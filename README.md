@@ -98,6 +98,23 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm run validate:artifact`: recheck an existing artifact's manifest and ESM `default.fetch` export
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
+## Automatic Cloudflare Deployment
+
+`.github/workflows/deploy.yml` builds and validates the site, then deploys it to
+Cloudflare Workers whenever `main` receives a push. It can also be started
+manually from the GitHub Actions tab.
+
+Add these repository secrets in GitHub under **Settings → Secrets and variables
+→ Actions**:
+
+- `CLOUDFLARE_API_TOKEN`: a token with permission to deploy Workers and manage
+  the `rabby.cc` custom domain
+- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns `rabby.cc`
+
+The workflow deploys the Worker and binds `mps.rabby.cc`. Keep the local
+`.env.cloudflare` file uncommitted; `.env.cloudflare.example` documents the
+required variable names.
+
 Use build and validation commands for targeted diagnosis after a remote failure, not as part of the normal checkpoint path.
 
 The timeout defaults can be overridden for a controlled canary with `SITES_INSTALL_TIMEOUT`, `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`. A timeout fails the command; the helpers never retry an unchanged install or build.
