@@ -80,6 +80,14 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(robots, /Sitemap: https:\/\/mps\.rabby\.cc\/sitemap\.xml/);
   assert.match(robots, /User-agent: GPTBot[\s\S]*Allow: \//);
   assert.match(sitemap, /<loc>https:\/\/mps\.rabby\.cc\/<\/loc>/);
+  assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
+  for (const image of [
+    "hero-skin-atelier.webp",
+    "intro-skin-consultation.webp",
+    "knowledge-skin-palette.webp",
+  ]) {
+    assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/mps\\.rabby\\.cc\\/${image}<\\/image:loc>`));
+  }
   assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店（中和區）/);
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
