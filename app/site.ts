@@ -1,7 +1,7 @@
 export const siteUrl = "https://mps.rabby.cc";
 export const siteName = "瑪菲斯皮膚覆蓋專家｜新北雙和店";
 export const siteDescription = "瑪菲斯皮膚覆蓋專家｜新北雙和店，提供草本撫紋、皮膚覆蓋術、科技測色與肌膚美學知識，陪你先理解肌膚，再選擇適合自己的方向。";
-export const facebookUrl = "https://www.facebook.com/profile.php?id=61592083747747";
+export const facebookUrl = "https://www.facebook.com/people/%E7%91%AA%E8%8F%B2%E6%96%AF%E7%9A%AE%E8%86%9A%E8%A6%86%E8%93%8B%E5%B0%88%E5%AE%B6-%E6%96%B0%E5%8C%97%E9%9B%99%E5%92%8C%E5%BA%97/61592083747747/";
 export const instagramUrl = "https://www.instagram.com/mavis_pure_skin/";
 export const lineUrl = "https://liff.line.me/1645278921-kWRPP32q/?accountId=043aqebt";
 export const phoneNumber = "+886981756111";
