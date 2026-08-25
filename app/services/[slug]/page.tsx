@@ -165,7 +165,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
             <aside className="service-detail-aside" aria-label="其他服務與聯絡方式">
               <div className="service-aside-card"><span className="knowledge-card-label">MAVIS PURE SKIN</span><p>每個人的肌膚狀態不同，先從清楚溝通開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">Facebook 私訊諮詢</a></div>
-              <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE SERVICES</span>{services.map((other) => <a className={other.slug === service.slug ? "is-current" : ""} href={serviceUrl(other.slug)} key={other.slug}>{other.title}<span aria-hidden="true">↗</span></a>)}</div>
+              <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE SERVICES</span>{services.map((other) => <a className={other.slug === service.slug ? "is-current" : ""} aria-current={other.slug === service.slug ? "page" : undefined} href={serviceUrl(other.slug)} key={other.slug}>{other.title}<span aria-hidden="true">↗</span></a>)}</div>
             </aside>
           </div>
         </article>

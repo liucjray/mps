@@ -130,6 +130,7 @@ export default function Home() {
       <main id="main-content">
       <section className="hero section-shell" id="top">
         <div className="hero-copy">
+          <div className="eyebrow"><span className="eyebrow-line" />瑪菲斯 / 新北雙和店</div>
           <h1><span className="hero-title-line">讓肌膚的故事，</span><span className="hero-title-line hero-title-accent">被溫柔理解。</span></h1>
           <p className="hero-lede">從妊娠紋、肥胖紋、成長紋，到疤痕與局部色澤困擾，瑪菲斯用專業評估、科技測色與清楚說明，陪你找到適合自己的美化方向。</p>
           <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a><a className="text-link" href="#services">查看服務內容</a></div>

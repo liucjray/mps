@@ -55,6 +55,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc\/"\/>/i);
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
+  assert.match(html, /瑪菲斯 \/ 新北雙和店/);
   assert.match(html, /"@type":"Organization"/i);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
@@ -147,6 +148,7 @@ test("ships crawler and answer-engine support files", async () => {
     assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/mps\\.rabby\\.cc\\/${image}<\\/image:loc>`));
   }
   assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店（中和區）/);
+  assert.match(llms, /最後更新：2026-08-26/);
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
   assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);
