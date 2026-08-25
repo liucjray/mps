@@ -55,25 +55,25 @@ export default function Home() {
       <section className="trust-strip" aria-label="服務關鍵字"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><span><b>01</b> 妊娠紋</span><span><b>02</b> 肥胖紋</span><span><b>03</b> 疤痕與色澤</span></div></section>
 
       <section className="intro section-shell" id="about">
-        <div className="section-label">/ 品牌理念</div>
+        <div className="section-label">品牌理念</div>
         <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div></div>
       </section>
 
       <section className="services section-shell" id="services">
-        <div className="section-heading"><div><div className="section-label">/ 服務內容</div><h2>從紋路，到肌膚美學。</h2></div><p>每一種狀態不同，<br />先評估，再找到方向。</p></div>
+        <div className="section-heading"><div><div className="section-label">服務內容</div><h2>從紋路，到肌膚美學。</h2></div><p>每一種狀態不同，<br />先評估，再找到方向。</p></div>
         <div className="service-list">{services.map((service) => <article className="service-row" key={service.number}><span className="service-number">{service.number}</span><div className="service-title-wrap"><h3>{service.title}</h3><span>{service.tag}</span></div><p>{service.text}</p></article>)}</div>
       </section>
 
       <section className="knowledge section-shell">
-        <div className="knowledge-copy"><div className="section-label">/ Mavis pure skin</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從瑪菲斯同名色乳、膚色判斷，到不同紋路的形成與照護，Facebook 會持續整理真實案例與實用知識。先看懂，再決定要不要開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">前往雙和店 Facebook</a></div>
+        <div className="knowledge-copy"><div className="section-label">Mavis pure skin</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從瑪菲斯同名色乳、膚色判斷，到不同紋路的形成與照護，Facebook 會持續整理真實案例與實用知識。先看懂，再決定要不要開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">前往雙和店 Facebook</a></div>
         <div className="knowledge-card"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-cloud"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div><span className="knowledge-card-note">Mavis pure skin / professional skin education</span></div>
       </section>
 
       <section className="manifesto section-shell"><p className="eyebrow"><span className="eyebrow-line" /> A SMALL NOTE FROM MAPHIS</p><h2>每一種肌膚狀態，<br /><em>都值得被好好對待。</em></h2><div className="manifesto-bottom"><span>瑪菲斯 / 新北雙和店</span><span>紋路美化・科技測色・肌膚知識</span></div></section>
 
-      <section className="faq section-shell" id="faq"><div className="section-label">/ 常見問題</div><div className="faq-layout"><h2>先把想問的，<br /><span>問清楚。</span></h2><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></div></section>
+      <section className="faq section-shell" id="faq"><div className="section-label">常見問題</div><div className="faq-layout"><h2>先把想問的，<br /><span>問清楚。</span></h2><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></div></section>
 
-      <section className="contact section-shell" id="contact"><div className="contact-copy"><div className="section-label">/ 新北雙和店</div><h2>想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a></div></section>
+      <section className="contact section-shell" id="contact"><div className="contact-copy"><div className="section-label">新北雙和店</div><h2>想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a></div></section>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="#top"><span className="wordmark-mark">M</span><span>瑪菲斯</span></a><span>瑪菲斯皮膚覆蓋專家｜新北雙和店</span><span>© 2026</span></footer>
       <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a>

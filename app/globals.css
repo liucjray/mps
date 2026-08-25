@@ -11,14 +11,15 @@ a { color: inherit; text-decoration: none; }
 .site-nav { width: min(1320px, calc(100% - 72px)); height: 96px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .wordmark { display: inline-flex; align-items: center; gap: 11px; font-size: 17px; font-weight: 700; letter-spacing: -.04em; }
 .wordmark-mark { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font-family: var(--serif); font-size: 16px; font-style: italic; font-weight: 400; }
-.nav-links { display: flex; gap: 42px; color: var(--muted); font-size: 13px; }
+.nav-links { display: flex; gap: 42px; color: var(--muted); font-size: 14px; letter-spacing: .04em; }
 .nav-links a, .text-link, .nav-cta { transition: color .25s ease; }
 .nav-links a:hover, .text-link:hover, .nav-cta:hover { color: var(--clay); }
 .nav-cta { color: var(--clay-dark); font-size: 13px; font-weight: 700; }
-.eyebrow, .section-label, .trust-label, .image-caption, .hero-notes, .service-title-wrap span, .manifesto-bottom, .site-footer { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.eyebrow, .trust-label, .image-caption, .hero-notes, .service-title-wrap span, .manifesto-bottom, .site-footer { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
 .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--clay-dark); margin: 0 0 30px; }
 .eyebrow-line { display: inline-block; width: 30px; height: 1px; background: currentColor; }
-.section-label { color: var(--clay-dark); }
+.section-label { display: inline-flex; align-items: center; gap: 12px; color: var(--clay-dark); font-size: 13px; font-weight: 700; letter-spacing: .12em; line-height: 1; text-transform: none; }
+.section-label::before { content: ""; width: 30px; height: 2px; background: currentColor; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2 { font-family: var(--serif); font-weight: 400; }
 h1 { max-width: 700px; font-size: clamp(58px, 7.2vw, 106px); line-height: .98; letter-spacing: -.08em; margin-bottom: 31px; }
@@ -140,6 +141,8 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .hero-actions { gap: 20px; }
   .button { min-height: 51px; }
   .hero-notes { gap: 16px; margin-top: 52px; font-size: 9px; }
+  .section-label { gap: 9px; font-size: 12px; letter-spacing: .1em; }
+  .section-label::before { width: 22px; }
   .hero-visual { min-height: 390px; padding: 0 0 22px 16px; }
   .hero-visual::before { inset: 18px 0 0 0; }
   .hero-image { height: 368px; }
