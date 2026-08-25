@@ -97,6 +97,8 @@ function getStructuredData(service: Service) {
         inLanguage: "zh-Hant-TW",
         dateModified: siteLastModified,
         isPartOf: { "@id": websiteId },
+        author: { "@id": organizationId },
+        publisher: { "@id": organizationId },
         about: { "@id": serviceId },
         mainEntity: { "@id": serviceId },
         breadcrumb: { "@id": `${url}#breadcrumb` },

@@ -98,6 +98,8 @@ const structuredData = {
       inLanguage: "zh-Hant-TW",
       dateModified: siteLastModified,
       isPartOf: { "@id": `${siteCanonicalUrl}#website` },
+      author: { "@id": organizationId },
+      publisher: { "@id": organizationId },
       about: { "@id": organizationId },
       mainEntity: { "@id": organizationId },
       primaryImageOfPage: { "@type": "ImageObject", url: `${siteUrl}${beautyImage}`, width: 1536, height: 1024 },
