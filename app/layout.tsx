@@ -1,20 +1,46 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { siteDescription, siteName, siteUrl } from "./site";
 
 export const metadata: Metadata = {
-  title: "瑪菲斯皮膚覆蓋專家｜新北雙和店",
-  description: "瑪菲斯皮膚覆蓋專家｜新北雙和店：草本撫紋、皮膚覆蓋術、科技測色與肌膚美學知識，關注妊娠紋、肥胖紋、成長紋與各類疤痕。",
+  metadataBase: new URL(siteUrl),
+  title: { default: siteName, template: `%s｜${siteName}` },
+  description: siteDescription,
   keywords: ["瑪菲斯", "Mavis pure skin", "皮膚覆蓋術", "草本撫紋", "科技測色", "妊娠紋", "肥胖紋", "成長紋", "疤痕", "新北雙和"],
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "瑪菲斯皮膚覆蓋專家｜新北雙和店",
-    description: "草本撫紋、皮膚覆蓋術、科技測色與肌膚美學知識。先了解，再選擇適合自己的方向。",
+    title: siteName,
+    description: siteDescription,
     type: "website",
     locale: "zh_TW",
+    url: siteUrl,
+    siteName,
+    images: [{ url: "/hero-skin-atelier.png", width: 1536, height: 1024, alt: "自然光下展示肌膚紋理的女性肩背" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+    images: ["/hero-skin-atelier.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxSnippet: -1,
+      maxImagePreview: "large",
+      maxVideoPreview: -1,
+    },
   },
   other: { "codex-preview": "development" },
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-Hant"><body>{children}</body></html>;
+  return <html lang="zh-Hant-TW"><body>{children}</body></html>;
 }

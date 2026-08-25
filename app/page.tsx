@@ -1,5 +1,7 @@
-const facebookUrl = "https://www.facebook.com/profile.php?id=61592083747747";
-const phoneUrl = "tel:+886981756111";
+import Image from "next/image";
+import { facebookUrl, phoneNumber, siteDescription, siteName, siteUrl } from "./site";
+
+const phoneUrl = `tel:${phoneNumber}`;
 
 const services = [
   { number: "01", title: "瑪菲斯草本撫紋", text: "針對妊娠紋、肥胖紋、成長紋等常見紋路，先辨識狀態，再討論適合的美化方向。", tag: "HERBAL STRETCH CARE" },
@@ -21,17 +23,63 @@ const introImage = "/intro-skin-consultation.png";
 const knowledgeImage = "/knowledge-skin-palette.png";
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "BeautySalon",
-  name: "瑪菲斯皮膚覆蓋專家｜新北雙和店",
-  telephone: "+886981756111",
-  url: "https://personal-brand.workspace-885811.chatgpt.site",
-  sameAs: [facebookUrl],
-  knowsAbout: ["妊娠紋", "肥胖紋", "成長紋", "皮膚覆蓋術", "科技測色", "肌膚美學"],
+  "@graph": [
+    {
+      "@type": "BeautySalon",
+      "@id": `${siteUrl}/#localbusiness`,
+      name: siteName,
+      description: siteDescription,
+      url: siteUrl,
+      telephone: phoneNumber,
+      image: [`${siteUrl}${beautyImage}`, `${siteUrl}${introImage}`, `${siteUrl}${knowledgeImage}`],
+      logo: `${siteUrl}/favicon.svg`,
+      sameAs: [facebookUrl],
+      areaServed: { "@type": "AdministrativeArea", name: "新北市" },
+      availableLanguage: ["zh-Hant-TW"],
+      knowsAbout: ["妊娠紋", "肥胖紋", "成長紋", "各類疤痕", "皮膚覆蓋術", "科技測色", "肌膚美學"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "瑪菲斯肌膚美學服務",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: service.title, description: service.text, serviceType: service.tag },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteName,
+      inLanguage: "zh-Hant-TW",
+      publisher: { "@id": `${siteUrl}/#localbusiness` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: siteName,
+      description: siteDescription,
+      inLanguage: "zh-Hant-TW",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#localbusiness` },
+      primaryImageOfPage: { "@type": "ImageObject", url: `${siteUrl}${beautyImage}`, width: 1536, height: 1024 },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: faqs.map(([question, answer]) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ],
 };
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="#top" aria-label="瑪菲斯首頁"><span className="wordmark-mark">M</span><span>瑪菲斯</span></a>
@@ -47,7 +95,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <div className="hero-image">
-            <img src={beautyImage} alt="自然光下的女性肌膚與美容形象照" />
+            <Image src={beautyImage} alt="自然光下展示肌膚紋理的女性肩背" width={1536} height={1024} priority />
           </div>
           <div className="image-caption"><span>MAPHIS PURE SKIN</span><span>Skin stories, understood.</span></div>
         </div>
@@ -57,17 +105,17 @@ export default function Home() {
 
       <section className="intro section-shell">
         <div className="section-label section-anchor" id="about">品牌理念</div>
-        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo" role="img" aria-label="瑪菲斯肌膚美學的自然光諮詢桌面" style={{ backgroundImage: `url(${introImage})` }} /><span>01 / 先理解肌膚</span></div></div>
+        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><Image src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} /></div><span>01 / 先理解肌膚</span></div></div>
       </section>
 
       <section className="services section-shell" id="services">
-        <div className="section-heading"><div><div className="section-label">服務內容</div><h2>從紋路，到肌膚美學。</h2></div><p>每一種狀態不同，<br />先評估，再找到方向。</p></div>
+        <div className="section-heading"><div><div className="section-label">服務內容</div><h2>從紋路，到肌膚美學。</h2></div><p>瑪菲斯提供草本撫紋、皮膚覆蓋術、科技測色與局部美學教育；<br />每一種狀態不同，先評估，再找到方向。</p></div>
         <div className="service-list">{services.map((service) => <article className="service-row" key={service.number}><span className="service-number">{service.number}</span><div className="service-title-wrap"><h3>{service.title}</h3><span>{service.tag}</span></div><p>{service.text}</p></article>)}</div>
       </section>
 
       <section className="knowledge section-shell">
         <div className="knowledge-copy"><div className="section-label">Mavis pure skin</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從瑪菲斯同名色乳、膚色判斷，到不同紋路的形成與照護，Facebook 會持續整理真實案例與實用知識。先看懂，再決定要不要開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">前往雙和店 Facebook</a></div>
-        <div className="knowledge-card"><div className="knowledge-photo" role="img" aria-label="膚色判斷與肌膚教育的自然光靜物照" style={{ backgroundImage: `url(${knowledgeImage})` }} /><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div></div><span className="knowledge-card-note">Mavis pure skin / professional skin education</span></div>
+        <div className="knowledge-card"><div className="knowledge-photo"><Image src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div></div><span className="knowledge-card-note">Mavis pure skin / professional skin education</span></div>
       </section>
 
       <section className="manifesto"><div className="manifesto-inner section-shell"><div className="manifesto-mark">M</div><h2>每一種肌膚狀態，<br /><em>都值得被好好對待。</em></h2><div className="manifesto-bottom"><span>瑪菲斯 / 新北雙和店</span><span>紋路美化・科技測色・肌膚知識</span></div></div></section>
