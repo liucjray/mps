@@ -40,6 +40,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"FAQPage"/i);
   assert.match(html, /"@type":"WebPage"/i);
   assert.doesNotMatch(html, /personal-brand\.workspace-885811\.chatgpt\.site/i);
+  assert.doesNotMatch(html, /\/_(?:vinext|next)\/image/i);
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
 });
 

@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
 import { facebookUrl, phoneNumber, siteDescription, siteName, siteUrl } from "./site";
 
 const phoneUrl = `tel:${phoneNumber}`;
@@ -95,7 +95,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <div className="hero-image">
-            <Image src={beautyImage} alt="自然光下展示肌膚紋理的女性肩背" width={1536} height={1024} priority />
+            <img src={beautyImage} alt="自然光下展示肌膚紋理的女性肩背" width={1536} height={1024} loading="eager" fetchPriority="high" decoding="async" />
           </div>
           <div className="image-caption"><span>MAPHIS PURE SKIN</span><span>Skin stories, understood.</span></div>
         </div>
@@ -105,7 +105,7 @@ export default function Home() {
 
       <section className="intro section-shell">
         <div className="section-label section-anchor" id="about">品牌理念</div>
-        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><Image src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} /></div><span>01 / 先理解肌膚</span></div></div>
+        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div><span>01 / 先理解肌膚</span></div></div>
       </section>
 
       <section className="services section-shell" id="services">
@@ -115,7 +115,7 @@ export default function Home() {
 
       <section className="knowledge section-shell">
         <div className="knowledge-copy"><div className="section-label">Mavis pure skin</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從瑪菲斯同名色乳、膚色判斷，到不同紋路的形成與照護，Facebook 會持續整理真實案例與實用知識。先看懂，再決定要不要開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">前往雙和店 Facebook</a></div>
-        <div className="knowledge-card"><div className="knowledge-photo"><Image src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div></div><span className="knowledge-card-note">Mavis pure skin / professional skin education</span></div>
+        <div className="knowledge-card"><div className="knowledge-photo"><img src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} loading="lazy" decoding="async" /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div></div><span className="knowledge-card-note">Mavis pure skin / professional skin education</span></div>
       </section>
 
       <section className="manifesto"><div className="manifesto-inner section-shell"><div className="manifesto-mark">M</div><h2>每一種肌膚狀態，<br /><em>都值得被好好對待。</em></h2><div className="manifesto-bottom"><span>瑪菲斯 / 新北雙和店</span><span>紋路美化・科技測色・肌膚知識</span></div></div></section>
