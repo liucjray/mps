@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteDescription, siteLastModified, siteName, siteUrl } from "./site";
+import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteCanonicalUrl, siteDescription, siteLastModified, siteName, siteUrl } from "./site";
 
 export const dynamic = "force-static";
 
@@ -31,19 +31,19 @@ const faqs = [
 const beautyImage = heroImageUrl;
 const introImage = introImageUrl;
 const knowledgeImage = knowledgeImageUrl;
-const organizationId = `${siteUrl}/#organization`;
+const organizationId = `${siteCanonicalUrl}#organization`;
 const servedAreas = [
   { "@type": "AdministrativeArea", name: "新北市" },
   { "@type": "AdministrativeArea", name: "中和區" },
 ];
 const serviceEntities = services.map((service) => ({
   "@type": "Service",
-  "@id": `${siteUrl}/#service-${service.slug}`,
+  "@id": `${siteCanonicalUrl}#service-${service.slug}`,
   name: service.title,
   description: service.text,
   serviceType: service.title,
   alternateName: service.tag,
-  url: `${siteUrl}/#services`,
+  url: `${siteCanonicalUrl}#services`,
   provider: { "@id": organizationId },
   areaServed: servedAreas,
 }));
@@ -56,7 +56,7 @@ const structuredData = {
       name: siteName,
       alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
       description: siteDescription,
-      url: siteUrl,
+      url: siteCanonicalUrl,
       telephone: phoneNumber,
       image: [`${siteUrl}${beautyImage}`, `${siteUrl}${introImage}`, `${siteUrl}${knowledgeImage}`],
       logo: {
@@ -82,35 +82,35 @@ const structuredData = {
         name: "瑪菲斯肌膚美學服務",
         itemListElement: services.map((service) => ({
           "@type": "Offer",
-          itemOffered: { "@id": `${siteUrl}/#service-${service.slug}` },
+          itemOffered: { "@id": `${siteCanonicalUrl}#service-${service.slug}` },
         })),
       },
     },
     ...serviceEntities,
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
+      "@id": `${siteCanonicalUrl}#website`,
+      url: siteCanonicalUrl,
       name: siteName,
       inLanguage: "zh-Hant-TW",
       publisher: { "@id": organizationId },
     },
     {
       "@type": "WebPage",
-      "@id": `${siteUrl}/#webpage`,
-      url: siteUrl,
+      "@id": `${siteCanonicalUrl}#webpage`,
+      url: siteCanonicalUrl,
       name: siteName,
       description: siteDescription,
       inLanguage: "zh-Hant-TW",
       dateModified: siteLastModified,
-      isPartOf: { "@id": `${siteUrl}/#website` },
+      isPartOf: { "@id": `${siteCanonicalUrl}#website` },
       about: { "@id": organizationId },
       mainEntity: { "@id": organizationId },
       primaryImageOfPage: { "@type": "ImageObject", url: `${siteUrl}${beautyImage}`, width: 1536, height: 1024 },
     },
     {
       "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
+      "@id": `${siteCanonicalUrl}#faq`,
       inLanguage: "zh-Hant-TW",
       mainEntity: faqs.map(([question, answer]) => ({
         "@type": "Question",

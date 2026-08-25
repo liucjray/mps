@@ -52,7 +52,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.ok(organization.hasOfferCatalog.itemListElement.every((offer) => offer.itemOffered["@id"].includes("#service-")));
   assert.match(html, developmentPreviewMeta);
   assert.match(html, /<link rel="canonical" href="https:\/\/mps\.rabby\.cc\/"\/>/i);
-  assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc\/"\/>/i);
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /"@type":"Organization"/i);
