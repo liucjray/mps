@@ -89,9 +89,16 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .service-title-wrap span { color: var(--muted); }
 .service-row p { color: var(--muted); line-height: 1.8; max-width: 350px; margin: 0; font-size: 14px; }
 .row-arrow { color: var(--clay-dark); font-size: 18px; font-weight: 300; letter-spacing: -.08em; opacity: .68; text-align: right; }
+.process { padding: 0 0 145px; }
+.process-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.process-step { min-height: 220px; padding: 26px 0 22px; border-bottom: 1px solid var(--line); }
+.process-number { display: block; margin-bottom: 28px; color: var(--clay); font-family: var(--serif); font-size: 24px; }
+.process-step h3 { margin: 0 0 16px; font-family: var(--serif); font-size: 28px; font-weight: 400; letter-spacing: -.06em; }
+.process-step p { max-width: 310px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.85; }
 .knowledge { display: grid; grid-template-columns: .84fr 1.16fr; gap: 7vw; align-items: center; padding: 0 0 155px; }
 .knowledge h2 { margin: 32px 0 26px; }
 .knowledge-copy > p { max-width: 410px; color: var(--muted); line-height: 1.9; margin-bottom: 32px; }
+.knowledge-copy > .content-note { margin-top: -14px; color: var(--clay-dark); font-size: 13px; line-height: 1.75; }
 .knowledge-card { min-height: 390px; display: grid; grid-template-columns: .98fr 1.02fr; grid-template-rows: 1fr auto; gap: 0 28px; padding: 0; background: transparent; }
 .knowledge-photo { min-height: 390px; grid-row: 1 / 3; overflow: hidden; }
 .knowledge-topics { padding: 28px 0 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -186,6 +193,12 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .service-title-wrap h3 { font-size: 26px; }
   .service-title-wrap span { font-size: 9px; }
   .service-row p { grid-column: 2 / 3; font-size: 13px; line-height: 1.7; }
+  .process { padding-bottom: 105px; }
+  .process-list { display: block; }
+  .process-step { min-height: 0; padding: 22px 0 24px; }
+  .process-number { display: inline-block; width: 38px; margin: 0 10px 0 0; vertical-align: top; font-size: 21px; }
+  .process-step h3 { display: inline-block; margin: 0 0 13px; vertical-align: top; font-size: 25px; }
+  .process-step p { margin-left: 48px; font-size: 13px; line-height: 1.75; }
   .knowledge { display: block; padding-bottom: 105px; }
   .knowledge h2 { margin-top: 27px; }
   .knowledge-card { min-height: 330px; margin-top: 52px; display: block; }
