@@ -17,6 +17,7 @@ const faqs = [
 ];
 
 const beautyImage = "/hero-skin-atelier.png";
+const introImage = "/intro-skin-consultation.png";
 const knowledgeImage = "/knowledge-skin-palette.png";
 const structuredData = {
   "@context": "https://schema.org",
@@ -56,7 +57,7 @@ export default function Home() {
 
       <section className="intro section-shell">
         <div className="section-label section-anchor" id="about">品牌理念</div>
-        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo" role="img" aria-label="瑪菲斯肌膚美學的自然光靜物照" style={{ backgroundImage: `url(${knowledgeImage})` }} /><span>01 / 先理解肌膚</span></div></div>
+        <div className="intro-content"><h2>不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo" role="img" aria-label="瑪菲斯肌膚美學的自然光諮詢桌面" style={{ backgroundImage: `url(${introImage})` }} /><span>01 / 先理解肌膚</span></div></div>
       </section>
 
       <section className="services section-shell" id="services">
