@@ -156,6 +156,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .service-detail-main h2 { margin: 30px 0 28px; font-size: clamp(42px, 5vw, 68px); }
 .service-detail-main h2 em { color: var(--clay); }
 .service-detail-overview { max-width: 650px; color: var(--muted); font-size: 17px; line-height: 2; }
+.service-detail-note { max-width: 650px; margin: 24px 0 0; color: var(--clay-dark); font-size: 13px; line-height: 1.8; }
 .service-detail-point-list { border-top: 1px solid var(--line); }
 .service-detail-point-list article { display: grid; grid-template-columns: 58px 1fr; column-gap: 20px; padding: 28px 0 30px; border-bottom: 1px solid var(--line); }
 .service-detail-point-list article > span { color: var(--clay); font-family: var(--serif); font-size: 24px; }

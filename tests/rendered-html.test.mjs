@@ -119,6 +119,7 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /"@type":"BreadcrumbList"/i);
     assert.match(html, /"@type":"FAQPage"/i);
     assert.match(html, /<details>/i);
+    assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
     assert.match(html, /href="https:\/\/mps\.rabby\.cc\/services\//i);
   }
 });
