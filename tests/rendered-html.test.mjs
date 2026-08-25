@@ -33,6 +33,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
   assert.equal(response.headers.get("permissions-policy"), "camera=(), geolocation=(), microphone=()");
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
   const html = await response.text();
   assert.match(html, /<\/body><\/html>$/i);
   assert.doesNotMatch(html, /<\/html>\s*<script/i);

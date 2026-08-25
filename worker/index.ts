@@ -23,6 +23,7 @@ const isHashedAsset = (pathname: string) => pathname.startsWith("/assets/");
 const isPublicAsset = (pathname: string) => /\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$/i.test(pathname);
 const isAssetRequest = (request: Request, pathname: string) =>
   (request.method === "GET" || request.method === "HEAD") && (isHashedAsset(pathname) || isPublicAsset(pathname));
+const htmlCacheControl = "public, max-age=300, stale-while-revalidate=86400";
 
 function addResponseHeaders(response: Response, cacheControl?: string): Response {
   const headers = new Headers(response.headers);
@@ -77,7 +78,11 @@ const worker = {
     }
 
     const response = await handler.fetch(request, env, ctx);
-    return addResponseHeaders(await normalizeHtmlDocument(response));
+    const normalizedResponse = await normalizeHtmlDocument(response);
+    const cacheControl = normalizedResponse.headers.get("content-type")?.startsWith("text/html")
+      ? htmlCacheControl
+      : undefined;
+    return addResponseHeaders(normalizedResponse, cacheControl);
   },
 };
 
