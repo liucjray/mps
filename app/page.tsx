@@ -55,7 +55,6 @@ const structuredData = {
         { "@type": "AdministrativeArea", name: "新北市" },
         { "@type": "AdministrativeArea", name: "中和區" },
       ],
-      availableLanguage: ["zh-Hant-TW"],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: phoneNumber,

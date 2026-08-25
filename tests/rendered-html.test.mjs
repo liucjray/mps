@@ -34,6 +34,13 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
   assert.equal(response.headers.get("permissions-policy"), "camera=(), geolocation=(), microphone=()");
   const html = await response.text();
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const organization = graph.find((entity) => entity["@type"] === "Organization");
+  assert.ok(organization, "Organization entity should be rendered");
+  assert.equal("availableLanguage" in organization, false);
+  assert.deepEqual(organization.contactPoint.availableLanguage, ["zh-Hant-TW"]);
   assert.match(html, developmentPreviewMeta);
   assert.match(html, /<link rel="canonical" href="https:\/\/mps\.rabby\.cc\/"\/>/i);
   assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc"\/>/i);
