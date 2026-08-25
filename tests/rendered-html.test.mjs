@@ -101,6 +101,8 @@ test("ships crawler and answer-engine support files", async () => {
 
   assert.match(robots, /Sitemap: https:\/\/mps\.rabby\.cc\/sitemap\.xml/);
   assert.match(robots, /User-agent: GPTBot[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Disallow: \/api\//);
   assert.match(sitemap, /<loc>https:\/\/mps\.rabby\.cc\/<\/loc>/);
   assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
   for (const image of [
