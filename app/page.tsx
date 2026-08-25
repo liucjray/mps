@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteDescription, siteName, siteUrl } from "./site";
+import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteDescription, siteName, siteUrl } from "./site";
 
 const phoneUrl = `tel:${phoneNumber}`;
 
@@ -26,9 +26,9 @@ const faqs = [
   ["如何聯絡新北雙和店？", "可以透過雙和店 Facebook 粉絲團私訊，或撥打 0981-756-111 了解服務內容與預約方式。"],
 ];
 
-const beautyImage = "/hero-skin-atelier.png";
-const introImage = "/intro-skin-consultation.png";
-const knowledgeImage = "/knowledge-skin-palette.png";
+const beautyImage = heroImageUrl;
+const introImage = introImageUrl;
+const knowledgeImage = knowledgeImageUrl;
 const localBusinessId = `${siteUrl}/#localbusiness`;
 const structuredData = {
   "@context": "https://schema.org",

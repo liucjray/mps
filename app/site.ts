@@ -5,3 +5,6 @@ export const facebookUrl = "https://www.facebook.com/people/%E7%91%AA%E8%8F%B2%E
 export const instagramUrl = "https://www.instagram.com/mavis_pure_skin/";
 export const lineUrl = "https://liff.line.me/1645278921-kWRPP32q/?accountId=043aqebt";
 export const phoneNumber = "+886981756111";
+export const heroImageUrl = "/hero-skin-atelier.webp";
+export const introImageUrl = "/intro-skin-consultation.webp";
+export const knowledgeImageUrl = "/knowledge-skin-palette.webp";

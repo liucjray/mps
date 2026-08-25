@@ -48,6 +48,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"WebPage"/i);
   assert.doesNotMatch(html, /personal-brand\.workspace-885811\.chatgpt\.site/i);
   assert.doesNotMatch(html, /\/_(?:vinext|next)\/image/i);
+  assert.match(html, /src="\/hero-skin-atelier\.webp"/i);
+  assert.match(html, /src="\/intro-skin-consultation\.webp"/i);
+  assert.match(html, /src="\/knowledge-skin-palette\.webp"/i);
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
   assert.match(html, /了解流程/);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { siteDescription, siteName, siteUrl } from "./site";
+import { heroImageUrl, siteDescription, siteName, siteUrl } from "./site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     url: siteUrl,
     siteName,
-    images: [{ url: "/hero-skin-atelier.png", width: 1536, height: 1024, alt: "自然光下展示肌膚紋理的女性肩背" }],
+    images: [{ url: heroImageUrl, width: 1536, height: 1024, alt: "自然光下展示肌膚紋理的女性肩背" }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: ["/hero-skin-atelier.png"],
+    images: [heroImageUrl],
   },
   robots: {
     index: true,
