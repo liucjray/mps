@@ -29,25 +29,31 @@ const faqs = [
 const beautyImage = heroImageUrl;
 const introImage = introImageUrl;
 const knowledgeImage = knowledgeImageUrl;
-const localBusinessId = `${siteUrl}/#localbusiness`;
+const organizationId = `${siteUrl}/#organization`;
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "BeautySalon",
-      "@id": localBusinessId,
+      "@type": "Organization",
+      "@id": organizationId,
       name: siteName,
       alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
       description: siteDescription,
       url: siteUrl,
       telephone: phoneNumber,
       image: [`${siteUrl}${beautyImage}`, `${siteUrl}${introImage}`, `${siteUrl}${knowledgeImage}`],
-      logo: `${siteUrl}/favicon.svg`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.png`,
+        contentUrl: `${siteUrl}/logo.png`,
+        width: 512,
+        height: 512,
+      },
       sameAs: [facebookUrl, instagramUrl, lineUrl],
       brand: { "@type": "Brand", name: "Mavis pure skin" },
       areaServed: [
         { "@type": "AdministrativeArea", name: "新北市" },
-        { "@type": "City", name: "中和區" },
+        { "@type": "AdministrativeArea", name: "中和區" },
       ],
       availableLanguage: ["zh-Hant-TW"],
       contactPoint: {
@@ -69,7 +75,7 @@ const structuredData = {
             description: service.text,
             serviceType: service.title,
             alternateName: service.tag,
-            provider: { "@id": localBusinessId },
+            provider: { "@id": organizationId },
           },
         })),
       },
@@ -80,7 +86,7 @@ const structuredData = {
       url: siteUrl,
       name: siteName,
       inLanguage: "zh-Hant-TW",
-      publisher: { "@id": localBusinessId },
+      publisher: { "@id": organizationId },
     },
     {
       "@type": "WebPage",
@@ -90,8 +96,8 @@ const structuredData = {
       description: siteDescription,
       inLanguage: "zh-Hant-TW",
       isPartOf: { "@id": `${siteUrl}/#website` },
-      about: { "@id": localBusinessId },
-      mainEntity: { "@id": localBusinessId },
+      about: { "@id": organizationId },
+      mainEntity: { "@id": organizationId },
       primaryImageOfPage: { "@type": "ImageObject", url: `${siteUrl}${beautyImage}`, width: 1536, height: 1024 },
     },
     {

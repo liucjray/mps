@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Mavis pure skin</title>
+  <rect width="512" height="512" rx="96" fill="#f5f0e9"/>
+  <circle cx="256" cy="256" r="174" fill="none" stroke="#352b29" stroke-width="8"/>
+  <text x="256" y="316" text-anchor="middle" fill="#352b29" font-family="Georgia, 'Noto Serif TC', serif" font-size="184" font-style="italic">M</text>
+</svg>

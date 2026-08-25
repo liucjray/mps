@@ -39,11 +39,14 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc"\/>/i);
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
-  assert.match(html, /"@type":"BeautySalon"/i);
+  assert.match(html, /"@type":"Organization"/i);
+  assert.match(html, /"@type":"ImageObject"/i);
+  assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
-  assert.match(html, /"@type":"City"/i);
+  assert.match(html, /"@type":"AdministrativeArea"/i);
+  assert.doesNotMatch(html, /"@type":"BeautySalon"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
   assert.match(html, /https:\/\/www\.instagram\.com\/mavis_pure_skin\//i);
   assert.match(html, /accountId=043aqebt/i);
