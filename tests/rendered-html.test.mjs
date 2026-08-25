@@ -44,6 +44,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.ok(organization, "Organization entity should be rendered");
   assert.equal("availableLanguage" in organization, false);
   assert.deepEqual(organization.contactPoint.availableLanguage, ["zh-Hant-TW"]);
+  assert.deepEqual(organization.contactPoint.areaServed.map((area) => area.name), ["新北市", "中和區"]);
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
   assert.ok(services.every((service) => service.provider["@id"] === "https://mps.rabby.cc/#organization"));

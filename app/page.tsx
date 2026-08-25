@@ -73,7 +73,7 @@ const structuredData = {
         "@type": "ContactPoint",
         telephone: phoneNumber,
         contactType: "customer service",
-        areaServed: "TW",
+        areaServed: servedAreas,
         availableLanguage: ["zh-Hant-TW"],
       },
       knowsAbout: ["妊娠紋", "肥胖紋", "成長紋", "各類疤痕", "皮膚覆蓋術", "科技測色", "肌膚美學"],
