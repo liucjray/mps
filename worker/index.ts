@@ -33,6 +33,18 @@ function addResponseHeaders(response: Response, cacheControl?: string): Response
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
 
+async function normalizeHtmlDocument(response: Response): Promise<Response> {
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.startsWith("text/html") || !response.body) return response;
+
+  const body = await response.text();
+  const trailingScripts = body.match(/^(?<document>[\s\S]*?)<\/body>\s*<\/html>(?<scripts>\s*<script[\s\S]*)$/i);
+  if (!trailingScripts?.groups) return new Response(body, response);
+
+  const normalizedBody = `${trailingScripts.groups.document}${trailingScripts.groups.scripts}</body></html>`;
+  return new Response(normalizedBody, response);
+}
+
 // Image security config. SVG sources with .svg extension auto-skip the
 // optimization endpoint on the client side (served directly, no proxy).
 // To route SVGs through the optimizer (with security headers), set
@@ -65,7 +77,7 @@ const worker = {
     }
 
     const response = await handler.fetch(request, env, ctx);
-    return addResponseHeaders(response);
+    return addResponseHeaders(await normalizeHtmlDocument(response));
   },
 };
 

@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
 import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteDescription, siteLastModified, siteName, siteUrl } from "./site";
 
+export const dynamic = "force-static";
+
 const phoneUrl = `tel:${phoneNumber}`;
 
 const services = [

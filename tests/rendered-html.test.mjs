@@ -34,6 +34,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
   assert.equal(response.headers.get("permissions-policy"), "camera=(), geolocation=(), microphone=()");
   const html = await response.text();
+  assert.match(html, /<\/body><\/html>$/i);
+  assert.doesNotMatch(html, /<\/html>\s*<script/i);
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "JSON-LD block should be rendered");
   const graph = JSON.parse(jsonLdMatch[1])["@graph"];
