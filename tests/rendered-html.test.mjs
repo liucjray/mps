@@ -42,7 +42,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"Organization"/i);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
-  assert.match(html, /property="og:image" content="https:\/\/mps\.rabby\.cc\/hero-skin-atelier\.png"/i);
+  assert.match(html, /property="og:image" content="https:\/\/mps\.rabby\.cc\/social-skin-atelier\.jpg"/i);
   assert.match(html, /"dateModified":"2026-08-26"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);

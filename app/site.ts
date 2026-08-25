@@ -8,5 +8,5 @@ export const phoneNumber = "+886981756111";
 export const heroImageUrl = "/hero-skin-atelier.webp";
 export const introImageUrl = "/intro-skin-consultation.webp";
 export const knowledgeImageUrl = "/knowledge-skin-palette.webp";
-export const socialImageUrl = "/hero-skin-atelier.png";
+export const socialImageUrl = "/social-skin-atelier.jpg";
 export const siteLastModified = "2026-08-26";
