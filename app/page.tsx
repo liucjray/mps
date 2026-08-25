@@ -4,10 +4,10 @@ import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageU
 const phoneUrl = `tel:${phoneNumber}`;
 
 const services = [
-  { number: "01", title: "瑪菲斯草本撫紋", text: "針對妊娠紋、肥胖紋、成長紋等常見紋路，先辨識狀態，再討論適合的美化方向。", tag: "HERBAL STRETCH CARE" },
-  { number: "02", title: "皮膚覆蓋術", text: "針對紋路與各類疤痕造成的色澤、紋理落差，透過評估了解適合的覆蓋方式。", tag: "SKIN CAMOUFLAGE" },
-  { number: "03", title: "科技測色", text: "以膚色比對與專業判斷，協助找到更貼近個人肌膚狀態的色彩選擇。", tag: "COLOUR MATCHING" },
-  { number: "04", title: "局部美學與科普", text: "分享黑眼圈、淚溝、泡泡眼與輪廓線等困擾的美學知識，讓你少走一點彎路。", tag: "BEAUTY EDUCATION" },
+  { number: "01", slug: "herbal-stretch-care", title: "瑪菲斯草本撫紋", text: "針對妊娠紋、肥胖紋、成長紋等常見紋路，先辨識狀態，再討論適合的美化方向。", tag: "HERBAL STRETCH CARE" },
+  { number: "02", slug: "skin-camouflage", title: "皮膚覆蓋術", text: "針對紋路與各類疤痕造成的色澤、紋理落差，透過評估了解適合的覆蓋方式。", tag: "SKIN CAMOUFLAGE" },
+  { number: "03", slug: "colour-matching", title: "科技測色", text: "以膚色比對與專業判斷，協助找到更貼近個人肌膚狀態的色彩選擇。", tag: "COLOUR MATCHING" },
+  { number: "04", slug: "beauty-education", title: "局部美學與科普", text: "分享黑眼圈、淚溝、泡泡眼與輪廓線等困擾的美學知識，讓你少走一點彎路。", tag: "BEAUTY EDUCATION" },
 ];
 
 const processSteps = [
@@ -30,6 +30,21 @@ const beautyImage = heroImageUrl;
 const introImage = introImageUrl;
 const knowledgeImage = knowledgeImageUrl;
 const organizationId = `${siteUrl}/#organization`;
+const servedAreas = [
+  { "@type": "AdministrativeArea", name: "新北市" },
+  { "@type": "AdministrativeArea", name: "中和區" },
+];
+const serviceEntities = services.map((service) => ({
+  "@type": "Service",
+  "@id": `${siteUrl}/#service-${service.slug}`,
+  name: service.title,
+  description: service.text,
+  serviceType: service.title,
+  alternateName: service.tag,
+  url: `${siteUrl}/#services`,
+  provider: { "@id": organizationId },
+  areaServed: servedAreas,
+}));
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -51,10 +66,7 @@ const structuredData = {
       },
       sameAs: [facebookUrl, instagramUrl, lineUrl],
       brand: { "@type": "Brand", name: "Mavis pure skin" },
-      areaServed: [
-        { "@type": "AdministrativeArea", name: "新北市" },
-        { "@type": "AdministrativeArea", name: "中和區" },
-      ],
+      areaServed: servedAreas,
       contactPoint: {
         "@type": "ContactPoint",
         telephone: phoneNumber,
@@ -68,17 +80,11 @@ const structuredData = {
         name: "瑪菲斯肌膚美學服務",
         itemListElement: services.map((service) => ({
           "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: service.title,
-            description: service.text,
-            serviceType: service.title,
-            alternateName: service.tag,
-            provider: { "@id": organizationId },
-          },
+          itemOffered: { "@id": `${siteUrl}/#service-${service.slug}` },
         })),
       },
     },
+    ...serviceEntities,
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
