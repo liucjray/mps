@@ -1,16 +1,10 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
 import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteCanonicalUrl, siteDescription, siteLastModified, siteName, siteUrl } from "./site";
+import { serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
 
 const phoneUrl = `tel:${phoneNumber}`;
-
-const services = [
-  { number: "01", slug: "herbal-stretch-care", title: "瑪菲斯草本撫紋", text: "針對妊娠紋、肥胖紋、成長紋等常見紋路，先辨識狀態，再討論適合的美化方向。", tag: "HERBAL STRETCH CARE" },
-  { number: "02", slug: "skin-camouflage", title: "皮膚覆蓋術", text: "針對紋路與各類疤痕造成的色澤、紋理落差，透過評估了解適合的覆蓋方式。", tag: "SKIN CAMOUFLAGE" },
-  { number: "03", slug: "colour-matching", title: "科技測色", text: "以膚色比對與專業判斷，協助找到更貼近個人肌膚狀態的色彩選擇。", tag: "COLOUR MATCHING" },
-  { number: "04", slug: "beauty-education", title: "局部美學與科普", text: "分享黑眼圈、淚溝、泡泡眼與輪廓線等困擾的美學知識，讓你少走一點彎路。", tag: "BEAUTY EDUCATION" },
-];
 
 const processSteps = [
   { number: "01", title: "說明你的困擾", text: "透過雙和店 Facebook 私訊或電話，描述紋路、疤痕或局部色澤困擾；若方便，也可以先準備清楚的照片。" },
@@ -43,7 +37,7 @@ const serviceEntities = services.map((service) => ({
   description: service.text,
   serviceType: service.title,
   alternateName: service.tag,
-  url: `${siteCanonicalUrl}#services`,
+  url: serviceUrl(service.slug),
   provider: { "@id": organizationId },
   areaServed: servedAreas,
 }));
@@ -155,7 +149,7 @@ export default function Home() {
 
       <section className="services section-shell" id="services" aria-labelledby="services-title">
         <div className="section-heading"><div><div className="section-label">服務內容</div><h2 id="services-title">從紋路，到肌膚美學。</h2></div><p>瑪菲斯提供草本撫紋、皮膚覆蓋術、科技測色與局部美學教育；<br />每一種狀態不同，先評估，再找到方向。</p></div>
-        <div className="service-list">{services.map((service) => <article className="service-row" key={service.number}><span className="service-number">{service.number}</span><div className="service-title-wrap"><h3>{service.title}</h3><span>{service.tag}</span></div><p>{service.text}</p></article>)}</div>
+        <div className="service-list">{services.map((service) => <article className="service-row" key={service.number}><span className="service-number">{service.number}</span><div className="service-title-wrap"><h3><a href={serviceUrl(service.slug)}>{service.title}</a></h3><span>{service.tag}</span></div><p>{service.text}</p></article>)}</div>
       </section>
 
       <section className="process section-shell" id="process" aria-labelledby="process-title">

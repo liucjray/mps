@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: [socialImageUrl],
+    images: [{ url: socialImageUrl, alt: "自然光下展示肌膚紋理的女性肩背" }],
   },
   robots: {
     index: true,

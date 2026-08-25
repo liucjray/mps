@@ -80,6 +80,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
   assert.match(html, /了解流程/);
   assert.match(html, /<section class="intro section-shell" id="about" aria-labelledby="about-title">/i);
+  for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
+    assert.match(html, new RegExp(`href="https://mps\\.rabby\\.cc/services/${slug}"`, "i"));
+  }
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
@@ -90,6 +93,33 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.equal(assetResponse.status, 200);
   assert.equal(assetResponse.headers.get("cache-control"), "public, max-age=86400, stale-while-revalidate=604800");
   assert.equal(assetResponse.headers.get("x-content-type-options"), "nosniff");
+});
+
+test("renders independently indexable service pages", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("services-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const serviceSlugs = ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"];
+
+  for (const slug of serviceSlugs) {
+    const response = await worker.fetch(
+      new Request(`http://localhost/services/${slug}`, { headers: { accept: "text/html" } }),
+      { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+      { waitUntil() {}, passThroughOnException() {} },
+    );
+
+    assert.equal(response.status, 200, `${slug} should render`);
+    assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+    const html = await response.text();
+    assert.match(html, /<h1>[^<]+<\/h1>/i);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
+    assert.match(html, new RegExp(`<meta property="og:url" content="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
+    assert.match(html, /"@type":"Service"/i);
+    assert.match(html, /"@type":"BreadcrumbList"/i);
+    assert.match(html, /"@type":"FAQPage"/i);
+    assert.match(html, /<details>/i);
+    assert.match(html, /href="https:\/\/mps\.rabby\.cc\/services\//i);
+  }
 });
 
 test("ships crawler and answer-engine support files", async () => {
@@ -104,6 +134,10 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Disallow: \/api\//);
   assert.match(sitemap, /<loc>https:\/\/mps\.rabby\.cc\/<\/loc>/);
+  for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
+    assert.match(sitemap, new RegExp(`<loc>https://mps\\.rabby\\.cc/services/${slug}<\\/loc>`));
+    assert.match(llms, new RegExp(`https://mps\\.rabby\\.cc/services/${slug}`));
+  }
   assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
   for (const image of [
     "hero-skin-atelier.webp",
