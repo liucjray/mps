@@ -19,6 +19,20 @@ interface ExecutionContext {
   passThroughOnException(): void;
 }
 
+const isHashedAsset = (pathname: string) => pathname.startsWith("/assets/");
+const isPublicAsset = (pathname: string) => /\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$/i.test(pathname);
+const isAssetRequest = (request: Request, pathname: string) =>
+  (request.method === "GET" || request.method === "HEAD") && (isHashedAsset(pathname) || isPublicAsset(pathname));
+
+function addResponseHeaders(response: Response, cacheControl?: string): Response {
+  const headers = new Headers(response.headers);
+  headers.set("X-Content-Type-Options", "nosniff");
+  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=()");
+  if (cacheControl && response.ok) headers.set("Cache-Control", cacheControl);
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
 // Image security config. SVG sources with .svg extension auto-skip the
 // optimization endpoint on the client side (served directly, no proxy).
 // To route SVGs through the optimizer (with security headers), set
@@ -40,24 +54,18 @@ const worker = {
       }, allowedWidths);
     }
 
-    const response = await handler.fetch(request, env, ctx);
-    const headers = new Headers(response.headers);
-    headers.set("X-Content-Type-Options", "nosniff");
-    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-    headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=()");
-
-    const isHashedAsset = url.pathname.startsWith("/assets/");
-    const isPublicAsset = /\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$/i.test(url.pathname);
-    if (response.ok && (isHashedAsset || isPublicAsset)) {
-      headers.set(
-        "Cache-Control",
-        isHashedAsset
+    if (isAssetRequest(request, url.pathname)) {
+      const response = await env.ASSETS.fetch(request);
+      return addResponseHeaders(
+        response,
+        isHashedAsset(url.pathname)
           ? "public, max-age=31536000, immutable"
           : "public, max-age=86400, stale-while-revalidate=604800",
       );
     }
 
-    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+    const response = await handler.fetch(request, env, ctx);
+    return addResponseHeaders(response);
   },
 };
 

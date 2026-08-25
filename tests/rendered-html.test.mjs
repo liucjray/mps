@@ -59,6 +59,15 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
   assert.match(html, /了解流程/);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
+
+  const assetResponse = await worker.fetch(
+    new Request("http://localhost/hero-skin-atelier.webp"),
+    { ASSETS: { fetch: async () => new Response("asset", { headers: { "content-type": "image/webp" } }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+  assert.equal(assetResponse.status, 200);
+  assert.equal(assetResponse.headers.get("cache-control"), "public, max-age=86400, stale-while-revalidate=604800");
+  assert.equal(assetResponse.headers.get("x-content-type-options"), "nosniff");
 });
 
 test("ships crawler and answer-engine support files", async () => {
