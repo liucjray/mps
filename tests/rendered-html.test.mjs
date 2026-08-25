@@ -42,6 +42,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"Organization"/i);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
+  assert.match(html, /property="og:image" content="https:\/\/mps\.rabby\.cc\/hero-skin-atelier\.png"/i);
+  assert.match(html, /"dateModified":"2026-08-26"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
@@ -61,6 +63,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /src="\/knowledge-skin-palette\.webp"/i);
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
   assert.match(html, /了解流程/);
+  assert.match(html, /<section class="intro section-shell" id="about" aria-labelledby="about-title">/i);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
