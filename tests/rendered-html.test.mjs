@@ -37,6 +37,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /"@type":"BeautySalon"/i);
+  assert.match(html, /新北市中和區/);
+  assert.match(html, /"@type":"City"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
   assert.match(html, /https:\/\/www\.instagram\.com\/mavis_pure_skin\//i);
   assert.match(html, /accountId=043aqebt/i);
@@ -61,7 +63,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(robots, /Sitemap: https:\/\/mps\.rabby\.cc\/sitemap\.xml/);
   assert.match(robots, /User-agent: GPTBot[\s\S]*Allow: \//);
   assert.match(sitemap, /<loc>https:\/\/mps\.rabby\.cc\/<\/loc>/);
-  assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店/);
+  assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店（中和區）/);
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
   assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);

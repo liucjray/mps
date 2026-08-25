@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: siteName, template: `%s｜${siteName}` },
   description: siteDescription,
-  keywords: ["瑪菲斯", "Mavis pure skin", "皮膚覆蓋術", "草本撫紋", "科技測色", "妊娠紋", "肥胖紋", "成長紋", "疤痕", "新北雙和"],
+  keywords: ["瑪菲斯", "Mavis pure skin", "皮膚覆蓋術", "草本撫紋", "科技測色", "妊娠紋", "肥胖紋", "成長紋", "疤痕", "新北雙和", "新北市中和區"],
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
