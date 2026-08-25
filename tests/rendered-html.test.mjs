@@ -38,6 +38,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /"@type":"BeautySalon"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
+  assert.match(html, /https:\/\/www\.instagram\.com\/mavis_pure_skin\//i);
+  assert.match(html, /accountId=043aqebt/i);
   assert.match(html, /"serviceType":"瑪菲斯草本撫紋"/i);
   assert.match(html, /"@type":"FAQPage"/i);
   assert.match(html, /"@type":"WebPage"/i);
@@ -61,6 +63,8 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店/);
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);
+  assert.match(llms, /品牌 Instagram: https:\/\/www\.instagram\.com\/mavis_pure_skin\//);
+  assert.match(llms, /品牌 LINE: https:\/\/liff\.line\.me\/1645278921-kWRPP32q\/\?accountId=043aqebt/);
   assert.match(llms, /## 諮詢流程/);
   assert.match(llms, /肌膚美學資訊可以取代看醫生嗎？不可以/);
 });
