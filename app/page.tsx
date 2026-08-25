@@ -37,12 +37,14 @@ const structuredData = {
       "@type": "BeautySalon",
       "@id": localBusinessId,
       name: siteName,
+      alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
       description: siteDescription,
       url: siteUrl,
       telephone: phoneNumber,
       image: [`${siteUrl}${beautyImage}`, `${siteUrl}${introImage}`, `${siteUrl}${knowledgeImage}`],
       logo: `${siteUrl}/favicon.svg`,
       sameAs: [facebookUrl, instagramUrl, lineUrl],
+      brand: { "@type": "Brand", name: "Mavis pure skin" },
       areaServed: [
         { "@type": "AdministrativeArea", name: "新北市" },
         { "@type": "City", name: "中和區" },
@@ -95,6 +97,7 @@ const structuredData = {
     {
       "@type": "FAQPage",
       "@id": `${siteUrl}/#faq`,
+      inLanguage: "zh-Hant-TW",
       mainEntity: faqs.map(([question, answer]) => ({
         "@type": "Question",
         name: question,

@@ -37,6 +37,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /"@type":"BeautySalon"/i);
+  assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
+  assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
   assert.match(html, /"@type":"City"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
