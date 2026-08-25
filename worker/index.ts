@@ -40,7 +40,24 @@ const worker = {
       }, allowedWidths);
     }
 
-    return handler.fetch(request, env, ctx);
+    const response = await handler.fetch(request, env, ctx);
+    const headers = new Headers(response.headers);
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    headers.set("Permissions-Policy", "camera=(), geolocation=(), microphone=()");
+
+    const isHashedAsset = url.pathname.startsWith("/assets/");
+    const isPublicAsset = /\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$/i.test(url.pathname);
+    if (response.ok && (isHashedAsset || isPublicAsset)) {
+      headers.set(
+        "Cache-Control",
+        isHashedAsset
+          ? "public, max-age=31536000, immutable"
+          : "public, max-age=86400, stale-while-revalidate=604800",
+      );
+    }
+
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
   },
 };
 

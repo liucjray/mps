@@ -30,6 +30,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
     response.headers.get("content-type") ?? "",
     /^text\/html\b/i,
   );
+  assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+  assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+  assert.equal(response.headers.get("permissions-policy"), "camera=(), geolocation=(), microphone=()");
   const html = await response.text();
   assert.match(html, developmentPreviewMeta);
   assert.match(html, /<link rel="canonical" href="https:\/\/mps\.rabby\.cc\/"\/>/i);
