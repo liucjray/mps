@@ -77,6 +77,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.doesNotMatch(html, /"@type":"BeautySalon"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
   assert.match(html, /https:\/\/line\.me\/ti\/p\/f_92dWjx8l/i);
+  assert.match(html, /aria-label="LINE 預約 QR Code/i);
+  assert.match(html, /src="\/qr-line\.svg"/i);
+  assert.match(html, /src="\/qr-facebook\.svg"/i);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.match(html, /"serviceType":"瑪菲斯草本撫紋"/i);
   assert.match(html, /"@type":"FAQPage"/i);
@@ -171,10 +174,10 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /服務範圍: 中和、永和、雙和地區，以及台北市與北部地區預約客/);
   assert.match(llms, /營業時間: 11:00–19:00（預約制）/);
   assert.match(llms, /預約方式: 手機、LINE 或雙和店 Facebook 私訊/);
-  assert.match(llms, /LINE 預約: https:\/\/line\.me\/ti\/p\/f_92dWjx8l/);
-  assert.match(llms, /官方網站: https:\/\/ycaura\.com\//);
-  assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
-  assert.match(llms, /諮詢流程: https:\/\/ycaura\.com\/#process/);
+  assert.match(llms, /- \[官方網站\]\(https:\/\/ycaura\.com\/\)/);
+  assert.match(llms, /- \[LINE 預約\]\(https:\/\/line\.me\/ti\/p\/f_92dWjx8l\)/);
+  assert.match(llms, /- \[雙和店 Facebook\]\(https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
+  assert.match(llms, /- \[諮詢流程\]\(https:\/\/ycaura\.com\/#process\)/);
   assert.doesNotMatch(llms, /Instagram|instagram\.com|liff\.line\.me/i);
   assert.match(llms, /## 諮詢流程/);
   assert.match(llms, /肌膚美學資訊可以取代看醫生嗎？不可以/);
