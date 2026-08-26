@@ -139,21 +139,22 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-arrow { align-self: end; font-family: var(--sans); font-size: 32px; font-weight: 300; letter-spacing: -.08em; opacity: .78; }
 .contact-secondary { align-self: flex-end; color: var(--ink); border-bottom: 1px solid var(--clay); padding-bottom: 6px; font-size: 13px; }
 .contact-secondary span { margin-left: 10px; color: var(--clay-dark); }
-.contact-qr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
-.contact-qr-card { position: relative; display: grid; grid-template-columns: 86px 1fr; gap: 14px; min-height: 120px; overflow: hidden; padding: 12px; background: rgba(233, 222, 211, .52); border: 1px solid rgba(53, 43, 41, .12); color: var(--ink); isolation: isolate; transition: transform .3s cubic-bezier(.22,1,.36,1), background .3s ease, border-color .3s ease; }
+.contact-qr-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.contact-qr-card { position: relative; display: flex; flex-direction: column; gap: 11px; min-height: 245px; overflow: hidden; padding: 12px; background: rgba(233, 222, 211, .52); border: 1px solid rgba(53, 43, 41, .12); color: var(--ink); isolation: isolate; transition: transform .3s cubic-bezier(.22,1,.36,1), background .3s ease, border-color .3s ease; }
 .contact-qr-card:hover { transform: translateY(-4px) rotate(-.5deg); background: var(--paper-deep); border-color: rgba(184, 120, 110, .55); }
-.contact-qr-image { position: relative; z-index: 1; display: block; align-self: center; width: 86px; height: 86px; padding: 4px; background: var(--paper); border-radius: 8px; box-shadow: 0 8px 18px rgba(53, 43, 41, .12); }
+.contact-qr-image { position: relative; z-index: 1; display: block; flex: 0 0 86px; align-self: center; width: 86px; height: 86px; padding: 4px; background: var(--paper); border-radius: 8px; box-shadow: 0 8px 18px rgba(53, 43, 41, .12); }
 .contact-qr-image img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
-.contact-qr-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.contact-qr-copy { position: relative; z-index: 1; display: flex; flex: 1; flex-direction: column; width: 100%; min-width: 0; }
 .contact-qr-brand { display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 25px; margin-bottom: 7px; color: #fff; box-shadow: 0 5px 10px rgba(53, 43, 41, .16); transition: transform .3s cubic-bezier(.22,1,.36,1); }
 .contact-qr-brand svg { display: block; width: 18px; height: 18px; }
 .contact-qr-brand-line { border-radius: 8px 8px 8px 3px; background: #06c755; }
 .contact-qr-brand-facebook { border-radius: 50%; background: #1877f2; }
+.contact-qr-brand-instagram { border-radius: 8px 8px 8px 3px; background: linear-gradient(135deg, #feda75, #d62976 58%, #4f5bd5); }
 .contact-qr-card:hover .contact-qr-brand { transform: rotate(-6deg) scale(1.08); }
 .contact-qr-eyebrow { color: var(--clay-dark); font-size: 8px; font-weight: 700; letter-spacing: .12em; line-height: 1.3; }
-.contact-qr-copy strong { margin-top: 8px; font-family: var(--serif); font-size: 19px; font-weight: 400; letter-spacing: -.05em; }
+.contact-qr-copy strong { margin-top: 6px; font-family: var(--serif); font-size: 19px; font-weight: 400; letter-spacing: -.05em; }
 .contact-qr-copy small { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
-.contact-qr-arrow { align-self: flex-end; margin-top: 5px; color: var(--clay-dark); font-size: 18px; line-height: 1; transition: transform .3s ease; }
+.contact-qr-arrow { align-self: flex-end; margin-top: auto; color: var(--clay-dark); font-size: 18px; line-height: 1; transition: transform .3s ease; }
 .contact-qr-card:hover .contact-qr-arrow { transform: translate(3px, -3px); }
 .contact-qr-glow { position: absolute; z-index: -1; top: -28px; right: -24px; width: 100px; height: 100px; border-radius: 50%; background: rgba(184, 120, 110, .2); filter: blur(2px); animation: contact-qr-breathe 4.5s ease-in-out infinite; }
 .contact-qr-spark { position: absolute; z-index: 2; color: var(--clay-dark); pointer-events: none; }
@@ -218,6 +219,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .intro-content { grid-template-columns: 1fr 1fr; }
   .intro-media { grid-column: 1 / 3; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .intro-photo { height: 240px; }
+  .contact-qr-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   .section-shell, .site-nav { width: min(100% - 40px, 620px); }

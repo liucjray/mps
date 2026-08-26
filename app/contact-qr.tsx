@@ -5,7 +5,7 @@ type ContactQrProps = {
   eyebrow: string;
   title: string;
   description: string;
-  kind: "line" | "facebook";
+  kind: "line" | "facebook" | "instagram";
 };
 
 function BrandIcon({ kind }: { kind: ContactQrProps["kind"] }) {
@@ -20,9 +20,19 @@ function BrandIcon({ kind }: { kind: ContactQrProps["kind"] }) {
     );
   }
 
+  if (kind === "facebook") {
+    return (
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path fill="currentColor" d="M13.62 20v-6.92h2.3l.35-2.7h-2.65V8.66c0-.78.217-1.31 1.337-1.31h1.427V4.93c-.247-.033-1.094-.11-2.082-.11-2.06 0-3.47 1.257-3.47 3.565v1.993H8.5v2.7h2.337V20h2.783Z" />
+      </svg>
+    );
+  }
+
   return (
     <svg viewBox="0 0 24 24" focusable="false">
-      <path fill="currentColor" d="M13.62 20v-6.92h2.3l.35-2.7h-2.65V8.66c0-.78.217-1.31 1.337-1.31h1.427V4.93c-.247-.033-1.094-.11-2.082-.11-2.06 0-3.47 1.257-3.47 3.565v1.993H8.5v2.7h2.337V20h2.783Z" />
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" />
     </svg>
   );
 }
