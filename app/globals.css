@@ -19,7 +19,7 @@ a { color: inherit; text-decoration: none; }
 .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--clay-dark); margin: 0 0 30px; }
 .eyebrow-line { display: inline-block; width: 30px; height: 1px; background: currentColor; }
 .section-label { display: inline-flex; align-items: center; gap: 12px; color: var(--clay-dark); font-size: 13px; font-weight: 700; letter-spacing: .12em; line-height: 1; text-transform: none; }
-section[id] { scroll-margin-top: 28px; }
+.nav-target { scroll-margin-top: 28px; }
 .section-label::before { content: ""; width: 30px; height: 2px; background: currentColor; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2 { font-family: var(--serif); font-weight: 400; }
@@ -111,7 +111,7 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .manifesto-mark { display: grid; width: 54px; height: 54px; place-items: center; border: 1px solid var(--clay); border-radius: 50%; color: var(--clay); font-family: var(--serif); font-size: 24px; font-style: italic; }
 .manifesto h2 { max-width: 800px; margin: 0 0 76px; }
 .manifesto h2 em { color: var(--clay); }
-.manifesto-bottom { display: flex; justify-content: space-between; color: var(--muted); }
+.manifesto-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--muted); }
 .faq { padding: 0 0 150px; }
 .faq-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8vw; margin-top: 68px; }
 .faq h2 { margin: 0; }
@@ -202,6 +202,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .service-detail-contact { padding-top: 0; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 960px) {
+  .site-nav { position: sticky; top: 0; z-index: 20; isolation: isolate; background: transparent; }
+  .site-nav::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: -16px; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--paper); backdrop-filter: blur(14px); pointer-events: none; }
+  .nav-target { scroll-margin-top: 104px; }
+  #top { scroll-margin-top: 0; }
   .intro h2, .section-heading h2, .knowledge h2, .manifesto h2, .faq h2, .contact h2 { white-space: nowrap; }
   .knowledge h2, .contact h2 { font-size: clamp(42px, 4.7vw, 66px); }
 }

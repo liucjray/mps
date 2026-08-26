@@ -91,7 +91,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /src="\/knowledge-skin-palette\.webp"/i);
   assert.match(html, /alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡"/i);
   assert.match(html, /了解流程/);
-  assert.match(html, /<section class="intro section-shell" id="about" aria-labelledby="about-title">/i);
+  assert.match(html, /<section class="intro section-shell" aria-labelledby="about-title"><div class="section-label nav-target" id="about"/i);
+  assert.match(html, /<section class="services section-shell" aria-labelledby="services-title"><div class="section-heading"><div><div class="section-label nav-target" id="services"/i);
+  assert.match(html, /<section class="faq section-shell" aria-labelledby="faq-title"><div class="section-label nav-target" id="faq"/i);
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
     assert.match(html, new RegExp(`href="https://ycaura\\.com/services/${slug}"`, "i"));
   }
