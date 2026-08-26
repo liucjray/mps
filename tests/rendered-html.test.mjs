@@ -40,11 +40,13 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "JSON-LD block should be rendered");
   const graph = JSON.parse(jsonLdMatch[1])["@graph"];
-  const organization = graph.find((entity) => entity["@type"] === "Organization");
+  const organization = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
   assert.ok(organization, "Organization entity should be rendered");
   assert.equal("availableLanguage" in organization, false);
   assert.deepEqual(organization.contactPoint.availableLanguage, ["zh-Hant-TW"]);
   assert.deepEqual(organization.contactPoint.areaServed.map((area) => area.name), ["新北市", "中和區"]);
+  assert.equal(organization.email, "millie0806@gmail.com");
+  assert.deepEqual(organization.address, { "@type": "PostalAddress", streetAddress: "景新街347號9樓之9", addressLocality: "中和區", addressRegion: "新北市", addressCountry: "TW" });
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
   assert.ok(services.every((service) => service.provider["@id"] === "https://mps.rabby.cc/#organization"));
@@ -56,7 +58,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /瑪菲斯 \/ 新北雙和店/);
-  assert.match(html, /"@type":"Organization"/i);
+  assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
+  assert.match(html, /millie0806@gmail\.com/i);
+  assert.match(html, /景新街347號9樓之9/);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/mps\.rabby\.cc\/social-skin-atelier\.jpg"/i);
@@ -116,6 +120,9 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, new RegExp(`<link rel="canonical" href="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
     assert.match(html, new RegExp(`<meta property="og:url" content="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
     assert.match(html, /"@type":"Service"/i);
+    assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
+    assert.match(html, /millie0806@gmail\.com/i);
+    assert.match(html, /景新街347號9樓之9/);
     assert.match(html, /"@type":"BreadcrumbList"/i);
     assert.match(html, /"@type":"FAQPage"/i);
     assert.match(html, /<details>/i);
@@ -150,6 +157,8 @@ test("ships crawler and answer-engine support files", async () => {
   }
   assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北雙和店（中和區）/);
   assert.match(llms, /最後更新：2026-08-26/);
+  assert.match(llms, /Email: millie0806@gmail\.com/);
+  assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
   assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);
