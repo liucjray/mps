@@ -58,9 +58,9 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
-    if (redirectHosts.has(url.hostname)) {
+    if (url.protocol === "http:" || redirectHosts.has(url.hostname)) {
       url.protocol = "https:";
-      url.hostname = canonicalHost;
+      if (redirectHosts.has(url.hostname)) url.hostname = canonicalHost;
       return Response.redirect(url.toString(), 301);
     }
 

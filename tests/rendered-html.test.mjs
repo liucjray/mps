@@ -11,7 +11,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   const { default: worker } = await import(workerUrl.href);
 
   const response = await worker.fetch(
-    new Request("http://localhost/", {
+    new Request("https://localhost/", {
       headers: { accept: "text/html" },
     }),
     {
@@ -103,7 +103,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
-    new Request("http://localhost/hero-skin-atelier.webp"),
+    new Request("https://localhost/hero-skin-atelier.webp"),
     { ASSETS: { fetch: async () => new Response("asset", { headers: { "content-type": "image/webp" } }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
@@ -120,7 +120,7 @@ test("renders independently indexable service pages", async () => {
 
   for (const slug of serviceSlugs) {
     const response = await worker.fetch(
-      new Request(`http://localhost/services/${slug}`, { headers: { accept: "text/html" } }),
+      new Request(`https://localhost/services/${slug}`, { headers: { accept: "text/html" } }),
       { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
       { waitUntil() {}, passThroughOnException() {} },
     );
@@ -144,6 +144,27 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /<details>/i);
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
     assert.match(html, /href="https:\/\/ycaura\.com\/services\//i);
+  }
+});
+
+test("redirects every HTTP hostname to HTTPS", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("http-redirect-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  for (const [hostname, target] of [
+    ["ycaura.com", "ycaura.com"],
+    ["www.ycaura.com", "ycaura.com"],
+    ["mps.rabby.cc", "ycaura.com"],
+  ]) {
+    const response = await worker.fetch(
+      new Request(`http://${hostname}/contact?source=test`),
+      { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+      { waitUntil() {}, passThroughOnException() {} },
+    );
+
+    assert.equal(response.status, 301, `${hostname} should redirect`);
+    assert.equal(response.headers.get("location"), `https://${target}/contact?source=test`);
   }
 });
 
