@@ -29,6 +29,8 @@ const organizationId = `${siteCanonicalUrl}#organization`;
 const servedAreas = [
   { "@type": "AdministrativeArea", name: "新北市" },
   { "@type": "AdministrativeArea", name: "中和區" },
+  { "@type": "AdministrativeArea", name: "永和區" },
+  { "@type": "AdministrativeArea", name: "台北市" },
 ];
 const serviceEntities = services.map((service) => ({
   "@type": "Service",
@@ -133,9 +135,9 @@ export default function Home() {
       <main id="main-content">
       <section className="hero section-shell" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-line" />瑪菲斯 / 新北雙和店</div>
+          <div className="eyebrow"><span className="eyebrow-line" />瑪菲斯 / 新北中和・南勢角站</div>
           <h1><span className="hero-title-line">讓肌膚的故事，</span><span className="hero-title-line hero-title-accent">被溫柔理解。</span></h1>
-          <p className="hero-lede">從妊娠紋、肥胖紋、成長紋，到疤痕與局部色澤困擾，瑪菲斯用專業評估、科技測色與清楚說明，陪你找到適合自己的美化方向。</p>
+          <p className="hero-lede">位於新北市中和區、捷運南勢角站附近，服務中和、永和、雙和地區，也接受台北市與北部地區預約。從妊娠紋、肥胖紋、成長紋，到疤痕與局部色澤困擾，瑪菲斯用專業評估、科技測色與清楚說明，陪你找到適合自己的美化方向。</p>
           <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a><a className="text-link" href="#services">查看服務內容</a></div>
         </div>
         <div className="hero-visual">
@@ -150,7 +152,7 @@ export default function Home() {
 
       <section className="intro section-shell" id="about" aria-labelledby="about-title">
         <div className="section-label">品牌理念</div>
-        <div className="intro-content"><h2 id="about-title">不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div><span>01 / 先理解肌膚</span></div></div>
+        <div className="intro-content"><h2 id="about-title">不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>瑪菲斯把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><p className="content-note">新北市中和區、捷運南勢角站附近；服務中和、永和、雙和地區，也接受台北市與北部地區預約。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div><span>01 / 先理解肌膚</span></div></div>
       </section>
 
       <section className="services section-shell" id="services" aria-labelledby="services-title">
@@ -172,7 +174,7 @@ export default function Home() {
 
       <section className="faq section-shell" id="faq" aria-labelledby="faq-title"><div className="section-label">常見問題</div><div className="faq-layout"><h2 id="faq-title">先把想問的，<br /><span>問清楚。</span></h2><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></div></section>
 
-      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北市中和區・雙和店</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a></div></section>
+      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a></div></section>
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="#top"><span className="wordmark-mark">M</span><span>瑪菲斯</span></a><span>瑪菲斯皮膚覆蓋專家｜新北雙和店</span><span>© 2026</span></footer>

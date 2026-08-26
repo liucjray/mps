@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { siteCanonicalUrl, siteDescription, siteName, siteUrl, socialImageUrl } from "./site";
+import { siteCanonicalUrl, siteDescription, siteName, siteTitle, siteUrl, socialImageUrl } from "./site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: siteName, template: `%s｜${siteName}` },
+  title: { default: siteTitle, template: `%s｜${siteName}` },
   description: siteDescription,
-  keywords: ["瑪菲斯", "Mavis pure skin", "皮膚覆蓋術", "草本撫紋", "科技測色", "妊娠紋", "肥胖紋", "成長紋", "疤痕", "新北雙和", "新北市中和區"],
+  keywords: ["瑪菲斯", "Mavis pure skin", "皮膚覆蓋術", "草本撫紋", "科技測色", "妊娠紋", "肥胖紋", "成長紋", "疤痕", "捷運南勢角站", "新北市中和區", "中和", "永和", "雙和", "台北市", "雙北", "北部"],
   authors: [{ name: siteName, url: siteCanonicalUrl }],
   creator: siteName,
   publisher: siteName,
   alternates: { canonical: siteCanonicalUrl },
   openGraph: {
-    title: siteName,
+    title: siteTitle,
     description: siteDescription,
     type: "website",
     locale: "zh_TW",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: siteName,
+    title: siteTitle,
     description: siteDescription,
     images: [{ url: socialImageUrl, alt: "自然光下展示肌膚紋理的女性肩背" }],
   },
