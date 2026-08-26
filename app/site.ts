@@ -3,6 +3,7 @@ export const siteCanonicalUrl = `${siteUrl}/`;
 export const siteName = "瑪菲斯皮膚覆蓋專家｜新北雙和店";
 export const siteTitle = "瑪菲斯皮膚覆蓋專家｜新北中和・南勢角站｜雙北預約";
 export const siteDescription = "瑪菲斯位於新北市中和區、捷運南勢角站附近，服務中和、永和、雙和地區，也接受台北市與北部地區預約，提供草本撫紋、皮膚覆蓋術、科技測色與肌膚美學知識。";
+export const siteBusinessHours = "11:00–19:00（預約制）";
 export const siteEmail = "millie0806@gmail.com";
 export const siteAddress = {
   "@type": "PostalAddress",

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { facebookUrl, phoneNumber, siteAddress, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl, socialImageUrl } from "../../site";
+import { facebookUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl, socialImageUrl } from "../../site";
 import { serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
@@ -174,7 +174,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </article>
 
-        <section className="contact service-detail-contact section-shell" id="contact" aria-labelledby="service-contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="service-contact-title">想了解這項服務，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={`tel:${phoneNumber}`}>電話諮詢 0981-756-111</a></div></section>
+        <section className="contact service-detail-contact section-shell" id="contact" aria-labelledby="service-contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="service-contact-title">想了解這項服務，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊或手機預約，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>時間</span>{siteBusinessHours}<br /><span>預約</span>手機或 Facebook 私訊<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={`tel:${phoneNumber}`}>電話預約 0981-756-111</a></div></section>
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href={siteCanonicalUrl}><span className="wordmark-mark">M</span><span>瑪菲斯</span></a><span>瑪菲斯皮膚覆蓋專家｜新北雙和店</span><span>© 2026</span></footer>
