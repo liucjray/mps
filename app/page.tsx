@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, heroImageUrl, introImageUrl, knowledgeImageUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl } from "./site";
+import { facebookUrl, heroImageUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl } from "./site";
 import { serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 const phoneUrl = `tel:${phoneNumber}`;
 
 const processSteps = [
-  { number: "01", title: "說明你的困擾", text: "透過雙和店 Facebook 私訊或電話，描述紋路、疤痕或局部色澤困擾；若方便，也可以先準備清楚的照片。" },
+  { number: "01", title: "說明你的困擾", text: "透過雙和店 Facebook 私訊、LINE 或電話，描述紋路、疤痕或局部色澤困擾；若方便，也可以先準備清楚的照片。" },
   { number: "02", title: "評估紋路與膚色", text: "了解紋路類型、部位與膚色狀態，需要時搭配科技測色，讓後續討論更有依據。" },
   { number: "03", title: "討論美化方向", text: "依個人狀況說明可行方向與注意事項，再由你決定是否進一步安排。" },
 ];
@@ -16,10 +16,10 @@ const faqs = [
   ["瑪菲斯草本撫紋適合哪些紋路？", "常見諮詢包含妊娠紋、肥胖紋、成長紋與不同類型的紋路。每個人的狀況不同，建議先提供照片或透過雙和店聯絡方式諮詢。"],
   ["皮膚覆蓋術是在做什麼？", "皮膚覆蓋是針對紋路、疤痕或局部色澤落差，透過色彩與肌膚狀態評估，討論外觀美化方向的服務。"],
   ["為什麼需要科技測色？", "不同人的膚色、部位與紋路狀態不一樣。測色能協助縮小色彩選擇範圍，讓後續討論更有依據。"],
-  ["需要先預約或準備什麼？", "請先透過雙和店 Facebook 私訊或電話聯絡，說明想了解的紋路或部位；若方便，也可準備清楚照片，讓初步溝通更有效率。"],
+  ["需要先預約或準備什麼？", "請先透過雙和店 Facebook 私訊、LINE 或電話聯絡，說明想了解的紋路或部位；若方便，也可準備清楚照片，讓初步溝通更有效率。"],
   ["肌膚美學資訊可以取代看醫生嗎？", "不可以。本站內容是一般肌膚美學與外觀照護資訊；若有皮膚疾病、傷口、發炎、疼痛或其他醫療疑慮，請先諮詢合格醫療專業人員。"],
   ["可以先看案例與專業分享嗎？", "可以。Facebook 粉絲團會持續分享紋路類型、案例心得、保養觀念與局部美學知識，歡迎先追蹤了解。"],
-  ["如何聯絡新北雙和店？", "可以透過雙和店 Facebook 粉絲團私訊，或撥打 0981-756-111 了解服務內容與預約方式。"],
+  ["如何聯絡新北雙和店？", "可以透過雙和店 Facebook 粉絲團私訊、LINE，或撥打 0981-756-111 了解服務內容與預約方式。"],
 ];
 
 const beautyImage = heroImageUrl;
@@ -64,7 +64,7 @@ const structuredData = {
         width: 512,
         height: 512,
       },
-      sameAs: [facebookUrl],
+      sameAs: [facebookUrl, lineUrl],
       brand: { "@type": "Brand", name: "Mavis pure skin" },
       areaServed: servedAreas,
       contactPoint: {
@@ -72,6 +72,7 @@ const structuredData = {
         telephone: phoneNumber,
         email: siteEmail,
         contactType: "customer service",
+        url: lineUrl,
         areaServed: servedAreas,
         availableLanguage: ["zh-Hant-TW"],
       },
@@ -138,7 +139,7 @@ export default function Home() {
           <div className="eyebrow"><span className="eyebrow-line" />瑪菲斯 / 新北中和・南勢角站</div>
           <h1><span className="hero-title-line">讓肌膚的故事，</span><span className="hero-title-line hero-title-accent">被溫柔理解。</span></h1>
           <p className="hero-lede">位於新北市中和區、捷運南勢角站附近，服務中和、永和、雙和地區，也接受台北市與北部地區預約。從妊娠紋、肥胖紋、成長紋，到疤痕與局部色澤困擾，瑪菲斯用專業評估、科技測色與清楚說明，陪你找到適合自己的美化方向。</p>
-          <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a><a className="text-link" href="#services">查看服務內容</a></div>
+          <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約</a></div>
         </div>
         <div className="hero-visual">
           <div className="hero-image">
@@ -174,7 +175,7 @@ export default function Home() {
 
       <section className="faq section-shell" id="faq" aria-labelledby="faq-title"><div className="section-label">常見問題</div><div className="faq-layout"><h2 id="faq-title">先把想問的，<br /><span>問清楚。</span></h2><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></div></section>
 
-      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊或手機預約，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>時間</span>{siteBusinessHours}<br /><span>預約</span>手機或 Facebook 私訊<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話預約 0981-756-111</a></div></section>
+      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊、LINE 或手機預約，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>時間</span>{siteBusinessHours}<br /><span>預約</span>手機、LINE 或 Facebook 私訊<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約諮詢</a><a className="contact-secondary" href={phoneUrl}>電話預約 0981-756-111</a></div></section>
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="#top"><span className="wordmark-mark">M</span><span>瑪菲斯</span></a><span>瑪菲斯皮膚覆蓋專家｜新北雙和店</span><span>© 2026</span></footer>
