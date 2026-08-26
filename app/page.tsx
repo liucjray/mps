@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl } from "./site";
+import { facebookUrl, heroImageUrl, introImageUrl, knowledgeImageUrl, phoneNumber, siteAddress, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl } from "./site";
 import { serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
@@ -62,7 +62,7 @@ const structuredData = {
         width: 512,
         height: 512,
       },
-      sameAs: [facebookUrl, instagramUrl, lineUrl],
+      sameAs: [facebookUrl],
       brand: { "@type": "Brand", name: "Mavis pure skin" },
       areaServed: servedAreas,
       contactPoint: {
@@ -172,7 +172,7 @@ export default function Home() {
 
       <section className="faq section-shell" id="faq" aria-labelledby="faq-title"><div className="section-label">常見問題</div><div className="faq-layout"><h2 id="faq-title">先把想問的，<br /><span>問清楚。</span></h2><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></div></section>
 
-      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北市中和區・雙和店</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a><a className="contact-secondary" href={instagramUrl} target="_blank" rel="noreferrer">Instagram @mavis_pure_skin</a><a className="contact-secondary" href={lineUrl} target="_blank" rel="noreferrer">LINE 官方帳號</a></div></section>
+      <section className="contact section-shell" id="contact" aria-labelledby="contact-title"><div className="contact-copy"><div className="section-label">新北市中和區・雙和店</div><h2 id="contact-title">想了解你的紋路，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊，或直接致電 0981-756-111，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={phoneUrl}>電話諮詢 0981-756-111</a></div></section>
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="#top"><span className="wordmark-mark">M</span><span>瑪菲斯</span></a><span>瑪菲斯皮膚覆蓋專家｜新北雙和店</span><span>© 2026</span></footer>

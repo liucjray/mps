@@ -71,8 +71,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"AdministrativeArea"/i);
   assert.doesNotMatch(html, /"@type":"BeautySalon"/i);
   assert.match(html, /"@type":"ContactPoint"/i);
-  assert.match(html, /https:\/\/www\.instagram\.com\/mavis_pure_skin\//i);
-  assert.match(html, /accountId=043aqebt/i);
+  assert.doesNotMatch(html, /instagram\.com|liff\.line\.me|LINE 官方帳號/i);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.match(html, /"serviceType":"瑪菲斯草本撫紋"/i);
   assert.match(html, /"@type":"FAQPage"/i);
@@ -162,8 +161,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
   assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);
-  assert.match(llms, /品牌 Instagram: https:\/\/www\.instagram\.com\/mavis_pure_skin\//);
-  assert.match(llms, /品牌 LINE: https:\/\/liff\.line\.me\/1645278921-kWRPP32q\/\?accountId=043aqebt/);
+  assert.doesNotMatch(llms, /Instagram|LINE|instagram\.com|liff\.line\.me/i);
   assert.match(llms, /## 諮詢流程/);
   assert.match(llms, /肌膚美學資訊可以取代看醫生嗎？不可以/);
 });

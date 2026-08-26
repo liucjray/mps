@@ -11,8 +11,6 @@ export const siteAddress = {
   addressCountry: "TW",
 } as const;
 export const facebookUrl = "https://www.facebook.com/people/%E7%91%AA%E8%8F%B2%E6%96%AF%E7%9A%AE%E8%86%9A%E8%A6%86%E8%93%8B%E5%B0%88%E5%AE%B6-%E6%96%B0%E5%8C%97%E9%9B%99%E5%92%8C%E5%BA%97/61592083747747/";
-export const instagramUrl = "https://www.instagram.com/mavis_pure_skin/";
-export const lineUrl = "https://liff.line.me/1645278921-kWRPP32q/?accountId=043aqebt";
 export const phoneNumber = "+886981756111";
 export const heroImageUrl = "/hero-skin-atelier.webp";
 export const introImageUrl = "/intro-skin-consultation.webp";
