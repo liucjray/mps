@@ -223,7 +223,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .section-shell, .site-nav { width: min(100% - 40px, 620px); }
   .site-nav { height: 78px; }
   .nav-links { display: none; }
-  .nav-cta { font-size: 12px; }
+  .wordmark { min-width: 0; flex: 1 1 auto; gap: 8px; overflow: hidden; font-size: clamp(12px, 3.65vw, 15px); letter-spacing: -.06em; }
+  .wordmark > span:last-child { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .wordmark-mark { flex: 0 0 28px; width: 28px; height: 28px; font-size: 15px; }
+  .nav-cta { flex: 0 0 auto; font-size: 12px; margin-left: 10px; }
   .hero { width: calc(100% - 20px); display: flex; flex-direction: column; align-items: stretch; gap: 0; margin-top: 22px; padding: 0; }
   .hero-copy { padding: 58px 22px 60px; }
   h1 { font-size: clamp(57px, 16.8vw, 90px); }
@@ -289,8 +292,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .contact-secondary { align-self: flex-start; }
   .contact-qr-grid { display: none; }
   .site-footer { min-height: 138px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 22px 0 72px; line-height: 1.5; }
-  .site-footer span:nth-child(2) { grid-column: 1 / 3; order: 3; }
-  .site-footer span:last-child { text-align: right; }
+  .site-footer .wordmark { grid-column: 1 / 3; grid-row: 1; font-size: 13px; letter-spacing: -.06em; white-space: nowrap; }
+  .site-footer .wordmark > span:last-child { white-space: nowrap; overflow: visible; text-overflow: clip; }
+  .site-footer > span:nth-child(2) { grid-column: 1 / 3; grid-row: 3; order: initial; }
+  .site-footer > span:last-child { grid-column: 2; grid-row: 2; text-align: right; }
   .mobile-sticky-cta { position: fixed; display: flex; align-items: center; justify-content: space-between; left: 15px; right: 15px; bottom: 15px; min-height: 53px; padding: 0 18px; border-radius: 2px; background: var(--ink); color: var(--paper); box-shadow: 0 12px 28px rgba(41,35,34,.18); font-size: 13px; font-weight: 700; z-index: 10; }
   .mobile-sticky-cta span { color: var(--paper-deep); font-size: 20px; }
 }

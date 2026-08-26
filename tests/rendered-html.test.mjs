@@ -58,6 +58,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /瑪菲斯 \/ 新北中和・南勢角站/);
+  assert.match(html, /瑪菲斯皮膚覆蓋專家-新北雙和店/);
   assert.match(html, /新北中和・南勢角站｜雙北預約/);
   assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
   assert.match(html, /millie0806@gmail\.com/i);
