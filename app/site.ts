@@ -1,4 +1,4 @@
-export const siteUrl = "https://mps.rabby.cc";
+export const siteUrl = "https://ycaura.com";
 export const siteCanonicalUrl = `${siteUrl}/`;
 export const siteName = "瑪菲斯皮膚覆蓋專家｜新北雙和店";
 export const siteTitle = "瑪菲斯皮膚覆蓋專家｜新北中和・南勢角站｜雙北預約";

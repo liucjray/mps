@@ -24,6 +24,8 @@ const isPublicAsset = (pathname: string) => /\.(?:avif|css|gif|ico|jpe?g|js|png|
 const isAssetRequest = (request: Request, pathname: string) =>
   (request.method === "GET" || request.method === "HEAD") && (isHashedAsset(pathname) || isPublicAsset(pathname));
 const htmlCacheControl = "public, max-age=300, stale-while-revalidate=86400";
+const redirectHosts = new Set(["mps.rabby.cc", "www.ycaura.com"]);
+const canonicalHost = "ycaura.com";
 
 function addResponseHeaders(response: Response, cacheControl?: string): Response {
   const headers = new Headers(response.headers);
@@ -55,6 +57,12 @@ async function normalizeHtmlDocument(response: Response): Promise<Response> {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    if (redirectHosts.has(url.hostname)) {
+      url.protocol = "https:";
+      url.hostname = canonicalHost;
+      return Response.redirect(url.toString(), 301);
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

@@ -49,12 +49,12 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.deepEqual(organization.address, { "@type": "PostalAddress", streetAddress: "景新街347號9樓之9", addressLocality: "中和區", addressRegion: "新北市", addressCountry: "TW" });
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
-  assert.ok(services.every((service) => service.provider["@id"] === "https://mps.rabby.cc/#organization"));
+  assert.ok(services.every((service) => service.provider["@id"] === "https://ycaura.com/#organization"));
   assert.ok(services.every((service) => service.areaServed.some((area) => area.name === "中和區")));
   assert.ok(organization.hasOfferCatalog.itemListElement.every((offer) => offer.itemOffered["@id"].includes("#service-")));
   assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<link rel="canonical" href="https:\/\/mps\.rabby\.cc\/"\/>/i);
-  assert.match(html, /<meta property="og:url" content="https:\/\/mps\.rabby\.cc\/"\/>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/"\/>/i);
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /瑪菲斯 \/ 新北中和・南勢角站/);
@@ -63,8 +63,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /millie0806@gmail\.com/i);
   assert.match(html, /景新街347號9樓之9/);
   assert.match(html, /"@type":"ImageObject"/i);
-  assert.match(html, /https:\/\/mps\.rabby\.cc\/logo\.png/i);
-  assert.match(html, /property="og:image" content="https:\/\/mps\.rabby\.cc\/social-skin-atelier\.jpg"/i);
+  assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
+  assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
   assert.match(html, /"dateModified":"2026-08-26"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
@@ -90,7 +90,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /了解流程/);
   assert.match(html, /<section class="intro section-shell" id="about" aria-labelledby="about-title">/i);
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
-    assert.match(html, new RegExp(`href="https://mps\\.rabby\\.cc/services/${slug}"`, "i"));
+    assert.match(html, new RegExp(`href="https://ycaura\\.com/services/${slug}"`, "i"));
   }
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
@@ -121,8 +121,8 @@ test("renders independently indexable service pages", async () => {
     assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
     const html = await response.text();
     assert.match(html, /<h1>[^<]+<\/h1>/i);
-    assert.match(html, new RegExp(`<link rel="canonical" href="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
-    assert.match(html, new RegExp(`<meta property="og:url" content="https://mps\\.rabby\\.cc/services/${slug}"\/>`, "i"));
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://ycaura\\.com/services/${slug}"\/>`, "i"));
+    assert.match(html, new RegExp(`<meta property="og:url" content="https://ycaura\\.com/services/${slug}"\/>`, "i"));
     assert.match(html, /"@type":"Service"/i);
     assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
     assert.match(html, /millie0806@gmail\.com/i);
@@ -135,7 +135,7 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /"@type":"FAQPage"/i);
     assert.match(html, /<details>/i);
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
-    assert.match(html, /href="https:\/\/mps\.rabby\.cc\/services\//i);
+    assert.match(html, /href="https:\/\/ycaura\.com\/services\//i);
   }
 });
 
@@ -146,14 +146,14 @@ test("ships crawler and answer-engine support files", async () => {
     readFile(new URL("../public/llms.txt", import.meta.url), "utf8"),
   ]);
 
-  assert.match(robots, /Sitemap: https:\/\/mps\.rabby\.cc\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/ycaura\.com\/sitemap\.xml/);
   assert.match(robots, /User-agent: GPTBot[\s\S]*Allow: \//);
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Disallow: \/api\//);
-  assert.match(sitemap, /<loc>https:\/\/mps\.rabby\.cc\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/<\/loc>/);
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
-    assert.match(sitemap, new RegExp(`<loc>https://mps\\.rabby\\.cc/services/${slug}<\\/loc>`));
-    assert.match(llms, new RegExp(`https://mps\\.rabby\\.cc/services/${slug}`));
+    assert.match(sitemap, new RegExp(`<loc>https://ycaura\\.com/services/${slug}<\\/loc>`));
+    assert.match(llms, new RegExp(`https://ycaura\\.com/services/${slug}`));
   }
   assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
   for (const image of [
@@ -161,7 +161,7 @@ test("ships crawler and answer-engine support files", async () => {
     "intro-skin-consultation.webp",
     "knowledge-skin-palette.webp",
   ]) {
-    assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/mps\\.rabby\\.cc\\/${image}<\\/image:loc>`));
+    assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/ycaura\\.com\\/${image}<\\/image:loc>`));
   }
   assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北中和・南勢角站｜雙北預約/);
   assert.match(llms, /最後更新：2026-08-26/);
@@ -171,9 +171,9 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /服務範圍: 中和、永和、雙和地區，以及台北市與北部地區預約客/);
   assert.match(llms, /營業時間: 11:00–19:00（預約制）/);
   assert.match(llms, /預約方式: 手機或雙和店 Facebook 私訊/);
-  assert.match(llms, /官方網站: https:\/\/mps\.rabby\.cc\//);
+  assert.match(llms, /官方網站: https:\/\/ycaura\.com\//);
   assert.match(llms, /雙和店 Facebook: https:\/\/www\.facebook\.com\/people\/.+61592083747747\//);
-  assert.match(llms, /諮詢流程: https:\/\/mps\.rabby\.cc\/#process/);
+  assert.match(llms, /諮詢流程: https:\/\/ycaura\.com\/#process/);
   assert.doesNotMatch(llms, /Instagram|LINE|instagram\.com|liff\.line\.me/i);
   assert.match(llms, /## 諮詢流程/);
   assert.match(llms, /肌膚美學資訊可以取代看醫生嗎？不可以/);

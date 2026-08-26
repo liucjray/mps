@@ -111,7 +111,8 @@ Add these repository secrets in GitHub under **Settings → Secrets and variable
   the `rabby.cc` custom domain
 - `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns `rabby.cc`
 
-The workflow deploys the Worker and binds `mps.rabby.cc`. Keep the local
+The workflow deploys the Worker and binds `ycaura.com`, `www.ycaura.com`, and
+the legacy `mps.rabby.cc` redirect. Keep the local
 `.env.cloudflare` file uncommitted; `.env.cloudflare.example` documents the
 required variable names.
 

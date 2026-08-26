@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://mps.rabby.cc/</loc>
+    <loc>https://ycaura.com/</loc>
     <lastmod>2026-08-26</lastmod>
     <image:image>
-      <image:loc>https://mps.rabby.cc/hero-skin-atelier.webp</image:loc>
+      <image:loc>https://ycaura.com/hero-skin-atelier.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://mps.rabby.cc/intro-skin-consultation.webp</image:loc>
+      <image:loc>https://ycaura.com/intro-skin-consultation.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://mps.rabby.cc/knowledge-skin-palette.webp</image:loc>
+      <image:loc>https://ycaura.com/knowledge-skin-palette.webp</image:loc>
     </image:image>
   </url>
   <url>
-    <loc>https://mps.rabby.cc/services/herbal-stretch-care</loc>
+    <loc>https://ycaura.com/services/herbal-stretch-care</loc>
     <lastmod>2026-08-26</lastmod>
   </url>
   <url>
-    <loc>https://mps.rabby.cc/services/skin-camouflage</loc>
+    <loc>https://ycaura.com/services/skin-camouflage</loc>
     <lastmod>2026-08-26</lastmod>
   </url>
   <url>
-    <loc>https://mps.rabby.cc/services/colour-matching</loc>
+    <loc>https://ycaura.com/services/colour-matching</loc>
     <lastmod>2026-08-26</lastmod>
   </url>
   <url>
-    <loc>https://mps.rabby.cc/services/beauty-education</loc>
+    <loc>https://ycaura.com/services/beauty-education</loc>
     <lastmod>2026-08-26</lastmod>
   </url>
 </urlset>

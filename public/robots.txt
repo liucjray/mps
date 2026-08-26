@@ -22,4 +22,4 @@ User-agent: Google-Extended
 Allow: /
 Disallow: /api/
 
-Sitemap: https://mps.rabby.cc/sitemap.xml
+Sitemap: https://ycaura.com/sitemap.xml
