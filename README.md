@@ -91,7 +91,8 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 ## Diagnostic Commands
 
 - `npm run install:ci`: perform the one bounded lockfile install
-- `npm run dev`: start the Vite/Vinext development server
+- `npm run dev`: build and start the stable local preview at `http://localhost:1102`
+- `npm run dev:hmr`: start the Vite/Vinext HMR server for framework debugging only
 - `npm run build`: build and validate the deployable Sites artifact
 - `npm run start`: start the built Vinext application
 - `npm test`: build, validate, and verify the rendered development-preview metadata

@@ -26,6 +26,7 @@ const isAssetRequest = (request: Request, pathname: string) =>
 const htmlCacheControl = "public, max-age=300, stale-while-revalidate=86400";
 const redirectHosts = new Set(["mps.rabby.cc", "www.ycaura.com"]);
 const canonicalHost = "ycaura.com";
+const localHosts = new Set(["localhost", "127.0.0.1", "[::1]", "terminal.local"]);
 
 function addResponseHeaders(response: Response, cacheControl?: string): Response {
   const headers = new Headers(response.headers);
@@ -58,13 +59,13 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.protocol === "http:" || redirectHosts.has(url.hostname)) {
+    if ((url.protocol === "http:" && !localHosts.has(url.hostname)) || redirectHosts.has(url.hostname)) {
       url.protocol = "https:";
       if (redirectHosts.has(url.hostname)) url.hostname = canonicalHost;
       return Response.redirect(url.toString(), 301);
     }
 
-    if (url.pathname === "/_vinext/image") {
+    if (url.pathname === "/_vinext/image" && env.ASSETS && env.IMAGES) {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
@@ -75,7 +76,7 @@ const worker = {
       }, allowedWidths);
     }
 
-    if (isAssetRequest(request, url.pathname)) {
+    if (isAssetRequest(request, url.pathname) && env.ASSETS) {
       const response = await env.ASSETS.fetch(request);
       return addResponseHeaders(
         response,

@@ -53,20 +53,20 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.ok(services.every((service) => service.areaServed.some((area) => area.name === "中和區")));
   assert.ok(organization.hasOfferCatalog.itemListElement.every((offer) => offer.itemOffered["@id"].includes("#service-")));
   assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/"\/>/i);
-  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/"\/>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/?"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/?"\/>/i);
   assert.match(html, /<meta name="robots" content="index, follow"\/>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
-  assert.match(html, /瑪菲斯 \/ 新北中和・南勢角站/);
-  assert.match(html, /瑪菲斯皮膚覆蓋專家-新北雙和店/);
-  assert.match(html, /新北中和・南勢角站｜雙北預約/);
+  assert.match(html, /雙和店 \/ 新北中和・南勢角站/);
+  assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家/);
+  assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
   assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
   assert.match(html, /millie0806@gmail\.com/i);
   assert.match(html, /景新街347號9樓之9/);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
-  assert.match(html, /"dateModified":"2026-08-26"/i);
+  assert.match(html, /"dateModified":"2026-08-27"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
@@ -84,7 +84,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /src="\/qr-facebook\.svg"/i);
   assert.match(html, /src="\/qr-instagram\.svg"/i);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
-  assert.match(html, /"serviceType":"瑪菲斯草本撫紋"/i);
+  assert.match(html, /"serviceType":"草本撫紋"/i);
   assert.match(html, /"@type":"FAQPage"/i);
   assert.match(html, /"@type":"WebPage"/i);
   assert.doesNotMatch(html, /personal-brand\.workspace-885811\.chatgpt\.site/i);
@@ -98,8 +98,9 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /<section class="services section-shell" aria-labelledby="services-title"><div class="section-heading"><div><div class="section-label nav-target" id="services"/i);
   assert.match(html, /<section class="faq section-shell" aria-labelledby="faq-title"><div class="section-label nav-target" id="faq"/i);
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
-    assert.match(html, new RegExp(`href="https://ycaura\\.com/services/${slug}"`, "i"));
+    assert.match(html, new RegExp(`href="/services/${slug}"`, "i"));
   }
+  assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
@@ -110,6 +111,40 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.equal(assetResponse.status, 200);
   assert.equal(assetResponse.headers.get("cache-control"), "public, max-age=86400, stale-while-revalidate=604800");
   assert.equal(assetResponse.headers.get("x-content-type-options"), "nosniff");
+});
+
+test("renders the pregnancy stretch marks knowledge page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("knowledge-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge/stretch-marks", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
+  const html = await response.text();
+  assert.match(html, /<h1>妊娠紋是什麼？[\s\S]*先了解，再選擇。[\s\S]*<\/h1>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
+  assert.match(html, /<meta property="og:type" content="article"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
+  assert.match(html, /妊娠紋是皮膚在懷孕等快速伸展情況下形成的線狀紋路/);
+  assert.match(html, /保濕可以協助舒緩乾燥與搔癢/);
+  assert.match(html, /本站內容與外觀修飾諮詢都不能取代診斷或治療/);
+  assert.match(html, /href="\/services\/herbal-stretch-care"/i);
+  assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
+  assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
+
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "knowledge page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  assert.ok(graph.some((entity) => entity["@type"] === "Article"));
+  assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
+  assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-08-27");
 });
 
 test("renders independently indexable service pages", async () => {
@@ -129,8 +164,8 @@ test("renders independently indexable service pages", async () => {
     assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
     const html = await response.text();
     assert.match(html, /<h1>[^<]+<\/h1>/i);
-    assert.match(html, new RegExp(`<link rel="canonical" href="https://ycaura\\.com/services/${slug}"\/>`, "i"));
-    assert.match(html, new RegExp(`<meta property="og:url" content="https://ycaura\\.com/services/${slug}"\/>`, "i"));
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://ycaura\\.com/services/${slug}/?"(?:/?>)`, "i"));
+    assert.match(html, new RegExp(`<meta property="og:url" content="https://ycaura\\.com/services/${slug}"(?:/?>)`, "i"));
     assert.match(html, /"@type":"Service"/i);
     assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
     assert.match(html, /millie0806@gmail\.com/i);
@@ -143,7 +178,12 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /"@type":"FAQPage"/i);
     assert.match(html, /<details>/i);
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
-    assert.match(html, /href="https:\/\/ycaura\.com\/services\//i);
+    assert.match(html, /href="\/services\//i);
+    if (slug === "herbal-stretch-care") {
+      assert.match(html, /<h1>草本撫紋<\/h1>/i);
+      assert.match(html, /針對妊娠紋、肥胖紋與成長紋等常見紋路，從紋路類型、部位與肌膚狀態開始評估/);
+      assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
+    }
   }
 });
 
@@ -165,6 +205,23 @@ test("redirects every HTTP hostname to HTTPS", async () => {
 
     assert.equal(response.status, 301, `${hostname} should redirect`);
     assert.equal(response.headers.get("location"), `https://${target}/contact?source=test`);
+  }
+});
+
+test("keeps local development on HTTP", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("local-http-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  for (const hostname of ["localhost", "terminal.local"]) {
+    const response = await worker.fetch(
+      new Request(`http://${hostname}/knowledge/stretch-marks`, { headers: { accept: "text/html" } }),
+      { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+      { waitUntil() {}, passThroughOnException() {} },
+    );
+
+    assert.notEqual(response.status, 301);
+    assert.match(await response.text(), /妊娠紋/);
   }
 });
 
@@ -192,8 +249,10 @@ test("ships crawler and answer-engine support files", async () => {
   ]) {
     assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/ycaura\\.com\\/${image}<\\/image:loc>`));
   }
-  assert.match(llms, /# 瑪菲斯皮膚覆蓋專家｜新北中和・南勢角站｜雙北預約/);
-  assert.match(llms, /最後更新：2026-08-26/);
+  assert.match(llms, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
+  assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/stretch-marks/);
+  assert.match(llms, /最後更新：2026-08-27/);
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /服務據點: 新北市中和區、捷運南勢角站附近/);

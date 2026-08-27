@@ -4,10 +4,10 @@ export const services = [
   {
     number: "01",
     slug: "herbal-stretch-care",
-    title: "瑪菲斯草本撫紋",
+    title: "草本撫紋",
     text: "針對妊娠紋、肥胖紋、成長紋等常見紋路，先辨識狀態，再討論適合的美化方向。",
     tag: "HERBAL STRETCH CARE",
-    description: "了解瑪菲斯草本撫紋如何從紋路類型、部位與肌膚狀態開始評估，再討論適合自己的外觀美化方向。",
+    description: "針對妊娠紋、肥胖紋與成長紋等常見紋路，從紋路類型、部位與肌膚狀態開始評估，再討論適合自己的外觀美化方向。",
     overview: "草本撫紋的諮詢會先從紋路的類型、顏色、紋理與所在部位開始了解，不以單一方式套用在每個人身上。實際方向會依個人狀態說明，讓你在決定前先知道可以討論什麼。",
     image: knowledgeImageUrl,
     imageAlt: "肌膚教育與科技測色使用的膚色色彩樣本與保養瓶",
@@ -29,7 +29,7 @@ export const services = [
     title: "皮膚覆蓋術",
     text: "針對紋路與各類疤痕造成的色澤、紋理落差，透過評估了解適合的覆蓋方式。",
     tag: "SKIN CAMOUFLAGE",
-    description: "了解瑪菲斯皮膚覆蓋術如何評估紋路、疤痕與局部色澤落差，先確認狀態，再討論外觀美化方向。",
+    description: "了解雙和店皮膚覆蓋術如何評估紋路、疤痕與局部色澤落差，先確認狀態，再討論外觀美化方向。",
     overview: "皮膚覆蓋術主要從外觀上的色澤與紋理落差開始討論。紋路或疤痕的類型、位置、顏色與肌膚狀態都會影響評估，因此需要先了解個別狀況，不能只用一張案例照片推論結果。",
     image: introImageUrl,
     imageAlt: "自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡",
@@ -51,7 +51,7 @@ export const services = [
     title: "科技測色",
     text: "以膚色比對與專業判斷，協助找到更貼近個人肌膚狀態的色彩選擇。",
     tag: "COLOUR MATCHING",
-    description: "了解瑪菲斯科技測色如何把膚色比對納入肌膚評估，協助討論更貼近個人狀態的色彩選擇。",
+    description: "了解雙和店科技測色如何把膚色比對納入肌膚評估，協助討論更貼近個人狀態的色彩選擇。",
     overview: "膚色會受到部位、光線與個人肌膚狀態影響。科技測色提供一個更有依據的比對參考，協助縮小色彩討論範圍，但不取代個別評估與專業判斷。",
     image: knowledgeImageUrl,
     imageAlt: "膚色色彩樣本與保養瓶放在自然光下的肌膚教育桌面",
@@ -73,7 +73,7 @@ export const services = [
     title: "局部美學與科普",
     text: "分享黑眼圈、淚溝、泡泡眼與輪廓線等困擾的美學知識，讓你少走一點彎路。",
     tag: "BEAUTY EDUCATION",
-    description: "閱讀瑪菲斯局部美學與科普內容，從黑眼圈、淚溝、泡泡眼到輪廓線，先理解外觀困擾再做選擇。",
+    description: "閱讀雙和店局部美學與科普內容，從黑眼圈、淚溝、泡泡眼到輪廓線，先理解外觀困擾再做選擇。",
     overview: "局部美學教育把常見的外觀困擾拆開說明，協助你分辨自己在意的是色澤、陰影、輪廓或肌膚狀態。內容以一般美學與外觀照護資訊為主，不取代醫療診斷或治療建議。",
     image: heroImageUrl,
     imageAlt: "自然光下展示肌膚紋理的女性肩背",
@@ -93,4 +93,5 @@ export const services = [
 
 export type Service = (typeof services)[number];
 
+export const servicePath = (slug: string) => `/services/${slug}`;
 export const serviceUrl = (slug: string) => `${siteUrl}/services/${slug}`;

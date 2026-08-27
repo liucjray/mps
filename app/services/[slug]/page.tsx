@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
+/* eslint-disable @next/next/no-img-element, @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
-import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl } from "../../site";
-import { serviceUrl, services, type Service } from "../../services";
+import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl, stretchMarksKnowledgePath } from "../../site";
+import { servicePath, serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -141,14 +141,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href={`${siteCanonicalUrl}#top`} aria-label="瑪菲斯皮膚覆蓋專家-新北雙和店首頁"><span className="wordmark-mark">M</span><span>瑪菲斯皮膚覆蓋專家-新北雙和店</span></a>
-        <div className="nav-links"><a href={`${siteCanonicalUrl}#about`}>品牌理念</a><a href={`${siteCanonicalUrl}#services`}>服務內容</a><a href={`${siteCanonicalUrl}#faq`}>常見問題</a></div>
+        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
+        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer">雙和店</a>
       </nav>
 
       <main id="main-content">
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
-          <a href={siteCanonicalUrl}>首頁</a><span aria-hidden="true">/</span><a href={`${siteCanonicalUrl}#services`}>服務內容</a><span aria-hidden="true">/</span><span aria-current="page">{service.title}</span>
+          <a href="/">首頁</a><span aria-hidden="true">/</span><a href="/#services">服務內容</a><span aria-hidden="true">/</span><span aria-current="page">{service.title}</span>
         </nav>
 
         <article className="service-detail section-shell">
@@ -169,8 +169,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <section className="service-detail-faq" aria-labelledby="service-faq-title"><div className="section-label">常見問題</div><h2 id="service-faq-title">關於{service.title}，<br /><em>先問清楚。</em></h2><div className="faq-list">{service.faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></section>
             </div>
             <aside className="service-detail-aside" aria-label="其他服務與聯絡方式">
-              <div className="service-aside-card"><span className="knowledge-card-label">MAVIS PURE SKIN</span><p>每個人的肌膚狀態不同，先從清楚溝通開始。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">Facebook 私訊諮詢</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約諮詢</a><a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer">Instagram 追蹤／私訊</a></div>
-              <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE SERVICES</span>{services.map((other) => <a className={other.slug === service.slug ? "is-current" : ""} aria-current={other.slug === service.slug ? "page" : undefined} href={serviceUrl(other.slug)} key={other.slug}>{other.title}<span aria-hidden="true">↗</span></a>)}</div>
+              <div className="service-aside-card"><span className="knowledge-card-label">雙和店 / MAVIS PURE SKIN</span><p>每個人的肌膚狀態不同，先從清楚溝通開始。</p><a className="text-link" href={stretchMarksKnowledgePath}>妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer">Facebook 私訊諮詢</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約諮詢</a><a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer">Instagram 追蹤／私訊</a></div>
+              <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE SERVICES</span>{services.map((other) => <a className={other.slug === service.slug ? "is-current" : ""} aria-current={other.slug === service.slug ? "page" : undefined} href={servicePath(other.slug)} key={other.slug}>{other.title}<span aria-hidden="true">↗</span></a>)}</div>
             </aside>
           </div>
         </article>
@@ -178,7 +178,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <section className="contact service-detail-contact section-shell" id="contact" aria-labelledby="service-contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="service-contact-title">想了解這項服務，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊、LINE、Instagram 或手機預約，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br /><span>時間</span>{siteBusinessHours}<br /><span>預約</span>手機、LINE、Instagram 或 Facebook 私訊<br /><span>Email</span><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約諮詢</a><a className="contact-secondary" href={instagramUrl} target="_blank" rel="noreferrer">Instagram 追蹤／私訊</a><a className="contact-secondary" href={`tel:${phoneNumber}`}>電話預約 0981-756-111</a><div className="contact-qr-grid" aria-label="掃描加入聯絡方式"><ContactQr href={lineUrl} image="/qr-line.svg" eyebrow="SCAN TO CONNECT" title="LINE 預約" description="掃描加入好友" kind="line" /><ContactQr href={facebookUrl} image="/qr-facebook.svg" eyebrow="FOLLOW & MESSAGE" title="Facebook" description="查看最新分享" kind="facebook" /><ContactQr href={instagramUrl} image="/qr-instagram.svg" eyebrow="FOLLOW & MESSAGE" title="Instagram" description="查看日常分享" kind="instagram" /></div></div></section>
       </main>
 
-      <footer className="site-footer section-shell"><a className="wordmark" href={siteCanonicalUrl} aria-label="瑪菲斯皮膚覆蓋專家-新北雙和店首頁"><span className="wordmark-mark">M</span><span>瑪菲斯皮膚覆蓋專家-新北雙和店</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
+      <footer className="site-footer section-shell"><a className="wordmark" href="/" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
       <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a>
     </>
   );
