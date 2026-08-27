@@ -135,6 +135,8 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /保濕可以協助舒緩乾燥與搔癢/);
   assert.match(html, /本站內容與外觀修飾諮詢都不能取代診斷或治療/);
   assert.match(html, /href="\/services\/herbal-stretch-care"/i);
+  assert.match(html, /了解雙和店的草本撫紋服務/);
+  assert.doesNotMatch(html, /了解雙和店草本撫紋服務/);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
 

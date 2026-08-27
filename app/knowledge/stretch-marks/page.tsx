@@ -219,7 +219,7 @@ export default function StretchMarksKnowledgePage() {
                 <h2 id="service-title">妊娠紋覆蓋是在做什麼？</h2>
                 <p className="knowledge-lede">外觀修飾主要是討論色澤、紋路與周圍肌膚的視覺落差；它不應被描述成治療皮膚疾病、改變皮膚結構或保證讓妊娠紋消失。</p>
                 <p>雙和店的諮詢會先從在意的部位、紋路顏色、凹凸與形成時間開始了解，再說明目前能討論的方向與限制。實際服務細節、適用條件與孕期／哺乳期是否需要暫緩，請在預約前直接向雙和店確認。</p>
-                <a className="text-link" href="/services/herbal-stretch-care">了解雙和店草本撫紋服務 <span aria-hidden="true">↗</span></a>
+                <a className="text-link" href="/services/herbal-stretch-care">了解雙和店的草本撫紋服務 <span aria-hidden="true">↗</span></a>
               </section>
 
               <section className="knowledge-article-section" id="faq" aria-labelledby="faq-title">
