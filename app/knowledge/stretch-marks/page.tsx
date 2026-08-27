@@ -159,7 +159,7 @@ export default function StretchMarksKnowledgePage() {
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
         <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer">雙和店</a>
+        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">雙和店</a>
       </nav>
 
       <main id="main-content">
@@ -219,7 +219,7 @@ export default function StretchMarksKnowledgePage() {
                 <h2 id="service-title">妊娠紋覆蓋是在做什麼？</h2>
                 <p className="knowledge-lede">外觀修飾主要是討論色澤、紋路與周圍肌膚的視覺落差；它不應被描述成治療皮膚疾病、改變皮膚結構或保證讓妊娠紋消失。</p>
                 <p>雙和店的諮詢會先從在意的部位、紋路顏色、凹凸與形成時間開始了解，再說明目前能討論的方向與限制。實際服務細節、適用條件與孕期／哺乳期是否需要暫緩，請在預約前直接向雙和店確認。</p>
-                <a className="text-link" href="/services/herbal-stretch-care">了解雙和店的草本撫紋服務 <span aria-hidden="true">↗</span></a>
+                <a className="text-link" href="/services/herbal-stretch-care" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">了解雙和店的草本撫紋服務 <span aria-hidden="true">↗</span></a>
               </section>
 
               <section className="knowledge-article-section" id="faq" aria-labelledby="faq-title">
@@ -243,13 +243,13 @@ export default function StretchMarksKnowledgePage() {
                 <span className="knowledge-card-label">雙和店 / 新北中和</span>
                 <h2>想了解自己的紋路？</h2>
                 <p>可以先準備在意的部位、形成時間與清楚照片，再向雙和店說明狀況。</p>
-                <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
-                <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
+                <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
+                <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
               </div>
               <div className="knowledge-aside-details">
                 <span className="knowledge-card-label">CONTACT</span>
                 <p>{siteServiceArea}。</p>
-                <address>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`}>{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`}>{siteEmail}</a></address>
+                <address>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="knowledge_contact">{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a></address>
                 <a className="text-link" href="/#contact">查看完整聯絡方式 <span aria-hidden="true">↗</span></a>
               </div>
             </aside>
@@ -258,7 +258,7 @@ export default function StretchMarksKnowledgePage() {
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
-      <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer">雙和店 Facebook 私訊</a>
+      <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="mobile_sticky">雙和店 Facebook 私訊</a>
     </>
   );
 }

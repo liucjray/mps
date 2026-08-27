@@ -39,7 +39,7 @@ function BrandIcon({ kind }: { kind: ContactQrProps["kind"] }) {
 
 export function ContactQr({ href, image, eyebrow, title, description, kind }: ContactQrProps) {
   return (
-    <a className="contact-qr-card" href={href} target="_blank" rel="noreferrer" aria-label={`${title} QR Code，點擊開啟連結`}>
+    <a className="contact-qr-card" href={href} target="_blank" rel="noreferrer" aria-label={`${title} QR Code，點擊開啟連結`} data-ga-event="contact_click" data-ga-contact-method={kind} data-ga-cta-location="contact_qr">
       <span className="contact-qr-glow" aria-hidden="true" />
       <span className="contact-qr-spark contact-qr-spark-one" aria-hidden="true">✦</span>
       <span className="contact-qr-spark contact-qr-spark-two" aria-hidden="true">·</span>

@@ -19,7 +19,8 @@
 
 目前主要缺口：
 
-- 尚未安裝 Meta Pixel／Dataset 或其他轉換追蹤
+- 已加入 GA4 基礎追蹤程式，且已設定正式環境 `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+- 尚未安裝 Meta Pixel／Dataset
 - 尚未定義主要廣告目標與轉換事件
 - 已確認營業時間為 11:00–19:00，採預約制；星期幾營業尚未提供
 - 尚未確認 Facebook 粉絲專頁的私訊自動回覆、回覆時段與完整預約流程
@@ -51,12 +52,15 @@
 
 若廣告導向網站，需補上：
 
+- [x] 加入 GA4 基礎頁面瀏覽與 CTA 點擊追蹤程式
+- [x] 在 GitHub Actions Repository Variables 設定 `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 - [ ] 建立 Meta Pixel／Dataset
 - [ ] 將網站網域加入並完成 Meta Business 驗證
-- [ ] 設定頁面瀏覽事件
-- [ ] 設定 Facebook 私訊點擊事件
-- [ ] 設定電話點擊事件
-- [ ] 設定 Email 點擊事件
+- [x] 設定 GA4 自動頁面瀏覽事件
+- [x] 設定 Facebook、LINE、電話與 Email 點擊事件
+- [ ] 以 Meta Pixel／Dataset 設定 Facebook 私訊點擊事件
+- [ ] 以 Meta Pixel／Dataset 設定電話點擊事件
+- [ ] 以 Meta Pixel／Dataset 設定 Email 點擊事件
 - [ ] 為廣告網址加入 UTM 參數
 - [ ] 以測試工具確認事件實際送出
 - [ ] 依實際追蹤方式確認隱私揭露與使用者告知內容

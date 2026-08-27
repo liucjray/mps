@@ -84,6 +84,8 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /src="\/qr-facebook\.svg"/i);
   assert.match(html, /src="\/qr-instagram\.svg"/i);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
+  assert.match(html, /data-ga-event="contact_click"/i);
+  assert.match(html, /data-ga-contact-method="line"/i);
   assert.match(html, /"serviceType":"草本撫紋"/i);
   assert.match(html, /"@type":"FAQPage"/i);
   assert.match(html, /"@type":"WebPage"/i);
@@ -137,6 +139,7 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /href="\/services\/herbal-stretch-care"/i);
   assert.match(html, /了解雙和店的草本撫紋服務/);
   assert.doesNotMatch(html, /了解雙和店草本撫紋服務/);
+  assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
 

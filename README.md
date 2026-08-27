@@ -99,6 +99,15 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm run validate:artifact`: recheck an existing artifact's manifest and ESM `default.fetch` export
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
+### GA4 setup
+
+The site includes optional GA4 pageview and contact CTA tracking. Set the public
+build variable `NEXT_PUBLIC_GA_MEASUREMENT_ID` to a GA4 Measurement ID such as
+`G-XXXXXXXXXX`; when it is empty or invalid, no GA4 script is rendered. For
+local development, export the variable before `npm run dev`. For production,
+add it as a GitHub Actions Repository Variable with the same name so the deploy
+build can include GA4. The ID is public configuration, not a secret.
+
 ## Automatic Cloudflare Deployment
 
 `.github/workflows/deploy.yml` builds and validates the site, then deploys it to
