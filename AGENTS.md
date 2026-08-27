@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-- `app/` contains the Next/Vinext site: shared content in `site.ts` and `services.ts`, route pages in `page.tsx` and `services/[slug]/page.tsx`, and shared styling in `globals.css`.
+- `app/` contains the Next/Vinext site: shared content in `site.ts` and `services.ts`, route pages in `page.tsx` and `services/[slug]/page.tsx`, optional GA4 integration in `google-analytics.tsx` and `google-analytics-tracker.tsx`, and shared styling in `globals.css`.
 - `public/` contains static images, SVGs, QR codes, crawler files, and social assets.
 - `tests/` contains Node’s built-in test suite for rendered HTML, metadata, SEO/AEO signals, and deployable content.
 - `scripts/` contains bounded install/build and artifact-validation helpers; `worker/` contains the Cloudflare Worker entrypoint.
@@ -10,14 +10,14 @@
 
 ## Build, Test, and Development Commands
 
-- `npm run dev` starts the local Vite/Vinext development server.
+- `npm run dev` starts the local Vite/Vinext development server at `http://localhost:1102`.
 - `npm run build` creates and validates the Cloudflare deployable artifact.
-- `npm run start` serves the built application locally.
+- `npm run start` serves the built application locally at `http://localhost:1102`.
 - `npm test` runs the build plus `node:test` rendered-HTML checks.
 - `npm run lint` runs ESLint across the repository.
 - `npm run validate:artifact` rechecks an existing deployment artifact.
 
-Use Node.js `>=22.13.0`. Run `npm run install:ci` only when a clean lockfile install is needed.
+Use Node.js `>=22.13.0`. Keep the local preview port fixed at `1102`; do not change the Vite `strictPort` setting. Run `npm run install:ci` only when a clean lockfile install is needed.
 
 ## Coding Style & Naming Conventions
 
@@ -25,7 +25,7 @@ Use TypeScript/TSX with two-space indentation, semicolons, and the existing doub
 
 ## Testing Guidelines
 
-Add or update assertions in `tests/rendered-html.test.mjs` when changing visible content, metadata, routes, or structured data. Run `npm test` and `npm run lint` before submitting changes. Visual changes should also be checked at desktop and mobile widths.
+Add or update assertions in `tests/rendered-html.test.mjs` when changing visible content, metadata, routes, structured data, or analytics markup. Run `npm test` and `npm run lint` before submitting changes. For GA4 changes, also test once with `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123 npm test`. Visual changes should also be checked at desktop and mobile widths.
 
 ## Skill-Assisted Review
 
@@ -37,4 +37,4 @@ Use concise conventional-style commits, such as `feat: 加入 LINE 預約入口`
 
 ## Security & Deployment Notes
 
-Never commit `.env.cloudflare` or tokens; use `.env.cloudflare.example` for documented variable names. A push to `main` triggers the Cloudflare deployment workflow, so verify tests and the diff before pushing.
+Never commit `.env.cloudflare`, analytics credentials, or tokens; use documented environment names and GitHub Actions Repository Variables for public build configuration. `NEXT_PUBLIC_GA_MEASUREMENT_ID` is a public GA4 identifier, not a secret, and must be supplied at build time. A push to `main` triggers the Cloudflare deployment workflow, so verify tests and the diff before pushing.

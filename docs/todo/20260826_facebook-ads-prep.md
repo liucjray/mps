@@ -16,10 +16,10 @@
 - Facebook 私訊、電話、Email、地址等聯絡方式
 - 手機版頁面與清楚的主要 CTA
 - 已確認並加入正確的 LINE 預約連結
+- 已加入並部署 GA4 基礎追蹤，記錄 pageview 與主要 CTA 點擊
 
 目前主要缺口：
 
-- 已加入 GA4 基礎追蹤程式，且已設定正式環境 `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 - 尚未安裝 Meta Pixel／Dataset
 - 尚未定義主要廣告目標與轉換事件
 - 已確認營業時間為 11:00–19:00，採預約制；星期幾營業尚未提供
@@ -65,7 +65,7 @@
 - [ ] 以測試工具確認事件實際送出
 - [ ] 依實際追蹤方式確認隱私揭露與使用者告知內容
 
-目前程式碼尚未發現 `fbq`、Meta Pixel、Google Analytics 或轉換事件，因此這一項是網站轉換廣告的主要阻塞項。
+目前程式碼已加入並部署 GA4 pageview 與 CTA 點擊事件；但尚未發現 `fbq` 或 Meta Pixel。GA4 可用來分析網站行為，不能取代 Meta Pixel 對 Facebook 廣告的最佳化與歸因，因此網站轉換廣告仍需補上 Meta Pixel／Dataset。
 
 ### 4. 完成廣告內容與落地頁對齊
 
