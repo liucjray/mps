@@ -71,7 +71,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
   assert.match(html, /捷運南勢角站/);
-  assert.match(html, /台北市與北部地區預約/);
+  assert.match(html, /雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約/);
   assert.match(html, /11:00–19:00（預約制）/);
   assert.match(html, /預約.*手機、LINE、Instagram 或 Facebook 私訊/);
   assert.match(html, /"@type":"AdministrativeArea"/i);
@@ -136,7 +136,7 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /millie0806@gmail\.com/i);
     assert.match(html, /景新街347號9樓之9/);
     assert.match(html, /捷運南勢角站/);
-    assert.match(html, /台北市與北部地區預約/);
+    assert.match(html, /雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約/);
     assert.match(html, /11:00–19:00（預約制）/);
     assert.match(html, /預約.*手機、LINE、Instagram 或 Facebook 私訊/);
     assert.match(html, /"@type":"BreadcrumbList"/i);
@@ -197,7 +197,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /服務據點: 新北市中和區、捷運南勢角站附近/);
-  assert.match(llms, /服務範圍: 中和、永和、雙和地區，以及台北市與北部地區預約客/);
+  assert.match(llms, /服務範圍: 雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約客/);
   assert.match(llms, /營業時間: 11:00–19:00（預約制）/);
   assert.match(llms, /預約方式: 手機、LINE、Instagram 或雙和店 Facebook 私訊/);
   assert.match(llms, /- \[官方網站\]\(https:\/\/ycaura\.com\/\)/);

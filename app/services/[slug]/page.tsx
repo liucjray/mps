@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
-import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteUrl, socialImageUrl } from "../../site";
+import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl } from "../../site";
 import { serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
@@ -156,7 +156,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="service-detail-copy">
               <div className="section-label">{service.tag}</div>
               <h1>{service.title}</h1>
-              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">新北市中和區、捷運南勢角站附近；服務中和、永和、雙和地區，也接受台北市與北部地區預約。</p>
+              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">{siteServiceArea}。</p>
               <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer">向雙和店詢問</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer">LINE 預約</a></div>
             </div>
             <div className="service-detail-image"><img src={service.image} alt={service.imageAlt} width={service.imageWidth} height={service.imageHeight} loading="eager" fetchPriority="high" decoding="async" /></div>
