@@ -27,6 +27,20 @@ Use TypeScript/TSX with two-space indentation, semicolons, and the existing doub
 
 Add or update assertions in `tests/rendered-html.test.mjs` when changing visible content, metadata, routes, structured data, or analytics markup. Run `npm test` and `npm run lint` before submitting changes. For GA4 changes, also test once with `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123 npm test`. Visual changes should also be checked at desktop and mobile widths.
 
+## Shared Memory and Multi-Agent Handoff
+
+The MPS Obsidian vault is the shared memory source for this project. Its Windows path is `C:\Users\user\obs-notes\Projects\mps` (WSL path: `/mnt/c/Users/user/obs-notes/Projects/mps`). When working in a new session or as a different agent, read these notes before making decisions:
+
+1. `00-總覽.md` for project identity, source priority, and navigation.
+2. The relevant note for the requested area (brand, service, knowledge, SEO/AEO, marketing, or technology).
+3. `99-待確認/待確認事項.md` before writing public claims, health-related content, advertising copy, pricing, procedures, qualifications, contraindications, or operating rules.
+
+When website facts, content, SEO/AEO, analytics, advertising, deployment, or operational decisions change, update the corresponding note under `Projects/mps` in the same task. Add the source, confirmation status, and update date. If a fact is unknown or conflicts with another source, record it in `99-待確認/待確認事項.md`; do not silently guess or overwrite the established source boundary.
+
+All brand, location, contact, service-area, CTA, and public-facing copy must remain centered on the New Taipei Shuanghe Store. The teacher's Mavis Facebook page is background-only and must not be used as evidence for Shuanghe Store facts. Keep medical, legal, advertising, and privacy boundaries explicit in both code and Obsidian notes.
+
+Before handing off work, verify that the code, public crawler files, repository docs, and relevant Obsidian notes do not contradict one another. The Obsidian vault has its own `CLAUDE.md`; follow its formatting and linking conventions. Do not automatically commit or push changes in `C:\Users\user\obs-notes`; leave vault version-control decisions to the user.
+
 ## Skill-Assisted Review
 
 For UI or responsive design changes, use the `frontend-design` skill, then verify with local desktop/mobile screenshots. For metadata, structured data, sitemap, robots, or AI-search changes, use `seo-aeo-best-practices` and verify rendered HTML with `npm test`. Read selected skill instructions completely and use only the relevant skill.
