@@ -73,7 +73,7 @@ function getStructuredData(service: Service) {
         "@id": serviceId,
         name: service.title,
         description: service.description,
-        serviceType: service.title,
+        serviceType: service.slug === "herbal-stretch-care" ? "草本撫紋" : service.title,
         alternateName: service.tag,
         url,
         image: `${siteUrl}${service.image}`,
@@ -156,7 +156,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="service-detail-copy">
               <div className="section-label">{service.tag}</div>
               <h1>{service.title}</h1>
-              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">{siteServiceArea}。</p>
+              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">{siteServiceArea}。<br />內容整理：{siteName}<br />最後更新：{siteLastModified}</p>
               <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="service_hero">向雙和店詢問</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="service_hero">LINE 預約</a></div>
             </div>
             <div className="service-detail-image"><img src={service.image} alt={service.imageAlt} width={service.imageWidth} height={service.imageHeight} loading="eager" fetchPriority="high" decoding="async" /></div>

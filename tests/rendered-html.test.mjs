@@ -130,10 +130,14 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
   const html = await response.text();
   assert.match(html, /<h1>妊娠紋是什麼？[\s\S]*先了解，再選擇。[\s\S]*<\/h1>/i);
+  assert.match(html, /<title>妊娠紋是什麼？產後變化與保養｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<meta name="description" content="了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。"\/>/i);
   assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
   assert.match(html, /<meta property="og:type" content="article"\/>/i);
   assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
   assert.match(html, /妊娠紋是皮膚在懷孕等快速伸展情況下形成的線狀紋路/);
+  assert.match(html, /妊娠紋是懷孕或皮膚快速伸展後可能形成的線狀紋路，產後可能逐漸變淡，但不一定完全消失/);
+  assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
   assert.match(html, /保濕可以協助舒緩乾燥與搔癢/);
   assert.match(html, /本站內容與外觀修飾諮詢都不能取代診斷或治療/);
   assert.match(html, /href="\/services\/herbal-stretch-care"/i);
@@ -185,8 +189,11 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
     assert.match(html, /href="\/services\//i);
     if (slug === "herbal-stretch-care") {
-      assert.match(html, /<h1>草本撫紋<\/h1>/i);
-      assert.match(html, /針對妊娠紋、肥胖紋與成長紋等常見紋路，從紋路類型、部位與肌膚狀態開始評估/);
+      assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
+      assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+      assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
+      assert.match(html, /最後更新：[\s\S]*2026-08-27/);
+      assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
     }
   }

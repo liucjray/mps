@@ -38,7 +38,7 @@ const serviceEntities = services.map((service) => ({
   "@id": `${siteCanonicalUrl}#service-${service.slug}`,
   name: service.title,
   description: service.text,
-  serviceType: service.title,
+  serviceType: service.slug === "herbal-stretch-care" ? "草本撫紋" : service.title,
   alternateName: service.tag,
   url: serviceUrl(service.slug),
   provider: { "@id": organizationId },
