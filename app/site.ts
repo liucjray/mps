@@ -1,5 +1,7 @@
 export const siteUrl = "https://ycaura.com";
-export const siteCanonicalUrl = `${siteUrl}/`;
+// 站內一律使用無尾斜線 URL（`/path/` 會 308 轉址到 `/path`），
+// canonical、og:url 與 sitemap 需與此一致。
+export const siteCanonicalUrl = siteUrl;
 export const siteName = "新北雙和店｜瑪菲斯皮膚覆蓋專家";
 export const siteTitle = "新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約";
 export const siteServiceArea = "位於新北市中和區、捷運南勢角站附近，主要服務雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約";
@@ -23,4 +25,5 @@ export const knowledgeImageUrl = "/knowledge-skin-palette.webp";
 export const socialImageUrl = "/social-skin-atelier.jpg";
 export const stretchMarksKnowledgeUrl = `${siteUrl}/knowledge/stretch-marks`;
 export const stretchMarksKnowledgePath = "/knowledge/stretch-marks";
-export const siteLastModified = "2026-08-27";
+// 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
+export const siteLastModified = "2026-08-31";

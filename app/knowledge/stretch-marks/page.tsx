@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, instagramUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgeUrl } from "../../site";
+import { facebookUrl, instagramUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgeUrl } from "../../site";
 
 export const dynamic = "force-static";
 
 const pageUrl = stretchMarksKnowledgeUrl;
 const pageTitle = "妊娠紋是什麼？產後變化與保養";
 const pageDescription = "了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。";
-const updatedAt = siteLastModified;
+const updatedAt = "2026-08-28";
 
 const faqs = [
   {

@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://ycaura.com/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <loc>https://ycaura.com</loc>
+    <lastmod>2026-08-31</lastmod>
     <image:image>
       <image:loc>https://ycaura.com/hero-skin-atelier.webp</image:loc>
     </image:image>
@@ -16,26 +16,26 @@
   </url>
   <url>
     <loc>https://ycaura.com/services/herbal-stretch-care</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-31</lastmod>
   </url>
   <url>
     <loc>https://ycaura.com/knowledge/stretch-marks</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <image:image>
       <image:loc>https://ycaura.com/knowledge-skin-palette.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://ycaura.com/services/skin-camouflage</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-31</lastmod>
   </url>
   <url>
     <loc>https://ycaura.com/services/colour-matching</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-31</lastmod>
   </url>
   <url>
     <loc>https://ycaura.com/services/beauty-education</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-31</lastmod>
   </url>
   <url>
     <loc>https://ycaura.com/knowledge/dark-circles</loc>
