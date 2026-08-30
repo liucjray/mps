@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
 import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl, stretchMarksKnowledgePath } from "../../site";
-import { servicePath, serviceUrl, services, type Service } from "../../services";
+import { darkCirclesPath, servicePath, serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -164,12 +164,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
           <div className="service-detail-body">
             <div className="service-detail-main">
-              <section aria-labelledby="service-overview-title"><div className="section-label">服務說明</div><h2 id="service-overview-title">先理解狀態，<br /><em>再討論適合的方向。</em></h2><p className="service-detail-overview">{service.overview}</p><p className="service-detail-note">本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。若有皮膚疾病、傷口、發炎、疼痛或其他疑慮，請先諮詢合格醫療專業人員。</p></section>
+              <section aria-labelledby="service-overview-title"><div className="section-label">服務說明</div><h2 id="service-overview-title">先理解狀態，<br /><em>再討論適合的方向。</em></h2><p className="service-detail-overview">{service.overview}</p><p className="service-detail-note">本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。若有皮膚疾病、傷口、發炎、疼痛或其他疑慮，請先諮詢合格醫療專業人員。</p>{service.slug === "beauty-education" && <p className="service-detail-note service-topic-note">你可以依照在意的部位，從眼周、膚色、疤痕、紋路或輪廓等主題開始閱讀。</p>}</section>
               <section className="service-detail-points" aria-labelledby="service-points-title"><div className="section-label">如何了解</div><h2 id="service-points-title">把每一步說清楚。</h2><div className="service-detail-point-list">{service.sections.map((section, index) => <article key={section.title}><span>0{index + 1}</span><h3>{section.title}</h3><p>{section.text}</p></article>)}</div></section>
               <section className="service-detail-faq" aria-labelledby="service-faq-title"><div className="section-label">常見問題</div><h2 id="service-faq-title">關於{service.title}，<br /><em>先問清楚。</em></h2><div className="faq-list">{service.faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></section>
             </div>
             <aside className="service-detail-aside" aria-label="其他服務與聯絡方式">
               <div className="service-aside-card"><span className="knowledge-card-label">雙和店 / MAVIS PURE SKIN</span><p>每個人的肌膚狀態不同，先從清楚溝通開始。</p><a className="text-link" href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="service_aside">妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="service_aside">Facebook 私訊諮詢</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="service_aside">LINE 預約諮詢</a><a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="service_aside">Instagram 追蹤／私訊</a></div>
+              {service.slug === "beauty-education" && <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE TOPICS</span><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="service_topics">黑眼圈與眼周狀態<span aria-hidden="true">↗</span></a><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="service_topics">妊娠紋與紋路知識<span aria-hidden="true">↗</span></a><a href={servicePath("skin-camouflage")} data-ga-event="content_navigation" data-ga-cta-location="service_topics">疤痕與局部色澤<span aria-hidden="true">↗</span></a><a href={servicePath("colour-matching")} data-ga-event="content_navigation" data-ga-cta-location="service_topics">膚色與科技測色<span aria-hidden="true">↗</span></a></div>}
               <div className="service-aside-links"><span className="knowledge-card-label">EXPLORE SERVICES</span>{services.map((other) => <a className={other.slug === service.slug ? "is-current" : ""} aria-current={other.slug === service.slug ? "page" : undefined} href={servicePath(other.slug)} key={other.slug}>{other.title}<span aria-hidden="true">↗</span></a>)}</div>
             </aside>
           </div>

@@ -103,6 +103,7 @@ test("renders development preview metadata and SEO/AEO signals", async () => {
     assert.match(html, new RegExp(`href="/services/${slug}"`, "i"));
   }
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
+  assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
@@ -197,6 +198,42 @@ test("renders independently indexable service pages", async () => {
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
     }
   }
+});
+
+test("renders the dark circles child knowledge page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("dark-circles-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge/dark-circles", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
+  const html = await response.text();
+  assert.match(html, /<h1>黑眼圈怎麼看？[\s\S]*先分辨色澤與陰影。[\s\S]*<\/h1>/i);
+  assert.match(html, /<title>黑眼圈怎麼看？成因與外觀評估｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<meta name="description" content="整理黑眼圈常見的色澤、陰影與眼周狀態差異，了解新北雙和與台北肌膚美學諮詢前可以先觀察什麼。"\/>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/dark-circles"\/>/i);
+  assert.match(html, /<meta property="og:type" content="article"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/dark-circles"\/>/i);
+  assert.match(html, /黑眼圈不一定只有一種成因/);
+  assert.match(html, /皮膚覆蓋術/);
+  assert.match(html, /新北市中和區/);
+  assert.match(html, /捷運南勢角站/);
+  assert.match(html, /11:00–19:00（預約制）/);
+  assert.match(html, /"@type":"Article"/i);
+  assert.match(html, /"@type":"FAQPage"/i);
+  assert.match(html, /"@type":"BreadcrumbList"/i);
+  assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/27398005\//i);
+  assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34078228\//i);
+  assert.match(html, /https:\/\/acaai\.org\/allergies\/allergic-conditions\/eye-allergy\//i);
+  assert.match(html, /https:\/\/www\.mayoclinic\.org\/symptoms\/dark-circles-under-eyes\/basics\/causes\/sym-20050624/i);
+  assert.match(html, /href="\/services\/beauty-education"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
 });
 
 test("redirects every HTTP hostname to HTTPS", async () => {

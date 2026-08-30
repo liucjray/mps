@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
 import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
-import { servicePath, serviceUrl, services } from "./services";
+import { darkCirclesPath, servicePath, serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
 
@@ -150,11 +150,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="trust-strip" aria-label="服務關鍵字"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><span><b>01</b> 妊娠紋</span><span><b>02</b> 肥胖紋</span><span><b>03</b> 疤痕與色澤</span></div></section>
+      <section className="trust-strip" aria-label="服務關鍵字"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>01</b> 妊娠紋</a><span><b>02</b> 肥胖紋</span><span><b>03</b> 疤痕與色澤</span><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>04</b> 黑眼圈</a></div></section>
 
       <section className="intro section-shell" aria-labelledby="about-title">
         <div className="section-label nav-target" id="about">品牌理念</div>
-        <div className="intro-content"><h2 id="about-title">不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>雙和店把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><p className="content-note">{siteServiceArea}。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="intro">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div><span>01 / 先理解肌膚</span></div></div>
+        <div className="intro-content"><h2 id="about-title">不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>雙和店把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><p className="content-note">{siteServiceArea}。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="intro">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div></div></div>
       </section>
 
       <section className="services section-shell" aria-labelledby="services-title">
@@ -168,8 +168,8 @@ export default function Home() {
       </section>
 
       <section className="knowledge section-shell">
-        <div className="knowledge-copy"><div className="section-label">雙和店肌膚知識</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從紋路形成、孕期與產後照護，到膚色判斷與外觀修飾，雙和店把常見問題整理成容易閱讀的肌膚知識。先看懂，再決定要不要開始。</p><p className="content-note">本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。</p><div className="knowledge-links"><a className="text-link" href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_section">前往雙和店 Facebook <span aria-hidden="true">↗</span></a></div></div>
-        <div className="knowledge-card"><div className="knowledge-photo"><img src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} loading="lazy" decoding="async" /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><span>妊娠紋</span><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><span>黑眼圈</span><span>輪廓美學</span></div></div><span className="knowledge-card-note">雙和店 / professional skin education</span></div>
+        <div className="knowledge-copy"><div className="section-label">雙和店肌膚知識</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從紋路形成、孕期與產後照護，到膚色判斷與外觀修飾，雙和店把常見問題整理成容易閱讀的肌膚知識。先看懂，再決定要不要開始。</p><p className="content-note">本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。</p><div className="knowledge-links"><a className="text-link" href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀黑眼圈知識 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_section">前往雙和店 Facebook <span aria-hidden="true">↗</span></a></div></div>
+        <div className="knowledge-card"><div className="knowledge-photo"><img src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} loading="lazy" decoding="async" /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">妊娠紋</a><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">黑眼圈</a><span>輪廓美學</span></div></div><span className="knowledge-card-note">雙和店 / professional skin education</span></div>
       </section>
 
       <section className="manifesto"><div className="manifesto-inner section-shell"><div className="manifesto-mark">M</div><h2>每一種肌膚狀態，<br /><em>都值得被好好對待。</em></h2><div className="manifesto-bottom"><span>雙和店 / 瑪菲斯</span><span>紋路美化・科技測色・肌膚知識</span></div></div></section>
