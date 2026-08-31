@@ -1,0 +1,14 @@
+# 這個 repo 的檔案一律以 LF 存放與簽出。
+#
+# 背景：全域 ~/.gitconfig 設了 core.autocrlf=true + core.safecrlf=true。
+# 在 WSL 下 checkout（尤其是 git worktree add）會把 shell script 轉成 CRLF，
+# 造成 `bash scripts/build-verified.sh` 因 shebang 帶 ^M 而失敗；
+# git add 也會被 safecrlf 擋下（fatal: LF would be replaced by CRLF）。
+# 指定 eol=lf 後，行尾規則跟著 repo 走，不受個人全域設定影響。
+* text=auto eol=lf
+
+# 二進位資產不做任何行尾轉換。
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
