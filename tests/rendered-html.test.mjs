@@ -62,6 +62,10 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /<meta name="googlebot" content="[^"]*max-image-preview:large[^"]*"\/>/i);
   assert.match(html, /<meta name="googlebot" content="[^"]*max-snippet:-1[^"]*"\/>/i);
   assert.doesNotMatch(html, /maxImagePreview|maxSnippet|maxVideoPreview/);
+  // 品牌英文拼法全站一致，MAPHIS 為曾出現過的錯字。
+  assert.doesNotMatch(html, /MAPHIS/i);
+  assert.match(html, /MAVIS PURE SKIN/);
+  assert.match(html, /<a class="skip-link" href="#main-content">跳至主要內容<\/a>/);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
   assert.match(html, /雙和店 \/ 新北中和・南勢角站/);
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家/);

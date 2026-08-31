@@ -159,6 +159,7 @@ export function DarkCirclesContent() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <a className="skip-link" href="#main-content">跳至主要內容</a>
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
         <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="#faq">常見問題</a></div>
