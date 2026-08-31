@@ -134,7 +134,7 @@ export default function Home() {
         <div className="nav-links"><a href="#about">品牌理念</a><a href="#services">服務內容</a><a href="#knowledge">肌膚知識</a><a href="#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
         <details className="nav-menu">
-          <summary><span /></summary>
+          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
           <div className="nav-menu-panel">
             <a href="#about">品牌理念</a><a href="#services">服務內容</a><a href="#knowledge">肌膚知識</a><a href="#faq">常見問題</a>
             <span className="nav-menu-divider">知識文章</span>
@@ -144,7 +144,7 @@ export default function Home() {
         </details>
       </nav>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
       <section className="hero section-shell" id="top">
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" />雙和店 / 新北中和・南勢角站</div>

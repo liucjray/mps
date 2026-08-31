@@ -162,12 +162,12 @@ export default function StretchMarksKnowledgePage() {
       <a className="skip-link" href="#main-content">跳至主要內容</a>
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="/#faq">常見問題</a></div>
+        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
         <details className="nav-menu">
-          <summary><span /></summary>
+          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
           <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="/#faq">常見問題</a>
+            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="#faq">常見問題</a>
             <span className="nav-menu-divider">知識文章</span>
             <a href="/knowledge/stretch-marks" data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href="/knowledge/dark-circles" data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
@@ -175,7 +175,7 @@ export default function StretchMarksKnowledgePage() {
         </details>
       </nav>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
           <a href="/">首頁</a><span aria-hidden="true">/</span><span aria-current="page">妊娠紋知識</span>
         </nav>

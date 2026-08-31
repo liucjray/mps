@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleAnalytics } from "./google-analytics";
+import { NavMenuBehavior } from "./nav-menu-behavior";
 import { siteCanonicalUrl, siteDescription, siteName, siteTitle, siteUrl, socialImageUrl } from "./site";
 
 export const metadata: Metadata = {
@@ -42,5 +43,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-Hant-TW"><body>{children}<GoogleAnalytics /></body></html>;
+  return <html lang="zh-Hant-TW"><body>{children}<NavMenuBehavior /><GoogleAnalytics /></body></html>;
 }

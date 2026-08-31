@@ -146,7 +146,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="/#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
         <details className="nav-menu">
-          <summary><span /></summary>
+          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
           <div className="nav-menu-panel">
             <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="/#faq">常見問題</a>
             <span className="nav-menu-divider">知識文章</span>
@@ -156,7 +156,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </details>
       </nav>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
           <a href="/">首頁</a><span aria-hidden="true">/</span><a href="/#services">服務內容</a><span aria-hidden="true">/</span><span aria-current="page">{service.title}</span>
         </nav>
