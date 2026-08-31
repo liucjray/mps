@@ -284,11 +284,12 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .site-nav { position: sticky; top: 0; z-index: 20; isolation: isolate; background: transparent; }
   .site-nav::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: -16px; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--paper); backdrop-filter: blur(14px); pointer-events: none; }
   .nav-target { scroll-margin-top: 104px; }
-  .intro h2 { font-size: clamp(52px, 5vw, 72px); line-height: 1.02; }
+  .intro h2 { font-size: clamp(46px, 4.4vw, 63px); line-height: 1.04; }
   .intro-copy { border-left: 1px solid var(--line); padding: 10px 0 0 24px; }
   #top { scroll-margin-top: 0; }
-  /* 標題斷行一律由 JSX 的 <br /> 控制。原本這裡用 white-space: nowrap 強制不斷行，
-     但字距放寬後會超出欄位，且溢出會被 body 的 overflow-x: hidden 靜靜吃掉。 */
+  /* 標題的斷行由 JSX 的 <br /> 決定，nowrap 用來防止單行再被容器寬度折斷。
+     .intro h2 不在此列：它的欄位較窄，改以字級收斂讓整行容得下（見下方 font-size）。 */
+  .section-heading h2, .knowledge h2, .manifesto h2, .faq h2, .contact h2 { white-space: nowrap; }
   .knowledge h2, .contact h2 { font-size: clamp(42px, 4.7vw, 66px); }
 }
 @media (prefers-reduced-motion: reduce) {
