@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
-import { facebookUrl, instagramUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl, stretchMarksKnowledgePath } from "../../site";
+import { facebookUrl, instagramUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, sharedServedAreas, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, socialImageUrl, stretchMarksKnowledgePath } from "../../site";
 import { darkCirclesPath, servicePath, serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
@@ -48,7 +48,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 function getStructuredData(service: Service) {
   const url = serviceUrl(service.slug);
   const serviceId = `${siteCanonicalUrl}#service-${service.slug}`;
-  const organizationId = `${siteCanonicalUrl}#organization`;
   const websiteId = `${siteCanonicalUrl}#website`;
   const pageId = `${url}#webpage`;
   const faqId = `${url}#faq`;
@@ -56,18 +55,7 @@ function getStructuredData(service: Service) {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": ["Organization", "LocalBusiness"],
-        "@id": organizationId,
-        name: siteName,
-        url: siteCanonicalUrl,
-        description: siteDescription,
-        email: siteEmail,
-        address: siteAddress,
-        telephone: phoneNumber,
-        logo: `${siteUrl}/logo.png`,
-        sameAs: [facebookUrl, lineUrl, instagramUrl],
-      },
+      sharedOrganizationEntity,
       {
         "@type": "Service",
         "@id": serviceId,
@@ -78,12 +66,7 @@ function getStructuredData(service: Service) {
         url,
         image: `${siteUrl}${service.image}`,
         provider: { "@id": organizationId },
-                areaServed: [
-          { "@type": "AdministrativeArea", name: "新北市" },
-          { "@type": "AdministrativeArea", name: "中和區" },
-          { "@type": "AdministrativeArea", name: "永和區" },
-          { "@type": "AdministrativeArea", name: "台北市" },
-        ],
+        areaServed: sharedServedAreas,
       },
       {
         "@type": "WebSite",

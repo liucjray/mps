@@ -26,4 +26,54 @@ export const socialImageUrl = "/social-skin-atelier.jpg";
 export const stretchMarksKnowledgeUrl = `${siteUrl}/knowledge/stretch-marks`;
 export const stretchMarksKnowledgePath = "/knowledge/stretch-marks";
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
-export const siteLastModified = "2026-08-31";
+export const siteLastModified = "2026-09-03";
+
+export const organizationId = `${siteCanonicalUrl}#organization`;
+
+export const sharedServedAreas = [
+  { "@type": "AdministrativeArea", name: "新北市" },
+  { "@type": "AdministrativeArea", name: "中和區" },
+  { "@type": "AdministrativeArea", name: "永和區" },
+  { "@type": "AdministrativeArea", name: "台北市" },
+] as const;
+
+export const sharedContactPoint = {
+  "@type": "ContactPoint",
+  telephone: phoneNumber,
+  email: siteEmail,
+  contactType: "customer service",
+  url: lineUrl,
+  areaServed: sharedServedAreas,
+  availableLanguage: ["zh-Hant-TW"],
+  hoursAvailable: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  },
+} as const;
+
+export const sharedOrganizationEntity = {
+  "@type": ["Organization", "LocalBusiness"],
+  "@id": organizationId,
+  name: siteName,
+  alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
+  description: siteDescription,
+  email: siteEmail,
+  address: siteAddress,
+  url: siteCanonicalUrl,
+  telephone: phoneNumber,
+  image: [`${siteUrl}${heroImageUrl}`, `${siteUrl}${introImageUrl}`, `${siteUrl}${knowledgeImageUrl}`],
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/logo.png`,
+    contentUrl: `${siteUrl}/logo.png`,
+    width: 512,
+    height: 512,
+  },
+  sameAs: [facebookUrl, lineUrl, instagramUrl],
+  brand: { "@type": "Brand", name: "Mavis pure skin" },
+  areaServed: sharedServedAreas,
+  contactPoint: sharedContactPoint,
+  knowsAbout: ["妊娠紋", "肥胖紋", "成長紋", "各類疤痕", "皮膚覆蓋術", "科技測色", "肌膚美學"],
+} as const;

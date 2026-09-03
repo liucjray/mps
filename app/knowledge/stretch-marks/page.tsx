@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, instagramUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgeUrl } from "../../site";
+import { facebookUrl, knowledgeImageUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgeUrl } from "../../site";
 
 export const dynamic = "force-static";
 
@@ -68,7 +68,6 @@ export const metadata: Metadata = {
   },
 };
 
-const organizationId = `${siteCanonicalUrl}#organization`;
 const websiteId = `${siteCanonicalUrl}#website`;
 const pageId = `${pageUrl}#webpage`;
 const articleId = `${pageUrl}#article`;
@@ -77,24 +76,7 @@ const faqId = `${pageUrl}#faq`;
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": ["Organization", "LocalBusiness"],
-      "@id": organizationId,
-      name: siteName,
-      alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
-      description: siteDescription,
-      url: siteCanonicalUrl,
-      telephone: phoneNumber,
-      email: siteEmail,
-      address: siteAddress,
-      sameAs: [facebookUrl, lineUrl, instagramUrl],
-      areaServed: [
-        { "@type": "AdministrativeArea", name: "新北市" },
-        { "@type": "AdministrativeArea", name: "中和區" },
-        { "@type": "AdministrativeArea", name: "永和區" },
-        { "@type": "AdministrativeArea", name: "台北市" },
-      ],
-    },
+    sharedOrganizationEntity,
     {
       "@type": "WebSite",
       "@id": websiteId,

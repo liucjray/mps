@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, phoneNumber, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "./site";
+import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, sharedServedAreas, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
 import { darkCirclesPath, servicePath, serviceUrl, services } from "./services";
 
@@ -26,13 +26,6 @@ const faqs = [
 const beautyImage = heroImageUrl;
 const introImage = introImageUrl;
 const knowledgeImage = knowledgeImageUrl;
-const organizationId = `${siteCanonicalUrl}#organization`;
-const servedAreas = [
-  { "@type": "AdministrativeArea", name: "新北市" },
-  { "@type": "AdministrativeArea", name: "中和區" },
-  { "@type": "AdministrativeArea", name: "永和區" },
-  { "@type": "AdministrativeArea", name: "台北市" },
-];
 const serviceEntities = services.map((service) => ({
   "@type": "Service",
   "@id": `${siteCanonicalUrl}#service-${service.slug}`,
@@ -42,42 +35,13 @@ const serviceEntities = services.map((service) => ({
   alternateName: service.tag,
   url: serviceUrl(service.slug),
   provider: { "@id": organizationId },
-  areaServed: servedAreas,
+  areaServed: sharedServedAreas,
 }));
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization", "LocalBusiness"],
-      "@id": organizationId,
-      name: siteName,
-      alternateName: ["Mavis pure skin", "MAVIS PURE SKIN"],
-      description: siteDescription,
-      email: siteEmail,
-      address: siteAddress,
-      url: siteCanonicalUrl,
-      telephone: phoneNumber,
-      image: [`${siteUrl}${beautyImage}`, `${siteUrl}${introImage}`, `${siteUrl}${knowledgeImage}`],
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
-        contentUrl: `${siteUrl}/logo.png`,
-        width: 512,
-        height: 512,
-      },
-      sameAs: [facebookUrl, lineUrl, instagramUrl],
-      brand: { "@type": "Brand", name: "Mavis pure skin" },
-      areaServed: servedAreas,
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: phoneNumber,
-        email: siteEmail,
-        contactType: "customer service",
-        url: lineUrl,
-        areaServed: servedAreas,
-        availableLanguage: ["zh-Hant-TW"],
-      },
-      knowsAbout: ["妊娠紋", "肥胖紋", "成長紋", "各類疤痕", "皮膚覆蓋術", "科技測色", "肌膚美學"],
+      ...sharedOrganizationEntity,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "雙和店肌膚美學服務",

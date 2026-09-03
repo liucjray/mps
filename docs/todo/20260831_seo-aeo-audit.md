@@ -1,9 +1,8 @@
 # 全站 SEO／AEO 稽核待辦
 
-建立日期：2026-08-31
-網站：<https://ycaura.com/>
-稽核範圍：首頁、4 個服務頁、2 個知識頁、`robots.txt`、`sitemap.xml`、`llms.txt`、線上 HTTP 回應與 rendered HTML
-前置文件：`docs/seo/260828_mavis-shuanghe-seo-aeo-optimization-plan.md`
+建立日期：2026-08-31  
+後續執行待辦：已統整至 `docs/todo/20260903_seo-aeo-audit.md`（供後續 session wt 執行）  
+網站：<https://ycaura.com/>  
 
 ## 1. 目前判斷
 

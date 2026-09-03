@@ -43,7 +43,17 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   const organization = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
   assert.ok(organization, "Organization entity should be rendered");
   assert.equal("availableLanguage" in organization, false);
+  assert.equal("openingHoursSpecification" in organization, false);
   assert.deepEqual(organization.contactPoint.availableLanguage, ["zh-Hant-TW"]);
+  assert.deepEqual(organization.contactPoint.hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  });
+  assert.deepEqual(organization.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.deepEqual(organization.brand, { "@type": "Brand", name: "Mavis pure skin" });
+  assert.ok(organization.knowsAbout.includes("妊娠紋"));
   assert.deepEqual(organization.contactPoint.areaServed.map((area) => area.name), ["新北市", "中和區", "永和區", "台北市"]);
   assert.equal(organization.email, "millie0806@gmail.com");
   assert.deepEqual(organization.address, { "@type": "PostalAddress", streetAddress: "景新街347號9樓之9", addressLocality: "中和區", addressRegion: "新北市", addressCountry: "TW" });
@@ -76,7 +86,7 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
-  assert.match(html, /"dateModified":"2026-08-31"/i);
+  assert.match(html, /"dateModified":"2026-09-03"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
@@ -161,6 +171,17 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "knowledge page JSON-LD block should be rendered");
   const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+  assert.ok(org, "Organization should be in stretch-marks page graph");
+  assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.deepEqual(org.brand, { "@type": "Brand", name: "Mavis pure skin" });
+  assert.deepEqual(org.contactPoint.hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  });
+  assert.equal("openingHoursSpecification" in org, false);
   assert.ok(graph.some((entity) => entity["@type"] === "Article"));
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
   assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
@@ -188,6 +209,20 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, new RegExp(`<meta property="og:url" content="https://ycaura\\.com/services/${slug}"(?:/?>)`, "i"));
     assert.match(html, /"@type":"Service"/i);
     assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
+    const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+    assert.ok(jsonLdMatch, "service page JSON-LD block should be rendered");
+    const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+    const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+    assert.ok(org, "Organization should be in service page graph");
+    assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+    assert.deepEqual(org.brand, { "@type": "Brand", name: "Mavis pure skin" });
+    assert.deepEqual(org.contactPoint.hoursAvailable, {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "11:00",
+      closes: "19:00",
+    });
+    assert.equal("openingHoursSpecification" in org, false);
     assert.match(html, /millie0806@gmail\.com/i);
     assert.match(html, /景新街347號9樓之9/);
     assert.match(html, /捷運南勢角站/);
@@ -203,9 +238,16 @@ test("renders independently indexable service pages", async () => {
       assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
       assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
       assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
-      assert.match(html, /最後更新：[\s\S]*2026-08-31/);
+      assert.match(html, /最後更新：[\s\S]*2026-09-03/);
       assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
+    }
+    if (slug === "skin-camouflage") {
+      assert.match(html, /位於新北中和、南勢角站附近的雙和店皮膚覆蓋術/);
+    }
+    if (slug === "colour-matching") {
+      assert.match(html, /位於新北中和、南勢角站附近的雙和店科技測色/);
+      assert.doesNotMatch(html, /精準/);
     }
   }
 });
@@ -238,6 +280,20 @@ test("renders the dark circles child knowledge page", async () => {
   assert.match(html, /"@type":"Article"/i);
   assert.match(html, /"@type":"FAQPage"/i);
   assert.match(html, /"@type":"BreadcrumbList"/i);
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "knowledge page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+  assert.ok(org, "Organization should be in dark-circles page graph");
+  assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.deepEqual(org.brand, { "@type": "Brand", name: "Mavis pure skin" });
+  assert.deepEqual(org.contactPoint.hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  });
+  assert.equal("openingHoursSpecification" in org, false);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/27398005\//i);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34078228\//i);
   assert.match(html, /https:\/\/acaai\.org\/allergies\/allergic-conditions\/eye-allergy\//i);
@@ -295,6 +351,11 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(robots, /User-agent: GPTBot[\s\S]*Allow: \//);
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Disallow: \/api\//);
+  assert.match(robots, /User-agent: Applebot-Extended[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: meta-externalagent[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: Amazonbot[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: cohere-ai[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: Bingbot[\s\S]*Allow: \//);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com<\/loc>/);
   assert.doesNotMatch(sitemap, /<loc>https:\/\/ycaura\.com\/<\/loc>/);
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
@@ -319,7 +380,7 @@ test("ships crawler and answer-engine support files", async () => {
     (sitemap.match(/<lastmod>/g) ?? []).length,
   );
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/stretch-marks/);
-  assert.match(llms, /最後更新：2026-08-31/);
+  assert.match(llms, /最後更新：2026-09-03/);
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /服務據點: 新北市中和區、捷運南勢角站附近/);
