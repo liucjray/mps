@@ -334,7 +334,7 @@ test("renders the knowledge hub index page", async () => {
   const html = await response.text();
   assert.match(html, /<title>肌膚知識中心｜妊娠紋、黑眼圈與局部美學科普｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
   assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge"\/>/i);
-  assert.match(html, /<h1>先把肌膚的故事看懂，[\s\S]*再做選擇。[\s\S]*<\/h1>/i);
+  assert.match(html, /<h1>先看懂肌膚，[\s\S]*再做選擇。[\s\S]*<\/h1>/i);
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議/);

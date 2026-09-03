@@ -241,7 +241,8 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-article-facts ol { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .knowledge-article-facts li { display: grid; grid-template-columns: 92px 1fr; gap: 18px; padding: 26px 0; border-bottom: 1px solid var(--line); }
 .knowledge-article-facts li:last-child { border-bottom: 0; }
-.knowledge-article-facts strong { color: var(--clay-dark); font-family: var(--serif); font-size: 25px; font-weight: 400; letter-spacing: -.05em; }
+.knowledge-article-facts strong { color: var(--clay-dark); font-family: var(--serif); font-size: 25px; font-weight: 400; letter-spacing: -.05em; white-space: nowrap; }
+.knowledge-services .service-row { grid-template-columns: 8% 42% 1fr; }
 .knowledge-article-facts li span { color: var(--muted); font-size: 13px; line-height: 1.75; }
 .knowledge-article-body { display: grid; grid-template-columns: 1.35fr .65fr; gap: 8vw; padding-top: 125px; }
 .knowledge-article-section + .knowledge-article-section { margin-top: 145px; }

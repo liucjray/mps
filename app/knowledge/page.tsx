@@ -34,6 +34,7 @@ export const metadata: Metadata = {
 const articles = [
   {
     slug: "stretch-marks",
+    cardTitle: "妊娠紋知識",
     title: "妊娠紋是什麼？產後變化與保養",
     description: "了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。",
     path: stretchMarksKnowledgePath,
@@ -44,6 +45,7 @@ const articles = [
   },
   {
     slug: "dark-circles",
+    cardTitle: "黑眼圈知識",
     title: "黑眼圈怎麼看？成因與外觀評估",
     description: "整理黑眼圈常見的色澤、陰影與眼周狀態差異，了解新北雙和與台北肌膚美學諮詢前可以先觀察什麼。",
     path: darkCirclesKnowledgePath,
@@ -133,16 +135,16 @@ export default function KnowledgeHubPage() {
         <header className="knowledge-article-hero section-shell">
           <div className="knowledge-article-copy">
             <div className="section-label">雙和店 / 肌膚知識中心</div>
-            <h1>先把肌膚的故事看懂，<br /><em>再做選擇。</em></h1>
+            <h1>先看懂肌膚，<br /><em>再做選擇。</em></h1>
             <p>新北雙和店將常見的妊娠紋、肥胖紋、疤痕色澤與眼周陰影困擾拆解為科普知識。我們相信，清楚理解肌膚的生理特性與外觀差異，是在尋求任何美化服務前最重要的第一步。</p>
             <div className="knowledge-article-meta"><span>科普衛教與外觀評估指南</span><span>最後更新：{updatedAt}</span></div>
           </div>
           <div className="knowledge-article-facts" aria-label="知識中心核心原則">
             <span className="knowledge-card-label">知識中心三大原則</span>
             <ol>
-              <li><strong>科普先行</strong><span>先理解成因與自然變化，不急著在焦慮時做出決定。</span></li>
-              <li><strong>清楚邊界</strong><span>外觀修飾不等於醫療治療，遇疾病或傷口應諮詢醫師。</span></li>
-              <li><strong>個別評估</strong><span>每個人膚色與紋理不同，不以單一案例代表全部結果。</span></li>
+              <li><strong>科普</strong><span>先理解成因與自然變化，不急著在焦慮時做出決定。</span></li>
+              <li><strong>邊界</strong><span>外觀修飾不等於醫療治療，遇疾病或傷口應諮詢醫師。</span></li>
+              <li><strong>評估</strong><span>每個人膚色與紋理不同，不以單一案例代表全部結果。</span></li>
             </ol>
           </div>
         </header>
@@ -151,7 +153,7 @@ export default function KnowledgeHubPage() {
           <div className="knowledge-article-notice">本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議；若有健康、皮膚病症、發炎或傷口疑慮，請先諮詢醫療專業人員。</div>
         </div>
 
-        <section className="services section-shell" style={{ paddingTop: "80px" }} aria-labelledby="knowledge-articles-title">
+        <section className="services knowledge-services section-shell" style={{ paddingTop: "80px" }} aria-labelledby="knowledge-articles-title">
           <div className="section-heading">
             <div>
               <div className="section-label">專題文章</div>
@@ -164,7 +166,7 @@ export default function KnowledgeHubPage() {
               <article className="service-row" key={article.slug}>
                 <span className="service-number">0{idx + 1}</span>
                 <div className="service-title-wrap">
-                  <h3><a href={article.path}>{article.title}</a></h3>
+                  <h3><a href={article.path}>{article.cardTitle}</a></h3>
                   <span>{article.tag}</span>
                 </div>
                 <div className="service-row-content">
@@ -181,7 +183,7 @@ export default function KnowledgeHubPage() {
         <section className="contact service-detail-contact section-shell" id="contact" aria-labelledby="knowledge-contact-title">
           <div className="contact-copy">
             <div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div>
-            <h2 id="knowledge-contact-title">想了解你的肌膚狀態，<br /><em>可以從這裡開始。</em></h2>
+            <h2 id="knowledge-contact-title">想了解你的肌膚，<br /><em>可以從這裡開始。</em></h2>
             <p>閱讀完科普文章後，若想進一步了解適合自己的外觀修飾、草本撫紋或科技測色方向，歡迎透過 Facebook 私訊、LINE、Instagram 或手機預約，先聊聊你的狀況。</p>
             <address className="contact-details">
               <span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />
