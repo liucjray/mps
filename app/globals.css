@@ -347,7 +347,8 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .service-row:hover { padding-left: 0; background: transparent; }
   .service-title-wrap h3 { font-size: 26px; }
   .service-title-wrap span { font-size: 11px; }
-  .service-row p { grid-column: 2 / 3; font-size: 13px; line-height: 1.7; }
+  .service-row p, .service-row-content { grid-column: 2 / 3; font-size: 13px; line-height: 1.7; }
+  .service-row-content p { font-size: 13px; line-height: 1.7; margin: 0; }
   .process { padding-bottom: 105px; }
   .process-list { display: block; }
   .process-step { min-height: 0; padding: 22px 0 24px; }

@@ -23,8 +23,12 @@ export const heroImageUrl = "/hero-skin-atelier.webp";
 export const introImageUrl = "/intro-skin-consultation.webp";
 export const knowledgeImageUrl = "/knowledge-skin-palette.webp";
 export const socialImageUrl = "/social-skin-atelier.jpg";
+export const knowledgeIndexPath = "/knowledge";
+export const knowledgeIndexUrl = `${siteUrl}/knowledge`;
 export const stretchMarksKnowledgeUrl = `${siteUrl}/knowledge/stretch-marks`;
 export const stretchMarksKnowledgePath = "/knowledge/stretch-marks";
+export const darkCirclesKnowledgeUrl = `${siteUrl}/knowledge/dark-circles`;
+export const darkCirclesKnowledgePath = "/knowledge/dark-circles";
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
 export const siteLastModified = "2026-09-03";
 

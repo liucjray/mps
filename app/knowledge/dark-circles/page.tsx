@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, knowledgeImageUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl } from "../../site";
+import { facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "../../site";
 import { darkCirclesPath, darkCirclesUrl, servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -120,7 +120,7 @@ const structuredData = {
       "@id": `${darkCirclesUrl}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: siteName, item: siteCanonicalUrl },
-        { "@type": "ListItem", position: 2, name: "局部美學與科普", item: `${siteUrl}${servicePath(parentSlug)}` },
+        { "@type": "ListItem", position: 2, name: "知識中心", item: `${siteCanonicalUrl}${knowledgeIndexPath}` },
         { "@type": "ListItem", position: 3, name: "黑眼圈", item: darkCirclesUrl },
       ],
     },
@@ -144,22 +144,23 @@ export function DarkCirclesContent() {
       <a className="skip-link" href="#main-content">跳至主要內容</a>
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="#faq">常見問題</a></div>
+        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
         <details className="nav-menu">
           <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
           <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href="/#knowledge">肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識文章</span>
-            <a href="/knowledge/stretch-marks" data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href="/knowledge/dark-circles" data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
+            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
+            <span className="nav-menu-divider">知識專題</span>
+            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
+            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
+            <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
           </div>
         </details>
       </nav>
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
-          <a href="/">首頁</a><span aria-hidden="true">/</span><a href={servicePath(parentSlug)}>局部美學與科普</a><span aria-hidden="true">/</span><span aria-current="page">黑眼圈</span>
+          <a href="/">首頁</a><span aria-hidden="true">/</span><a href={knowledgeIndexPath}>知識中心</a><span aria-hidden="true">/</span><span aria-current="page">黑眼圈</span>
         </nav>
 
         <article className="knowledge-article section-shell">
@@ -253,6 +254,12 @@ export function DarkCirclesContent() {
                 <p>可以先整理在意的顏色、左右差異與照片，再向雙和店說明想了解的方向。</p>
                 <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
+              </div>
+              <div className="service-aside-links">
+                <span className="knowledge-card-label">相關閱讀與主題</span>
+                <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">妊娠紋是什麼？產後變化與保養 <span aria-hidden="true">↗</span></a>
+                <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">知識中心全專題 <span aria-hidden="true">↗</span></a>
+                <a href={servicePath(parentSlug)} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">局部美學與科普專頁 <span aria-hidden="true">↗</span></a>
               </div>
               <div className="knowledge-aside-details">
                 <span className="knowledge-card-label">CONTACT</span>

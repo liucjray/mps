@@ -77,7 +77,7 @@
 
 ### Batch 2：知識中心 Hub 頁面與 AEO 深度佈局（路由與內容擴充）
 
-- [ ] **2.1 建立 `/knowledge` 知識中心索引頁**
+- [x] **2.1 建立 `/knowledge` 知識中心索引頁**
   - **問題**：目前訪客或爬蟲訪問 `https://ycaura.com/knowledge` 回傳 404 Not Found。妊娠紋與黑眼圈兩篇知識文章缺少統一的彙總樞紐。
   - **改動檔案**：
     - 新增 `app/knowledge/page.tsx`：
@@ -88,16 +88,19 @@
     - `public/sitemap.xml`：新增 `<loc>https://ycaura.com/knowledge</loc>` 及對應 `<lastmod>`。
     - `public/llms.txt`：在官方來源中加入 `[知識中心](https://ycaura.com/knowledge)`。
   - **驗證**：訪問 `/knowledge` 回傳 200，Sitemap 與 HTML 測試通過。
+  - **狀態**：已於 2026-09-03 完成，測試通過。
 
-- [ ] **2.2 強化知識文章的內部鏈結網（Topic Cluster）**
+- [x] **2.2 強化知識文章的內部鏈結網（Topic Cluster）**
   - **改動檔案**：
     - `app/knowledge/stretch-marks/page.tsx`：麵包屑改為 `首頁 > 知識中心 > 妊娠紋知識`；文末或側欄增加相關文章連結（指向黑眼圈知識與知識中心）。
     - `app/knowledge/dark-circles/page.tsx`：麵包屑同步調整為 `首頁 > 知識中心 > 黑眼圈`；增加指向妊娠紋知識與知識中心之連結。
     - 首頁 `app/page.tsx`：主導覽與肌膚知識區塊的「閱讀更多」明確導向 `/knowledge`。
+  - **狀態**：已於 2026-09-03 完成，側欄與麵包屑鏈結完整串接並通過測試。
 
-- [ ] **2.3 評估建立 `public/llms-full.txt`**
+- [x] **2.3 評估建立 `public/llms-full.txt`**
   - **改動檔案**：新增 `public/llms-full.txt`
   - **內容**：匯整雙和店核心品牌資訊、所有服務說明與限制、QA 問答全文、知識頁面衛教精華，提供給支援完整讀取的 LLM 引擎（如 Cursor、Perplexity、ChatGPT Search）。
+  - **狀態**：已於 2026-09-03 完成建立並通過爬蟲驗證測試。
 
 ---
 

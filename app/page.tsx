@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, sharedServedAreas, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "./site";
+import { facebookUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, sharedServedAreas, siteAddress, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
 import { darkCirclesPath, servicePath, serviceUrl, services } from "./services";
 
@@ -95,13 +95,14 @@ export default function Home() {
       <a className="skip-link" href="#main-content">跳至主要內容</a>
       <nav className="site-nav" aria-label="主要導覽">
         <a className="wordmark" href="#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="#about">品牌理念</a><a href="#services">服務內容</a><a href="#knowledge">肌膚知識</a><a href="#faq">常見問題</a></div>
+        <div className="nav-links"><a href="#about">品牌理念</a><a href="#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
         <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
         <details className="nav-menu">
           <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
           <div className="nav-menu-panel">
-            <a href="#about">品牌理念</a><a href="#services">服務內容</a><a href="#knowledge">肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識文章</span>
+            <a href="#about">品牌理念</a><a href="#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
+            <span className="nav-menu-divider">知識專題</span>
+            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
           </div>
@@ -142,7 +143,7 @@ export default function Home() {
       </section>
 
       <section className="knowledge section-shell">
-        <div className="knowledge-copy"><div className="section-label nav-target" id="knowledge">雙和店肌膚知識</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從紋路形成、孕期與產後照護，到膚色判斷與外觀修飾，雙和店把常見問題整理成容易閱讀的肌膚知識。先看懂，再決定要不要開始。</p><p className="content-note">本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。</p><div className="knowledge-links"><a className="text-link" href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀黑眼圈知識 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_section">前往雙和店 Facebook <span aria-hidden="true">↗</span></a></div></div>
+        <div className="knowledge-copy"><div className="section-label nav-target" id="knowledge">雙和店肌膚知識</div><h2>把專業，<br /><em>說得更容易懂。</em></h2><p>從紋路形成、孕期與產後照護，到膚色判斷與外觀修飾，雙和店把常見問題整理成容易閱讀的肌膚知識。先看懂，再決定要不要開始。</p><p className="content-note">本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。</p><div className="knowledge-links"><a className="text-link" href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">前往雙和店肌膚知識中心 <span aria-hidden="true">↗</span></a><a className="text-link" href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀妊娠紋知識指南 <span aria-hidden="true">↗</span></a><a className="text-link" href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀黑眼圈知識 <span aria-hidden="true">↗</span></a><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_section">前往雙和店 Facebook <span aria-hidden="true">↗</span></a></div></div>
         <div className="knowledge-card"><div className="knowledge-photo"><img src={knowledgeImage} alt="肌膚教育與科技測色使用的膚色色彩樣本與保養瓶" width={1448} height={1086} loading="lazy" decoding="async" /></div><div className="knowledge-topics"><span className="knowledge-card-label">TOPICS WE COVER</span><div className="topic-list"><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">妊娠紋</a><span>肥胖紋</span><span>成長紋</span><span>各類疤痕</span><span>草本撫紋</span><span>科技測色</span><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">黑眼圈</a><span>輪廓美學</span></div></div><span className="knowledge-card-note">雙和店 / professional skin education</span></div>
       </section>
 

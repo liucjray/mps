@@ -122,6 +122,7 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
     assert.match(html, new RegExp(`href="/services/${slug}"`, "i"));
   }
+  assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
@@ -186,6 +187,13 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
   assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
   assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-08-28");
+  assert.match(html, /href="\/knowledge"/i);
+  assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present in stretch-marks");
+  assert.equal(breadcrumb.itemListElement.length, 3);
+  assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
 });
 
 test("renders independently indexable service pages", async () => {
@@ -234,6 +242,7 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /<details>/i);
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
     assert.match(html, /href="\/services\//i);
+    assert.match(html, /href="\/knowledge"/i);
     if (slug === "herbal-stretch-care") {
       assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
       assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
@@ -299,7 +308,51 @@ test("renders the dark circles child knowledge page", async () => {
   assert.match(html, /https:\/\/acaai\.org\/allergies\/allergic-conditions\/eye-allergy\//i);
   assert.match(html, /https:\/\/www\.mayoclinic\.org\/symptoms\/dark-circles-under-eyes\/basics\/causes\/sym-20050624/i);
   assert.match(html, /href="\/services\/beauty-education"/i);
+  assert.match(html, /href="\/knowledge"/i);
+  assert.match(html, /href="\/knowledge\/stretch-marks"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
   assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present in dark-circles");
+  assert.equal(breadcrumb.itemListElement.length, 3);
+  assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+});
+
+test("renders the knowledge hub index page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("knowledge-hub-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
+  const html = await response.text();
+  assert.match(html, /<title>肌膚知識中心｜妊娠紋、黑眼圈與局部美學科普｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge"\/>/i);
+  assert.match(html, /<h1>先把肌膚的故事看懂，[\s\S]*再做選擇。[\s\S]*<\/h1>/i);
+  assert.match(html, /href="\/knowledge\/stretch-marks"/i);
+  assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議/);
+
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "knowledge hub JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+  assert.ok(org, "Organization should be in knowledge hub graph");
+  assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.ok(graph.some((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("CollectionPage") : entity["@type"] === "CollectionPage"));
+  const itemList = graph.find((entity) => entity["@type"] === "ItemList");
+  assert.ok(itemList, "ItemList should be present in knowledge hub");
+  assert.equal(itemList.itemListElement.length, 2);
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present in knowledge hub");
+  assert.equal(breadcrumb.itemListElement.length, 2);
+  assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
 });
 
 test("redirects every HTTP hostname to HTTPS", async () => {
@@ -371,8 +424,10 @@ test("ships crawler and answer-engine support files", async () => {
     assert.match(sitemap, new RegExp(`<image:loc>https:\\/\\/ycaura\\.com\\/${image}<\\/image:loc>`));
   }
   assert.match(llms, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/dark-circles<\/loc>/);
+  assert.match(llms, /https:\/\/ycaura\.com\/knowledge/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/dark-circles/);
   // 每個 <loc> 都必須有 <lastmod>，避免新增頁面時漏填。
   assert.equal(
@@ -380,6 +435,10 @@ test("ships crawler and answer-engine support files", async () => {
     (sitemap.match(/<lastmod>/g) ?? []).length,
   );
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/stretch-marks/);
+  const llmsFull = await readFile(new URL("../public/llms-full.txt", import.meta.url), "utf8");
+  assert.match(llmsFull, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜完整知識與服務指南/);
+  assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge/);
+  assert.match(llmsFull, /0981-756-111/);
   assert.match(llms, /最後更新：2026-09-03/);
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
