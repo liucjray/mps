@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteUrl, stretchMarksKnowledgePath } from "../site";
+import { darkCirclesKnowledgePath, facebookUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../site";
 
 export const dynamic = "force-static";
 
@@ -8,7 +8,7 @@ const pageUrl = knowledgeIndexUrl;
 const websiteId = `${siteCanonicalUrl}#website`;
 const pageId = `${pageUrl}#webpage`;
 const itemListId = `${pageUrl}#itemlist`;
-const updatedAt = "2026-09-03";
+const updatedAt = "2026-09-04";
 
 export const metadata: Metadata = {
   title: "肌膚知識中心｜妊娠紋、黑眼圈與局部美學科普",
@@ -53,6 +53,17 @@ const articles = [
     tag: "DARK CIRCLES",
     date: "2026-08-30",
     summary: "黑眼圈只有睡不飽嗎？如何分辨色素型色澤差異與結構型光影、淚溝或眼袋？本篇整理諮詢前自我觀察重點，以及需要尋求合格醫療專業的警訊提醒。",
+  },
+  {
+    slug: "striae-comparison",
+    cardTitle: "肥胖紋與生長紋",
+    title: "肥胖紋、成長紋與妊娠紋怎麼分？成因差異與外觀評估",
+    description: "整理妊娠紋、肥胖紋與生長紋（萎縮紋）成因、好發部位、紅紋與白紋演變差異，並了解非醫療外觀修飾與雙和店諮詢評估方向。",
+    path: striaeKnowledgePath,
+    url: `${siteCanonicalUrl}${striaeKnowledgePath}`,
+    tag: "STRIAE DISTENSAE",
+    date: "2026-09-04",
+    summary: "肥胖紋、生長紋與妊娠紋在醫學上皆屬皮膚擴張紋。紅紋初期充血與白紋成熟萎縮有何不同？減重後會消失嗎？了解非醫療視覺修飾與自我評估指南。",
   },
 ];
 
@@ -123,6 +134,7 @@ export default function KnowledgeHubPage() {
             <span className="nav-menu-divider">知識專題</span>
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
+            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
           </div>
         </details>
       </nav>

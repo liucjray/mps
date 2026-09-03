@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath, stretchMarksKnowledgeUrl } from "../../site";
+import { darkCirclesKnowledgePath, facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath, stretchMarksKnowledgeUrl } from "../../site";
 import { servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -156,6 +156,7 @@ export default function StretchMarksKnowledgePage() {
             <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
+            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
           </div>
         </details>
       </nav>
@@ -247,6 +248,7 @@ export default function StretchMarksKnowledgePage() {
               <div className="service-aside-links">
                 <span className="knowledge-card-label">相關閱讀與主題</span>
                 <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">黑眼圈成因與外觀評估 <span aria-hidden="true">↗</span></a>
+                <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">肥胖紋與生長紋比較 <span aria-hidden="true">↗</span></a>
                 <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">知識中心全專題 <span aria-hidden="true">↗</span></a>
                 <a href={servicePath("herbal-stretch-care")} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">草本撫紋專頁 <span aria-hidden="true">↗</span></a>
               </div>

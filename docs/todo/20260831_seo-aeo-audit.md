@@ -1,7 +1,7 @@
 # 全站 SEO／AEO 稽核待辦
 
 建立日期：2026-08-31  
-後續執行待辦：已統整至 `docs/todo/20260903_seo-aeo-audit.md`（供後續 session wt 執行）  
+後續執行待辦：已統整至 `docs/blocked/20260903_seo-aeo-audit.md`（Batch 1、2 與 3.3 已完成；3.1、3.2 待外部資料）  
 網站：<https://ycaura.com/>  
 
 ## 1. 目前判斷

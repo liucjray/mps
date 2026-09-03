@@ -318,6 +318,65 @@ test("renders the dark circles child knowledge page", async () => {
   assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
 });
 
+test("renders the striae comparison child knowledge page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("striae-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge/striae-comparison", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
+  const html = await response.text();
+  assert.match(html, /<h1>肥胖紋、成長紋與妊娠紋，[\s\S]*究竟有何不同？[\s\S]*<\/h1>/i);
+  assert.match(html, /<title>肥胖紋、成長紋與妊娠紋怎麼分？成因差異與外觀評估｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<meta name="description" content="整理妊娠紋、肥胖紋與生長紋（萎縮紋）成因、好發部位、紅紋與白紋演變差異，並了解非醫療外觀修飾與雙和店諮詢評估方向。"\/>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/striae-comparison"\/>/i);
+  assert.match(html, /<meta property="og:type" content="article"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/striae-comparison"\/>/i);
+  assert.match(html, /同屬於「皮膚擴張紋（Striae Distensae）」/);
+  assert.match(html, /皮膚覆蓋術/);
+  assert.match(html, /新北市中和區/);
+  assert.match(html, /捷運南勢角站/);
+  assert.match(html, /11:00–19:00（預約制）/);
+  assert.match(html, /"@type":"Article"/i);
+  assert.match(html, /"@type":"FAQPage"/i);
+  assert.match(html, /"@type":"BreadcrumbList"/i);
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "knowledge page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+  assert.ok(org, "Organization should be in striae-comparison page graph");
+  assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.deepEqual(org.brand, { "@type": "Brand", name: "Mavis pure skin" });
+  assert.deepEqual(org.contactPoint.hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  });
+  assert.equal("openingHoursSpecification" in org, false);
+  assert.match(html, /https:\/\/www\.aad\.org\/public\/cosmetic\/scars-stretch-marks\/stretch-marks-why-appear/i);
+  assert.match(html, /https:\/\/www\.mayoclinic\.org\/diseases-conditions\/stretch-marks\/symptoms-causes\/syc-20351144/i);
+  assert.match(html, /https:\/\/www\.nhs\.uk\/pregnancy\/common-symptoms\/stretch-marks\//i);
+  assert.match(html, /https:\/\/www\.fda\.gov\.tw\/tc\/newsContent\.aspx\?id=28618/i);
+  assert.match(html, /href="\/services\/skin-camouflage"/i);
+  assert.match(html, /href="\/knowledge"/i);
+  assert.match(html, /href="\/knowledge\/stretch-marks"/i);
+  assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present in striae-comparison");
+  assert.equal(breadcrumb.itemListElement.length, 3);
+  assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+  assert.equal(breadcrumb.itemListElement[2].name, "肥胖紋與成長紋");
+});
+
 test("renders the knowledge hub index page", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("knowledge-hub-test", `${process.pid}-${Date.now()}`);
@@ -337,6 +396,7 @@ test("renders the knowledge hub index page", async () => {
   assert.match(html, /<h1>先看懂肌膚，[\s\S]*再做選擇。[\s\S]*<\/h1>/i);
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /href="\/knowledge\/striae-comparison"/i);
   assert.match(html, /本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議/);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
@@ -348,7 +408,7 @@ test("renders the knowledge hub index page", async () => {
   assert.ok(graph.some((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("CollectionPage") : entity["@type"] === "CollectionPage"));
   const itemList = graph.find((entity) => entity["@type"] === "ItemList");
   assert.ok(itemList, "ItemList should be present in knowledge hub");
-  assert.equal(itemList.itemListElement.length, 2);
+  assert.equal(itemList.itemListElement.length, 3);
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present in knowledge hub");
   assert.equal(breadcrumb.itemListElement.length, 2);
@@ -427,8 +487,10 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/dark-circles<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/striae-comparison<\/loc>/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/dark-circles/);
+  assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/striae-comparison/);
   // 每個 <loc> 都必須有 <lastmod>，避免新增頁面時漏填。
   assert.equal(
     (sitemap.match(/<loc>https:\/\/ycaura\.com[^<]*<\/loc>/g) ?? []).length,
@@ -438,8 +500,9 @@ test("ships crawler and answer-engine support files", async () => {
   const llmsFull = await readFile(new URL("../public/llms-full.txt", import.meta.url), "utf8");
   assert.match(llmsFull, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜完整知識與服務指南/);
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge/);
+  assert.match(llmsFull, /肥胖紋與生長紋/);
   assert.match(llmsFull, /0981-756-111/);
-  assert.match(llms, /最後更新：2026-09-03/);
+  assert.match(llms, /最後更新：2026-09-04/);
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /服務據點: 新北市中和區、捷運南勢角站附近/);

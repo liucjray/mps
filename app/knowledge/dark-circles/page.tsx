@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, stretchMarksKnowledgePath } from "../../site";
+import { facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
 import { darkCirclesPath, darkCirclesUrl, servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -154,6 +154,7 @@ export function DarkCirclesContent() {
             <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
+            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
           </div>
         </details>
       </nav>
@@ -258,6 +259,7 @@ export function DarkCirclesContent() {
               <div className="service-aside-links">
                 <span className="knowledge-card-label">相關閱讀與主題</span>
                 <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">妊娠紋是什麼？產後變化與保養 <span aria-hidden="true">↗</span></a>
+                <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">肥胖紋與生長紋比較 <span aria-hidden="true">↗</span></a>
                 <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">知識中心全專題 <span aria-hidden="true">↗</span></a>
                 <a href={servicePath(parentSlug)} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">局部美學與科普專頁 <span aria-hidden="true">↗</span></a>
               </div>

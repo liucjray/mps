@@ -20,7 +20,7 @@
   </url>
   <url>
     <loc>https://ycaura.com/knowledge</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <image:image>
       <image:loc>https://ycaura.com/knowledge-skin-palette.webp</image:loc>
     </image:image>
@@ -47,6 +47,13 @@
   <url>
     <loc>https://ycaura.com/knowledge/dark-circles</loc>
     <lastmod>2026-08-30</lastmod>
+    <image:image>
+      <image:loc>https://ycaura.com/knowledge-skin-palette.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ycaura.com/knowledge/striae-comparison</loc>
+    <lastmod>2026-09-04</lastmod>
     <image:image>
       <image:loc>https://ycaura.com/knowledge-skin-palette.webp</image:loc>
     </image:image>
