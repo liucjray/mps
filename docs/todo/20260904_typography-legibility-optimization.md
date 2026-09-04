@@ -46,19 +46,18 @@
 
 ## 3. 待辦項目清單
 
-- [x] **1. 淘汰全站低於 11px 之極小字**（已完成於 2026-09-04）
-  - 將 `.contact-qr-eyebrow` 由 8px 提升至 11px。
+- [x] **1. 淘汰全站低於 11px 之極小字與卡片美感平衡**（已完成於 2026-09-04）
   - 將 `.knowledge-article-meta`（手機版）由 9px 提升至 12px。
   - 將 `.contact-details > span` 由 10px 提升至 12px。
   - 將 `.contact-guide-badge` 由 10px 提升至 12px。
-  - 將 `.contact-qr-copy small` 由 10px 提升至 12px。
   - 將 `.knowledge-card-label`, `.knowledge-card-note` 由 10px 提升至 11px。
+  - **QR 卡片調優**：經實機視覺比對，`.contact-qr-eyebrow` 放大為 11px 會導致 `SCAN TO CONNECT` 在 138px 窄卡片中斷行壅擠；經使用者確認還原為精緻單行留白設計（eyebrow 8px、copy small 10px），保留輕奢精品呼吸感。
 
 - [x] **2. 優化聯絡指引與導航互動元件字級**（已完成於 2026-09-04）
   - 將 `.contact-guide-steps strong` 由 11px 提升至 13px。
   - 將 `.contact-guide-steps li / span` 由 12px 提升至 13px。
   - 將 `.contact-guide-hint` 由 11px 提升至 12px。
-  - 將 `.contact-map-link` 由 11px 提升至 12px。
+  - 將 `.contact-map-link` 由 11px 提升至 12px；同時移除撐大行框的 `min-height: 44px`，改用 `::before { inset: -10px -8px; }` 維持 45px 觸控熱區，解決「地址」與後續項目行高不一致問題。
   - 將手機端 `.contact-details` 由 12px 提升至 13px。
 
 - [x] **3. 調優手機端內文標準正文字級（13px ➜ 14px）**（已完成於 2026-09-04）
