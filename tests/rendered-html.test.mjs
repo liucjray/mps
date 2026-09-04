@@ -561,4 +561,30 @@ test("ships crawler and answer-engine support files", async () => {
   assert.doesNotMatch(llms, /liff\.line\.me/i);
   assert.match(llms, /## 諮詢流程/);
   assert.match(llms, /肌膚美學資訊可以取代看醫生嗎？不可以/);
+  const indexNowKey = "e9bc2e27a67fe6a725cf2b64a15917a0";
+  const indexNowKeyFile = await readFile(new URL(`../public/${indexNowKey}.txt`, import.meta.url), "utf8");
+  assert.equal(indexNowKeyFile.trim(), indexNowKey);
+  const { extractSitemapUrls, decodeXmlEntities, chunkArray } = await import("../scripts/submit-indexnow.mjs");
+  const extractedUrls = extractSitemapUrls(sitemap);
+  assert.equal(extractedUrls.length, 9);
+  assert.ok(extractedUrls.includes("https://ycaura.com"));
+  assert.ok(extractedUrls.includes("https://ycaura.com/services/herbal-stretch-care"));
+  assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/striae-comparison"));
+
+  // Edge cases: XML entity decoding & strict canonical host verification
+  assert.equal(decodeXmlEntities("https://ycaura.com/test?a=1&amp;b=2"), "https://ycaura.com/test?a=1&b=2");
+  const edgeCaseXml = `
+    <urlset>
+      <url><loc>https://ycaura.com.evil.example/bad</loc></url>
+      <url><loc>https://ycaura.com@evil.example/bad</loc></url>
+      <url><loc>https://ycaura.com/clean-path</loc></url>
+      <url><loc>https://ycaura.com/search?q=skin&amp;category=care</loc></url>
+    </urlset>
+  `;
+  const edgeExtracted = extractSitemapUrls(edgeCaseXml);
+  assert.deepEqual(edgeExtracted, [
+    "https://ycaura.com/clean-path",
+    "https://ycaura.com/search?q=skin&category=care",
+  ]);
+  assert.equal(chunkArray([1, 2, 3, 4, 5], 2).length, 3);
 });

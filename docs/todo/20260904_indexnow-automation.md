@@ -18,36 +18,18 @@ Google Search Console 雖具備 API，但官方嚴格限制一般內容網頁無
 
 ## 2. 待辦項目清單
 
-- [ ] **2.1 產生唯一 IndexNow 金鑰與驗證檔案**
-  - 產生一組 32 位元唯一 hex 金鑰（如 `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`）。
-  - 於 `public/` 建立 `<key>.txt`，內容包含金鑰本身，確保可透過 `https://ycaura.com/<key>.txt` 公開讀取。
+- [x] **2.1 產生唯一 IndexNow 金鑰與驗證檔案**（已完成於 2026-09-04）
+  - 產生一組 32 位元唯一 hex 金鑰（`e9bc2e27a67fe6a725cf2b64a15917a0`）。
+  - 於 `public/` 建立 `e9bc2e27a67fe6a725cf2b64a15917a0.txt`，內容包含金鑰本身，確保可透過 `https://ycaura.com/e9bc2e27a67fe6a725cf2b64a15917a0.txt` 公開讀取。
 
-- [ ] **2.2 撰寫 Node.js 推播腳本 (`scripts/submit-indexnow.mjs`)**
-  - 讀取 `public/sitemap.xml` 解析出全站所有有效 URL（或指定更新的 URL）。
-  - 發送標準 HTTP POST 請求至 `https://api.indexnow.org/indexnow`：
-    ```json
-    {
-      "host": "ycaura.com",
-      "key": "<key>",
-      "keyLocation": "https://ycaura.com/<key>.txt",
-      "urlList": [
-        "https://ycaura.com",
-        "https://ycaura.com/knowledge",
-        "https://ycaura.com/knowledge/stretch-marks",
-        "https://ycaura.com/knowledge/dark-circles",
-        "https://ycaura.com/knowledge/striae-comparison",
-        "https://ycaura.com/services/herbal-stretch-care",
-        "https://ycaura.com/services/skin-camouflage",
-        "https://ycaura.com/services/colour-matching",
-        "https://ycaura.com/services/beauty-education"
-      ]
-    }
-    ```
-  - 處理並輸出回應狀態碼（200 或 202 表示成功）。
+- [x] **2.2 撰寫 Node.js 推播腳本 (`scripts/submit-indexnow.mjs`)**（已完成於 2026-09-04）
+  - 讀取 `public/sitemap.xml` 解析出全站所有有效 URL。
+  - 發送標準 HTTP POST 請求至 `https://api.indexnow.org/indexnow`。
+  - 支援 `--dry-run` 模式以供離線驗收與測試。
 
-- [ ] **2.3 整合至專案工作流程**
+- [x] **2.3 整合至專案工作流程**（已完成於 2026-09-04）
   - 在 `package.json` 加入腳本指令：`"submit:indexnow": "node scripts/submit-indexnow.mjs"`。
-  - 在 GitHub Actions 的部署工作流（Deploy Workflow）中可選加入自動執行步驟，或供本地/CI 部署完成後一鍵執行。
+  - 在 GitHub Actions 的部署工作流（`.github/workflows/deploy.yml`）中加入自動執行步驟（`continue-on-error: true`，不阻斷生產部署）。
 
 ---
 
