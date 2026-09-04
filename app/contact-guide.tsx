@@ -12,7 +12,7 @@ export function ContactConsultationGuide() {
           <span>困擾出現時間長短，以及局部的色澤、陰影或外觀質地變化</span>
         </li>
         <li>
-          <strong>03 清楚照片（選填）</strong>
+          <strong>03 清楚照片</strong>
           <span>若方便，可提供自然光下無濾鏡近照；亦可先以文字描述狀況</span>
         </li>
       </ol>

@@ -95,7 +95,7 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
   assert.match(html, /私訊前可先整理 3 件事/);
   assert.match(html, /01 在意部位/);
-  assert.match(html, /03 清楚照片（選填）/);
+  assert.match(html, /03 清楚照片/);
   assert.match(html, /若不便提供照片，直接以文字說明外觀困擾與想了解的方向亦可/);
   assert.doesNotMatch(html, /免收諮詢費用/);
   assert.match(html, /雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約/);

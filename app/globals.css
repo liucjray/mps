@@ -25,7 +25,7 @@ a { color: inherit; text-decoration: none; }
 .nav-menu[open] > summary > .nav-menu-label-open, .nav-menu:not([open]) > summary > .nav-menu-label-close { display: none; }
 .nav-menu-panel { position: absolute; right: -10px; top: calc(100% + 10px); z-index: 30; display: flex; flex-direction: column; min-width: 208px; padding: 8px 0; border: 1px solid var(--line); background: var(--paper); box-shadow: 0 18px 40px rgba(41,35,34,.14); }
 .nav-menu-panel a { display: flex; align-items: center; min-height: 48px; padding: 0 20px; font-size: 15px; }
-.nav-menu-divider { margin: 6px 20px 2px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.nav-menu-divider { margin: 6px 20px 2px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
 .nav-links a, .text-link, .nav-cta { transition: color .25s ease; }
 .nav-links a:hover, .text-link:hover, .nav-cta:hover { color: var(--clay-dark); }
 .nav-cta { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: var(--clay-dark); font-size: 13px; font-weight: 700; }
@@ -77,7 +77,7 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .intro-media { padding-top: 0; }
 .intro-photo { height: 360px; overflow: hidden; }
 .intro-photo img, .knowledge-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.intro-media > span { display: block; margin-top: 14px; color: var(--muted); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.intro-media > span { display: block; margin-top: 14px; color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
 .services { padding: 0 0 170px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 50px; }
 .section-heading h2 { margin: var(--section-gap) 0 0; font-size: clamp(40px, 4.8vw, 62px); }
@@ -122,7 +122,7 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .knowledge-card { min-height: 390px; display: grid; grid-template-columns: .98fr 1.02fr; grid-template-rows: 1fr auto; gap: 0 28px; padding: 0; background: transparent; }
 .knowledge-photo { min-height: 390px; grid-row: 1 / 3; overflow: hidden; }
 .knowledge-topics { padding: 28px 0 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.knowledge-card-label, .knowledge-card-note { color: var(--muted); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.knowledge-card-label, .knowledge-card-note { color: var(--muted); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
 .topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; margin-top: 24px; }
 .topic-list span { padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; }
 .topic-list a { display: block; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; transition: color .25s ease, padding-left .3s ease; }
@@ -155,17 +155,17 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact h2 { margin: 52px 0 30px; }
 .contact-copy p { max-width: 340px; color: var(--muted); line-height: 1.9; }
 .contact-details { max-width: 540px; margin-top: 28px; color: var(--muted); font-size: 13px; font-style: normal; line-height: 2; }
-.contact-details > span { display: inline-block; min-width: 48px; color: var(--clay-dark); font-size: 10px; letter-spacing: .12em; }
+.contact-details > span { display: inline-block; min-width: 48px; color: var(--clay-dark); font-size: 12px; letter-spacing: .12em; }
 .contact-details a { border-bottom: 1px solid var(--clay); }
-.contact-map-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; margin-left: 6px; color: var(--clay-dark) !important; font-size: 11px; white-space: nowrap; border-bottom: 1px solid var(--clay); }
+.contact-map-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; margin-left: 6px; color: var(--clay-dark) !important; font-size: 12px; white-space: nowrap; border-bottom: 1px solid var(--clay); }
 .contact-map-link span { min-width: 0 !important; margin-left: 2px; }
 .contact-guide { margin-top: 28px; padding: 20px 22px; background: rgba(233, 222, 211, .55); border: 1px solid rgba(53, 43, 41, .12); border-radius: 4px; }
-.contact-guide-badge { display: inline-block; color: var(--clay-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.contact-guide-badge { display: inline-block; color: var(--clay-dark); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
 .contact-guide-steps { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.contact-guide-steps li { display: flex; align-items: baseline; gap: 12px; font-size: 12px; line-height: 1.6; }
-.contact-guide-steps strong { flex-shrink: 0; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
-.contact-guide-steps span { color: var(--muted); font-size: 12px; }
-.contact-guide-hint { margin-top: 12px !important; margin-bottom: 0 !important; max-width: 100% !important; color: var(--clay-dark) !important; font-size: 11px !important; line-height: 1.5 !important; }
+.contact-guide-steps li { display: flex; align-items: baseline; gap: 12px; font-size: 13px; line-height: 1.6; }
+.contact-guide-steps strong { flex-shrink: 0; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+.contact-guide-steps span { color: var(--muted); font-size: 13px; }
+.contact-guide-hint { margin-top: 12px !important; margin-bottom: 0 !important; max-width: 100% !important; color: var(--clay-dark) !important; font-size: 12px !important; line-height: 1.6 !important; }
 .contact-actions { display: flex; flex-direction: column; gap: 22px; }
 .contact-button { min-height: 220px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--ink); color: var(--paper); font-family: var(--serif); font-size: 26px; letter-spacing: -.05em; transition: background .25s ease, transform .25s ease; }
 .contact-button:hover { background: var(--clay-dark); }
@@ -185,9 +185,9 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-qr-brand-facebook { border-radius: 50%; background: #1877f2; }
 .contact-qr-brand-instagram { border-radius: 8px 8px 8px 3px; background: linear-gradient(135deg, #feda75, #d62976 58%, #4f5bd5); }
 
-.contact-qr-eyebrow { color: var(--clay-dark); font-size: 8px; font-weight: 700; letter-spacing: .12em; line-height: 1.3; }
+.contact-qr-eyebrow { color: var(--clay-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; line-height: 1.3; }
 .contact-qr-copy strong { margin-top: 6px; font-family: var(--serif); font-size: 19px; font-weight: 400; letter-spacing: -.05em; }
-.contact-qr-copy small { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.contact-qr-copy small { margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .contact-qr-arrow { align-self: flex-end; margin-top: auto; color: var(--clay-dark); font-size: 18px; line-height: 1; transition: transform .3s ease; }
 .contact-qr-card:hover .contact-qr-arrow { transform: translate(3px, -3px); }
 .contact-qr-glow { position: absolute; z-index: -1; top: -28px; right: -24px; width: 100px; height: 100px; border-radius: 50%; background: rgba(184, 120, 110, .2); filter: blur(2px); animation: contact-qr-breathe 4.5s ease-in-out infinite; }
@@ -243,7 +243,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-article-copy h1 { max-width: 650px; margin: 28px 0 26px; color: var(--paper); font-size: clamp(48px, 4.7vw, 70px); }
 .knowledge-article-copy h1 em { color: var(--clay); }
 .knowledge-article-copy > p { max-width: 510px; margin: 0; color: rgba(245,240,233,.74); line-height: 1.95; }
-.knowledge-article-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 54px; color: rgba(245,240,233,.48); font-size: 10px; letter-spacing: .14em; }
+.knowledge-article-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 54px; color: rgba(245,240,233,.48); font-size: 12px; letter-spacing: .14em; }
 .knowledge-article-notice { margin-top: 24px; padding: 17px 22px; border: 1px solid var(--line); color: var(--clay-dark); font-size: 13px; line-height: 1.8; }
 .knowledge-article-facts { align-self: stretch; margin: 28px 28px 28px 0; padding: 31px 32px; background: var(--paper); color: var(--ink); }
 .knowledge-article-facts .knowledge-card-label { display: block; padding-bottom: 27px; border-bottom: 1px solid var(--line); color: var(--clay-dark); }
@@ -357,14 +357,14 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .service-row:hover { padding-left: 0; background: transparent; }
   .service-title-wrap h3 { font-size: 26px; }
   .service-title-wrap span { font-size: 11px; }
-  .service-row p, .service-row-content { grid-column: 2 / 3; font-size: 13px; line-height: 1.7; }
-  .service-row-content p { font-size: 13px; line-height: 1.7; margin: 0; }
+  .service-row p, .service-row-content { grid-column: 2 / 3; font-size: 14px; line-height: 1.7; }
+  .service-row-content p { font-size: 14px; line-height: 1.7; margin: 0; }
   .process { padding-bottom: 105px; }
   .process-list { display: block; }
   .process-step { min-height: 0; padding: 22px 0 24px; }
   .process-number { display: inline-block; width: 38px; margin: 0 10px 0 0; vertical-align: top; font-size: 21px; }
   .process-step h3 { display: inline-block; margin: 0 0 13px; vertical-align: top; font-size: 25px; }
-  .process-step p { margin-left: 48px; font-size: 13px; line-height: 1.75; }
+  .process-step p { margin-left: 48px; font-size: 14px; line-height: 1.75; }
   .knowledge { display: block; padding-bottom: 105px; }
   .knowledge h2 { margin-top: 27px; }
   .knowledge-links { gap: 14px; }
@@ -381,14 +381,14 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .faq-layout { display: block; margin-top: var(--section-gap); }
   .faq-list { margin-top: 55px; }
   details:not(.nav-menu) > summary { font-size: 18px; padding: 20px 0; }
-  .faq-answer p { font-size: 13px; }
+  .faq-answer p { font-size: 14px; }
   .contact { display: block; padding: 90px 0 110px; }
   .contact-actions { margin-top: 52px; }
-  .contact-details { margin-top: 24px; font-size: 12px; }
+  .contact-details { margin-top: 24px; font-size: 13px; line-height: 1.9; }
   .contact-details .contact-map-link { margin-left: 48px; }
   .contact-guide { margin-top: 22px; padding: 16px 18px; }
-  .contact-guide-steps li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
-  .contact-guide-steps strong { font-size: 11px; }
+  .contact-guide-steps li { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+  .contact-guide-steps strong { font-size: 13px; }
   .contact-button { min-height: 190px; padding: 24px; font-size: 23px; }
   .contact-secondary { align-self: flex-start; }
   .contact-qr-grid { display: none; }
@@ -401,7 +401,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .mobile-sticky-cta span { color: var(--paper-deep); font-size: 20px; }
 }
 @media (max-width: 760px) {
-  .service-breadcrumb { padding-top: 18px; font-size: 11px; }
+  .service-breadcrumb { padding-top: 18px; font-size: 12px; }
   .service-detail { padding: 30px 0 105px; }
   .service-detail-hero { display: flex; flex-direction: column; }
   .service-detail-copy { padding: 52px 22px 56px; }
@@ -427,29 +427,29 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .knowledge-article-copy { padding: 52px 22px 48px; }
   .knowledge-article-copy h1 { margin: 24px 0 21px; font-size: clamp(36px, 9.5vw, 46px); }
   .knowledge-article-copy > p { overflow-wrap: anywhere; font-size: 15px; line-height: 1.85; }
-  .knowledge-article-meta { gap: 12px; margin-top: 38px; font-size: 9px; line-height: 1.7; }
-  .knowledge-article-notice { margin-top: 16px; padding: 15px 17px; font-size: 12px; line-height: 1.75; }
+  .knowledge-article-meta { gap: 12px; margin-top: 38px; font-size: 12px; line-height: 1.7; }
+  .knowledge-article-notice { margin-top: 16px; padding: 15px 17px; font-size: 13px; line-height: 1.75; }
   .knowledge-article-facts { margin: 0 16px 16px; padding: 25px 22px; }
   .knowledge-article-facts li { grid-template-columns: 75px 1fr; gap: 12px; padding: 20px 0; }
   .knowledge-article-facts strong { font-size: 22px; }
-  .knowledge-article-facts li span { font-size: 12px; line-height: 1.7; }
+  .knowledge-article-facts li span { font-size: 13px; line-height: 1.7; }
   .knowledge-article-body { display: block; padding-top: 88px; }
   .knowledge-article-section + .knowledge-article-section, .knowledge-article-faq, .knowledge-article-sources { margin-top: 100px; }
   .knowledge-article-section h2, .knowledge-article-sources h2 { margin-top: 25px; font-size: clamp(40px, 12vw, 58px); }
   .knowledge-article-section p, .knowledge-article-sources > p { font-size: 15px; line-height: 1.9; }
   .knowledge-lede { font-size: 15px; }
   .knowledge-callout { padding: 22px; }
-  .knowledge-callout p { font-size: 13px; line-height: 1.8; }
+  .knowledge-callout p { font-size: 14px; line-height: 1.8; }
   .knowledge-check-list { margin-top: 28px; }
-  .knowledge-check-list li { padding: 17px 0 17px 27px; font-size: 13px; line-height: 1.8; }
+  .knowledge-check-list li { padding: 17px 0 17px 27px; font-size: 14px; line-height: 1.8; }
   .knowledge-check-list li::before { top: 18px; }
   .knowledge-faq-list { margin-top: 34px; }
   .knowledge-article-sources { padding-top: 27px; }
   .knowledge-article-sources ul { margin-top: 28px; }
-  .knowledge-article-sources a { font-size: 13px; }
+  .knowledge-article-sources a { font-size: 14px; }
   .knowledge-aside-card { padding: 24px; }
   .knowledge-aside-card h2 { margin: 25px 0 16px; font-size: 32px; }
-  .knowledge-aside-card p { font-size: 13px; }
+  .knowledge-aside-card p { font-size: 14px; }
   .knowledge-article-aside { margin-top: 100px; }
   .knowledge-aside-details { margin-top: 45px; }
 }
