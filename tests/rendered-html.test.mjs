@@ -57,6 +57,8 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.deepEqual(organization.contactPoint.areaServed.map((area) => area.name), ["新北市", "中和區", "永和區", "台北市"]);
   assert.equal(organization.email, "millie0806@gmail.com");
   assert.deepEqual(organization.address, { "@type": "PostalAddress", streetAddress: "景新街347號9樓之9", addressLocality: "中和區", addressRegion: "新北市", addressCountry: "TW" });
+  assert.equal("geo" in organization, false);
+  assert.equal("hasMap" in organization, false);
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
   assert.ok(services.every((service) => service.provider["@id"] === "https://ycaura.com#organization"));
@@ -243,6 +245,8 @@ test("renders independently indexable service pages", async () => {
       closes: "19:00",
     });
     assert.equal("openingHoursSpecification" in org, false);
+    assert.equal("geo" in org, false);
+    assert.equal("hasMap" in org, false);
     assert.match(html, /millie0806@gmail\.com/i);
     assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
     assert.match(html, /捷運南勢角站/);
@@ -254,6 +258,9 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /預約.*手機、LINE、Instagram 或 Facebook 私訊/);
     assert.match(html, /"@type":"BreadcrumbList"/i);
     assert.match(html, /"@type":"FAQPage"/i);
+    const faqEntity = graph.find((entity) => entity["@type"] === "FAQPage");
+    assert.ok(faqEntity, "FAQPage entity should exist in service page");
+    assert.ok(faqEntity.mainEntity.length >= 2, `Expected at least 2 FAQs in ${slug}, got ${faqEntity.mainEntity.length}`);
     assert.match(html, /<details>/i);
     assert.match(html, /本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。/);
     assert.match(html, /href="\/services\//i);
@@ -264,14 +271,21 @@ test("renders independently indexable service pages", async () => {
       assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
       assert.match(html, /最後更新：[\s\S]*2026-09-04/);
       assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
+      assert.match(html, /草本撫紋與其他方式有什麼不同/);
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
     }
     if (slug === "skin-camouflage") {
       assert.match(html, /位於新北中和、南勢角站附近的雙和店皮膚覆蓋術/);
+      assert.match(html, /皮膚覆蓋術的評估重點是什麼/);
+      assert.match(html, /夏天曬黑或膚色改變後/);
     }
     if (slug === "colour-matching") {
       assert.match(html, /位於新北中和、南勢角站附近的雙和店科技測色/);
+      assert.match(html, /為什麼需要科技測色/);
       assert.doesNotMatch(html, /精準/);
+    }
+    if (slug === "beauty-education") {
+      assert.match(html, /若有明顯的眼袋或淚溝/);
     }
   }
 });

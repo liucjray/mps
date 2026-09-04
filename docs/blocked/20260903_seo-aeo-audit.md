@@ -71,8 +71,7 @@
 ### Batch 3：需外部店家確認與長期項目（P1／P2）
 
 - [ ] **3.1 補齊 Google 商家（GBP）連結與座標 ⚠️ [BLOCKED - 待店家資料]**
-  - **阻擋原因**：尚未取得店家 Google Business Profile 專屬短網址及店址精確經緯度。依據專案規範，嚴禁自行揣測或以非官方定位填入，以免與商家地標不符。
-  - **解除阻擋後動作**：取得資料後，於 `app/site.ts` 的 `sharedOrganizationEntity` 補上 `hasMap` 與 `geo` (`GeoCoordinates`)。
+  - **阻擋原因**：精準經緯度 `geo`（`GeoCoordinates`）與店家專屬 Google Business Profile 短網址尚未經店家正式確認。依據專案規範與 Codex 跨模型審查結論，嚴禁自行揣測經緯度或使用一般搜尋字串替代官方商家地圖，因此維持 `hasMap` 與 `geo` 阻擋狀態，待取得店家官方 GBP 正式資料後再解鎖注入。
 
 - [ ] **3.2 E-E-A-T 具名作者與專家實體 ⚠️ [BLOCKED - 待店家資料]**
   - **阻擋原因**：店家尚未於 `Projects/mps/99-待確認/待確認事項.md` 提供操作者真實姓名、專業證照與培訓認證背景。依據專案規範，嚴禁臆測或偽造專家實體。
