@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, striaeKnowledgePath, striaeKnowledgeUrl, stretchMarksKnowledgePath } from "../../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, striaeKnowledgeUrl, stretchMarksKnowledgePath } from "../../site";
 import { servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -262,7 +262,7 @@ export default function StriaeComparisonKnowledgePage() {
               <div className="knowledge-aside-card">
                 <span className="knowledge-card-label">雙和店 / 新北中和</span>
                 <h2>想了解自己的紋路型態？</h2>
-                <p>可以先拍攝在意外觀的局部照片、記下出現時間與是否有紅白變化，透過官方管道先向雙和店諮詢。</p>
+                <p>私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照，讓初次溝通更精準。</p>
                 <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
               </div>
@@ -276,7 +276,7 @@ export default function StriaeComparisonKnowledgePage() {
               <div className="knowledge-aside-details">
                 <span className="knowledge-card-label">CONTACT</span>
                 <p>{siteServiceArea}。</p>
-                <address>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="knowledge_contact">{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a></address>
+                <address>{siteAddressLine}{" "}<a className="contact-map-link" href={googleMapsSearchUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="map" data-ga-cta-location="knowledge_contact">地圖導航 <span aria-hidden="true">↗</span></a><br />{siteTransitInfo}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="knowledge_contact">{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a></address>
                 <a className="text-link" href="/#contact">查看完整聯絡方式 <span aria-hidden="true">↗</span></a>
               </div>
             </aside>

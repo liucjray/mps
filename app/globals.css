@@ -154,9 +154,18 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: end; padding: 120px 0 150px; border-top: 1px solid var(--line); }
 .contact h2 { margin: 52px 0 30px; }
 .contact-copy p { max-width: 340px; color: var(--muted); line-height: 1.9; }
-.contact-details { max-width: 380px; margin-top: 28px; color: var(--muted); font-size: 13px; font-style: normal; line-height: 2; }
-.contact-details span { display: inline-block; min-width: 48px; color: var(--clay-dark); font-size: 10px; letter-spacing: .12em; }
+.contact-details { max-width: 540px; margin-top: 28px; color: var(--muted); font-size: 13px; font-style: normal; line-height: 2; }
+.contact-details > span { display: inline-block; min-width: 48px; color: var(--clay-dark); font-size: 10px; letter-spacing: .12em; }
 .contact-details a { border-bottom: 1px solid var(--clay); }
+.contact-map-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; margin-left: 6px; color: var(--clay-dark) !important; font-size: 11px; white-space: nowrap; border-bottom: 1px solid var(--clay); }
+.contact-map-link span { min-width: 0 !important; margin-left: 2px; }
+.contact-guide { margin-top: 28px; padding: 20px 22px; background: rgba(233, 222, 211, .55); border: 1px solid rgba(53, 43, 41, .12); border-radius: 4px; }
+.contact-guide-badge { display: inline-block; color: var(--clay-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.contact-guide-steps { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.contact-guide-steps li { display: flex; align-items: baseline; gap: 12px; font-size: 12px; line-height: 1.6; }
+.contact-guide-steps strong { flex-shrink: 0; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+.contact-guide-steps span { color: var(--muted); font-size: 12px; }
+.contact-guide-hint { margin-top: 12px !important; margin-bottom: 0 !important; max-width: 100% !important; color: var(--clay-dark) !important; font-size: 11px !important; line-height: 1.5 !important; }
 .contact-actions { display: flex; flex-direction: column; gap: 22px; }
 .contact-button { min-height: 220px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--ink); color: var(--paper); font-family: var(--serif); font-size: 26px; letter-spacing: -.05em; transition: background .25s ease, transform .25s ease; }
 .contact-button:hover { background: var(--clay-dark); }
@@ -376,6 +385,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .contact { display: block; padding: 90px 0 110px; }
   .contact-actions { margin-top: 52px; }
   .contact-details { margin-top: 24px; font-size: 12px; }
+  .contact-details .contact-map-link { margin-left: 48px; }
+  .contact-guide { margin-top: 22px; padding: 16px 18px; }
+  .contact-guide-steps li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
+  .contact-guide-steps strong { font-size: 11px; }
   .contact-button { min-height: 190px; padding: 24px; font-size: 23px; }
   .contact-secondary { align-self: flex-start; }
   .contact-qr-grid { display: none; }

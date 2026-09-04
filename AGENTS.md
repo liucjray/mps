@@ -45,6 +45,22 @@ Before handing off work, verify that the code, public crawler files, repository 
 
 For UI or responsive design changes, use the `frontend-design` skill, then verify with local desktop/mobile screenshots. For metadata, structured data, sitemap, robots, or AI-search changes, use `seo-aeo-best-practices` and verify rendered HTML with `npm test`. Read selected skill instructions completely and use only the relevant skill.
 
+## Dual-Model Development & Quality Gate (Mandatory Workflow)
+
+Every development task must follow this 4-step quality gate lifecycle:
+
+1. **agy Development & Self-Validation**:
+   - Complete implementation and update tests in `tests/rendered-html.test.mjs`.
+   - Run `npm run lint` and `npm test` locally to eliminate syntax, type, and assertion errors before calling review.
+2. **Independent Review via `codex-review`**:
+   - Invoke the `codex-review` skill using local `codex` CLI (`gpt-5.6-luna`, read-only sandbox mode) to review uncommitted changes.
+3. **agy Remediation & Verification Loop**:
+   - Cross-check review findings against `AGENTS.md` and regulatory/medical boundaries.
+   - If genuine issues are found (anatomical accuracy, unverified claims, missing boundaries, edge cases), agy fixes the code and re-runs `npm test`.
+   - Re-run review or verify until all valid P1/P2 issues are resolved.
+4. **Handoff & Summary**:
+   - Conclude with a clean summary of user-visible changes, test results, and review verification before handoff or commit.
+
 ## Commit & Pull Request Guidelines
 
 Use concise conventional-style commits, such as `feat: 加入 LINE 預約入口`, `fix: ...`, or `style: ...`. Pull requests should explain the user-visible change, list validation commands, and include desktop/mobile screenshots for visual work. Keep deployment/config changes clearly separated from content changes when practical.

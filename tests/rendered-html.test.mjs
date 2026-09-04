@@ -82,15 +82,22 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
   assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
   assert.match(html, /millie0806@gmail\.com/i);
-  assert.match(html, /景新街347號9樓之9/);
+  assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
-  assert.match(html, /"dateModified":"2026-09-03"/i);
+  assert.match(html, /"dateModified":"2026-09-04"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
   assert.match(html, /捷運南勢角站/);
+  assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+  assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+  assert.match(html, /私訊前可先整理 3 件事/);
+  assert.match(html, /01 在意部位/);
+  assert.match(html, /03 清楚照片（選填）/);
+  assert.match(html, /若不便提供照片，直接以文字說明外觀困擾與想了解的方向亦可/);
+  assert.doesNotMatch(html, /免收諮詢費用/);
   assert.match(html, /雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約/);
   assert.match(html, /11:00–19:00（預約制）/);
   assert.match(html, /預約.*手機、LINE、Instagram 或 Facebook 私訊/);
@@ -166,6 +173,10 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /了解雙和店的草本撫紋服務/);
   assert.doesNotMatch(html, /了解雙和店草本撫紋服務/);
   assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
+  assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+  assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
+  assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+  assert.match(html, /私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照/);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
 
@@ -186,7 +197,8 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.ok(graph.some((entity) => entity["@type"] === "Article"));
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
   assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-08-28");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-28");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-04");
   assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
@@ -232,8 +244,11 @@ test("renders independently indexable service pages", async () => {
     });
     assert.equal("openingHoursSpecification" in org, false);
     assert.match(html, /millie0806@gmail\.com/i);
-    assert.match(html, /景新街347號9樓之9/);
+    assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
     assert.match(html, /捷運南勢角站/);
+    assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+    assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+    assert.match(html, /私訊前可先整理 3 件事/);
     assert.match(html, /雙和（中和、永和）與雙北（新北市、台北市）地區，亦接受北部地區預約/);
     assert.match(html, /11:00–19:00（預約制）/);
     assert.match(html, /預約.*手機、LINE、Instagram 或 Facebook 私訊/);
@@ -247,7 +262,7 @@ test("renders independently indexable service pages", async () => {
       assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
       assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
       assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
-      assert.match(html, /最後更新：[\s\S]*2026-09-03/);
+      assert.match(html, /最後更新：[\s\S]*2026-09-04/);
       assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
     }
@@ -285,6 +300,10 @@ test("renders the dark circles child knowledge page", async () => {
   assert.match(html, /皮膚覆蓋術/);
   assert.match(html, /新北市中和區/);
   assert.match(html, /捷運南勢角站/);
+  assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+  assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+  assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
+  assert.match(html, /私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照/);
   assert.match(html, /11:00–19:00（預約制）/);
   assert.match(html, /"@type":"Article"/i);
   assert.match(html, /"@type":"FAQPage"/i);
@@ -302,6 +321,8 @@ test("renders the dark circles child knowledge page", async () => {
     opens: "11:00",
     closes: "19:00",
   });
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-30");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-04");
   assert.equal("openingHoursSpecification" in org, false);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/27398005\//i);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34078228\//i);
@@ -342,6 +363,10 @@ test("renders the striae comparison child knowledge page", async () => {
   assert.match(html, /皮膚覆蓋術/);
   assert.match(html, /新北市中和區/);
   assert.match(html, /捷運南勢角站/);
+  assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+  assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+  assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
+  assert.match(html, /私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照/);
   assert.match(html, /11:00–19:00（預約制）/);
   assert.match(html, /"@type":"Article"/i);
   assert.match(html, /"@type":"FAQPage"/i);
@@ -398,6 +423,10 @@ test("renders the knowledge hub index page", async () => {
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /href="\/knowledge\/striae-comparison"/i);
   assert.match(html, /本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議/);
+  assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
+  assert.match(html, /景新街347號9樓之9（元大證券 6F 樓上）/);
+  assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
+  assert.match(html, /私訊前可先整理 3 件事/);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "knowledge hub JSON-LD block should be rendered");

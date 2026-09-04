@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../site";
+import { ContactConsultationGuide } from "../contact-guide";
 
 export const dynamic = "force-static";
 
@@ -198,11 +199,13 @@ export default function KnowledgeHubPage() {
             <h2 id="knowledge-contact-title">想了解你的肌膚，<br /><em>可以從這裡開始。</em></h2>
             <p>閱讀完科普文章後，若想進一步了解適合自己的外觀修飾、草本撫紋或科技測色方向，歡迎透過 Facebook 私訊、LINE、Instagram 或手機預約，先聊聊你的狀況。</p>
             <address className="contact-details">
-              <span>地址</span>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />
+              <span>地址</span>{siteAddressLine}{" "}<a className="contact-map-link" href={googleMapsSearchUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="map" data-ga-cta-location="knowledge_contact">地圖導航 <span aria-hidden="true">↗</span></a><br />
+              <span>交通</span>{siteTransitInfo}<br />
               <span>時間</span>{siteBusinessHours}<br />
               <span>預約</span>手機、LINE、Instagram 或 Facebook 私訊<br />
               <span>Email</span><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a>
             </address>
+            <ContactConsultationGuide />
           </div>
           <div className="contact-actions">
             <a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_contact">

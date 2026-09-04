@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddress, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
+import { facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
 import { darkCirclesPath, darkCirclesUrl, servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -9,7 +9,8 @@ export const dynamicParams = false;
 const parentSlug = "beauty-education";
 const pageTitle = "黑眼圈怎麼看？成因與外觀評估";
 const pageDescription = "整理黑眼圈常見的色澤、陰影與眼周狀態差異，了解新北雙和與台北肌膚美學諮詢前可以先觀察什麼。";
-const updatedAt = "2026-08-30";
+const publishedAt = "2026-08-30";
+const updatedAt = "2026-09-04";
 
 const faqs = [
   {
@@ -106,7 +107,7 @@ const structuredData = {
       headline: pageTitle,
       description: pageDescription,
       image: `${siteUrl}${knowledgeImageUrl}`,
-      datePublished: updatedAt,
+      datePublished: publishedAt,
       dateModified: updatedAt,
       inLanguage: "zh-Hant-TW",
       author: { "@id": organizationId },
@@ -252,7 +253,7 @@ export function DarkCirclesContent() {
               <div className="knowledge-aside-card">
                 <span className="knowledge-card-label">雙和店 / 新北中和</span>
                 <h2>想了解自己的眼周狀態？</h2>
-                <p>可以先整理在意的顏色、左右差異與照片，再向雙和店說明想了解的方向。</p>
+                <p>私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照，讓初次溝通更精準。</p>
                 <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
               </div>
@@ -266,7 +267,7 @@ export function DarkCirclesContent() {
               <div className="knowledge-aside-details">
                 <span className="knowledge-card-label">CONTACT</span>
                 <p>{siteServiceArea}。</p>
-                <address>{siteAddress.addressRegion}{siteAddress.addressLocality}{siteAddress.streetAddress}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="knowledge_contact">{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a></address>
+                <address>{siteAddressLine}{" "}<a className="contact-map-link" href={googleMapsSearchUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="map" data-ga-cta-location="knowledge_contact">地圖導航 <span aria-hidden="true">↗</span></a><br />{siteTransitInfo}<br />{siteBusinessHours}<br /><a href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="knowledge_contact">{phoneNumber.replace("+886", "0")}</a><br /><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="knowledge_contact">{siteEmail}</a></address>
                 <a className="text-link" href="/#contact">查看完整聯絡方式 <span aria-hidden="true">↗</span></a>
               </div>
             </aside>

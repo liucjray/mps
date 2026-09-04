@@ -15,6 +15,10 @@ export const siteAddress = {
   addressRegion: "新北市",
   addressCountry: "TW",
 } as const;
+export const siteAddressLandmark = "（元大證券 6F 樓上）";
+export const siteAddressLine = `${siteAddress.addressRegion}${siteAddress.addressLocality}${siteAddress.streetAddress}${siteAddressLandmark}`;
+export const googleMapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F";
+export const siteTransitInfo = "鄰近捷運南勢角站，建議出發前透過地圖規劃路線";
 export const facebookUrl = "https://www.facebook.com/people/%E7%91%AA%E8%8F%B2%E6%96%AF%E7%9A%AE%E8%86%9A%E8%A6%86%E8%93%8B%E5%B0%88%E5%AE%B6-%E6%96%B0%E5%8C%97%E9%9B%99%E5%92%8C%E5%BA%97/61592083747747/";
 export const lineUrl = "https://line.me/ti/p/f_92dWjx8l";
 export const instagramUrl = "https://www.instagram.com/millie_711102";
@@ -32,7 +36,7 @@ export const darkCirclesKnowledgePath = "/knowledge/dark-circles";
 export const striaeKnowledgeUrl = `${siteUrl}/knowledge/striae-comparison`;
 export const striaeKnowledgePath = "/knowledge/striae-comparison";
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
-export const siteLastModified = "2026-09-03";
+export const siteLastModified = "2026-09-04";
 
 export const organizationId = `${siteCanonicalUrl}#organization`;
 
