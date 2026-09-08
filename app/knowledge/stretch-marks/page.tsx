@@ -193,7 +193,7 @@ export default function StretchMarksKnowledgePage() {
                 <div className="section-label">01 / 先把名詞說清楚</div>
                 <h2 id="what-title">妊娠紋是什麼？</h2>
                 <p className="knowledge-lede">妊娠紋是皮膚在懷孕等快速伸展情況下形成的線狀紋路，常見於腹部，也可能出現在乳房、臀部與大腿。它通常不會造成健康問題，但可能成為外觀上的困擾。</p>
-                <p>早期紋路可能呈現紅、粉、紫或棕色，經過一段時間後顏色可能變淡，並留下較白或接近膚色的紋路。英文資料常見 <em>stretch marks</em>、<em>striae</em>，妊娠相關則可能使用 <em>striae gravidarum</em>。</p>
+                <p>早期紋路可能呈現紅、粉、紫或棕色，經過一段時間後顏色可能變淡，並留下較白或接近膚色的紋路。英文資料常見 <em>stretch marks</em>、<em>striae</em>，妊娠相關則可能使用 <em>striae gravidarum</em>。若想了解因體重波動或青春期快速成長造成的紋路差異，可參考<a className="text-link" href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">肥胖紋、生長紋與妊娠紋的成因比對 <span aria-hidden="true">↗</span></a>。</p>
               </section>
 
               <section className="knowledge-article-section" aria-labelledby="fade-title">

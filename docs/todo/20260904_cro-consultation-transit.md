@@ -30,7 +30,7 @@
 
 - [x] **1.2 補強南勢角站在地交通指引與一鍵導航**（已完成於 2026-09-04）
   - **捷運交通指引**：在 `app/site.ts` 宣告 `siteTransitInfo = "鄰近捷運南勢角站，建議出發前透過地圖規劃路線"`，恪守已證實的事實邊界。
-  - **大樓地標指引**：地址旁增加醒目地標 `siteAddressLandmark = "（元大證券 6F 樓上）"`，大幅降低到訪焦慮與門牌尋找困難，並透過 `siteAddressLine` 保持視覺排版與 Schema 結構化資料分離。
+  - **大樓地標指引**：地址旁增加醒目地標 `siteAddressLandmark = "（台北富邦銀行樓上）"`，大幅降低到訪焦慮與門牌尋找困難，並透過 `siteAddressLine` 保持視覺排版與 Schema 結構化資料分離。
   - **Google 地圖直達連結**：新增 `googleMapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=新北市中和區景新街347號"`，在全站所有地址聯絡區塊加入「地圖導航 ↗」外部連結，點擊熱區符合無障礙標準（`min-height: 44px`）。
 
 ---

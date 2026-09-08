@@ -15,7 +15,7 @@ export const siteAddress = {
   addressRegion: "新北市",
   addressCountry: "TW",
 } as const;
-export const siteAddressLandmark = "（元大證券 6F 樓上）";
+export const siteAddressLandmark = "（台北富邦銀行樓上）";
 export const siteAddressLine = `${siteAddress.addressRegion}${siteAddress.addressLocality}${siteAddress.streetAddress}${siteAddressLandmark}`;
 export const googleMapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F";
 export const siteTransitInfo = "鄰近捷運南勢角站，建議出發前透過地圖規劃路線";
@@ -36,7 +36,7 @@ export const darkCirclesKnowledgePath = "/knowledge/dark-circles";
 export const striaeKnowledgeUrl = `${siteUrl}/knowledge/striae-comparison`;
 export const striaeKnowledgePath = "/knowledge/striae-comparison";
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
-export const siteLastModified = "2026-09-04";
+export const siteLastModified = "2026-09-08";
 
 export const organizationId = `${siteCanonicalUrl}#organization`;
 

@@ -124,8 +124,8 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .knowledge-topics { padding: 28px 0 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .knowledge-card-label, .knowledge-card-note { color: var(--muted); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
 .topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; margin-top: 24px; }
-.topic-list span { padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; }
-.topic-list a { display: block; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; transition: color .25s ease, padding-left .3s ease; }
+.topic-list span { display: flex; align-items: flex-end; min-height: 44px; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; }
+.topic-list a { display: flex; align-items: flex-end; min-height: 44px; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 18px; letter-spacing: -.04em; transition: color .25s ease, padding-left .3s ease; }
 .topic-list a:hover { color: var(--clay-dark); }
 .knowledge-card-note { align-self: end; padding-top: 18px; }
 .manifesto { width: 100%; max-width: none; margin: 0; padding: 92px 0 96px; background: var(--ink); color: var(--paper); }
@@ -271,6 +271,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-check-list li:nth-child(2)::before { content: "02"; }
 .knowledge-check-list li:nth-child(3)::before { content: "03"; }
 .knowledge-article-section .text-link { margin-top: 30px; }
+.knowledge-article-section p .text-link { display: inline; min-height: 0; margin-top: 0; padding-bottom: 2px; line-height: inherit; vertical-align: baseline; }
 .knowledge-article-faq { margin-top: 145px; }
 .knowledge-faq-list { margin-top: 44px; }
 .knowledge-article-sources { margin-top: 145px; padding-top: 36px; border-top: 1px solid var(--line); }
@@ -343,7 +344,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .trust-inner { min-height: 68px; gap: 22px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .trust-inner::-webkit-scrollbar { display: none; }
   .trust-label { display: none; }
-  .trust-inner > span:not(.trust-label) { font-size: 12px; }
+  .trust-inner > span:not(.trust-label), .trust-inner > a { font-size: 12px; }
   .intro { padding: 105px 0 115px; }
   .intro-content { display: block; margin-top: var(--section-gap); }
   .intro-copy { padding-top: 52px; }
@@ -372,7 +373,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .knowledge-card { min-height: 330px; margin-top: 52px; display: block; }
   .knowledge-photo { min-height: 290px; }
   .knowledge-topics { margin-top: 24px; padding: 24px 0; }
-  .topic-list span { font-size: 16px; }
+  .topic-list span, .topic-list a { font-size: 16px; min-height: 44px; }
   .manifesto { padding: 95px 0 105px; }
   .manifesto-inner { display: block; }
   .manifesto-mark { margin-bottom: 38px; }
