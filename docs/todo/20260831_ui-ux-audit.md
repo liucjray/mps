@@ -62,9 +62,9 @@
 
 更關鍵的是：**全站任何裝置的導覽列都沒有通往知識頁的入口**。兩篇知識文是主要 SEO 資產，目前的入口是首頁 trust strip（20px 高的小連結）、首頁知識區塊，以及服務頁側欄（`app/services/[slug]/page.tsx:172-173`）；文章間也有 breadcrumb 與相互連結。入口存在但都埋在頁面深處，導覽列完全沒有。
 
-- [ ] 行動版加入導覽方案（漢堡選單，或在 hero 下方加一列可捲動的區段連結）。
-- [ ] 導覽列加入「肌膚知識」入口，桌機與行動版皆需要。
-- [ ] 與 `docs/todo/20260831_seo-aeo-audit.md` 的 3.4（建立 `/knowledge` hub 頁）一併規劃，導覽入口指向 hub 而非個別文章。
+- [x] 行動版加入導覽方案（漢堡選單，或在 hero 下方加一列可捲動的區段連結）。（已完成：`bfd7c80 feat: UI/UX 第二批` 加入 `<details className="nav-menu">` 漢堡選單，`globals.css:312-313` 在 ≤900px 生效，取代隱藏的 `.nav-links`。經 2026-09-12 用 `design-taste-frontend` skill 覆核時發現此項待辦未同步勾選。）
+- [x] 導覽列加入「肌膚知識」入口，桌機與行動版皆需要。（已完成：`app/page.tsx` 桌機 `.nav-links` 與行動版 `.nav-menu-panel` 皆含「肌膚知識」入口，面板內另有知識中心首頁／妊娠紋／黑眼圈子連結。）
+- [x] 與 `docs/todo/20260831_seo-aeo-audit.md` 的 3.4（建立 `/knowledge` hub 頁）一併規劃，導覽入口指向 hub 而非個別文章。（已完成：`app/knowledge/page.tsx` 為完整 hub 頁，`knowledgeIndexPath` 為導覽入口目標。）
 
 ### 2.4 窄螢幕（320px）內容被裁切且無法取用
 
