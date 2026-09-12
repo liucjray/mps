@@ -107,7 +107,7 @@
 
 目前妊娠紋與黑眼圈兩篇知識文只能從首頁與 `beauty-education` 服務頁進入，沒有 hub 頁。SEO 計畫 P2 已規劃 7 篇長尾文章，文章數增加後將缺少內部連結的組織節點。
 
-- [ ] 於長尾文章開始產出前建立 `/knowledge` hub 頁，含 `CollectionPage` 或 `ItemList` schema、breadcrumb 與 sitemap 項目。
+- [x] 於長尾文章開始產出前建立 `/knowledge` hub 頁，含 `CollectionPage` 或 `ItemList` schema、breadcrumb 與 sitemap 項目。（已完成：`app/knowledge/page.tsx` 同時具備 `["WebPage","CollectionPage"]`、`BreadcrumbList`、`ItemList` 結構化資料與頁面 breadcrumb；`public/sitemap.xml` 已含 `/knowledge` 與三篇知識文。經 2026-09-12 用 `design-taste-frontend` skill 覆核導覽時一併確認。）
 
 ## 4. P2：加分與清理
 
@@ -139,7 +139,7 @@
 1. **第一批（P0 全部）**：2.1、2.2、2.3、2.4。皆為 bug 修正，改動小、不涉及新的對外事實宣稱，不需先查 `99-待確認`。
 2. **第二批**：3.2、4.2、4.3、4.4。純程式重構與效能／爬蟲設定，同樣不涉及事實宣稱。
 3. **第三批**：3.1 的 `contactPoint.hoursAvailable` 可直接做（營業型態已於 2026-08-31 確認）；`geo`／`hasMap` 需先取得實際座標或 Google Business Profile 連結，4.1 的作者資歷須先在 Obsidian `Projects/mps/99-待確認/待確認事項.md` 取得確認。
-4. **第四批（需另行規劃）**：3.3、3.4。與 SEO 計畫 P2 的內容集群一併安排。
+4. **第四批（需另行規劃）**：3.3。與 SEO 計畫 P2 的內容集群一併安排；3.4 已完成，見上。
 
 ## 6. 驗收方式
 
