@@ -10,14 +10,18 @@
 
 ## Build, Test, and Development Commands
 
-- `npm run dev` starts the local Vite/Vinext development server at `http://localhost:1102`.
+- `npm run dev` starts the local Vite/Vinext development server at `http://localhost:1102` by default; set `PORT` for a worktree, for example `PORT=1104 npm run dev`.
 - `npm run build` creates and validates the Cloudflare deployable artifact.
-- `npm run start` serves the built application locally at `http://localhost:1102`.
+- `npm run start` serves the built application locally at `http://localhost:1102` by default; set `PORT` for a worktree, for example `PORT=1104 npm run start`.
 - `npm test` runs the build plus `node:test` rendered-HTML checks.
 - `npm run lint` runs ESLint across the repository.
 - `npm run validate:artifact` rechecks an existing deployment artifact.
 
-Use Node.js `>=22.13.0`. Keep the local preview port fixed at `1102`; do not change the Vite `strictPort` setting. Run `npm run install:ci` only when a clean lockfile install is needed.
+Use Node.js `>=22.13.0`. Keep the `main` preview port at `1102`; worktrees must set `PORT` to their allocated available port. Keep the Vite `strictPort` setting enabled. Run `npm run install:ci` only when a clean lockfile install is needed.
+
+## Worktree & Branch Naming
+
+Every development and test task must use a dedicated Git worktree; do not develop directly on the shared `main` worktree. The `main` worktree reserves preview port `1102`. A worktree must use a different available preview port, and its branch name must include that port in the format `wt{port}-xxxxxx`, where `xxxxxx` is a short task slug. For this project, use names such as `wt1104-animation-polish` or `wt1104-seo-check`. Keep the worktree path, branch name, and preview port aligned so another agent can identify the task quickly.
 
 ## Coding Style & Naming Conventions
 

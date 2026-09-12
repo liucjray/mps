@@ -18,6 +18,12 @@
 
 ---
 
+## Worktree 與分支命名
+
+依目前 `AGENTS.md` 規範，所有開發與測試任務都必須在獨立 Git worktree 進行，不直接修改共享 `main` worktree。`main` 固定使用預覽 port `1102`；開新的 worktree 時必須改用其他可用 port，設定對應的 `PORT`（例如 `PORT=1104 npm run dev`），且分支名稱固定攜帶該 port，格式為 `wt{port}-xxxxxx`，其中 `xxxxxx` 為簡短任務 slug。本專案範例：`wt1104-animation-polish`、`wt1104-seo-check`。worktree 路徑、分支名稱與預覽 port 應保持可辨識的一致性。
+
+---
+
 ## 2. 每次更新是否需要重新跑 skill？
 
 `AGENTS.md` 沒有「所有改動都要跑全部 skill」這種規則，是**按改動類型分流**，只有 `codex-review` 是無條件強制。整理成表：
@@ -30,7 +36,7 @@
 | metadata／結構化資料／sitemap／robots／AI 搜尋訊號改動 | **一定要** | `seo-aeo-best-practices`，並用 `npm test` 驗證 rendered HTML | `AGENTS.md` Skill-Assisted Review 第三句 |
 | 既有版面的**小範圍精修**（例如文案/CTA 文字改動、既有 checkbox 補勾這類非結構性改動） | 視情況，不強制重跑整套 UI skill | 可以只用 `design-taste-frontend` 做局部覆核（例如 CTA 文案是否誠實對應行為），不必每次都重新產出完整 Design Read | 本次 2026-09-12 的實際案例：改 `.mobile-sticky-cta` 文案沒有重跑 `frontend-design`，因為不涉及版面/視覺方向 |
 | 純文字／文件（`docs/`、Markdown）修正，不影響 render 出來的 HTML | 不需要 UI/SEO skill，但 `codex-review` 仍是強制項 | `codex-review` | Dual-Model 工作流程的「Every development task」沒有排除文件類改動 |
-| 純 CSS 微調（不涉及 render 內容）但視覺會變 | **一定要** | `frontend-design`（`AGENTS.md:46` 對 UI/響應式改動沒有排除任何大小的例外）+ 桌機/行動雙寬度截圖驗證 + `codex-review` | `AGENTS.md` Skill-Assisted Review 第一句、Testing Guidelines 第 28 行「Visual changes should also be checked at desktop and mobile widths」|
+| 純 CSS 微調（不涉及 render 內容）但視覺會變 | **一定要** | `frontend-design`（`AGENTS.md:50` 對 UI/響應式改動沒有排除任何大小的例外）+ 桌機/行動雙寬度截圖驗證 + `codex-review` | `AGENTS.md` Skill-Assisted Review 第一句、Testing Guidelines 第 32 行「Visual changes should also be checked at desktop and mobile widths」|
 
 ### 判斷原則（沒明寫規則時怎麼決定）
 
