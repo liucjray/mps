@@ -9,7 +9,7 @@ const pageUrl = stretchMarksKnowledgeUrl;
 const pageTitle = "妊娠紋是什麼？產後變化與保養";
 const pageDescription = "了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。";
 const publishedAt = "2026-08-28";
-const updatedAt = "2026-09-04";
+const updatedAt = "2026-09-17";
 
 const faqs = [
   {
@@ -27,6 +27,10 @@ const faqs = [
   {
     question: "妊娠紋覆蓋是在治療妊娠紋嗎？",
     answer: "外觀修飾與醫療治療是不同概念。妊娠紋覆蓋或色澤修飾若以顏色與視覺落差為主要討論，不能因此宣稱改變皮膚結構、治療疾病或讓紋路完全消失。",
+  },
+  {
+    question: "草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？",
+    answer: "兩者定位與本質不同。高能量微針電波（如墨菲斯 Morpheus8）或雷射屬於醫療處置，需由專科醫師在醫療院所診斷與施作；雙和店的草本撫紋則著重於外觀色澤與視覺落差的調和，屬於非醫療美學外觀照護，不宣稱醫療效能，亦不取代醫療診斷或治療。實際適用性需依個人紋路狀態個別了解。",
   },
   {
     question: "凹凸的妊娠紋也能只靠顏色修飾嗎？",
@@ -219,6 +223,50 @@ export default function StretchMarksKnowledgePage() {
                 <h2 id="service-title">妊娠紋覆蓋是在做什麼？</h2>
                 <p className="knowledge-lede">外觀修飾主要是討論色澤、紋路與周圍肌膚的視覺落差；它不應被描述成治療皮膚疾病、改變皮膚結構或保證讓妊娠紋消失。</p>
                 <p>雙和店的諮詢會先從在意的部位、紋路顏色、凹凸與形成時間開始了解，再說明目前能討論的方向與限制。實際服務細節、適用條件與孕期／哺乳期是否需要暫緩，請在預約前直接向雙和店確認。</p>
+                <div className="knowledge-table-wrap">
+                  <table className="knowledge-table" aria-label="常見紋路處理方式客觀比對表">
+                    <thead>
+                      <tr>
+                        <th scope="col">討論面向</th>
+                        <th scope="col">日常保養品（撫紋霜/油）</th>
+                        <th scope="col">醫療處置（如特定雷射或微針電波）</th>
+                        <th scope="col">雙和店草本撫紋（外觀修飾）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">主要定位</th>
+                        <td>表面滋潤保濕、舒緩乾癢感受</td>
+                        <td>需由專科醫師於醫療院所進行臨床評估與處置</td>
+                        <td>調和視覺色階與對比，著重外觀美化修飾</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">介入性質</th>
+                        <td>一般化粧品日常保養</td>
+                        <td>醫療行為（需由合格專科醫師施作）</td>
+                        <td>非醫療美容美化與外觀照護</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">適合考量</th>
+                        <td>日常滋潤肌膚，使用前請注意產品成分說明</td>
+                        <td>各儀器適應症與時機不同，需專科醫師專業評估</td>
+                        <td>在意線狀紋路外觀與局部色差，需經個別了解</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">流程與感受</th>
+                        <td>居家自行塗抹，感受與適用性依個別產品而異</td>
+                        <td>依處置規劃與體質而異，可能包含修復期</td>
+                        <td>流程與配合事項因人而異，建議預約前詳細諮詢</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">核心限制</th>
+                        <td>無法消除既有真皮紋路或結構性變化</td>
+                        <td>費用較高，效果依個人體質且不保證完全消失</td>
+                        <td>不改變皮膚凹凸結構與生理機能，曬黑需注意對比</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <a className="text-link" href="/services/herbal-stretch-care" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">了解雙和店的草本撫紋服務 <span aria-hidden="true">↗</span></a>
               </section>
 

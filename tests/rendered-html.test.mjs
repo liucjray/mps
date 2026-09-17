@@ -186,6 +186,17 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
 
+  // 驗證三方客觀比對表格
+  assert.match(html, /<table class="knowledge-table" aria-label="常見紋路處理方式客觀比對表">/);
+  assert.match(html, /日常保養品（撫紋霜\/油）/);
+  assert.match(html, /醫療處置（如特定雷射或微針電波）/);
+  assert.match(html, /雙和店草本撫紋（外觀修飾）/);
+  assert.match(html, /<th scope="row">主要定位<\/th>/);
+
+  // 驗證品牌去混淆問答（化解「墨菲斯」干擾）
+  assert.match(html, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
+  assert.match(html, /高能量微針電波（如墨菲斯 Morpheus8）或雷射屬於醫療處置/);
+
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "knowledge page JSON-LD block should be rendered");
   const graph = JSON.parse(jsonLdMatch[1])["@graph"];
@@ -202,9 +213,9 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.equal("openingHoursSpecification" in org, false);
   assert.ok(graph.some((entity) => entity["@type"] === "Article"));
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
-  assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
+  assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 7);
   assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-28");
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-04");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-17");
   assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /<section class="knowledge-article-section"[^>]*aria-labelledby="what-title">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">肥胖紋、生長紋與妊娠紋的成因比對 <span aria-hidden="true">↗<\/span><\/a>/);
@@ -555,7 +566,11 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge/);
   assert.match(llmsFull, /肥胖紋與生長紋/);
   assert.match(llmsFull, /0981-756-111/);
-  assert.match(llms, /最後更新：2026-09-08/);
+  assert.match(llmsFull, /最後更新：2026-09-17/);
+  assert.match(llms, /最後更新：2026-09-17/);
+  assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
+  assert.match(llmsFull, /紋路處理方式客觀比對/);
+  assert.match(llmsFull, /墨菲斯微針電波（Morpheus8）/);
   assert.match(llms, /Email: millie0806@gmail\.com/);
   assert.match(llms, /地址: 新北市中和區景新街347號9樓之9/);
   assert.match(llms, /服務據點: 新北市中和區、捷運南勢角站附近/);
