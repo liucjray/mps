@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, instagramUrl, knowledgeImageUrl, knowledgeIndexUrl, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../site";
 import { ContactConsultationGuide } from "../contact-guide";
 
 export const dynamic = "force-static";
@@ -9,7 +9,7 @@ const pageUrl = knowledgeIndexUrl;
 const websiteId = `${siteCanonicalUrl}#website`;
 const pageId = `${pageUrl}#webpage`;
 const itemListId = `${pageUrl}#itemlist`;
-const updatedAt = "2026-09-04";
+const updatedAt = "2026-09-19";
 
 export const metadata: Metadata = {
   title: "肌膚知識中心｜妊娠紋、黑眼圈與局部美學科普",
@@ -65,6 +65,17 @@ const articles = [
     tag: "STRIAE DISTENSAE",
     date: "2026-09-04",
     summary: "肥胖紋、生長紋與妊娠紋在醫學上皆屬皮膚擴張紋。紅紋初期充血與白紋成熟萎縮有何不同？減重後會消失嗎？了解非醫療視覺修飾與自我評估指南。",
+  },
+  {
+    slug: "scars-camouflage",
+    cardTitle: "疤痕外觀修飾",
+    title: "白色疤痕與手術痕跡外觀修飾，先看懂評估原則與界線",
+    description: "整理白色成熟疤痕與手術痕跡之外觀修飾評估重點。說明疤痕色階調和原理、非醫療安全界線與醫師諮詢原則，提供雙北顧客客觀清楚的美學評估資訊。",
+    path: scarsCamouflageKnowledgePath,
+    url: `${siteCanonicalUrl}${scarsCamouflageKnowledgePath}`,
+    tag: "SCARS CAMOUFLAGE",
+    date: "2026-09-19",
+    summary: "手術痕跡或外傷縫合轉白成熟後，如何看待局部色差？了解紅疤充血與白疤穩定期之生理差異、客觀處置比對與健康安全考量，建立客觀理性美學期待。",
   },
 ];
 
@@ -136,6 +147,7 @@ export default function KnowledgeHubPage() {
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
             <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
+            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
           </div>
         </details>
       </nav>

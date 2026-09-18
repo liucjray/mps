@@ -265,11 +265,9 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-callout { max-width: 690px; margin-top: 34px; padding: 25px 28px; border-left: 2px solid var(--clay); background: var(--paper-deep); }
 .knowledge-callout strong { display: block; margin-bottom: 12px; color: var(--clay-dark); font-family: var(--serif); font-size: 23px; font-weight: 400; }
 .knowledge-callout p { margin: 0; font-size: 14px; line-height: 1.85; }
-.knowledge-check-list { display: grid; gap: 0; max-width: 690px; margin: 35px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.knowledge-check-list { display: grid; gap: 0; max-width: 690px; margin: 35px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); counter-reset: check-item; }
 .knowledge-check-list li { position: relative; padding: 20px 0 20px 29px; border-bottom: 1px solid var(--line); color: var(--muted); line-height: 1.8; }
-.knowledge-check-list li::before { content: "01"; position: absolute; left: 0; top: 21px; color: var(--clay); font-family: var(--serif); font-size: 13px; }
-.knowledge-check-list li:nth-child(2)::before { content: "02"; }
-.knowledge-check-list li:nth-child(3)::before { content: "03"; }
+.knowledge-check-list li::before { content: counter(check-item, decimal-leading-zero); counter-increment: check-item; position: absolute; left: 0; top: 21px; color: var(--clay); font-family: var(--serif); font-size: 13px; }
 .knowledge-table-wrap { max-width: 690px; margin-top: 34px; overflow-x: auto; border: 1px solid var(--line); background: var(--paper); }
 .knowledge-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
 .knowledge-table th, .knowledge-table td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.65; }

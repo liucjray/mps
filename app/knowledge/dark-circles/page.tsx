@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
+import { facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
 import { darkCirclesPath, darkCirclesUrl, servicePath } from "../../services";
 
 export const dynamic = "force-static";
@@ -10,7 +10,7 @@ const parentSlug = "beauty-education";
 const pageTitle = "黑眼圈怎麼看？成因與外觀評估";
 const pageDescription = "整理黑眼圈常見的色澤、陰影與眼周狀態差異，了解新北雙和與台北肌膚美學諮詢前可以先觀察什麼。";
 const publishedAt = "2026-08-30";
-const updatedAt = "2026-09-04";
+const updatedAt = "2026-09-19";
 
 const faqs = [
   {
@@ -156,6 +156,7 @@ export function DarkCirclesContent() {
             <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
             <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
             <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
+            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
           </div>
         </details>
       </nav>

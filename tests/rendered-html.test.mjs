@@ -88,7 +88,7 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
-  assert.match(html, /"dateModified":"2026-09-08"/i);
+  assert.match(html, /"dateModified":"2026-09-19"/i);
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
@@ -134,9 +134,11 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /href="\/knowledge\/scars-camouflage"/i);
   assert.match(html, /<section class="trust-strip"[^>]*>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>02<\/b> 肥胖紋<\/a>/);
   assert.match(html, /<div class="knowledge-links">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀肥胖紋與生長紋比對 <span aria-hidden="true">↗<\/span><\/a>/);
-  assert.match(html, /<div class="topic-list">[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">肥胖紋<\/a>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">成長紋<\/a>/);
+  assert.match(html, /<div class="knowledge-links">[\s\S]*?<a class="text-link" href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀疤痕外觀修飾指南 <span aria-hidden="true">↗<\/span><\/a>/);
+  assert.match(html, /<div class="topic-list">[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">肥胖紋<\/a>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">成長紋<\/a>[\s\S]*?<a href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">各類疤痕<\/a>/);
   assert.match(html, /本站提供一般肌膚美學資訊，不取代醫療診斷或治療建議。/);
 
   const assetResponse = await worker.fetch(
@@ -215,7 +217,7 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
   assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 7);
   assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-28");
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-17");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-19");
   assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /<section class="knowledge-article-section"[^>]*aria-labelledby="what-title">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">肥胖紋、生長紋與妊娠紋的成因比對 <span aria-hidden="true">↗<\/span><\/a>/);
@@ -290,7 +292,7 @@ test("renders independently indexable service pages", async () => {
       assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
       assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
       assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
-      assert.match(html, /最後更新：[\s\S]*2026-09-08/);
+      assert.match(html, /最後更新：[\s\S]*2026-09-19/);
       assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
       assert.match(html, /草本撫紋與其他方式有什麼不同/);
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
@@ -357,7 +359,7 @@ test("renders the dark circles child knowledge page", async () => {
     closes: "19:00",
   });
   assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-30");
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-04");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-19");
   assert.equal("openingHoursSpecification" in org, false);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/27398005\//i);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34078228\//i);
@@ -437,6 +439,66 @@ test("renders the striae comparison child knowledge page", async () => {
   assert.equal(breadcrumb.itemListElement[2].name, "肥胖紋與成長紋");
 });
 
+test("renders the scars camouflage child knowledge page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("scars-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge/scars-camouflage", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
+  const html = await response.text();
+  assert.match(html, /<h1>白色疤痕與手術痕跡外觀修飾，[\s\S]*先看懂成熟時機與界線。[\s\S]*<\/h1>/i);
+  assert.match(html, /<title>白色疤痕與手術痕跡外觀修飾指南｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<meta name="description" content="整理白色成熟疤痕與手術痕跡之外觀修飾評估重點。說明疤痕色階調和原理、非醫療安全界線與醫師諮詢原則，提供雙北顧客客觀清楚的美學評估資訊。"\/>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/scars-camouflage"\/>/i);
+  assert.match(html, /<meta property="og:type" content="article"\/>/i);
+  assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/scars-camouflage"\/>/i);
+  assert.match(html, /紅疤與白疤有何不同？/);
+  assert.match(html, /手術痕跡評估/);
+  assert.match(html, /常見疤痕處理方式比較/);
+  assert.match(html, /蟹足腫（Keloid）與肥厚性疤痕/);
+  assert.match(html, /建議優先尋求皮膚科專科醫師/);
+  assert.match(html, /Cleveland Clinic/);
+  assert.match(html, /新北市中和區/);
+  assert.match(html, /捷運南勢角站/);
+  assert.match(html, /11:00–19:00（預約制）/);
+  assert.match(html, /"@type":"Article"/i);
+  assert.match(html, /"@type":"FAQPage"/i);
+  assert.match(html, /"@type":"BreadcrumbList"/i);
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "scars page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  const org = graph.find((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("Organization") : entity["@type"] === "Organization");
+  assert.ok(org, "Organization should be in scars-camouflage page graph");
+  assert.deepEqual(org.alternateName, ["Mavis pure skin", "MAVIS PURE SKIN"]);
+  assert.deepEqual(org.brand, { "@type": "Brand", name: "Mavis pure skin" });
+  assert.deepEqual(org.contactPoint.hoursAvailable, {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "11:00",
+    closes: "19:00",
+  });
+  assert.equal("openingHoursSpecification" in org, false);
+  assert.match(html, /href="\/services\/skin-camouflage"/i);
+  assert.match(html, /href="\/knowledge"/i);
+  assert.match(html, /href="\/knowledge\/stretch-marks"/i);
+  assert.match(html, /href="\/knowledge\/striae-comparison"/i);
+  assert.match(html, /href="\/knowledge\/dark-circles"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
+  assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present in scars-camouflage");
+  assert.equal(breadcrumb.itemListElement.length, 3);
+  assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+  assert.equal(breadcrumb.itemListElement[2].name, "疤痕外觀修飾");
+});
+
 test("renders the knowledge hub index page", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("knowledge-hub-test", `${process.pid}-${Date.now()}`);
@@ -457,6 +519,7 @@ test("renders the knowledge hub index page", async () => {
   assert.match(html, /href="\/knowledge\/stretch-marks"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /href="\/knowledge\/striae-comparison"/i);
+  assert.match(html, /href="\/knowledge\/scars-camouflage"/i);
   assert.match(html, /本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議/);
   assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
   assert.match(html, /景新街347號9樓之9（台北富邦銀行樓上）/);
@@ -472,7 +535,7 @@ test("renders the knowledge hub index page", async () => {
   assert.ok(graph.some((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("CollectionPage") : entity["@type"] === "CollectionPage"));
   const itemList = graph.find((entity) => entity["@type"] === "ItemList");
   assert.ok(itemList, "ItemList should be present in knowledge hub");
-  assert.equal(itemList.itemListElement.length, 3);
+  assert.equal(itemList.itemListElement.length, 4);
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present in knowledge hub");
   assert.equal(breadcrumb.itemListElement.length, 2);
@@ -552,9 +615,11 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/dark-circles<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/striae-comparison<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/scars-camouflage<\/loc>/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/dark-circles/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/striae-comparison/);
+  assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
   // 每個 <loc> 都必須有 <lastmod>，避免新增頁面時漏填。
   assert.equal(
     (sitemap.match(/<loc>https:\/\/ycaura\.com[^<]*<\/loc>/g) ?? []).length,
@@ -564,10 +629,11 @@ test("ships crawler and answer-engine support files", async () => {
   const llmsFull = await readFile(new URL("../public/llms-full.txt", import.meta.url), "utf8");
   assert.match(llmsFull, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜完整知識與服務指南/);
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge/);
+  assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
   assert.match(llmsFull, /肥胖紋與生長紋/);
   assert.match(llmsFull, /0981-756-111/);
-  assert.match(llmsFull, /最後更新：2026-09-17/);
-  assert.match(llms, /最後更新：2026-09-17/);
+  assert.match(llmsFull, /最後更新：2026-09-19/);
+  assert.match(llms, /最後更新：2026-09-19/);
   assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
   assert.match(llmsFull, /紋路處理方式客觀比對/);
   assert.match(llmsFull, /墨菲斯微針電波（Morpheus8）/);
@@ -591,10 +657,11 @@ test("ships crawler and answer-engine support files", async () => {
   assert.equal(indexNowKeyFile.trim(), indexNowKey);
   const { extractSitemapUrls, decodeXmlEntities, chunkArray } = await import("../scripts/submit-indexnow.mjs");
   const extractedUrls = extractSitemapUrls(sitemap);
-  assert.equal(extractedUrls.length, 9);
+  assert.equal(extractedUrls.length, 10);
   assert.ok(extractedUrls.includes("https://ycaura.com"));
   assert.ok(extractedUrls.includes("https://ycaura.com/services/herbal-stretch-care"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/striae-comparison"));
+  assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/scars-camouflage"));
 
   // Edge cases: XML entity decoding & strict canonical host verification
   assert.equal(decodeXmlEntities("https://ycaura.com/test?a=1&amp;b=2"), "https://ycaura.com/test?a=1&b=2");
