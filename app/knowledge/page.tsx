@@ -47,13 +47,13 @@ const articles = [
   {
     slug: "dark-circles",
     cardTitle: "黑眼圈知識",
-    title: "黑眼圈怎麼看？成因與外觀評估",
-    description: "整理黑眼圈常見的色澤、陰影與眼周狀態差異，了解新北雙和與台北肌膚美學諮詢前可以先觀察什麼。",
+    title: "黑眼圈怎麼看？成因、分類與外觀評估",
+    description: "整理黑眼圈四大類型（色素型、血管型、結構型、混合型）成因與外觀辨析表。介紹眼下皮膚拉平測試、處置途徑三方客觀比對與諮詢前評估重點。",
     path: darkCirclesKnowledgePath,
     url: `${siteCanonicalUrl}${darkCirclesKnowledgePath}`,
     tag: "DARK CIRCLES",
-    date: "2026-08-30",
-    summary: "黑眼圈只有睡不飽嗎？如何分辨色素型色澤差異與結構型光影、淚溝或眼袋？本篇整理諮詢前自我觀察重點，以及需要尋求合格醫療專業的警訊提醒。",
+    date: "2026-09-19",
+    summary: "黑眼圈不單純只有睡眠不足。整理四大類型辨析表、眼下皮膚輕拉觀察與處置途徑三方客觀比對，帶你建立非醫療外觀修飾客觀認知與諮詢前自我檢視重點。",
   },
   {
     slug: "striae-comparison",

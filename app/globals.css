@@ -263,7 +263,8 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-article-section p em { color: var(--ink); font-family: var(--serif); font-style: italic; }
 .knowledge-lede { font-size: 17px; }
 .knowledge-callout { max-width: 690px; margin-top: 34px; padding: 25px 28px; border-left: 2px solid var(--clay); background: var(--paper-deep); }
-.knowledge-callout strong { display: block; margin-bottom: 12px; color: var(--clay-dark); font-family: var(--serif); font-size: 23px; font-weight: 400; }
+.knowledge-callout > strong { display: block; margin-bottom: 12px; color: var(--clay-dark); font-family: var(--serif); font-size: 23px; font-weight: 400; }
+.knowledge-callout p strong { display: inline; margin-bottom: 0; color: var(--ink); font-family: inherit; font-size: inherit; font-weight: 700; }
 .knowledge-callout p { margin: 0; font-size: 14px; line-height: 1.85; }
 .knowledge-check-list { display: grid; gap: 0; max-width: 690px; margin: 35px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); counter-reset: check-item; }
 .knowledge-check-list li { position: relative; padding: 20px 0 20px 29px; border-bottom: 1px solid var(--line); color: var(--muted); line-height: 1.8; }
