@@ -42,3 +42,5 @@ next-env.d.ts
 /outputs/
 /work/
 /.gemini/
+/.claude/worktrees/
+/.worktrees/
