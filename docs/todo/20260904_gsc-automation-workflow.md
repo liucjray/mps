@@ -5,6 +5,9 @@
 目標網站：<https://ycaura.com/>  
 分類：DevOps 自動化 / 技術 SEO / 索引加速  
 
+> [!note] 文件狀態
+> 本文件是早期設計草案。最新的條件式 GSC、SEO／AEO 自動同步方案與目前實作對照，請以 [`20260919_gsc-seo-aeo-auto-sync-plan.md`](./20260919_gsc-seo-aeo-auto-sync-plan.md) 為準。
+
 ---
 
 ## 1. 架構與設計理念
@@ -90,11 +93,11 @@ flowchart TD
    - Header: `{ "alg": "RS256", "typ": "JWT" }`
    - Payload Claims:
      - `iss`: `client_email`
-     - `sub`: `client_email`
+     - `sub`: 不設定；只有使用 Google Workspace domain-wide delegation 代表使用者時才加入 `sub`，本專案的服務帳戶直接以 `iss` 授權。
      - `aud`: `https://oauth2.googleapis.com/token`
      - `scope`: `https://www.googleapis.com/auth/webmasters`
      - `iat`: Math.floor(Date.now() / 1000) - 30（扣除 30 秒防止時鐘偏差）
-     - `exp`: Math.floor(Date.now() / 1000) + 3600（最長 1 小時）
+     - `exp`: `iat + 3600` 以內；目前實作使用 `now + 3570`，在扣除 30 秒時鐘偏差後仍不超過一小時。
 4. **簽署與 Token 交換**：
    - 使用 `node:crypto.createSign("RSA-SHA256")` 針對 Header + Payload 進行私鑰簽署。
    - 向 `https://oauth2.googleapis.com/token` 交換 Access Token。

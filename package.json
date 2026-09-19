@@ -11,10 +11,12 @@
     "dev:hmr": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
     "build": "bash scripts/build-verified.sh",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start --port ${PORT:-1102}",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
     "validate:artifact": "bash scripts/validate-artifact.sh",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .claude/worktrees --ignore-pattern .worktrees",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "submit:gsc": "node scripts/gsc-notify.mjs",
+    "validate:seo-aeo": "node scripts/seo-aeo-check.mjs",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate"
   },
   "dependencies": {

@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -34,10 +36,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and validate artifact
+      - name: Classify SEO/AEO change
+        id: impact
+        env:
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: node scripts/classify-seo-aeo-change.mjs --output seo-aeo-impact.json
+
+      - name: Build, lint, and test
         env:
           NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
-        run: npm run build
+        run: |
+          npm test
+          npm run lint
+
+      - name: Validate built SEO/AEO output before deploy
+        env:
+          SEO_AEO_BASE_URL: http://localhost:1106
+          SEO_AEO_CANONICAL_ORIGIN: https://ycaura.com
+          SEO_AEO_REPORT_PATH: seo-aeo-predeploy-report.json
+        run: |
+          PORT=1106 npm run start > /tmp/mps-seo-aeo-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail http://localhost:1106/ >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --silent --fail http://localhost:1106/ >/dev/null
+          npm run validate:seo-aeo
 
       - name: Deploy Worker and custom domain
         uses: cloudflare/wrangler-action@v4
@@ -55,7 +84,48 @@ jobs:
             --output /tmp/ycaura-home.html https://ycaura.com/
           grep -q '瑪菲斯皮膚覆蓋專家' /tmp/ycaura-home.html
 
+      - name: Validate public SEO/AEO output
+        env:
+          SEO_AEO_BASE_URL: https://ycaura.com
+          SEO_AEO_REPORT_PATH: seo-aeo-report.json
+        run: npm run validate:seo-aeo
+
+      - name: Submit sitemap to Google Search Console
+        if: steps.impact.outputs.needs_gsc_sitemap_submit == 'true'
+        continue-on-error: true
+        timeout-minutes: 2
+        env:
+          GSC_CREDENTIALS: ${{ secrets.GSC_CREDENTIALS }}
+          GSC_SITE_URL: https://ycaura.com/
+          GSC_SITEMAP_URL: https://ycaura.com/sitemap.xml
+          GSC_REPORT_PATH: gsc-report.json
+        run: npm run submit:gsc
+
+      - name: Report skipped Google Search Console submission
+        if: steps.impact.outputs.needs_gsc_sitemap_submit != 'true'
+        run: |
+          echo "GSC sitemap submission skipped: ${{ steps.impact.outputs.impact_reasons }}"
+
       - name: Submit updated URLs to IndexNow
         continue-on-error: true
         timeout-minutes: 2
+        env:
+          INDEXNOW_REPORT_PATH: indexnow-report.json
         run: npm run submit:indexnow
+
+      - name: Publish SEO/AEO sync outcomes
+        if: always()
+        run: node scripts/write-seo-aeo-summary.mjs
+
+      - name: Upload SEO/AEO deployment reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-aeo-${{ github.sha }}
+          path: |
+            seo-aeo-impact.json
+            seo-aeo-predeploy-report.json
+            seo-aeo-report.json
+            gsc-report.json
+            indexnow-report.json
+          if-no-files-found: ignore

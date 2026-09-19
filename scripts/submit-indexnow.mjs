@@ -10,7 +10,7 @@
  *   node scripts/submit-indexnow.mjs [--dry-run]
  */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -23,6 +23,11 @@ const KEY = "e9bc2e27a67fe6a725cf2b64a15917a0";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
 const MAX_URLS_PER_BATCH = 10000;
+
+function writeReport(report) {
+  const reportPath = process.env.INDEXNOW_REPORT_PATH;
+  if (reportPath) writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 export function decodeXmlEntities(str) {
   return str
@@ -78,12 +83,14 @@ async function main() {
   try {
     sitemapContent = readFileSync(sitemapPath, "utf-8");
   } catch (err) {
+    writeReport({ status: "failed", error: `Unable to read sitemap: ${err.message}` });
     console.error(`[IndexNow] Error reading sitemap at ${sitemapPath}:`, err.message);
     process.exit(1);
   }
 
   const urls = extractSitemapUrls(sitemapContent);
   if (urls.length === 0) {
+    writeReport({ status: "skipped", reason: "No valid canonical URLs found in sitemap", urlCount: 0 });
     console.warn("[IndexNow] Warning: No valid URLs found in sitemap matching host:", HOST);
     process.exit(0);
   }
@@ -96,6 +103,7 @@ async function main() {
   }
 
   if (isDryRun) {
+    writeReport({ status: "dry-run", urlCount: urls.length, batchCount: batches.length });
     console.log("[IndexNow] DRY-RUN mode active: Skipping HTTP request.");
     console.log("[IndexNow] Payload preview (batch 1):", JSON.stringify({
       host: HOST,
@@ -107,6 +115,7 @@ async function main() {
   }
 
   let hasError = false;
+  let successfulBatches = 0;
 
   for (let i = 0; i < batches.length; i++) {
     const batchUrls = batches[i];
@@ -129,6 +138,7 @@ async function main() {
       });
 
       if (response.ok || response.status === 202) {
+        successfulBatches += 1;
         console.log(`[IndexNow] Successfully submitted batch ${i + 1}! (HTTP ${response.status})`);
       } else {
         const errorText = await response.text().catch(() => "");
@@ -140,6 +150,14 @@ async function main() {
       hasError = true;
     }
   }
+
+  writeReport({
+    status: hasError ? "partial-failure" : "submitted",
+    urlCount: urls.length,
+    batchCount: batches.length,
+    successfulBatches,
+    failedBatches: batches.length - successfulBatches,
+  });
 
   if (hasError && process.env.INDEXNOW_STRICT === "true") {
     process.exit(1);
