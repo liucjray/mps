@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath, stretchMarksKnowledgeUrl } from "../../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgeUrl } from "../../site";
 import { servicePath } from "../../services";
+import { KnowledgeContactCta } from "../../knowledge-contact";
+import { SiteNavigation } from "../../site-navigation";
 
 export const dynamic = "force-static";
 
@@ -149,23 +151,7 @@ export default function StretchMarksKnowledgePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
-            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation faqHref="#faq" />
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
@@ -224,7 +210,7 @@ export default function StretchMarksKnowledgePage() {
                 <h2 id="service-title">妊娠紋覆蓋是在做什麼？</h2>
                 <p className="knowledge-lede">外觀修飾主要是討論色澤、紋路與周圍肌膚的視覺落差；它不應被描述成治療皮膚疾病、改變皮膚結構或保證讓妊娠紋消失。</p>
                 <p>雙和店的諮詢會先從在意的部位、紋路顏色、凹凸與形成時間開始了解，再說明目前能討論的方向與限制。實際服務細節、適用條件與孕期／哺乳期是否需要暫緩，請在預約前直接向雙和店確認。</p>
-                <div className="knowledge-table-wrap">
+                <div className="knowledge-table-wrap" role="region" aria-label="常見紋路處理方式客觀比對表" tabIndex={0}>
                   <table className="knowledge-table" aria-label="常見紋路處理方式客觀比對表">
                     <thead>
                       <tr>
@@ -291,7 +277,7 @@ export default function StretchMarksKnowledgePage() {
               <div className="knowledge-aside-card">
                 <span className="knowledge-card-label">雙和店 / 新北中和</span>
                 <h2>想了解自己的紋路？</h2>
-                <p>私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照，讓初次溝通更精準。</p>
+                <p>私訊諮詢前可先整理：① 在意部位 ② 出現時間與狀態 ③ 色澤與紋理感受；若方便再提供自然光近照，不便提供也可以先用文字說明。</p>
                 <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
               </div>
@@ -299,6 +285,7 @@ export default function StretchMarksKnowledgePage() {
                 <span className="knowledge-card-label">相關閱讀與主題</span>
                 <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">黑眼圈成因與外觀評估 <span aria-hidden="true">↗</span></a>
                 <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">肥胖紋與生長紋比較 <span aria-hidden="true">↗</span></a>
+                <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">白色疤痕與手術痕跡修飾 <span aria-hidden="true">↗</span></a>
                 <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">知識中心全專題 <span aria-hidden="true">↗</span></a>
                 <a href={servicePath("herbal-stretch-care")} data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">草本撫紋專頁 <span aria-hidden="true">↗</span></a>
               </div>
@@ -311,6 +298,7 @@ export default function StretchMarksKnowledgePage() {
             </aside>
           </div>
         </article>
+        <KnowledgeContactCta title="想了解自己的紋路？" description="先用文字描述紋路的位置、顏色、凹凸與形成時間，再由雙和店說明可以討論的方向。" />
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>

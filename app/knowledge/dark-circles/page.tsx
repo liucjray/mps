@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
 import { facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
-import { darkCirclesPath, darkCirclesUrl, servicePath } from "../../services";
+import { darkCirclesUrl, servicePath } from "../../services";
+import { KnowledgeContactCta } from "../../knowledge-contact";
+import { SiteNavigation } from "../../site-navigation";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -159,27 +161,11 @@ export function DarkCirclesContent() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
-            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation faqHref="#faq" />
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
-          <a href="/">首頁</a><span aria-hidden="true">/</span><a href={knowledgeIndexPath}>知識中心</a><span aria-hidden="true">/</span><span aria-current="page">黑眼圈</span>
+          <a href="/">首頁</a><span aria-hidden="true">/</span><a href={knowledgeIndexPath}>知識中心</a><span aria-hidden="true">/</span><span aria-current="page">黑眼圈外觀評估</span>
         </nav>
 
         <article className="knowledge-article section-shell">
@@ -215,7 +201,7 @@ export function DarkCirclesContent() {
                 <div className="section-label">02 / 四大類型辨析</div>
                 <h2 id="types-title">常見黑眼圈的四大類型特徵</h2>
                 <p className="knowledge-lede">國際皮膚醫學文獻通常根據主導因素，將黑眼圈細分為四大表現型態：</p>
-                <div className="knowledge-table-wrap">
+                <div className="knowledge-table-wrap" role="region" aria-label="黑眼圈四大類型成因與外觀辨析表" tabIndex={0}>
                   <table className="knowledge-table" aria-label="黑眼圈四大類型成因與外觀辨析表">
                     <thead>
                       <tr>
@@ -264,7 +250,7 @@ export function DarkCirclesContent() {
                 <div className="section-label">03 / 居家觀察工具</div>
                 <h2 id="pinch-test-title">居家自我檢測：眼下皮膚「輕拉測試」</h2>
                 <p className="knowledge-lede">國際皮膚醫學回顧文獻（如 PubMed: 27398005）在探討眼周外觀觀察時，提及可藉由角度光影轉換或極輕柔展開細紋輔助視診，但強調任何眼周肌膚在牽拉或受光角度改變時外觀皆會變化，無法取代專科醫師之皮膚鏡或伍氏燈（Wood&apos;s lamp）臨床鑑別：</p>
-                <div className="knowledge-callout" style={{ marginBottom: "1rem" }}>
+                <div className="knowledge-callout knowledge-callout-mb">
                   <strong>安全注意與非診斷原則</strong>
                   <p>若眼周肌膚正處於紅腫、發癢、脫屑、刺痛、急性發炎、結膜炎或有開放性傷口，<strong>請勿觸摸、拉扯或擠壓眼周皮膚</strong>，應立即優先尋求眼科或皮膚專科醫師診斷治療。以下觀察僅為健康無不適時梳理個人主觀感受之輔助，非醫學病因分類依據。</p>
                 </div>
@@ -273,7 +259,7 @@ export function DarkCirclesContent() {
                   <li><strong>展開微細皺摺時之色斑分布觀察</strong>：在肌膚穩定無不適下照鏡，以指腹極輕柔展開下眼瞼細紋；若深色斑塊隨皮表紋理延展而顏色依然濃郁，文獻描述這類視覺表現常見於淺層或深層色素不均的情境，但薄透皮膚受拉扯時透光度皆會改變，切勿單憑此點推論病因。</li>
                   <li><strong>微血管受壓短暫反白（Blanching）之物理反應</strong>：若指腹極輕微碰觸時眼下青紫感短暫變淺，多為微血管血流受壓暫時排開之正常物理生理反應，亦受個人皮下組織厚薄影響，非單一血管病態之特異指標。</li>
                 </ul>
-                <p style={{ marginTop: "1rem", fontSize: "14px", color: "var(--muted)" }}>重要說明：眼周肌膚結構極為脆弱，且臨床上絕大多數人皆屬於多重因素交織，上述觀察僅供居家釐清自己在意的外觀感受，不可作為自我定性或取代專科醫師診斷之工具。</p>
+                <p className="knowledge-observation-note">重要說明：眼周肌膚結構極為脆弱，且臨床上絕大多數人皆屬於多重因素交織，上述觀察僅供居家釐清自己在意的外觀感受，不可作為自我定性或取代專科醫師診斷之工具。</p>
               </section>
 
               <section className="knowledge-article-section" aria-labelledby="allergy-title">
@@ -288,7 +274,7 @@ export function DarkCirclesContent() {
                 <div className="section-label">05 / 處置途徑客觀比對</div>
                 <h2 id="comparison-title">常見眼周困擾改善途徑比較</h2>
                 <p className="knowledge-lede">面對眼周色澤或陰影困擾，釐清不同途徑的定位有助於建立健康客觀的期待：</p>
-                <div className="knowledge-table-wrap">
+                <div className="knowledge-table-wrap" role="region" aria-label="眼周困擾處置途徑三方客觀比對表" tabIndex={0}>
                   <table className="knowledge-table" aria-label="眼周困擾處置途徑三方客觀比對表">
                     <thead>
                       <tr>
@@ -332,7 +318,7 @@ export function DarkCirclesContent() {
                     </tbody>
                   </table>
                 </div>
-                <div style={{ marginTop: "24px" }}>
+                <div className="knowledge-article-action">
                   <a className="text-link" href={servicePath("skin-camouflage")} data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">了解皮膚覆蓋術服務專頁 <span aria-hidden="true">↗</span></a>
                 </div>
               </section>
@@ -394,6 +380,7 @@ export function DarkCirclesContent() {
             </aside>
           </div>
         </article>
+        <KnowledgeContactCta title="想先分辨自己的眼周困擾？" description="可以先記錄顏色、光線角度與是否伴隨不適，再用文字描述狀況；若有紅腫、疼痛或視力變化，請優先諮詢醫療專業人員。" />
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>

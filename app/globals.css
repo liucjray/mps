@@ -107,7 +107,6 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .service-title-wrap h3 { font-family: var(--serif); font-size: 32px; font-weight: 400; letter-spacing: -.025em; margin: 0; }
 .service-title-wrap span { color: var(--muted); }
 .service-row p { color: var(--muted); line-height: 1.8; max-width: 350px; margin: 0; font-size: 14px; }
-.row-arrow { color: var(--clay-dark); font-size: 18px; font-weight: 300; letter-spacing: -.08em; opacity: .68; text-align: right; }
 .process { padding: 0 0 145px; }
 .process-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .process-step { min-height: 220px; padding: 26px 0 22px; border-bottom: 1px solid var(--line); }
@@ -118,6 +117,8 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .knowledge h2 { margin: 32px 0 26px; }
 .knowledge-copy > p { max-width: 410px; color: var(--muted); line-height: 1.9; margin-bottom: 32px; }
 .knowledge-copy > .content-note { margin-top: -14px; color: var(--clay-dark); font-size: 13px; line-height: 1.75; }
+.knowledge-section-top-space { padding-top: 80px; }
+.knowledge-card-action { margin-top: 16px; }
 .knowledge-links { display: flex; flex-direction: column; align-items: flex-start; gap: 17px; }
 .knowledge-card { min-height: 390px; display: grid; grid-template-columns: .98fr 1.02fr; grid-template-rows: 1fr auto; gap: 0 28px; padding: 0; background: transparent; }
 .knowledge-photo { min-height: 390px; grid-row: 1 / 3; overflow: hidden; }
@@ -171,8 +172,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-button { min-height: 220px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--ink); color: var(--paper); font-family: var(--serif); font-size: 26px; letter-spacing: -.05em; transition: background .25s ease, transform .25s ease; }
 .contact-button:hover { background: var(--clay-dark); }
 .contact-button small { font-family: var(--sans); font-size: 12px; color: rgba(247,242,236,.65); letter-spacing: .08em; }
-.contact-arrow { align-self: end; font-family: var(--sans); font-size: 32px; font-weight: 300; letter-spacing: -.08em; opacity: .78; }
-.contact-secondary { align-self: flex-end; color: var(--ink); border-bottom: 1px solid var(--clay); padding-bottom: 6px; font-size: 13px; }
+.contact-secondary { display: inline-flex; align-items: center; align-self: flex-end; min-height: 44px; color: var(--ink); border-bottom: 1px solid var(--clay); padding-bottom: 6px; font-size: 13px; }
 .contact-secondary span { margin-left: 10px; color: var(--clay-dark); }
 .contact-qr-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
 .contact-qr-card { position: relative; display: flex; flex-direction: column; gap: 11px; min-height: 245px; overflow: hidden; padding: 12px; background: rgba(233, 222, 211, .52); border: 1px solid rgba(53, 43, 41, .12); color: var(--ink); isolation: isolate; transition: transform .3s cubic-bezier(.22,1,.36,1), background .3s ease, border-color .3s ease; }
@@ -190,7 +190,6 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-qr-copy strong { margin-top: 6px; font-family: var(--serif); font-size: 19px; font-weight: 400; letter-spacing: -.05em; }
 .contact-qr-copy small { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 .contact-qr-arrow { align-self: flex-end; margin-top: auto; color: var(--clay-dark); font-size: 18px; line-height: 1; transition: transform .3s ease; }
-.contact-qr-card:hover .contact-qr-arrow { transform: translate(3px, -3px); }
 .contact-qr-glow { position: absolute; z-index: -1; top: -28px; right: -24px; width: 100px; height: 100px; border-radius: 50%; background: rgba(184, 120, 110, .2); filter: blur(2px); animation: contact-qr-breathe 4.5s ease-in-out infinite; }
 .contact-qr-spark { position: absolute; z-index: 2; color: var(--clay-dark); pointer-events: none; }
 .contact-qr-spark-one { top: 7px; left: 91px; font-size: 12px; animation: contact-qr-twinkle 2.8s ease-in-out infinite; }
@@ -269,14 +268,19 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-check-list { display: grid; gap: 0; max-width: 690px; margin: 35px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); counter-reset: check-item; }
 .knowledge-check-list li { position: relative; padding: 20px 0 20px 29px; border-bottom: 1px solid var(--line); color: var(--muted); line-height: 1.8; }
 .knowledge-check-list li::before { content: counter(check-item, decimal-leading-zero); counter-increment: check-item; position: absolute; left: 0; top: 21px; color: var(--clay); font-family: var(--serif); font-size: 13px; }
-.knowledge-table-wrap { max-width: 690px; margin-top: 34px; overflow-x: auto; border: 1px solid var(--line); background: var(--paper); }
+.knowledge-table-wrap { position: relative; max-width: 690px; margin-top: 34px; overflow-x: auto; border: 1px solid var(--line); background: var(--paper); box-shadow: inset -16px 0 14px -18px rgba(53,43,41,.72); scroll-behavior: smooth; }
+.knowledge-table-wrap:focus-visible { outline-offset: -3px; }
 .knowledge-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
 .knowledge-table th, .knowledge-table td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.65; }
 .knowledge-table thead th { background: var(--paper-deep); color: var(--ink); font-weight: 700; white-space: nowrap; font-size: 13px; }
 .knowledge-table tbody th { background: transparent; color: var(--clay-dark); font-weight: 700; white-space: nowrap; font-size: 13px; text-align: left; }
 .knowledge-table tr:last-child td, .knowledge-table tr:last-child th { border-bottom: none; }
 .knowledge-article-section .text-link { margin-top: 30px; }
+.knowledge-article-action { margin-top: 24px; }
 .knowledge-article-section p .text-link { display: inline; min-height: 0; margin-top: 0; padding-bottom: 2px; line-height: inherit; vertical-align: baseline; }
+.knowledge-callout-stack { margin-top: 16px; }
+.knowledge-callout-mb { margin-bottom: 16px; }
+.knowledge-observation-note { margin-top: 16px !important; font-size: 14px !important; color: var(--muted) !important; }
 .knowledge-article-faq { margin-top: 145px; }
 .knowledge-faq-list { margin-top: 44px; }
 .knowledge-article-sources { margin-top: 145px; padding-top: 36px; border-top: 1px solid var(--line); }
@@ -296,6 +300,11 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-aside-details > p { margin: 25px 0 22px; color: var(--muted); font-family: var(--serif); font-size: 22px; line-height: 1.5; letter-spacing: -.04em; }
 .knowledge-aside-details address { margin-bottom: 28px; color: var(--muted); font-size: 13px; font-style: normal; line-height: 2; }
 .knowledge-aside-details address a:hover { color: var(--clay-dark); }
+.knowledge-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: end; padding: 120px 0 150px; border-top: 1px solid var(--line); }
+.knowledge-contact h2 { max-width: 560px; margin: 52px 0 30px; font-size: clamp(44px, 5.8vw, 72px); }
+.knowledge-contact-copy > p { max-width: 430px; color: var(--muted); line-height: 1.9; }
+.knowledge-contact-copy .button { margin-top: 20px; }
+.knowledge-contact .contact-qr-grid { margin-top: 0; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 960px) {
   .site-nav { position: sticky; top: 0; z-index: 20; isolation: isolate; background: transparent; }
@@ -311,6 +320,13 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .contact-qr-card:hover .contact-qr-arrow { transform: translate(3px, -3px); }
+}
+@media (hover: none), (pointer: coarse) {
+  .contact-qr-card:hover, .contact-qr-card:hover .contact-qr-brand { transform: none; }
+  .contact-qr-card:hover .contact-qr-arrow, .knowledge-article-sources a:hover, .service-aside-links a:hover, .topic-list a:hover { transform: none; padding-left: 0; }
 }
 /* 導覽有自己的斷點：實測 761-899px 時四個連結加 CTA 會把品牌名擠成兩行。 */
 @media (max-width: 899px) {
@@ -460,6 +476,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .knowledge-aside-card p { font-size: 14px; }
   .knowledge-article-aside { margin-top: 100px; }
   .knowledge-aside-details { margin-top: 45px; }
+  .knowledge-contact { display: block; padding: 90px 0 110px; }
+  .knowledge-contact h2 { margin-top: 27px; font-size: clamp(40px, 12vw, 58px); }
+  .knowledge-contact .contact-qr-grid { display: grid; grid-template-columns: 1fr; margin-top: 42px; }
+  .knowledge-contact .contact-qr-card { min-height: 210px; }
 }
 
 /* 320px 時 .hero-title-line 的 nowrap 會讓主標超出欄位 9px。 */

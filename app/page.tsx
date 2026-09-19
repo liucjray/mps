@@ -2,6 +2,7 @@
 import { facebookUrl, googleMapsSearchUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
 import { ContactConsultationGuide } from "./contact-guide";
+import { SiteNavigation } from "./site-navigation";
 import { darkCirclesPath, servicePath, serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
@@ -94,21 +95,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="#about">品牌理念</a><a href="#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="#about">品牌理念</a><a href="#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation isHome />
 
       <main id="main-content" tabIndex={-1}>
       <section className="hero section-shell" id="top">

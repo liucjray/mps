@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, scarsCamouflageKnowledgeUrl, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgeUrl, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgePath } from "../../site";
 import { servicePath } from "../../services";
+import { KnowledgeContactCta } from "../../knowledge-contact";
+import { SiteNavigation } from "../../site-navigation";
 
 export const dynamic = "force-static";
 
@@ -139,23 +141,7 @@ export default function ScarsCamouflageKnowledgePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
-            <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation faqHref="#faq" />
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
@@ -192,7 +178,7 @@ export default function ScarsCamouflageKnowledgePage() {
                   <strong>早期充血期（紅疤）</strong>
                   <p>傷口剛癒合的初期，微血管新生充血以輸送養分，外觀呈現鮮紅或紫紅色。臨床醫學常由專科醫師在此階段指導使用醫療級矽膠產品或評估血管雷射介入；美學色階調和主要討論成熟後的淡白痕跡，若疤痕仍在充血發紅，建議優先遵從專科醫師醫囑照護。</p>
                 </div>
-                <div className="knowledge-callout" style={{ marginTop: "16px" }}>
+                <div className="knowledge-callout knowledge-callout-stack">
                   <strong>成熟穩定期（白疤）</strong>
                   <p>歷經數月至一年以上，微血管逐漸萎縮退去，局部黑色素細胞缺乏，留下平整或微萎縮的淡白痕跡。因反射光線與周圍正常膚色產生明顯對比，這正是美學視覺修飾常討論的情境。</p>
                 </div>
@@ -214,7 +200,7 @@ export default function ScarsCamouflageKnowledgePage() {
                 <div className="section-label">03 / 處置途徑客觀比對</div>
                 <h2 id="comparison-title">常見疤痕處理方式比較</h2>
                 <p className="knowledge-lede">面對成熟白疤或手術痕跡，釐清不同方式的定位有助於建立健康客觀的期待：</p>
-                <div className="knowledge-table-wrap">
+                <div className="knowledge-table-wrap" role="region" aria-label="疤痕處理途徑三方客觀比對表" tabIndex={0}>
                   <table className="knowledge-table" aria-label="疤痕處理途徑三方客觀比對表">
                     <thead>
                       <tr>
@@ -274,7 +260,7 @@ export default function ScarsCamouflageKnowledgePage() {
                   <li><strong>不把覆蓋當成醫療治療</strong>：皮膚覆蓋是外觀美化方向的討論，不等同於治療皮膚疾病、傷口或疤痕本身；若有醫療疑慮，應先尋求合格醫療專業意見。</li>
                   <li><strong>依個人狀態說明</strong>：了解部位與肌膚狀態後，再說明可能的方向、限制與注意事項，由您自行決定是否進一步安排。</li>
                 </ul>
-                <div style={{ marginTop: "24px" }}>
+                <div className="knowledge-article-action">
                   <a className="text-link" href={servicePath("skin-camouflage")} data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">進一步了解皮膚覆蓋術服務專頁 <span aria-hidden="true">↗</span></a>
                 </div>
               </section>
@@ -325,6 +311,7 @@ export default function ScarsCamouflageKnowledgePage() {
             </aside>
           </div>
         </article>
+        <KnowledgeContactCta title="想了解自己的疤痕狀態？" description="先用文字描述痕跡的位置、形成時間與目前是否穩定，再由雙和店說明可以討論的外觀方向；若有紅腫、疼痛或傷口，請先諮詢醫師。" />
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>

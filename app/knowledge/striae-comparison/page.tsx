@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
-import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, striaeKnowledgeUrl, stretchMarksKnowledgePath } from "../../site";
+import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgeUrl, stretchMarksKnowledgePath } from "../../site";
 import { servicePath } from "../../services";
+import { KnowledgeContactCta } from "../../knowledge-contact";
+import { SiteNavigation } from "../../site-navigation";
 
 export const dynamic = "force-static";
 
@@ -140,23 +142,7 @@ export default function StriaeComparisonKnowledgePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
-            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation faqHref="#faq" />
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
@@ -205,7 +191,7 @@ export default function StriaeComparisonKnowledgePage() {
                   <strong>紅紋階段（早期）</strong>
                   <p>真皮微血管擴張，局部可見微弱發炎反應，外觀呈現粉紅、紫紅或暗紅色。此時紋路可能觸感微突或平整，若有醫療介入（如染料雷射或皮膚科醫師處方外用藥），通常在此階段效果較具討論空間。</p>
                 </div>
-                <div className="knowledge-callout" style={{ marginTop: "16px" }}>
+                <div className="knowledge-callout knowledge-callout-stack">
                   <strong>白紋階段（成熟期）</strong>
                   <p>經過數月至數年後，局部發炎反應消退，微血管萎縮，真皮膠原纖維與彈性結構退化萎縮，上方表皮層失去深層支撐而變薄，呈現銀白色或淡白色條紋，觸感常有微小凹陷或細微皺褶。</p>
                 </div>
@@ -233,7 +219,7 @@ export default function StriaeComparisonKnowledgePage() {
                   <li><strong>尊重自然膚況</strong>：不強求填平凹凸微結構，而是追求在日常社交光線下的視覺和諧感。</li>
                   <li><strong>非醫療美學邊界</strong>：屬於外觀修飾服務，不宣稱醫療診斷或治療效能，亦不保證讓紋路完全消除。實際適用條件與服務細節需在預約前向雙和店確認。</li>
                 </ul>
-                <div style={{ marginTop: "24px" }}>
+                <div className="knowledge-article-action">
                   <a className="text-link" href="/services/skin-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">認識雙和店的皮膚覆蓋技術 <span aria-hidden="true">↗</span></a>
                 </div>
               </section>
@@ -263,7 +249,7 @@ export default function StriaeComparisonKnowledgePage() {
               <div className="knowledge-aside-card">
                 <span className="knowledge-card-label">雙和店 / 新北中和</span>
                 <h2>想了解自己的紋路型態？</h2>
-                <p>私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照，讓初次溝通更精準。</p>
+                <p>私訊諮詢前可先整理：① 在意部位 ② 出現時間與狀態 ③ 色澤與紋理感受；若方便再提供自然光近照，不便提供也可以先用文字說明。</p>
                 <a className="button button-dark" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="knowledge_aside">雙和店 Facebook 私訊 <span aria-hidden="true">↗</span></a>
                 <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="knowledge_aside">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
               </div>
@@ -283,6 +269,7 @@ export default function StriaeComparisonKnowledgePage() {
             </aside>
           </div>
         </article>
+        <KnowledgeContactCta title="想先了解自己的紋路？" description="先記錄紋路出現的位置、形成時間、顏色與凹凸，再用文字描述狀況；實際方向仍需由雙和店個別了解。" />
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>

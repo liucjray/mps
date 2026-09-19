@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
 import { ContactConsultationGuide } from "../../contact-guide";
+import { SiteNavigation } from "../../site-navigation";
 import { facebookUrl, googleMapsSearchUrl, instagramUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, socialImageUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "../../site";
 import { darkCirclesPath, servicePath, serviceUrl, services, type Service } from "../../services";
 
@@ -125,22 +126,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <a className="skip-link" href="#main-content">跳至主要內容</a>
-      <nav className="site-nav" aria-label="主要導覽">
-        <a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a>
-        <div className="nav-links"><a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="/#faq">常見問題</a></div>
-        <a className="nav-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="navigation">Facebook 私訊</a>
-        <details className="nav-menu">
-          <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
-          <div className="nav-menu-panel">
-            <a href="/#about">品牌理念</a><a href="/#services">服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href="/#faq">常見問題</a>
-            <span className="nav-menu-divider">知識專題</span>
-            <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
-            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-            <a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          </div>
-        </details>
-      </nav>
+      <SiteNavigation />
 
       <main id="main-content" tabIndex={-1}>
         <nav className="service-breadcrumb section-shell" aria-label="麵包屑導覽">
@@ -175,7 +161,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <section className="contact service-detail-contact section-shell" id="contact" aria-labelledby="service-contact-title"><div className="contact-copy"><div className="section-label">新北中和・南勢角站 / 服務雙和與雙北</div><h2 id="service-contact-title">想了解這項服務，<br /><em>可以從這裡開始。</em></h2><p>歡迎透過雙和店 Facebook 私訊、LINE、Instagram 或手機預約，先聊聊你的狀況。</p><address className="contact-details"><span>地址</span>{siteAddressLine}{" "}<a className="contact-map-link" href={googleMapsSearchUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="map" data-ga-cta-location="contact">地圖導航 <span aria-hidden="true">↗</span></a><br /><span>交通</span>{siteTransitInfo}<br /><span>時間</span>{siteBusinessHours}<br /><span>預約</span>手機、LINE、Instagram 或 Facebook 私訊<br /><span>Email</span><a href={`mailto:${siteEmail}`} data-ga-event="contact_click" data-ga-contact-method="email" data-ga-cta-location="contact">{siteEmail}</a></address><ContactConsultationGuide /></div><div className="contact-actions"><a className="contact-button" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="contact"><span>前往雙和店 Facebook<br /><small>了解最新案例與預約方式</small></span></a><a className="contact-secondary" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="contact">LINE 預約諮詢</a><a className="contact-secondary" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="contact">Instagram 追蹤／私訊</a><a className="contact-secondary" href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="contact">電話預約 0981-756-111</a><div className="contact-qr-grid" aria-label="掃描加入聯絡方式"><ContactQr href={lineUrl} image="/qr-line.svg" eyebrow="SCAN TO CONNECT" title="LINE 預約" description="掃描加入好友" kind="line" /><ContactQr href={facebookUrl} image="/qr-facebook.svg" eyebrow="FOLLOW & MESSAGE" title="Facebook" description="查看最新分享" kind="facebook" /><ContactQr href={instagramUrl} image="/qr-instagram.svg" eyebrow="FOLLOW & MESSAGE" title="Instagram" description="查看日常分享" kind="instagram" /></div></div></section>
       </main>
 
-      <footer className="site-footer section-shell"><a className="wordmark" href="/" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
+      <footer className="site-footer section-shell"><a className="wordmark" href="/#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
       <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="mobile_sticky">Facebook 私訊預約</a>
     </>
   );

@@ -184,7 +184,7 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /景新街347號9樓之9（台北富邦銀行樓上）/);
   assert.match(html, /捷運南勢角站/);
   assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
-  assert.match(html, /私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照/);
+  assert.match(html, /私訊諮詢前可先整理：① 在意部位 ② 出現時間與狀態 ③ 色澤與紋理感受；若方便再提供自然光近照，不便提供也可以先用文字說明/);
   assert.match(html, /facebook\.com\/people\/.+61592083747747\//i);
   assert.doesNotMatch(html, /facebook\.com\/mavispureskin1110111/i);
 
@@ -222,6 +222,9 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /<section class="knowledge-article-section"[^>]*aria-labelledby="what-title">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">肥胖紋、生長紋與妊娠紋的成因比對 <span aria-hidden="true">↗<\/span><\/a>/);
   assert.match(html, /<aside class="knowledge-article-aside"[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">肥胖紋與生長紋比較 <span aria-hidden="true">↗<\/span><\/a>/);
+  assert.match(html, /<aside class="knowledge-article-aside"[\s\S]*?<a href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_aside_related">白色疤痕與手術痕跡修飾 <span aria-hidden="true">↗<\/span><\/a>/);
+  assert.match(html, /<section class="knowledge-contact section-shell"[\s\S]*?掃描加入雙和店聯絡方式/);
+  assert.match(html, /<div class="knowledge-table-wrap" role="region" aria-label="常見紋路處理方式客觀比對表" tabindex="0">/);
   assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present in stretch-marks");
@@ -410,7 +413,7 @@ test("renders the striae comparison child knowledge page", async () => {
   assert.match(html, /鄰近捷運南勢角站，建議出發前透過地圖規劃路線/);
   assert.match(html, /maps\/search\/\?api=1&amp;query=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%8D%80%E6%99%AF%E6%96%B0%E8%A1%97347%E8%99%9F/);
   assert.match(html, /景新街347號9樓之9（台北富邦銀行樓上）/);
-  assert.match(html, /私訊諮詢前可先準備：① 在意部位 ② 出現時間與狀態 ③ 自然光清楚近照/);
+  assert.match(html, /私訊諮詢前可先整理：① 在意部位 ② 出現時間與狀態 ③ 色澤與紋理感受；若方便再提供自然光近照，不便提供也可以先用文字說明/);
   assert.match(html, /11:00–19:00（預約制）/);
   assert.match(html, /"@type":"Article"/i);
   assert.match(html, /"@type":"FAQPage"/i);
@@ -439,6 +442,7 @@ test("renders the striae comparison child knowledge page", async () => {
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /data-ga-cta-location="knowledge_aside_related"/i);
   assert.match(html, /data-ga-cta-location="knowledge_aside"/i);
+  assert.match(html, /<section class="knowledge-contact section-shell"[\s\S]*?想先了解自己的紋路？/);
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present in striae-comparison");
   assert.equal(breadcrumb.itemListElement.length, 3);
@@ -547,6 +551,8 @@ test("renders the knowledge hub index page", async () => {
   assert.ok(breadcrumb, "BreadcrumbList should be present in knowledge hub");
   assert.equal(breadcrumb.itemListElement.length, 2);
   assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+  assert.equal((html.match(/id="knowledge-quick-contact-title"/g) ?? []).length, 1);
+  assert.equal((html.match(/id="knowledge-contact-title"/g) ?? []).length, 1);
 });
 
 test("redirects every HTTP hostname to HTTPS", async () => {
