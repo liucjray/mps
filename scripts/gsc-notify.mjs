@@ -71,7 +71,16 @@ async function getAccessToken(credentials) {
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion }),
   }, { label: "OAuth token request" });
-  if (!response.ok) throw new Error(`[GSC] OAuth token request failed with HTTP ${response.status}`);
+  if (!response.ok) {
+    const body = await response.text();
+    let message = "";
+    try {
+      message = JSON.parse(body)?.error_description ?? JSON.parse(body)?.error ?? "";
+    } catch {
+      message = body.trim();
+    }
+    throw new Error(`[GSC] OAuth token request failed with HTTP ${response.status}${message ? `: ${message}` : ""}`);
+  }
   const payload = await response.json();
   if (!payload.access_token) throw new Error("[GSC] OAuth response did not contain an access token");
   return payload.access_token;
@@ -93,7 +102,16 @@ export async function submitSitemap({ credentials, siteUrl = DEFAULT_SITE_URL, s
     method: "PUT",
     headers: { authorization: `Bearer ${token}`, accept: "application/json" },
   }, { label: "Search Console sitemap submit" });
-  if (!response.ok) throw new Error(`[GSC] sitemap submit failed with HTTP ${response.status}`);
+  if (!response.ok) {
+    const body = await response.text();
+    let message = "";
+    try {
+      message = JSON.parse(body)?.error?.message ?? JSON.parse(body)?.error_description ?? "";
+    } catch {
+      message = body.trim();
+    }
+    throw new Error(`[GSC] sitemap submit failed with HTTP ${response.status}${message ? `: ${message}` : ""}`);
+  }
   return { endpoint, status: response.status };
 }
 

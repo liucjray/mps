@@ -112,6 +112,20 @@ test("submits GSC when sitemap metadata changes without changing URLs", () => {
   assert.deepEqual(result.reasons, ["sitemap metadata changed"]);
 });
 
+test("can force a GSC sitemap submit for a recovery run", () => {
+  const result = classifyChanges({
+    base: "before",
+    head: "after",
+    files: ["scripts/gsc-notify.mjs"],
+    diffText: "",
+    previousSitemap: ["https://ycaura.com"],
+    currentSitemap: ["https://ycaura.com"],
+    forceGscSitemapSubmit: true,
+  });
+  assert.equal(result.needsGscSitemapSubmit, true);
+  assert.deepEqual(result.reasons, ["manual GSC submit requested"]);
+});
+
 test("validates canonical, heading, and JSON-LD output", () => {
   const html = `<!doctype html><html><head><title>測試頁面</title><meta name="description" content="測試描述" /><meta property="og:title" content="測試頁面" /><meta property="og:description" content="測試描述" /><meta property="og:url" content="https://ycaura.com/knowledge/test" /><link rel="canonical" href="https://ycaura.com/knowledge/test" /></head><body><h1>測試頁面</h1><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","LocalBusiness"]},{"@type":"WebPage","url":"https://ycaura.com/knowledge/test"},{"@type":"Article"}]}</script></body></html>`;
   assert.equal(extractCanonical(html), "https://ycaura.com/knowledge/test");

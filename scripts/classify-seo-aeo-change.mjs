@@ -104,7 +104,7 @@ function isAnalyticsOnlyLayoutDiff(diffText) {
   return changedLines.length > 0 && changedLines.every((line) => /google-analytics|NEXT_PUBLIC_GA|gtag/i.test(line));
 }
 
-export function classifyChanges({ base, head, files, diffText, diffTextByFile = {}, previousSitemap, currentSitemap, previousSitemapContent = "", currentSitemapContent = "" }) {
+export function classifyChanges({ base, head, files, diffText, diffTextByFile = {}, previousSitemap, currentSitemap, previousSitemapContent = "", currentSitemapContent = "", forceGscSitemapSubmit = false }) {
   const addedUrls = currentSitemap.filter((url) => !previousSitemap.includes(url));
   const removedUrls = previousSitemap.filter((url) => !currentSitemap.includes(url));
   const sitemapChanged = files.includes("public/sitemap.xml");
@@ -137,6 +137,7 @@ export function classifyChanges({ base, head, files, diffText, diffTextByFile = 
   if (sitemapUrlsChanged) reasons.push("sitemap URL set changed");
   if (sitemapMetadataChanged) reasons.push("sitemap metadata changed");
   if (meaningfulPageChange && !sitemapUrlsChanged && !sitemapMetadataChanged) reasons.push("public SEO/AEO source changed");
+  if (forceGscSitemapSubmit) reasons.push("manual GSC submit requested");
 
   return {
     base,
@@ -160,7 +161,18 @@ export function classifyFromGit({ requestedBase, head = "HEAD" } = {}) {
   const currentSitemapContent = readGitFile(head, "public/sitemap.xml") || readFileSync(resolve(rootDir, "public/sitemap.xml"), "utf8");
   const previousSitemap = extractSitemapUrls(previousSitemapContent);
   const currentSitemap = extractSitemapUrls(currentSitemapContent);
-  return classifyChanges({ base, head, files, diffText, diffTextByFile, previousSitemap, currentSitemap, previousSitemapContent, currentSitemapContent });
+  return classifyChanges({
+    base,
+    head,
+    files,
+    diffText,
+    diffTextByFile,
+    previousSitemap,
+    currentSitemap,
+    previousSitemapContent,
+    currentSitemapContent,
+    forceGscSitemapSubmit: process.env.GSC_FORCE_SUBMIT === "true",
+  });
 }
 
 function writeGithubOutputs(result) {

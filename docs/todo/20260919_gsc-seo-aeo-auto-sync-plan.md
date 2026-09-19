@@ -201,6 +201,8 @@ GSC API 失敗時不應回滾已成功的 Cloudflare 部署；應在 Actions Sum
 4. `Submit sitemap to Google Search Console` 顯示執行，而不是 `-`；報告 artifact 的 `gsc-report.json` 應為 `status: "submitted"`。
 5. GitHub Actions Summary 顯示 `GSC sitemap: submitted`。這代表 API 已接受 sitemap submit，不代表頁面立即收錄；Google 的抓取與收錄仍由 Google 排程及品質系統決定。
 
+本次驗證 commit `2031894` 的實際結果：第 1～3 項通過，GSC step 確實執行，但 Google API 回傳 HTTP 403，因此 artifact 的 `gsc-report.json` 為 `status: "failed"`，尚未算完成授權驗證。完成授權修正後，可在 GitHub Actions 的 `Run workflow` 將 `force_gsc` 設為 true 重跑，不需要改動公開頁面；也可使用 `gh workflow run deploy.yml --ref main -f force_gsc=true`。
+
 若 GSC step 顯示 `skipped`，先檢查 classifier 輸出與 `GSC_CREDENTIALS` Secret；若顯示 403，檢查 Service Account 是否已被加入正確的 `https://ycaura.com/` URL-prefix property；若顯示 401，檢查 Secret 內 JSON 是否完整。API 的 429／5xx 會依腳本設定重試，結果會保留在 Summary 與 artifact。
 
 這個驗證頁不應在測試後刪除；刪除會再觸發 sitemap URL 移除同步，且不能把 GSC submit 誤解為立即索引測試。
