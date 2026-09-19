@@ -32,7 +32,7 @@
 
 - `.github/workflows/deploy.yml` 已在 push `main` 後執行 Cloudflare Worker build、部署與公開首頁驗證。
 - `public/robots.txt` 已宣告 `https://ycaura.com/sitemap.xml`。
-- `public/sitemap.xml` 是目前 10 個 canonical URL 的靜態 sitemap。
+- `public/sitemap.xml` 是目前 11 個 canonical URL 的靜態 sitemap（含公開自動同步驗證頁）。
 - `scripts/submit-indexnow.mjs` 已在部署後推送 sitemap 內的 URL 到 IndexNow。
 - 最近一次部署已成功；IndexNow 已成功送出 10 個 URL。
 
@@ -186,6 +186,24 @@ GSC API 失敗時不應回滾已成功的 Cloudflare 部署；應在 Actions Sum
 | GSC 403／429／5xx | Cloudflare 部署保留成功；GSC step 顯示告警與重試結果 |
 | 缺少 `GSC_CREDENTIALS` 或 OIDC 設定 | 部署不被 GSC 阻斷，但報告標為未啟用 |
 | 一般服務頁想用 Indexing API 強制收錄 | 禁止；改走 sitemap 與必要時人工 URL Inspection |
+
+### 8.1 使用公開驗證頁確認自動 GSC submit
+
+公開驗證頁：`https://ycaura.com/knowledge/gsc-automation-check`
+
+這個頁面是專門用來驗證「新增公開 URL → 部署 → 條件式提交 GSC sitemap」的保留頁面，不是服務頁，也不承諾 Google 收錄。它已加入 `public/sitemap.xml`、`public/llms.txt` 與 `public/llms-full.txt`，因此新增或修改它會被分類器視為搜尋相關變更。
+
+驗證時應觀察同一次 GitHub Actions run：
+
+1. `Classify SEO/AEO change` 的輸出包含 `sitemap URL set changed`，且 `needs_gsc_sitemap_submit=true`。
+2. `Validate built SEO/AEO output before deploy` 通過，確認新頁面在部署前已具備 200、canonical、metadata 與 JSON-LD。
+3. `Validate public SEO/AEO output` 通過，確認 Cloudflare 上的新頁面已公開。
+4. `Submit sitemap to Google Search Console` 顯示執行，而不是 `-`；報告 artifact 的 `gsc-report.json` 應為 `status: "submitted"`。
+5. GitHub Actions Summary 顯示 `GSC sitemap: submitted`。這代表 API 已接受 sitemap submit，不代表頁面立即收錄；Google 的抓取與收錄仍由 Google 排程及品質系統決定。
+
+若 GSC step 顯示 `skipped`，先檢查 classifier 輸出與 `GSC_CREDENTIALS` Secret；若顯示 403，檢查 Service Account 是否已被加入正確的 `https://ycaura.com/` URL-prefix property；若顯示 401，檢查 Secret 內 JSON 是否完整。API 的 429／5xx 會依腳本設定重試，結果會保留在 Summary 與 artifact。
+
+這個驗證頁不應在測試後刪除；刪除會再觸發 sitemap URL 移除同步，且不能把 GSC submit 誤解為立即索引測試。
 
 ## 9. 分階段實作建議
 

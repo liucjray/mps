@@ -316,6 +316,24 @@ test("renders independently indexable service pages", async () => {
   }
 });
 
+test("renders the public GSC automation verification page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("gsc-check-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/knowledge/gsc-automation-check", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  assert.match(html, /網站自動同步驗證頁/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/gsc-automation-check"\/>/i);
+  assert.match(html, /"@type":"Article"/i);
+  assert.match(html, /"@type":"BreadcrumbList"/i);
+  assert.match(html, /sitemaps\.submit/);
+});
+
 test("renders the dark circles child knowledge page", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("dark-circles-test", `${process.pid}-${Date.now()}`);
@@ -625,6 +643,7 @@ test("ships crawler and answer-engine support files", async () => {
   }
   assert.match(llms, /# 新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/gsc-automation-check<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/dark-circles<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/striae-comparison<\/loc>/);
@@ -633,6 +652,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/dark-circles/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/striae-comparison/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
+  assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/gsc-automation-check/);
   // 每個 <loc> 都必須有 <lastmod>，避免新增頁面時漏填。
   assert.equal(
     (sitemap.match(/<loc>https:\/\/ycaura\.com[^<]*<\/loc>/g) ?? []).length,
@@ -670,7 +690,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.equal(indexNowKeyFile.trim(), indexNowKey);
   const { extractSitemapUrls, decodeXmlEntities, chunkArray } = await import("../scripts/submit-indexnow.mjs");
   const extractedUrls = extractSitemapUrls(sitemap);
-  assert.equal(extractedUrls.length, 10);
+  assert.equal(extractedUrls.length, 11);
   assert.ok(extractedUrls.includes("https://ycaura.com"));
   assert.ok(extractedUrls.includes("https://ycaura.com/services/herbal-stretch-care"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/striae-comparison"));
