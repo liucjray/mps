@@ -1,7 +1,7 @@
 # Push 後 GSC／SEO／AEO 自動同步流程規劃
 
 建立日期：2026-09-19  
-狀態：Phase 1 實作完成，已通過本地驗證與獨立 review；待 merge 到 `main` 與一次性授權設定  
+狀態：Phase 1 已 merge 到 `main`，已完成一次性授權與自動 GSC submit 實際驗證
 目標網站：<https://ycaura.com/>  
 相關文件：`docs/todo/20260904_gsc-automation-workflow.md`、`docs/todo/20260904_indexnow-automation.md`
 
@@ -34,7 +34,7 @@
 - `public/robots.txt` 已宣告 `https://ycaura.com/sitemap.xml`。
 - `public/sitemap.xml` 是目前 11 個 canonical URL 的靜態 sitemap（含公開自動同步驗證頁）。
 - `scripts/submit-indexnow.mjs` 已在部署後推送 sitemap 內的 URL 到 IndexNow。
-- 最近一次部署已成功；IndexNow 已成功送出 10 個 URL。
+- 歷史部署曾成功送出 10 個 URL；目前 sitemap 有 11 個 canonical URL，最新驗證 run 的 IndexNow 已成功送出 11 個 URL。
 
 ### 本次已加入的自動化初版
 
@@ -191,17 +191,28 @@ GSC API 失敗時不應回滾已成功的 Cloudflare 部署；應在 Actions Sum
 
 公開驗證頁：`https://ycaura.com/knowledge/gsc-automation-check`
 
-這個頁面是專門用來驗證「新增公開 URL → 部署 → 條件式提交 GSC sitemap」的保留頁面，不是服務頁，也不承諾 Google 收錄。它已加入 `public/sitemap.xml`、`public/llms.txt` 與 `public/llms-full.txt`，因此新增或修改它會被分類器視為搜尋相關變更。
+這個頁面是專門用來驗證「公開 URL／內容或 sitemap metadata 變更 → 部署 → 條件式提交 GSC sitemap」的保留頁面，不是服務頁，也不承諾 Google 收錄。它已加入 `public/sitemap.xml`、`public/llms.txt` 與 `public/llms-full.txt`，因此新增或修改它會被分類器視為搜尋相關變更。
 
 驗證時應觀察同一次 GitHub Actions run：
 
-1. `Classify SEO/AEO change` 的輸出包含 `sitemap URL set changed`，且 `needs_gsc_sitemap_submit=true`。
+1. `Classify SEO/AEO change` 的輸出包含 `sitemap URL set changed`、`sitemap metadata changed` 或 `public SEO/AEO source changed` 其中之一，且 `needs_gsc_sitemap_submit=true`。
 2. `Validate built SEO/AEO output before deploy` 通過，確認新頁面在部署前已具備 200、canonical、metadata 與 JSON-LD。
 3. `Validate public SEO/AEO output` 通過，確認 Cloudflare 上的新頁面已公開。
 4. `Submit sitemap to Google Search Console` 顯示執行，而不是 `-`；報告 artifact 的 `gsc-report.json` 應為 `status: "submitted"`。
 5. GitHub Actions Summary 顯示 `GSC sitemap: submitted`。這代表 API 已接受 sitemap submit，不代表頁面立即收錄；Google 的抓取與收錄仍由 Google 排程及品質系統決定。
 
-首次驗證 commit `2031894` 的結果是 GSC API HTTP 403，原因為 workflow 使用 URL-prefix 格式呼叫 Domain property。修正為 `sc-domain:ycaura.com` 後，commit `8a362b8` 已完成不跳過的實際驗證：分類器以 `sitemap metadata changed` 判定 `needsGscSitemapSubmit=true`，GSC step 執行，artifact `gsc-report.json` 為 `status: "submitted"`、HTTP 204。之後若授權需要重試，可在 GitHub Actions 的 `Run workflow` 將 `force_gsc` 設為 true，或使用 `gh workflow run deploy.yml --ref main -f force_gsc=true`。
+首次驗證 commit `2031894` 的結果是 GSC API HTTP 403，原因為 workflow 使用 URL-prefix 格式呼叫 Domain property。修正為 `sc-domain:ycaura.com` 後，commit `8a362b8` 已完成不跳過的實際驗證：分類器以 `sitemap metadata changed` 判定 `needsGscSitemapSubmit=true`，GSC step 執行，artifact `gsc-report.json` 為 `status: "submitted"`、HTTP 204。之後若授權需要重試，可在 GitHub Actions 的 `Run workflow` 將 `force_gsc` 設為 true，或使用 `gh workflow run deploy.yml --ref main -f force_gsc=true`；後者需要 GitHub token 具備 Actions write 權限。
+
+### 8.2 Search Console 網頁版驗證
+
+自動化成功後，可在 Search Console 的 `ycaura.com` Domain property 開啟「Sitemap」，查看 `https://ycaura.com/sitemap.xml` 的詳細資料：
+
+- `Submitted`：代表 Search Console 已收到報告提交。
+- `Last read`：代表 Google 最近一次實際讀取 sitemap 的時間，可能晚於 API 提交時間。
+- `Status`：應顯示 `Sitemap 已順利處理完畢` 或英文介面的 `Success`。
+- `Discovered pages`：顯示 Google 從 sitemap 探索到的網頁數量；本次 2026-09-20 驗證顯示 11。
+
+網頁版的 `Last read` 與 `Success` 可以證明 Google 已讀取並處理 sitemap；要確認「是 push 後自動觸發」，仍需與同一個 GitHub Actions run 的 classifier 輸出、GSC step 成功狀態、HTTP 204 與 `gsc-report.json` 一起對照。這些訊號都不等於所有頁面已立即收錄；單頁收錄狀態需另用 URL Inspection 查看。
 
 若 GSC step 顯示 `skipped`，先檢查 classifier 輸出與 `GSC_CREDENTIALS` Secret；若顯示 403，檢查 Service Account 是否已被加入正確的 `ycaura.com` Domain property，且 workflow 使用 `sc-domain:ycaura.com`；若顯示 401，檢查 Secret 內 JSON 是否完整。API 的 429／5xx 會依腳本設定重試，結果會保留在 Summary 與 artifact。
 

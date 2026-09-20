@@ -8,6 +8,9 @@
 > [!note] 文件狀態
 > 本文件是早期設計草案。最新的條件式 GSC、SEO／AEO 自動同步方案與目前實作對照，請以 [`20260919_gsc-seo-aeo-auto-sync-plan.md`](./20260919_gsc-seo-aeo-auto-sync-plan.md) 為準。
 
+> [!warning] 目前設定
+> 目前 workflow 採用條件式 GSC submit，不是每次部署都提交；Search Console 使用 `ycaura.com` Domain property，API `siteUrl` 使用 `sc-domain:ycaura.com`。本文件的流程示意與端點僅供歷史參考。
+
 ---
 
 ## 1. 架構與設計理念
@@ -102,7 +105,7 @@ flowchart TD
    - 使用 `node:crypto.createSign("RSA-SHA256")` 針對 Header + Payload 進行私鑰簽署。
    - 向 `https://oauth2.googleapis.com/token` 交換 Access Token。
 5. **呼叫 Search Console API**：
-   - 端點：`PUT https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fycaura.com%2F/sitemaps/https%3A%2F%2Fycaura.com%2Fsitemap.xml`
+   - 目前端點：`PUT https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Aycaura.com/sitemaps/https%3A%2F%2Fycaura.com%2Fsitemap.xml`
    - Header: `Authorization: Bearer <TOKEN>`
    - 重試機制：針對 HTTP 429 或 5xx 實施指數退避重試（最多 2 次，每次間隔 2 秒、4 秒）。
 6. **日誌防護**：
