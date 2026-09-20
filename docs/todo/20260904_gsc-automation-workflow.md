@@ -63,8 +63,8 @@ flowchart TD
 ### 步驟 2：在 Google Search Console 授權該服務帳戶（約 1 分鐘）
 1. 開啟 [Google Search Console](https://search.google.com/search-console)。
 2. 於左上角選取目標資源：
-   - **重要規範**：請務必選取或建立 **網址前置字元（URL-prefix）資源** `https://ycaura.com/`（帶斜線）。
-   - *注意*：若僅在網域型資源（`sc-domain:ycaura.com`）授權，API siteUrl 識別碼不同將導致 403 拒絕存取。
+   - **重要規範**：本專案使用 **網域型（Domain）資源** `ycaura.com`。
+   - *注意*：Search Console API 的 `siteUrl` 必須使用 `sc-domain:ycaura.com`；不要使用 `https://ycaura.com/` URL-prefix 格式。
 3. 點擊左下角「**設定**」>「**使用者與權限**」。
 4. 點擊右上角「**新增使用者**」：
    - 電子郵件地址：貼上剛才的服務帳戶 Email。

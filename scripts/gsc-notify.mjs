@@ -5,7 +5,7 @@ import { writeFileSync } from "node:fs";
 
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const SEARCH_CONSOLE_SCOPE = "https://www.googleapis.com/auth/webmasters";
-const DEFAULT_SITE_URL = "https://ycaura.com/";
+const DEFAULT_SITE_URL = "sc-domain:ycaura.com";
 const DEFAULT_SITEMAP_URL = "https://ycaura.com/sitemap.xml";
 
 function writeReport(report) {

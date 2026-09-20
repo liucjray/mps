@@ -103,7 +103,7 @@ jobs:
         timeout-minutes: 2
         env:
           GSC_CREDENTIALS: ${{ secrets.GSC_CREDENTIALS }}
-          GSC_SITE_URL: https://ycaura.com/
+          GSC_SITE_URL: sc-domain:ycaura.com
           GSC_SITEMAP_URL: https://ycaura.com/sitemap.xml
           GSC_REPORT_PATH: gsc-report.json
         run: npm run submit:gsc

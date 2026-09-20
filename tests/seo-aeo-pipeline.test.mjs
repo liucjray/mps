@@ -203,8 +203,8 @@ test("creates a verifiable Google service-account JWT", () => {
 
 test("builds the Search Console sitemap submit endpoint", () => {
   assert.equal(
-    buildSitemapEndpoint("https://ycaura.com/", "https://ycaura.com/sitemap.xml"),
-    "https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fycaura.com%2F/sitemaps/https%3A%2F%2Fycaura.com%2Fsitemap.xml",
+    buildSitemapEndpoint("sc-domain:ycaura.com", "https://ycaura.com/sitemap.xml"),
+    "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Aycaura.com/sitemaps/https%3A%2F%2Fycaura.com%2Fsitemap.xml",
   );
 });
 
