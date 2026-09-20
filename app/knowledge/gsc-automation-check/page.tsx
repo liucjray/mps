@@ -9,7 +9,8 @@ export const dynamic = "force-static";
 const pageUrl = `${siteUrl}/knowledge/gsc-automation-check`;
 const pageTitle = "網站自動同步驗證頁｜GSC／SEO／AEO";
 const pageDescription = "這是新北雙和店用來驗證部署後 sitemap、GSC、SEO 與 AEO 自動同步流程的公開技術頁面，不代表服務或索引保證。";
-const updatedAt = "2026-09-19";
+const publishedAt = "2026-09-19";
+const updatedAt = "2026-09-20";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -60,7 +61,7 @@ const structuredData = {
       "@id": `${pageUrl}#article`,
       headline: pageTitle,
       description: pageDescription,
-      datePublished: updatedAt,
+      datePublished: publishedAt,
       dateModified: updatedAt,
       inLanguage: "zh-Hant-TW",
       author: { "@id": organizationId },
@@ -119,6 +120,7 @@ export default function GscAutomationCheckPage() {
                 <div className="section-label">01 / 驗證目的</div>
                 <h2 id="purpose-title">為什麼需要一個公開測試頁？</h2>
                 <p className="knowledge-lede">只有實際新增一個可抓取、可索引、列在 sitemap 的公開 URL，才能驗證部署流程是否真的呼叫 Google Search Console API，而不是只確認 GitHub Actions 顯示成功。</p>
+                <p>本次驗證版本：2026-09-20，預期 workflow 會因公開內容變更自動執行 GSC sitemap submit。</p>
                 <p>這個頁面會留在網站上，讓未來可以持續檢查自動化結果；它不承載服務價格、資格、案例或醫療宣稱。</p>
               </section>
 
@@ -128,7 +130,7 @@ export default function GscAutomationCheckPage() {
                 <ol className="knowledge-check-list">
                   <li><strong>Build 與 SEO/AEO gate</strong>：檢查頁面輸出、sitemap、robots、llms、canonical 與結構化資料。</li>
                   <li><strong>部署公開頁面</strong>：Cloudflare Worker 部署完成後，再驗證正式網址。</li>
-                  <li><strong>條件式 GSC submit</strong>：因為新增 sitemap URL，分類器會觸發 `sitemaps.submit`。</li>
+                  <li><strong>條件式 GSC submit</strong>：因為公開頁面內容與 sitemap `lastmod` 變更，分類器會觸發 `sitemaps.submit`。</li>
                   <li><strong>留下報告</strong>：GitHub Actions Summary 與 artifact 會記錄 GSC、IndexNow 與 SEO/AEO 結果。</li>
                 </ol>
               </section>

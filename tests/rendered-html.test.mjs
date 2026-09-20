@@ -328,6 +328,8 @@ test("renders the public GSC automation verification page", async () => {
   const html = await response.text();
   assert.equal(response.status, 200);
   assert.match(html, /網站自動同步驗證頁/);
+  assert.match(html, /最後更新：[\s\S]*2026-09-20/);
+  assert.match(html, /本次驗證版本：2026-09-20/);
   assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/gsc-automation-check"\/>/i);
   assert.match(html, /"@type":"Article"/i);
   assert.match(html, /"@type":"BreadcrumbList"/i);
@@ -665,8 +667,8 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
   assert.match(llmsFull, /肥胖紋與生長紋/);
   assert.match(llmsFull, /0981-756-111/);
-  assert.match(llmsFull, /最後更新：2026-09-19/);
-  assert.match(llms, /最後更新：2026-09-19/);
+  assert.match(llmsFull, /最後更新：2026-09-20/);
+  assert.match(llms, /最後更新：2026-09-20/);
   assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
   assert.match(llmsFull, /紋路處理方式客觀比對/);
   assert.match(llmsFull, /墨菲斯微針電波（Morpheus8）/);
