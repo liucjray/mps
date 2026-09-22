@@ -9,6 +9,28 @@
 
 ## 執行紀錄
 
+## 2026-09-22（三）skill 完整流程實測：Step 1-7 全部跑完，第一個真正落地的優化
+
+- 觸發方式：互動 session，延續同日前兩輪 dry run；這次透過 `Skill` 工具正式呼叫 `/seo-keyword-audit`（帶聚焦參數），走完整份 SKILL.md 全部七步
+- 範圍：聚焦「GSC 近 28 天已有曝光的長尾字詞」（妊娠紋原因、板橋妊娠紋、眼窩凹陷黑眼圈 常見問題等）
+- 排名查核結果（GSC Search Analytics，近 28 天，沿用同日稍早已驗證的 `.env.gsc`）：
+  - `眼窩凹陷黑眼圈 常見問題` — 平均排名 56.1，曝光 34，點擊 0
+  - `妊娠紋原因` — 平均排名 61.8，曝光 15，點擊 0
+  - `板橋妊娠紋` — 平均排名 57.7，曝光 3，點擊 0
+- 覆蓋率缺口：`/knowledge/dark-circles`（`docs/todo/20260919_dark-circles-enhancement.md` 已於 commit `d108e80` 實作）內容已涵蓋「結構型黑眼圈」概念，但用詞是「眼眶骨骼凹陷」，跟使用者實際搜尋的「眼窩凹陷」沒對齊；`public/llms-full.txt` 早就用「眼窩凹陷」描述同一概念，屬於既有已確認用詞，不是新事實
+- 優化方案：比對表結構型描述加「眼窩」用詞、新增一則解釋「眼窩凹陷黑眼圈」口語說法的 FAQ、Article keywords 加一項，dateModified／sitemap lastmod 同步更新
+- **第一步前置檢查**（本次驗證新補的規則）：已搜尋 `docs/blocked/`／`docs/todo/`，確認 `docs/blocked/20260903_seo-aeo-audit.md`（GBP／geo 相關）與本方案無關，沒有踩到既有阻擋項目
+- agy 自我確認：同意執行——低風險、可驗證、沒有新增醫療宣稱
+- codex 方案第二意見：有條件同意——同意風險判斷，但指出「眼窩凹陷」與「眼眶骨骼凹陷」不完全同義（有些過度等同），建議用更穩妥的措辭，並建議直接加一則 FAQ 承接「常見問題」查詢意圖比單靠 JSON-LD keyword 更有效益。完整輸出見 `<scratchpad>/seo-plan-review-2.last.md`
+- 後續處置：**通過，執行實作**（採納 codex 的措辭建議，用「眼眶骨骼或眼窩區域凹陷」而非直接畫等號）
+- 實作摘要：開 worktree `wt1110-dark-circles-orbital-kw`（port 1110），改 `app/knowledge/dark-circles/page.tsx`、`public/sitemap.xml`、`tests/rendered-html.test.mjs` 共 3 個檔案；`npm run lint`／`npm test` 全數通過（35/35）
+- codex 程式碼複審：**跑了三輪才乾淨**——
+  - 第一輪：P2×2（新 FAQ 答案未重申安全邊界／非診斷限制；Obsidian 黑眼圈知識筆記未同步）→ 已修正 FAQ 答案加入安全與非診斷限制、同步 vault 筆記
+  - 第二輪：P1×1（「眼窩凹陷」臨床語境下也可能指真正的眼窩／眼球退縮等健康變化，需排除新近／單側／進展性情形，否則可能把需要就醫的變化誤判成外觀成因）→ 已在 FAQ 答案加入排除條件，優先建議眼科/皮膚科評估
+  - 第三輪：乾淨，無 P1/P2（`npm test` 在 codex 的 read-only sandbox 裡因 EROFS 跑不了 build，非本次變更造成，已自行在一般環境驗證 35/35 通過）
+- Commit / 分支：`c822b91` on `wt1110-dark-circles-orbital-kw`；**已 push**（`git push -u origin wt1110-dark-circles-orbital-kw`），尚未開 PR／merge 到 main，等使用者決定
+- 備註／待確認連結：Obsidian `03-知識/黑眼圈知識.md` 已同步更新（結構型描述、更新日期、2026-09-22 更新紀錄段落）。這是這個 skill 第一次真正跑完 Step 5-7（worktree 建立、codex-review 對程式碼 diff 複審、commit、push），驗證了機制本身可行；同時也證明了 Step 6 的「跑到乾淨為止」迴圈是必要的——兩輪 codex 都抓到不是我自己會想到的真實問題（尤其第二輪的醫療邊界疑慮），如果只跑一輪就直接 commit 會帶著問題上線
+
 ## 2026-09-22（續）skill 驗證性 dry run 第二輪：Step 4-7 實測
 
 - 觸發方式：互動 session，延續同日稍早的 dry run，這次要把 Step 4（雙重確認）以後也實際跑一次，不再只是紙上作業
