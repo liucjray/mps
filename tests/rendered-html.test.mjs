@@ -386,9 +386,12 @@ test("renders the dark circles child knowledge page", async () => {
     closes: "19:00",
   });
   assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-30");
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-19");
-  assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 6);
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-22");
+  assert.ok(graph.find((entity) => entity["@type"] === "Article").keywords.includes("眼窩凹陷黑眼圈"));
+  assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 7);
   assert.equal("openingHoursSpecification" in org, false);
+  assert.match(html, /眼眶骨骼或眼窩區域凹陷、淚溝凹溝、眼袋脂肪凸出造成之立體落差與光影投射/);
+  assert.match(html, /口語常說的「眼窩凹陷黑眼圈」是什麼意思？/);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/27398005\//i);
   assert.match(html, /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34078228\//i);
   assert.match(html, /https:\/\/acaai\.org\/allergies\/allergic-conditions\/eye-allergy\//i);
