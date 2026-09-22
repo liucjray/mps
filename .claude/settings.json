@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "LAST_COMMIT_TS=$(git log -1 --format=%ct -- docs/seo/keyword-database.md 2>/dev/null); if [ -z \"$LAST_COMMIT_TS\" ]; then echo '{}'; exit 0; fi; NOW=$(date +%s); AGE_DAYS=$(( (NOW - LAST_COMMIT_TS) / 86400 )); if [ \"$AGE_DAYS\" -ge 7 ]; then jq -n --arg days \"$AGE_DAYS\" '{hookSpecificOutput:{hookEventName:\"SessionStart\",additionalContext:(\"docs/seo/keyword-database.md 距離上次更新已經 \" + $days + \" 天，session 一開始就主動問使用者要不要跑一次 GSC 查核更新這份關鍵字資料庫，不要等使用者自己想到。\")}}'; else echo '{}'; fi",
+            "statusMessage": "檢查關鍵字資料庫是否過期..."
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
