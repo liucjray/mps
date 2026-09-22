@@ -70,6 +70,11 @@ export default async function Home() {
 - `npm test`: build, validate, and verify the rendered development-preview metadata
 - `npm run validate:artifact`: recheck an existing artifact's manifest and ESM `default.fetch` export
 - `npm run db:generate`: generate Drizzle migrations after schema changes
+- `npm run lint`: run ESLint across the repository
+- `npm run validate:seo-aeo`: check the deployed site's sitemap, robots, llms, canonical, and JSON-LD
+- `npm run submit:indexnow`: push sitemap URLs to IndexNow after a deploy
+- `npm run submit:gsc`: submit the sitemap to Google Search Console (requires `GSC_CREDENTIALS`)
+- `npm run query:gsc`: query Google Search Console Search Analytics for real ranking/impression data (requires `GSC_CREDENTIALS`, see below)
 
 ### GA4 setup
 

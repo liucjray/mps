@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "STAGED=$(git diff --cached --name-only 2>/dev/null); NEEDS_CHECK=0; echo \"$STAGED\" | grep -qE '(^package\\.json$|\\.env\\..*\\.example$|^scripts/)' && NEEDS_CHECK=1; echo \"$STAGED\" | grep -qE '^README\\.md$' && README_STAGED=1 || README_STAGED=0; if [ \"$NEEDS_CHECK\" = \"1\" ] && [ \"$README_STAGED\" = \"0\" ]; then jq -n '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"ask\",permissionDecisionReason:\"這次 commit 觸及 package.json/scripts/.env.*.example，先確認 README.md（例如 Diagnostic Commands 清單）需不需要同步更新，確認後再繼續。\"}}'; else echo '{}'; fi",
+            "statusMessage": "檢查這次 commit 有沒有需要同步更新 README.md..."
+          }
+        ]
+      }
+    ]
+  }
+}
