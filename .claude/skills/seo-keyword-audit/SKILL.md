@@ -112,14 +112,17 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
 
 沿用 `AGENTS.md`「Worktree & Branch Naming」與「Dual-Model Development & Quality Gate」的既有規則,這裡只列這個流程特別要注意的點:
 
-1. 開一個新 worktree + 分支,命名 `wt{port}-seo-<簡短slug>`,`{port}` 選一個未被佔用的可用 port(`git worktree list` 先確認目前用了哪些)。**不要直接改 main worktree。**
-2. 依方案調整內容(`app/site.ts`、`app/services.ts`、knowledge 頁面、metadata、JSON-LD 等),嚴守第 4.1 點列的法規邊界——這一步只做「已經雙重確認過」的方案內容,不要在實作途中臨時加碼新宣稱。
+1. 開一個新 worktree + 分支,命名 `wt{port}-seo-<簡短slug>`,`{port}` 選一個未被佔用的可用 port(`git worktree list` 先確認目前用了哪些)。**不要直接改 main worktree。** 新開的 worktree **沒有 `node_modules`**,第一次跑 `npm run lint`／`npm test` 前要先在該 worktree 裡跑一次 `npm run install:ci`（2026-09-22 實測：沒跑會直接 `eslint: not found`），不是每次都要跑,只有第一次進這個新 worktree 時需要。
+2. 依方案調整內容(`app/site.ts`、`app/services.ts`、knowledge 頁面、metadata、JSON-LD 等),嚴守第 4.1 點列的法規邊界——這一步只做「已經雙重確認過」的方案內容,不要在實作途中臨時加碼新宣稱。改動時額外注意兩點（2026-09-22 實測，codex-review 兩輪才抓乾淨,屬於這類任務容易漏掉的地方,先自己檢查可以省一輪來回）:
+   - **把使用者搜尋詞對應到既有內容分類前,先想一下這個詞在臨床語境下有沒有可能指涉範圍更廣、更嚴重的病徵**（不只是這個頁面在講的外觀成因）。如果有,實作時要加排除條件（新近出現／單側／持續惡化／伴隨其他症狀等）導向專科就醫,不能逕自把兩者畫等號。
+   - **新增或修改的 FAQ／AEO 問答要自成一體**：FAQPage 的每一題都可能被搜尋引擎或 AI 答案引擎獨立擷取、獨立呈現給使用者,不能預期使用者一定會看到頁面其他段落的安全提示或免責聲明。必要的安全邊界（例如「紅腫發炎時不要做這個自我觀察」）與非診斷限制,要直接寫進這一題的答案本身,不要只放在頁面別處。
+   - 如果這個頁面在 Obsidian vault 有對應的共用筆記（例如 `Projects/mps/03-知識/`）,實作這一步就同步更新,不要等 Step 6 的 codex-review 抓到「筆記沒同步」才回頭補——`AGENTS.md`「Shared Memory and Multi-Agent Handoff」一節本來就要求同一個任務內同步,這裡只是提醒別漏掉。
 3. 涉及可驗證的 render 內容時同步更新 `tests/rendered-html.test.mjs`。
 4. 跑 `npm run lint` 與 `npm test`,全部通過才進第 6 步。
 
 ## 6. 實作後再跟 codex review 一次
 
-呼叫既有的 `codex-review` skill,對這個 worktree 裡「未 commit 的變更」做一次一般程式碼 review(`$ARGUMENTS` 可以帶重點,例如「SEO/AEO 準確性與法規邊界」)。若有 P1/P2 問題,修正後重新跑 `npm run lint` / `npm test`,再重新 review,直到沒有阻擋性問題,比照 `AGENTS.md` 的 Remediation & Verification Loop。把最終結論(通過 / 已修正)寫進台帳「codex 程式碼複審」欄。
+呼叫既有的 `codex-review` skill,對這個 worktree 裡「未 commit 的變更」做一次一般程式碼 review(`$ARGUMENTS` 可以帶重點,例如「SEO/AEO 準確性與法規邊界」)。若有 P1/P2 問題,修正後重新跑 `npm run lint` / `npm test`,再重新 review,直到沒有阻擋性問題,比照 `AGENTS.md` 的 Remediation & Verification Loop。**2026-09-22 實測：真的會需要跑不只一輪**（第一輪抓到 FAQ 答案安全邊界與 vault 筆記未同步兩個 P2,修完後第二輪又抓到一個更關鍵的醫療邊界 P1,第三輪才乾淨）——不要因為第一輪有 P1/P2 就懷疑方案本身有問題而中止,這是流程設計上預期會發生的事,照樣修完再送第二輪,兩輪都乾淨才算過。把每一輪抓到什麼、怎麼修的簡要記錄寫進台帳「codex 程式碼複審」欄,不要只寫最後一輪的「通過」。
 
 ## 7. Commit & Push
 
