@@ -4,6 +4,7 @@ import test from "node:test";
 import { classifyChanges } from "../scripts/classify-seo-aeo-change.mjs";
 import { discoverPublicRoutes, extractCanonical, findMissingRoutes, parseJsonLd, parseSitemap, runChecks, validateHtml } from "../scripts/seo-aeo-check.mjs";
 import { buildSitemapEndpoint, createJwtAssertion } from "../scripts/gsc-notify.mjs";
+import { buildQueryBody, buildSearchAnalyticsEndpoint, matchKeywords } from "../scripts/gsc-search-analytics.mjs";
 
 test("skips GSC for presentation-only changes", () => {
   const result = classifyChanges({
@@ -278,4 +279,28 @@ test("rejects stale or incomplete AEO source files", async () => {
   } finally {
     global.fetch = originalFetch;
   }
+});
+
+test("builds the Search Console search analytics query endpoint", () => {
+  assert.equal(
+    buildSearchAnalyticsEndpoint("sc-domain:ycaura.com"),
+    "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Aycaura.com/searchAnalytics/query",
+  );
+});
+
+test("builds a search analytics request body spanning the requested day range", () => {
+  const body = buildQueryBody({ days: 28, rowLimit: 500, endDate: new Date("2026-09-22T00:00:00Z") });
+  assert.deepEqual(body, { startDate: "2026-08-25", endDate: "2026-09-22", dimensions: ["query"], rowLimit: 500 });
+});
+
+test("matches requested keywords against GSC rows, case- and whitespace-insensitively", () => {
+  const rows = [
+    { keys: ["瑪菲斯 雙和"], clicks: 3, impressions: 40, ctr: 0.075, position: 1.2 },
+    { keys: ["草本撫紋 新北"], clicks: 0, impressions: 12, ctr: 0, position: 8.5 },
+  ];
+  const matches = matchKeywords(rows, [" 瑪菲斯 雙和 ", "皮膚覆蓋術 新北"]);
+  assert.deepEqual(matches, [
+    { keyword: " 瑪菲斯 雙和 ", found: true, clicks: 3, impressions: 40, ctr: 0.075, position: 1.2 },
+    { keyword: "皮膚覆蓋術 新北", found: false },
+  ]);
 });

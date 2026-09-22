@@ -48,7 +48,7 @@ function readCredentials() {
   }
 }
 
-async function fetchWithRetry(url, options, { retries = 2, label = "request" } = {}) {
+export async function fetchWithRetry(url, options, { retries = 2, label = "request" } = {}) {
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     const delayMs = 2000 * (2 ** attempt);
     try {
@@ -64,7 +64,7 @@ async function fetchWithRetry(url, options, { retries = 2, label = "request" } =
   throw new Error(`[GSC] ${label} exhausted retries`);
 }
 
-async function getAccessToken(credentials) {
+export async function getAccessToken(credentials) {
   const assertion = createJwtAssertion(credentials);
   const response = await fetchWithRetry(TOKEN_URL, {
     method: "POST",

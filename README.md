@@ -98,6 +98,12 @@ the legacy `mps.rabby.cc` redirect. Keep the local
 `.env.cloudflare` file uncommitted; `.env.cloudflare.example` documents the
 required variable names.
 
+Same pattern for Search Console: `GSC_CREDENTIALS` is a GitHub Actions secret
+used by the deploy workflow's sitemap submit step. To query real ranking data
+locally (`npm run query:gsc`, used by the `seo-keyword-audit` skill), copy
+`.env.gsc.example` to `.env.gsc`, paste the same service-account JSON in, and
+`source .env.gsc` before running the script — keep `.env.gsc` uncommitted.
+
 Use build and validation commands for targeted diagnosis after a remote failure, not as part of the normal checkpoint path.
 
 The timeout defaults can be overridden for a controlled canary with `SITES_INSTALL_TIMEOUT`, `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`. A timeout fails the command; the helpers never retry an unchanged install or build.

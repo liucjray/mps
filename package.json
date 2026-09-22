@@ -16,6 +16,7 @@
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .claude/worktrees --ignore-pattern .worktrees",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "submit:gsc": "node scripts/gsc-notify.mjs",
+    "query:gsc": "node scripts/gsc-search-analytics.mjs",
     "validate:seo-aeo": "node scripts/seo-aeo-check.mjs",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate"
   },
