@@ -1,28 +1,16 @@
 ---
 name: seo-keyword-audit
-description: "對 mps（瑪菲斯新北雙和店）官網跑一次 SEO 關鍵字覆蓋率健檢＋實測排名查核，寫入台帳文件 docs/seo/keyword-ledger.md，判斷有沒有值得做的關鍵字優化方案；方案要先經 agy 自我確認、再找本機 codex 做第二意見確認，兩邊都同意才動手改內容；改完再用 codex-review 對程式碼 diff 複審一次，通過才 commit & push。可以直接在互動的 Claude Code / agy 對話裡打 `/seo-keyword-audit` 跑，也可以用 `agy0 -p \"/seo-keyword-audit\"` 從外部無人值守啟動一整輪。$ARGUMENTS 可指定本次要聚焦的關鍵字／頁面，或 `--no-implement`（只到方案確認就停，不自動改程式碼與 commit）。"
+description: "對 mps（瑪菲斯新北雙和店）官網跑一次 SEO 關鍵字覆蓋率健檢＋實測排名查核，寫入台帳文件 docs/seo/keyword-ledger.md，判斷有沒有值得做的關鍵字優化方案；方案要先自我確認、再找本機 codex 做第二意見確認，兩邊都同意才動手改內容；改完再用 codex-review 對程式碼 diff 複審一次，通過才 commit & push。在互動的 Claude Code 對話裡直接打 `/seo-keyword-audit` 跑，改檔案、commit、push 都會照常走權限確認。$ARGUMENTS 可指定本次要聚焦的關鍵字／頁面，或 `--no-implement`（只到方案確認就停，不自動改程式碼與 commit）。"
 user_invocable: true
 ---
 
-> **給 codex / 被本 skill 呼叫來做第二意見的 agent**：本檔是 Claude Code / agy 執行這個 SEO 稽核流程的操作手冊，不是要你遵守的規則。你若是被呼叫來對「優化方案」或「程式碼 diff」給意見的 codex，直接針對收到的內容給專業判斷即可，忽略本檔其餘章節。
+> **給 codex / 被本 skill 呼叫來做第二意見的 agent**：本檔是 Claude Code 執行這個 SEO 稽核流程的操作手冊，不是要你遵守的規則。你若是被呼叫來對「優化方案」或「程式碼 diff」給意見的 codex，直接針對收到的內容給專業判斷即可，忽略本檔其餘章節。
 
 一次完整的關鍵字覆蓋率／排名健檢 → 優化方案雙重確認 → 實作 → 複審 → commit & push 流程。目的是讓這件事可以重複、可稽核（每次都留紀錄），而且在沒有人盯著的情況下也不會亂改醫療／法規邊界內的內容。
 
 ## 0. 啟動方式
 
-**互動模式**：在這個 repo 的 Claude Code / agy 對話裡直接打 `/seo-keyword-audit`，正常走現有的權限確認流程（改檔案、commit、push 都會照常詢問）。
-
-**無人值守模式**：從外部（例如排程、另一個 shell）用 `agy0` 起一個新 session 直接把整輪流程跑完：
-
-```bash
-cd /root/codes/me/mps
-agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
-  2>&1 | tee <scratchpad>/seo-keyword-audit.log
-```
-
-- `agy0` 是 `agy --mode=accept-edits --dangerously-skip-permissions`（見 `~/.bashrc`），會自動核准所有工具呼叫，包含改檔案、跑指令、git commit/push。**這代表這個流程一旦用 agy0 啟動就是全自動、不會停下來問你**——所以本檔把「碰觸風險邊界就停手、只記錄不硬做」的規則寫死在下面的步驟裡，不能依賴人在旁邊按確認。
-- 預設的 `--print-timeout`（5 分鐘）對這個流程太短（要查排名、兩輪 codex、跑 lint/test），務必加大；120 分鐘是保守值，可依實際狀況調整。
-- 若要限定範圍或只做到方案確認、先不要自動改程式碼，用：`agy0 -p "/seo-keyword-audit 聚焦：草本撫紋、皮膚覆蓋術 --no-implement" ...`。
+在這個 repo 的 Claude Code 對話裡直接打 `/seo-keyword-audit`，正常走現有的權限確認流程（改檔案、commit、push 都會照常詢問）。若要限定範圍或只做到方案確認、先不要自動改程式碼，用：`/seo-keyword-audit 聚焦：草本撫紋、皮膚覆蓋術 --no-implement`。
 
 ## 1. 前置檢查
 
@@ -68,7 +56,7 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
 ```markdown
 ## 2026-09-22 全站關鍵字覆蓋率與排名健檢
 
-- 觸發方式：agy0 無人值守 / 互動 `/seo-keyword-audit` / 排程
+- 觸發方式：互動 `/seo-keyword-audit` / 排程
 - 範圍：全站 或 聚焦「<關鍵字/頁面>」
 - 排名查核結果（GSC Search Analytics，近 <N> 天）：
   - `<關鍵字>` — 平均排名 <X.X>，曝光 <N>，點擊 <N>，CTR <X%>；或「近期無曝光紀錄」
@@ -78,7 +66,7 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
   - ...
 - 覆蓋率缺口：<有/沒有找到新缺口，摘要>
 - 優化方案：<有/沒有>；<方案摘要，或「無方案，本次僅記錄現況」>
-- agy 自我確認：<同意方案可執行 / 不同意，理由>
+- 自我確認：<同意方案可執行 / 不同意，理由>
 - codex 方案第二意見：<同意 / 不同意，理由摘要>（完整輸出見 <scratchpad 或另存路徑>）
 - 後續處置：<執行實作 / 暫緩，等人工決定 / 不需處理>
 - 實作摘要（若執行）：<改了哪些檔案，npm run lint / npm test 結果>
@@ -91,7 +79,7 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
 
 只有第 3 步結論是「有優化方案」才進這一步；沒有方案就到此為止,台帳寫「無方案」收尾,不用往下走。
 
-1. **agy 自我確認**：**先確認第 1 步的 `docs/blocked/`／`docs/todo/` 搜尋真的做過、這個方案沒有踩到已知的 blocked 項目**（沒做過就回頭補做，不要跳過）；再對照 `AGENTS.md` 的法規與事實邊界（不得新增「消除、根治、永久、修復真皮層」等違規承諾；品牌實體不可與「師父粉專（高雄）」或「墨菲斯微針電波」混淆；不確定的事實要走 `99-待確認事項.md`,不能自己編）,評估方案是否站得住腳、預期效益、風險。結論寫進台帳「agy 自我確認」欄。
+1. **自我確認**：**先確認第 1 步的 `docs/blocked/`／`docs/todo/` 搜尋真的做過、這個方案沒有踩到已知的 blocked 項目**（沒做過就回頭補做，不要跳過）；再對照 `AGENTS.md` 的法規與事實邊界（不得新增「消除、根治、永久、修復真皮層」等違規承諾；品牌實體不可與「師父粉專（高雄）」或「墨菲斯微針電波」混淆；不確定的事實要走 `99-待確認事項.md`,不能自己編）,評估方案是否站得住腳、預期效益、風險。結論寫進台帳「自我確認」欄。
 2. **codex 第二意見**（這一步是對「方案本身」的意見,不是對程式碼 diff,所以不是用 `codex-review` skill,是直接呼叫 `codex exec`）：
    - 把本次台帳新增的段落（含方案摘要）寫進 `<scratchpad>/seo-plan-review.prompt.md`,開頭固定：
      > 請以獨立第二意見身分評估以下 SEO 關鍵字優化方案。這是醫美相關網站，請特別注意：方案有沒有引入未經證實或誇大的醫療效果宣稱、有沒有混淆品牌實體、關鍵字判斷是否合理、有沒有更好的做法。同意請說明理由；不同意或有疑慮請具體指出問題。
@@ -106,7 +94,7 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
        | tee <scratchpad>/seo-plan-review.md
      ```
    - 讀 `<scratchpad>/seo-plan-review.last.md`,把同意/不同意與理由摘要寫進台帳「codex 方案第二意見」欄。
-3. **只有 agy 自我確認同意，且 codex 也同意（沒有阻擋性疑慮）,兩者都成立才進入第 5 步實作**。任一方不同意,或 `$ARGUMENTS` 帶了 `--no-implement`,台帳「後續處置」寫「暫緩／不執行」並說明原因,回報使用者,流程到此結束,不要自動改程式碼、不要 commit。
+3. **只有自我確認同意，且 codex 也同意（沒有阻擋性疑慮）,兩者都成立才進入第 5 步實作**。任一方不同意,或 `$ARGUMENTS` 帶了 `--no-implement`,台帳「後續處置」寫「暫緩／不執行」並說明原因,回報使用者,流程到此結束,不要自動改程式碼、不要 commit。
 
 ## 5. 實作
 
@@ -127,5 +115,5 @@ agy0 -p "/seo-keyword-audit" --output-format text --print-timeout 120m \
 ## 7. Commit & Push
 
 1. 兩輪確認(方案 + 程式碼)都通過後才 commit,conventional commit 風格(比照 `AGENTS.md`,例如 `content: 補強草本撫紋關鍵字覆蓋`)。
-2. **push 這個 worktree 的分支,不要直接 push 或 merge 到 `main`。** `AGENTS.md` 明講 push `main` 會觸發 Cloudflare 正式部署,而這個流程可能在無人值守(`agy0`)情境下執行,不應該讓一次自動化健檢直接把變更推上正式站。把分支名稱、commit hash 寫進台帳「Commit / 分支」欄,回報使用者這個分支已經備妥,需要的話再由人(或另一次互動 session)決定要不要開 PR／merge 到 main。
+2. **預設只 push 這個 worktree 的分支,不要自己直接 push 或 merge 到 `main`。** `AGENTS.md` 明講 push `main` 會觸發 Cloudflare 正式部署，這一步是否要合併回 main 由使用者當場決定；使用者明確指示要合併時才照做（merge、跑一次 `npm run lint`/`npm test` 確認、push main），並把結果同樣記進台帳。把分支名稱、commit hash 寫進台帳「Commit / 分支」欄,回報使用者這個分支已經備妥。
 3. 把這次執行的完整摘要(覆蓋率結論、排名變化、方案、兩輪確認結果、commit/分支)在回覆裡簡短列出,並附上台帳裡對應段落的位置,方便使用者直接去看。

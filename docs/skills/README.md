@@ -13,7 +13,7 @@
 | `frontend-design` | claude-plugins-official 內建 plugin | ❌ 未落地，依賴當次 Claude Code 環境是否啟用該 plugin | UI／響應式設計變更的主要設計哲學（避免 AI 樣板感）|
 | `seo-aeo-best-practices` | 外部 plugin（未在本 repo 找到來源） | ❌ 未落地，依賴當次環境 | metadata、結構化資料、sitemap、robots、AI 搜尋相關改動 |
 | `codex-review` | 本機 `codex` CLI（OpenAI，`gpt-5.6-luna`） | ⚠️ 半落地：呼叫方式（skill 指令）不在 repo 裡，但**執行環境**（本機 `codex` 指令）是外部依賴，不是 Claude Code plugin | **每一次**開發任務收尾前的強制獨立審查（見下方 Dual-Model 工作流程）|
-| `seo-keyword-audit` | 本專案自建，2026-09-22 新增 | ✅ 已 vendor 進 `.claude/skills/seo-keyword-audit/SKILL.md` | 關鍵字覆蓋率健檢＋實測排名查核，寫入 `docs/seo/keyword-ledger.md`；優化方案需 agy 自我確認＋`codex exec` 第二意見雙重同意才實作，實作後再跑一次 `codex-review` 才 commit（只 push worktree 分支，不自動碰 `main`）。可互動 `/seo-keyword-audit` 跑，也可用 `agy0 -p "/seo-keyword-audit"` 無人值守啟動 |
+| `seo-keyword-audit` | 本專案自建，2026-09-22 新增 | ✅ 已 vendor 進 `.claude/skills/seo-keyword-audit/SKILL.md` | 關鍵字覆蓋率健檢＋實測排名查核，寫入 `docs/seo/keyword-ledger.md`；優化方案需自我確認＋`codex exec` 第二意見雙重同意才實作，實作後再跑一次 `codex-review` 才 commit（預設只 push worktree 分支，要合併回 `main` 由使用者當場指示）。在互動的 Claude Code 對話裡打 `/seo-keyword-audit` 跑 |
 
 **已知風險（有實例)**：`frontend-design` 和 `seo-aeo-best-practices`是否可用完全看當次 Claude Code session 有沒有裝對應 plugin，不保證每次都在。`docs/todo/20260831_ui-ux-audit.md` 第 8 行就記錄過一次：那次 session 沒有 `frontend-design`，只好改用 CSS 檢視 + CDP 量測代替，並註記「後續若該 skill 可用，建議在實作階段再跑一次」。**只有 `design-taste-frontend` 是穩定可用的**，因為它是專案內建檔案，不依賴外部環境。
 
