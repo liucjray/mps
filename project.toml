@@ -1,0 +1,47 @@
+# Linear 自動工單流程的專案設定（schema 與欄位說明見 go-rabby-me 的
+# docs/done/261003_multi-project-ticket-workflow-analysis.md）。
+# 這個檔案不放秘密、不放裝置路徑；Linear API key 與本機路徑在 ~/.config/project-workflow/。
+schema_version = 1
+id = "mps"
+name = "MPS"
+
+[repository]
+url = "https://github.com/liucjray/mps.git"
+default_branch = "main"
+
+[linear]
+workspace_slug = "t2cb2022"
+team_key = "MPS"
+
+[workflow]
+# 沒有 docs/doing、docs/done：票的內容就是 Linear 的 description。
+lifecycle = "none"
+branch_pattern = "feat/{slug}"
+merge_strategy = "no-ff"
+# 目前只在本機合併，不 push（push main 會觸發 Cloudflare 部署）。自動 push 實作並驗證後才會改成 "push"。
+publish = "none"
+
+[adapter.worktree]
+kind = "builtin"
+# 共用主 repo 的依賴，避免每個 worktree 重新 npm install。
+link = ["node_modules"]
+
+[preview]
+command = ["npm", "run", "dev"]
+
+[agent]
+required_reading = ["AGENTS.md", "README.md"]
+preview_hint = "需要預覽時，在 worktree 內用 `PORT={port} npm run dev`（網址 {url}）；不要使用 1102（main 的預覽 port），也不要自行修改 .env* 或部署設定。"
+
+[verification]
+gate = [["git", "diff", "--check"], ["npm", "test"], ["npm", "run", "lint"]]
+agent_hint = ["npm test", "npm run lint"]
+timeout_seconds = 1800
+
+[requires]
+node = "22.13"
+# build-verified.sh 需要 GNU timeout（macOS 請安裝 coreutils 並讓 timeout 在 PATH 上）。
+commands = ["timeout"]
+
+[review]
+second_ai = true
