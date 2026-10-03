@@ -18,9 +18,10 @@ team_key = "MPS"
 lifecycle = "none"
 branch_pattern = "feat/{slug}"
 merge_strategy = "no-ff"
-# Review Done 即核准上線：merge worker 合併並通過驗證後會 push main，由 .github/workflows/deploy.yml 部署 Cloudflare。
-# push 的前置條件（origin 比對、只推 main、不 force、被拒絕時停住並留言）見 go-rabby-me 的分析文件第 7.3 節。
-publish = "push"
+# 只在本機合併，不 push：push main 會觸發 Cloudflare 部署，目前由使用者在檢查後手動 push。
+# （自動 push 的功能已實作，需要裝置層的 git token 才能在排程環境運作；要啟用時改成 "push"，
+#  見 go-rabby-me 的 docs/development-workflow.md「多專案」一節。）
+publish = "none"
 
 [adapter.worktree]
 kind = "builtin"
