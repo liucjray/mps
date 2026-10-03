@@ -8,3 +8,4 @@
 6. Merge worker 合併並通過驗證後，會 push `main`。
 7. `main` 的 push 觸發 GitHub Actions，部署至 Cloudflare。
 8. 若 push 被拒絕或驗證失敗，流程會停住並在票上留言；不會 force push。
+進入 `Review` 狀態後，Herdr 會開啟一個 PMAI 互動 pane，可向 devAI 或 reviewAI 提問。
