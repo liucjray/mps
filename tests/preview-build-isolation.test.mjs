@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
 
 const port = 1106;
 const baseUrl = `http://127.0.0.1:${port}`;
+const projectRoot = new URL("..", import.meta.url).pathname;
 
 async function waitForPreview(child) {
   const deadline = Date.now() + 5 * 60_000;
@@ -27,17 +30,29 @@ async function assertRoutesServeLatestBuild() {
     assert.equal(response.status, 200, `${route} should remain available`);
     const html = await response.text();
     assert.match(html, /<!doctype html>/i, `${route} should return rendered HTML`);
+    if (route === "/") {
+      assert.match(html, /G-PREVIEWENVOVERRIDE/, "preview should retain caller public environment values");
+    }
   }
 }
 
 test("running preview survives gate rebuild and repeated requests", { timeout: 10 * 60_000 }, async () => {
   const preview = spawn("bash", ["scripts/preview-isolated.sh"], {
-    env: { ...process.env, PORT: String(port) },
+    cwd: projectRoot,
+    env: {
+      ...process.env,
+      PORT: String(port),
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-PREVIEWENVOVERRIDE",
+    },
     stdio: "ignore",
   });
 
   try {
     await waitForPreview(preview);
+    assert.ok(
+      existsSync(join(projectRoot, ".preview-runtime", `project-${preview.pid}`, ".sites-runtime", "home")),
+      "preview build should use the snapshot's project-scoped runtime",
+    );
     await assertRoutesServeLatestBuild();
 
     const gate = spawn("npm", ["run", "build"], { stdio: "inherit" });

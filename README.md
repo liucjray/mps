@@ -24,7 +24,9 @@ snapshot. Gate builds (`npm run build` and `npm test`) continue to use the check
 `dist/`, so a gate rebuild cannot replace chunks used by a running preview. Start
 `npm run dev` again to preview the latest checkout source; each start gets a fresh
 snapshot. Only `NEXT_PUBLIC_*` values from local `.env*` files are passed into the
-preview build; the environment files themselves are not copied. The
+preview build; the environment files themselves are not copied. Existing
+process environment values take precedence over local `.env*` values, matching
+the build's usual dotenv behavior. The
 `.preview-runtime/` directory is disposable and ignored by Git.
 
 ## Included Shape

@@ -30,6 +30,9 @@ while IFS= read -r -d '' public_setting; do
 done < <(node "${project_root}/scripts/preview-public-env.mjs" "${project_root}")
 
 cd "${preview_root}"
+# A caller may itself be running inside sites-env.sh. Force the snapshot's
+# build scripts to initialize their own project-scoped environment.
+unset SITES_ENV_READY SITES_PROJECT_ROOT
 npm run build
 exec env WRANGLER_LOG_PATH=.wrangler/wrangler.log \
   "${project_root}/node_modules/.bin/vinext" start --port "${PORT:-1102}"
