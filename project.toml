@@ -1,0 +1,43 @@
+# AT（go-rabby-auto-ticket）的專案設定，進 git。欄位以 strict 模式解析，未知欄位會被拒絕。
+schema_version = 1
+id = "mps"
+name = "MPS"
+
+[repository]
+url = "git@github.com:liucjray/mps.git"
+default_branch = "main"
+
+[linear]
+workspace_slug = "t2cb2022"
+team_key = "AUT" # AUT team 由多個 repo 共用，以 Linear Project 區分
+# 必填（共用 team 的每個專案都要設）：先在 Linear 的 AUT team 建立名為 mps 的 Project，
+# 填網址 /project/ 之後那一段（<名稱>-<slugId>），例如 "mps-1a2b3c4d5e6f"
+project = "mps-b276f9764bd7"
+
+[workflow]
+lifecycle = "none" # description 就是任務；mps 有 docs/todo/ 但不是 AT 的 docs 流程格式
+branch_pattern = "feat/{slug}" # AT 工單啟動的任務依 AT 的規則，不用 AGENTS.md 的 wt{port}-xxxxxx；手動開發仍照 AGENTS.md
+merge_strategy = "no-ff"
+publish = "none" # 要合併後自動推到 origin 再改 "push"，並補 credentials/git.toml
+
+[adapter.worktree]
+kind = "builtin"
+shared_env = [".env.cloudflare", ".env.gsc"] # 兩個都被 .gitignore 的 .env* 涵蓋
+
+[preview]
+# mps 的 npm run dev 會先 build 再 vinext start，PORT 由 adapter 注入（slot port 1104–1108；main 是 1102）
+command = ["npm", "run", "dev"]
+url_path = "/"
+local_url = "http://localhost:1102"
+
+[verification]
+gate = [["npm", "run", "lint"], ["npm", "test"]] # npm test 已含 build
+agent_hint = ["npm run lint", "npm test"]
+timeout_seconds = 1800
+
+[requires]
+node = "22.13"
+commands = ["timeout"] # scripts/build-verified.sh 需要 GNU timeout，沒有會 exit 69
+
+[review]
+second_ai = true
