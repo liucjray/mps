@@ -23,6 +23,7 @@ publish = "none" # 要合併後自動推到 origin 再改 "push"，並補 creden
 [adapter.worktree]
 kind = "builtin"
 shared_env = [".env.cloudflare", ".env.gsc"] # 兩個都被 .gitignore 的 .env* 涵蓋
+link = ["node_modules"] # merge gate 的乾淨 checkout 沒有依賴，npm test 的 build 需要 node_modules/.bin/vinext
 
 [preview]
 # mps 的 npm run dev 會先 build 再 vinext start，PORT 由 adapter 注入（slot port 1104–1108；main 是 1102）
