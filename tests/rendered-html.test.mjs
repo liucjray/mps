@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+const stretchMarksVaultNotePath = "/mnt/c/Users/user/obs-notes/Projects/mps/03-知識/妊娠紋知識.md";
 const developmentPreviewMeta =
   /<meta[^>]*\bname=["']codex-preview["'][^>]*>/i;
 
@@ -165,14 +167,16 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   assert.equal(response.headers.get("cache-control"), "public, max-age=300, stale-while-revalidate=86400");
   const html = await response.text();
-  assert.match(html, /<h1>妊娠紋是什麼？[\s\S]*先了解，再選擇。[\s\S]*<\/h1>/i);
-  assert.match(html, /<title>妊娠紋是什麼？產後變化與保養｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<h1>妊娠紋原因是什麼？[\s\S]*先了解，再選擇。[\s\S]*<\/h1>/i);
+  assert.match(html, /<title>妊娠紋原因是什麼？產後變化與保養｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
   assert.match(html, /<meta name="description" content="了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。"\/>/i);
   assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
   assert.match(html, /<meta property="og:type" content="article"\/>/i);
+  assert.match(html, /<meta property="og:title" content="妊娠紋原因是什麼？產後變化與保養｜新北雙和店｜瑪菲斯皮膚覆蓋專家"\/>/i);
+  assert.match(html, /<meta name="twitter:title" content="妊娠紋原因是什麼？產後變化與保養｜新北雙和店｜瑪菲斯皮膚覆蓋專家"\/>/i);
   assert.match(html, /<meta property="og:url" content="https:\/\/ycaura\.com\/knowledge\/stretch-marks"\/>/i);
+  assert.match(html, /妊娠紋常在皮膚快速伸展或收縮後出現；懷孕、青春期快速成長與體重快速增減都可能相關，遺傳與荷爾蒙變化也可能影響個人差異，並非每個人都會出現/);
   assert.match(html, /妊娠紋是皮膚在懷孕等快速伸展情況下形成的線狀紋路/);
-  assert.match(html, /妊娠紋是懷孕或皮膚快速伸展後可能形成的線狀紋路，產後可能逐漸變淡，但不一定完全消失/);
   assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
   assert.match(html, /保濕可以協助舒緩乾燥與搔癢/);
   assert.match(html, /本站內容與外觀修飾諮詢都不能取代診斷或治療/);
@@ -214,10 +218,12 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   });
   assert.equal("openingHoursSpecification" in org, false);
   assert.ok(graph.some((entity) => entity["@type"] === "Article"));
+  assert.equal(graph.find((entity) => entity["@type"] === "WebPage").name, "妊娠紋原因是什麼？產後變化與保養");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").headline, "妊娠紋原因是什麼？產後變化與保養");
   assert.ok(graph.some((entity) => entity["@type"] === "FAQPage"));
   assert.equal(graph.find((entity) => entity["@type"] === "FAQPage").mainEntity.length, 7);
   assert.equal(graph.find((entity) => entity["@type"] === "Article").datePublished, "2026-08-28");
-  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-09-19");
+  assert.equal(graph.find((entity) => entity["@type"] === "Article").dateModified, "2026-10-11");
   assert.match(html, /href="\/knowledge"/i);
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /<section class="knowledge-article-section"[^>]*aria-labelledby="what-title">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_article">肥胖紋、生長紋與妊娠紋的成因比對 <span aria-hidden="true">↗<\/span><\/a>/);
@@ -230,6 +236,16 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.ok(breadcrumb, "BreadcrumbList should be present in stretch-marks");
   assert.equal(breadcrumb.itemListElement.length, 3);
   assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+});
+
+test("keeps the shared pregnancy knowledge note aligned with the website when the vault is mounted", {
+  skip: !existsSync(stretchMarksVaultNotePath),
+}, async () => {
+  const note = await readFile(stretchMarksVaultNotePath, "utf8");
+  assert.match(note, /^更新日期：2026-10-11\s*$/m);
+  assert.match(note, /^來源頁面：\[妊娠紋知識文章\]\(https:\/\/ycaura\.com\/knowledge\/stretch-marks\)\s*$/m);
+  assert.match(note, /^\| H1 \| 妊娠紋原因是什麼？先了解，再選擇。 \|$/m);
+  assert.match(note, /^\| Title \| 妊娠紋原因是什麼？產後變化與保養 \|$/m);
 });
 
 test("renders independently indexable service pages", async () => {
