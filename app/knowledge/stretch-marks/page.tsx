@@ -8,10 +8,10 @@ import { SiteNavigation } from "../../site-navigation";
 export const dynamic = "force-static";
 
 const pageUrl = stretchMarksKnowledgeUrl;
-const pageTitle = "妊娠紋是什麼？產後變化與保養";
+const pageTitle = "妊娠紋原因是什麼？產後變化與保養";
 const pageDescription = "了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。";
 const publishedAt = "2026-08-28";
-const updatedAt = "2026-09-19";
+const updatedAt = "2026-10-11";
 
 const faqs = [
   {
@@ -162,8 +162,8 @@ export default function StretchMarksKnowledgePage() {
           <header className="knowledge-article-hero">
             <div className="knowledge-article-copy">
               <div className="section-label">雙和店 / 妊娠紋知識</div>
-              <h1>妊娠紋是什麼？<br /><em>先了解，再選擇。</em></h1>
-              <p>妊娠紋是懷孕或皮膚快速伸展後可能形成的線狀紋路，產後可能逐漸變淡，但不一定完全消失。這一頁整理形成原因、紅白紋差異、保濕限制，以及外觀修飾前值得問清楚的事。</p>
+              <h1>妊娠紋原因是什麼？<br /><em>先了解，再選擇。</em></h1>
+              <p>妊娠紋常在皮膚快速伸展或收縮後出現；懷孕、青春期快速成長與體重快速增減都可能相關，遺傳與荷爾蒙變化也可能影響個人差異，並非每個人都會出現。產後紋路可能逐漸變淡，但不一定完全消失。這一頁整理形成因素、紅白紋差異、保濕限制，以及外觀修飾前值得問清楚的事。</p>
               <div className="knowledge-article-meta"><span>內容整理：{siteName}</span><span>最後更新：{updatedAt}</span></div>
             </div>
             <div className="knowledge-article-facts" aria-label="妊娠紋重點摘要">
