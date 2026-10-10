@@ -49,10 +49,13 @@ test("running preview survives gate rebuild and repeated requests", { timeout: 1
   });
   let previewOutput = "";
   let port = null;
+  let previewSnapshot = null;
   const readOutput = (chunk) => {
     previewOutput += chunk.toString();
     const match = previewOutput.match(/Production server running at http:\/\/[^:\s]+:(\d+)/);
     if (match) port = Number(match[1]);
+    const snapshotMatch = previewOutput.match(/Preview snapshot: ([^\r\n]+)/);
+    if (snapshotMatch) previewSnapshot = snapshotMatch[1];
   };
   preview.stdout.on("data", readOutput);
   preview.stderr.on("data", readOutput);
@@ -61,7 +64,7 @@ test("running preview survives gate rebuild and repeated requests", { timeout: 1
     port = await waitForPreview(preview, () => port);
     assert.ok(port < 1104 || port > 1108, "test preview must avoid the AT preview port range");
     assert.ok(
-      existsSync(join(projectRoot, ".preview-runtime", `project-${preview.pid}`, ".sites-runtime", "home")),
+      previewSnapshot && existsSync(join(previewSnapshot, ".sites-runtime", "home")),
       "preview build should use the snapshot's project-scoped runtime",
     );
     await assertRoutesServeLatestBuild(port);

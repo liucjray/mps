@@ -2,14 +2,16 @@
 set -euo pipefail
 
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-preview_root="${project_root}/.preview-runtime/project-${BASHPID}"
+preview_runtime="${project_root}/.preview-runtime"
 
 command -v rsync >/dev/null || {
   echo "preview-isolated.sh requires rsync." >&2
   exit 69
 }
 
-mkdir -p "${preview_root}"
+mkdir -p "${preview_runtime}"
+preview_root="$(mktemp -d "${preview_runtime}/project-XXXXXXXX")"
+echo "Preview snapshot: ${preview_root}"
 rsync -a \
   --exclude='/.git/' \
   --exclude='/node_modules/' \
