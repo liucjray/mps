@@ -35,6 +35,8 @@ Use TypeScript/TSX with two-space indentation, semicolons, and the existing doub
 
 Add or update assertions in `tests/rendered-html.test.mjs` when changing visible content, metadata, routes, structured data, or analytics markup. Run `npm test` and `npm run lint` before submitting changes. For GA4 changes, also test once with `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123 npm test`. Visual changes should also be checked at desktop and mobile widths.
 
+When `/mnt/c/Users/user/obs-notes/Projects/mps/03-知識/妊娠紋知識.md` is mounted, the rendered-HTML suite also checks that its H1, Title, and update date stay aligned with the stretch-marks page.
+
 ## Shared Memory and Multi-Agent Handoff
 
 The MPS Obsidian vault is the shared memory source for this project. Its Windows path is `C:\Users\user\obs-notes\Projects\mps` (WSL path: `/mnt/c/Users/user/obs-notes/Projects/mps`). When working in a new session or as a different agent, read these notes before making decisions:
