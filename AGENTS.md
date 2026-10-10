@@ -10,7 +10,7 @@
 
 ## Build, Test, and Development Commands
 
-- `npm run dev` starts the local Vite/Vinext development server at `http://localhost:1102` by default; set `PORT` for a worktree, for example `PORT=1104 npm run dev`.
+- `npm run dev` builds a fresh isolated preview snapshot and serves it at `http://localhost:1102` by default; set `PORT` for a worktree, for example `PORT=1104 npm run dev`. Gate builds continue to use the checkout's separate `dist/`.
 - `npm run build` creates and validates the Cloudflare deployable artifact.
 - `npm run start` serves the built application locally at `http://localhost:1102` by default; set `PORT` for a worktree, for example `PORT=1104 npm run start`.
 - `npm test` runs the build plus `node:test` rendered-HTML checks.
