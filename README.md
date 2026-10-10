@@ -19,6 +19,17 @@ This starter does not use `wrangler.jsonc`.
 
 Scripts that need writable project-scoped home, npm, XDG, and temporary paths use `scripts/sites-env.sh`. The `dev` and `start` scripts honor the caller's runtime environment and keep Wrangler logs inside the checkout. The generated `.sites-runtime/` directory is disposable and ignored by Git.
 
+The `dev` preview builds and serves from a fresh, uniquely named
+`.preview-runtime/project-*` snapshot. Gate builds (`npm run build` and
+`npm test`) continue to use the checkout's `dist/`, so a gate rebuild cannot
+replace chunks used by a running preview. Start
+`npm run dev` again to preview the latest checkout source; each start gets a fresh
+snapshot. Only `NEXT_PUBLIC_*` values from local `.env*` files are passed into the
+preview build; the environment files themselves are not copied. Existing
+process environment values take precedence over local `.env*` values, matching
+the build's usual dotenv behavior. The
+`.preview-runtime/` directory is disposable and ignored by Git.
+
 ## Included Shape
 
 - edit site code under `app/`
@@ -63,7 +74,7 @@ export default async function Home() {
 ## Diagnostic Commands
 
 - `npm run install:ci`: perform the one bounded lockfile install
-- `npm run dev`: build and start the stable local preview at `http://localhost:1102`
+- `npm run dev`: build an isolated preview snapshot and start it at `http://localhost:1102` (set `PORT` for a worktree)
 - `npm run dev:hmr`: start the Vite/Vinext HMR server for framework debugging only
 - `npm run build`: build and validate the deployable Sites artifact
 - `npm run start`: start the built Vinext application
