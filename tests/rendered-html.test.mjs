@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { isSitemapLastmodInSync } from "../scripts/sitemap-lastmod.mjs";
+import { updatedAt as stretchMarksUpdatedAt } from "../app/knowledge/stretch-marks/updated-at.mjs";
 import test from "node:test";
 
 const stretchMarksVaultNotePath = "/mnt/c/Users/user/obs-notes/Projects/mps/03-知識/妊娠紋知識.md";
@@ -666,6 +668,17 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/gsc-automation-check<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/stretch-marks<\/loc>/);
+  const stretchMarksUrl = "https://ycaura.com/knowledge/stretch-marks";
+  assert.equal(
+    isSitemapLastmodInSync(sitemap, stretchMarksUrl, stretchMarksUpdatedAt),
+    true,
+    "stretch-marks sitemap lastmod must match the page content update date",
+  );
+  assert.equal(
+    isSitemapLastmodInSync(sitemap, stretchMarksUrl, "2026-09-19"),
+    false,
+    "the lastmod check must reject a mismatched page date",
+  );
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/dark-circles<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/striae-comparison<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/knowledge\/scars-camouflage<\/loc>/);
