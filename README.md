@@ -23,7 +23,9 @@ The `dev` preview builds and serves from a separate `.preview-runtime/project-<p
 snapshot. Gate builds (`npm run build` and `npm test`) continue to use the checkout's
 `dist/`, so a gate rebuild cannot replace chunks used by a running preview. Start
 `npm run dev` again to preview the latest checkout source; each start gets a fresh
-snapshot. The `.preview-runtime/` directory is disposable and ignored by Git.
+snapshot. Only `NEXT_PUBLIC_*` values from local `.env*` files are passed into the
+preview build; the environment files themselves are not copied. The
+`.preview-runtime/` directory is disposable and ignored by Git.
 
 ## Included Shape
 

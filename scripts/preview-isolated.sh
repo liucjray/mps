@@ -22,6 +22,13 @@ rsync -a \
   "${project_root}/" "${preview_root}/"
 ln -sfn "${project_root}/node_modules" "${preview_root}/node_modules"
 
+while IFS= read -r -d '' public_setting; do
+  public_key="${public_setting%%=*}"
+  if [[ ! -v "${public_key}" ]]; then
+    export "${public_setting}"
+  fi
+done < <(node "${project_root}/scripts/preview-public-env.mjs" "${project_root}")
+
 cd "${preview_root}"
 npm run build
 exec env WRANGLER_LOG_PATH=.wrangler/wrangler.log \
