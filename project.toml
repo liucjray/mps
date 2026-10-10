@@ -18,7 +18,9 @@ project = "mps-b276f9764bd7"
 lifecycle = "none" # description 就是任務；mps 有 docs/todo/ 但不是 AT 的 docs 流程格式
 branch_pattern = "feat/{slug}" # AT 工單啟動的任務依 AT 的規則，不用 AGENTS.md 的 wt{port}-xxxxxx；手動開發仍照 AGENTS.md
 merge_strategy = "no-ff"
-publish = "none" # 要合併後自動推到 origin 再改 "push"，並補 credentials/git.toml
+# 只在本機合併，不 push：push main 會觸發 Cloudflare 部署，由使用者檢查後手動 push。
+# 要合併後自動推到 origin 再改 "push"，並補 credentials/git.toml。
+publish = "none"
 
 [adapter.worktree]
 kind = "builtin"
@@ -30,6 +32,10 @@ link = ["node_modules"] # merge gate 的乾淨 checkout 沒有依賴，npm test 
 command = ["npm", "run", "dev"]
 url_path = "/"
 local_url = "http://localhost:1102"
+
+[agent]
+required_reading = ["AGENTS.md", "README.md"]
+preview_hint = "需要預覽時，在 worktree 內用 `PORT={port} npm run dev`（網址 {url}）；不要使用 1102（main 的預覽 port），也不要自行修改 .env* 或部署設定。"
 
 [verification]
 gate = [["npm", "run", "lint"], ["npm", "test"]] # npm test 已含 build
