@@ -46,5 +46,8 @@ timeout_seconds = 1800
 node = "22.13"
 commands = ["timeout"] # scripts/build-verified.sh 需要 GNU timeout，沒有會 exit 69
 
+[roles]
+defaultai = "cx-luna-6-medium" # devAI、reviewAI、pmAI 的預設都用 Codex gpt-6-luna、effort medium（新票才套用，票上已有標籤不變）
+
 [review]
 second_ai = true
