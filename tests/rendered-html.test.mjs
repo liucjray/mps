@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+const stretchMarksVaultNotePath = "/mnt/c/Users/user/obs-notes/Projects/mps/03-知識/妊娠紋知識.md";
 const developmentPreviewMeta =
   /<meta[^>]*\bname=["']codex-preview["'][^>]*>/i;
 
@@ -234,6 +236,16 @@ test("renders the pregnancy stretch marks knowledge page", async () => {
   assert.ok(breadcrumb, "BreadcrumbList should be present in stretch-marks");
   assert.equal(breadcrumb.itemListElement.length, 3);
   assert.equal(breadcrumb.itemListElement[1].name, "知識中心");
+});
+
+test("keeps the shared pregnancy knowledge note aligned with the website when the vault is mounted", {
+  skip: !existsSync(stretchMarksVaultNotePath),
+}, async () => {
+  const note = await readFile(stretchMarksVaultNotePath, "utf8");
+  assert.match(note, /^更新日期：2026-10-11\s*$/m);
+  assert.match(note, /^來源頁面：\[妊娠紋知識文章\]\(https:\/\/ycaura\.com\/knowledge\/stretch-marks\)\s*$/m);
+  assert.match(note, /^\| H1 \| 妊娠紋原因是什麼？先了解，再選擇。 \|$/m);
+  assert.match(note, /^\| Title \| 妊娠紋原因是什麼？產後變化與保養 \|$/m);
 });
 
 test("renders independently indexable service pages", async () => {
