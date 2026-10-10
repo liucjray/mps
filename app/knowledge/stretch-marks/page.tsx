@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- static HTML links avoid Vinext client-router hydration issues. */
 import type { Metadata } from "next";
+import { updatedAt } from "./updated-at.mjs";
 import { darkCirclesKnowledgePath, facebookUrl, googleMapsSearchUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, striaeKnowledgePath, stretchMarksKnowledgeUrl } from "../../site";
 import { servicePath } from "../../services";
 import { KnowledgeContactCta } from "../../knowledge-contact";
@@ -11,7 +12,6 @@ const pageUrl = stretchMarksKnowledgeUrl;
 const pageTitle = "妊娠紋原因是什麼？產後變化與保養";
 const pageDescription = "了解妊娠紋形成原因、紅白紋差異、產後變化與保濕限制，也認識瑪菲斯雙和店的妊娠紋外觀修飾與諮詢方式。";
 const publishedAt = "2026-08-28";
-const updatedAt = "2026-10-11";
 
 const faqs = [
   {
