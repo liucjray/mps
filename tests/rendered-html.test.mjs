@@ -634,6 +634,40 @@ test("keeps local development on HTTP", async () => {
   }
 });
 
+test("returns 404 without home page content for unknown route", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("missing-route-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  const response = await worker.fetch(
+    new Request("https://localhost/__smoke_missing_route__", {
+      headers: { accept: "text/html" },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+
+  assert.equal(response.status, 404);
+  assert.match(
+    response.headers.get("content-type") ?? "",
+    /^text\/html\b/i,
+  );
+  assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+  const html = await response.text();
+  assert.match(html, /404/);
+  assert.match(html, /This page could not be found/i);
+  assert.doesNotMatch(html, /讓肌膚的故事/);
+  assert.doesNotMatch(html, /<main id="main-content"/);
+  assert.doesNotMatch(html, /雙和店肌膚美學服務/);
+});
+
 test("ships crawler and answer-engine support files", async () => {
   const [robots, sitemap, llms] = await Promise.all([
     readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
