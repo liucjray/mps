@@ -47,7 +47,8 @@ node = "22.13"
 commands = ["timeout"] # scripts/build-verified.sh 需要 GNU timeout，沒有會 exit 69
 
 [roles]
-defaultai = "cx-luna-6-medium" # devAI、reviewAI、pmAI 的預設都用 Codex gpt-6-luna、effort medium（新票才套用，票上已有標籤不變）
+defaultai = "cx-luna-6-medium" # reviewAI、pmAI 的預設用 Codex gpt-6-luna、effort medium（新票才套用，票上已有標籤不變）
+devai = "agy-gemini-3.8-medium" # devAI 預設改為 AGY Gemini 3.8 Flash、effort medium
 
 [review]
 second_ai = true
