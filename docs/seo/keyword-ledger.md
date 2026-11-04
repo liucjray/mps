@@ -15,8 +15,10 @@
 - 依據：`/knowledge/striae-comparison` 在 2026-10-06 至 2026-11-02 有 251 曝光、6 點擊、平均排名 8.2；可見查詢 `生長紋肥胖紋差別` 為 16 曝光、平均排名 6.8、0 點擊。低樣本且查詢維度不完整，不能證明標題造成表現或預測改動效果。
 - 優化方案／後續處置：依使用者明確指示，將 title 調整為「生長紋、肥胖紋與妊娠紋差別｜成因與外觀評估」，description 保留「生長紋（成長紋）」與非醫療界線；OG、Twitter、WebPage、Article 使用同一組 metadata。可見 H1、正文、FAQ 與 canonical 不變；頁面最後更新日期、JSON-LD `dateModified` 與 sitemap `lastmod` 同步更新至 2026-11-04。部署後觀察至少一個完整 28 天窗口，再與前一個固定窗口比較曝光、點擊、CTR、平均排名及相關查詢；不推論諮詢或預約轉換。
 - 自我確認／codex 方案第二意見：先前第二意見建議多觀察一個完整窗口；使用者其後明確授權有限 metadata 詞序測試，因此依指示實作，不擴大範圍。
-- 驗證：乾淨部署分支 `feat/deploy-striae-title` 上 `npm test` 通過、`npm run lint` 通過；本機 codex review 初次指出 ledger 與關鍵字活表未同步，已補本文與活表，待複審。
-- Commit / 部署：尚未提交或部署（待正式 workflow dispatch 與公開頁驗證）。
+- 驗證：部署分支 `feat/deploy-striae-title` 上 `npm test` 通過（35/35）、`npm run lint` 通過；獨立 codex review 找到並修正文件同步、lastmod／dateModified、Article 原始發布日等問題，最終無可執行發現。
+- Commit：`d0d68ee` 更新搜尋 metadata 與日期；`dc27ee6` 修正 Cloudflare 網域部署設定；`fc858c0` 移除已停用網域的 Worker redirect 與測試。
+- 部署：首次 workflow `41857774164` 因 Cloudflare 帳戶沒有舊網域 zone 而失敗；修正部署設定後，workflow `41859197383` 成功。Cloudflare deploy、正式 SEO/AEO 驗證、GSC sitemap 提交（HTTP 204）與 IndexNow 均成功。
+- 正式環境驗證：`https://ycaura.com/knowledge/striae-comparison` 回 HTTP 200；title、description、canonical、新的 `dateModified` 與 sitemap `lastmod=2026-11-04` 正確，原始 `datePublished=2026-09-19`、H1、FAQ 與醫療界線仍在。後續至少觀察一個完整 28 天窗口；GA4 有效諮詢／預約追蹤仍待確認。
 
 ## 2026-11-04 GSC 近 28 天搜尋成效追蹤
 

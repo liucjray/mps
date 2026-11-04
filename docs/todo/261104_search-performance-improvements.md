@@ -46,8 +46,10 @@ Google 可能依頁面內容自行產生 title link 或 snippet，故本修改�
 - 已更新比較頁 title／description；OG、Twitter、WebPage 與 Article 使用同一組值；可見最後更新日期、WebPage／Article `dateModified` 與 sitemap `lastmod` 同步更新至 2026-11-04。
 - 渲染測試新增 title、description、OG/Twitter、JSON-LD 日期與 sitemap `lastmod` 同步斷言。
 - `npm run lint` 通過；`npm test` 通過，39/39；唯讀 `codex-review` 複審無發現。
-- 部署前乾淨分支驗證：`npm test` 35/35、`npm run lint` 通過。獨立 review 前兩輪分別指出 SEO 台帳／活表同步、`lastmod`／日期同步及原始發布日期保留問題，已修正並同步 Obsidian；最後一輪無可執行發現。
-- 尚未部署；GA4 成效仍待連接資料來源後確認。
+- 部署前乾淨分支驗證：`npm test` 35/35、`npm run lint` 通過。獨立 review 指出 SEO 台帳／活表同步、`lastmod`／日期同步、原始發布日保留及 Obsidian 同步問題；均已修正，最後一輪無可執行發現。
+- 部署提交：`d0d68ee`（metadata 與 SEO 文件）、`dc27ee6`（只部署 Cloudflare 管理的網域）、`fc858c0`（移除已停用網域 redirect）。首次 workflow `41857774164` 因舊網域不屬於 Cloudflare zone 失敗；修正後 `41859197383` 全綠，並成功提交 Sitemap 至 GSC（HTTP 204）與 IndexNow。
+- 正式環境：`https://ycaura.com/knowledge/striae-comparison` HTTP 200；已確認 title、description、canonical、H1、FAQ、醫療界線、JSON-LD 發布／更新日期及 sitemap `lastmod` 正常。舊網域已從 deploy target、Worker redirect、測試與 README 移除。
+- GA4 成效仍待確認；部署後至少觀察一個完整 28 天窗口。
 
 ## 驗收
 
