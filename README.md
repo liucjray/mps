@@ -99,8 +99,7 @@ Add these repository secrets in GitHub under **Settings → Secrets and variable
 - `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns `ycaura.com`
 
 The workflow deploys the Worker and binds `ycaura.com` and `www.ycaura.com`.
-The legacy `mps.rabby.cc` hostname is served separately and is not managed by
-this Cloudflare deployment. Keep the local
+Keep the local
 `.env.cloudflare` file uncommitted; `.env.cloudflare.example` documents the
 required variable names.
 

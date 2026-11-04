@@ -601,7 +601,6 @@ test("redirects every HTTP hostname to HTTPS", async () => {
   for (const [hostname, target] of [
     ["ycaura.com", "ycaura.com"],
     ["www.ycaura.com", "ycaura.com"],
-    ["mps.rabby.cc", "ycaura.com"],
   ]) {
     const response = await worker.fetch(
       new Request(`http://${hostname}/contact?source=test`),
