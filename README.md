@@ -95,11 +95,12 @@ Add these repository secrets in GitHub under **Settings → Secrets and variable
 → Actions**:
 
 - `CLOUDFLARE_API_TOKEN`: a token with permission to deploy Workers and manage
-  the `rabby.cc` custom domain
-- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns `rabby.cc`
+  the `ycaura.com` custom domain
+- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account that owns `ycaura.com`
 
-The workflow deploys the Worker and binds `ycaura.com`, `www.ycaura.com`, and
-the legacy `mps.rabby.cc` redirect. Keep the local
+The workflow deploys the Worker and binds `ycaura.com` and `www.ycaura.com`.
+The legacy `mps.rabby.cc` hostname is served separately and is not managed by
+this Cloudflare deployment. Keep the local
 `.env.cloudflare` file uncommitted; `.env.cloudflare.example` documents the
 required variable names.
 
