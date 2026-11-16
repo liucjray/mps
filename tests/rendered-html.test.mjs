@@ -770,6 +770,7 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/striae-comparison/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
   assert.match(llms, /https:\/\/ycaura\.com\/knowledge\/gsc-automation-check/);
+  assert.match(llms, /https:\/\/ycaura\.com\/contact/);
   // 每個 <loc> 都必須有 <lastmod>，避免新增頁面時漏填。
   assert.equal(
     (sitemap.match(/<loc>https:\/\/ycaura\.com[^<]*<\/loc>/g) ?? []).length,
