@@ -37,6 +37,8 @@ export const striaeKnowledgeUrl = `${siteUrl}/knowledge/striae-comparison`;
 export const striaeKnowledgePath = "/knowledge/striae-comparison";
 export const scarsCamouflageKnowledgeUrl = `${siteUrl}/knowledge/scars-camouflage`;
 export const scarsCamouflageKnowledgePath = "/knowledge/scars-camouflage";
+export const contactPath = "/contact";
+export const contactUrl = `${siteUrl}/contact`;
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
 export const siteLastModified = "2026-09-19";
 

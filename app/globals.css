@@ -8,7 +8,7 @@ body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(
 body::selection { background: var(--clay); color: var(--paper); }
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--clay-dark); outline-offset: 3px; }
-.hero :focus-visible, .service-detail-hero :focus-visible, .knowledge-article-hero :focus-visible, .manifesto :focus-visible, .contact-button:focus-visible, .mobile-sticky-cta:focus-visible { outline-color: var(--paper); }
+.hero :focus-visible, .service-detail-hero :focus-visible, .knowledge-article-hero :focus-visible, .contact-landing-hero :focus-visible, .manifesto :focus-visible, .contact-button:focus-visible, .mobile-sticky-cta:focus-visible { outline-color: var(--paper); }
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; padding: 12px 18px; background: var(--ink); color: var(--paper); font-size: 13px; font-weight: 700; }
 .skip-link:focus { left: 8px; top: 8px; }
 .section-shell { width: min(1180px, calc(100% - 72px)); margin: 0 auto; }
@@ -480,6 +480,73 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .knowledge-contact h2 { margin-top: 27px; font-size: clamp(40px, 12vw, 58px); }
   .knowledge-contact .contact-qr-grid { display: grid; grid-template-columns: 1fr; margin-top: 42px; }
   .knowledge-contact .contact-qr-card { min-height: 210px; }
+}
+
+.contact-landing { padding: 32px 0 96px; }
+.contact-landing-hero { display: grid; grid-template-columns: 1.15fr .85fr; background: var(--hero); color: var(--paper); }
+.contact-landing-hero-copy { padding: 72px 64px; }
+.contact-landing-hero-copy .eyebrow { color: #c8998e; margin-bottom: 24px; }
+.contact-landing-hero-copy h1 { max-width: none; margin-bottom: 24px; font-size: clamp(42px, 4.8vw, 68px); line-height: 1.06; }
+.contact-landing-hero-lede { max-width: 540px; margin-bottom: 34px; color: rgba(245,240,233,.78); font-size: 16px; line-height: 1.9; }
+.contact-landing-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
+.contact-landing-hero .text-link { color: var(--paper); border-color: rgba(244,239,232,.55); }
+.contact-landing-facts { display: flex; flex-direction: column; justify-content: center; margin: 28px 28px 28px 0; padding: 32px; background: rgba(245,240,233,.06); border: 1px solid rgba(245,240,233,.16); }
+.contact-landing-facts-label { display: block; margin-bottom: 20px; color: #c8998e; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.contact-landing-facts-list { display: grid; gap: 18px; margin: 0; }
+.contact-landing-facts-list > div { padding-bottom: 16px; border-bottom: 1px solid rgba(245,240,233,.12); }
+.contact-landing-facts-list > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.contact-landing-facts-list dt { margin-bottom: 4px; color: rgba(245,240,233,.62); font-size: 12px; letter-spacing: .06em; }
+.contact-landing-facts-list dd { margin: 0; font-size: 14px; line-height: 1.7; }
+.contact-landing-facts-list dd a { border-bottom: 1px solid rgba(245,240,233,.4); padding-bottom: 2px; }
+.contact-landing-facts-note { display: block; margin-top: 2px; color: rgba(245,240,233,.65); font-size: 12px; }
+.contact-landing-band { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; padding: 96px 0; border-bottom: 1px solid var(--line); }
+.contact-landing-main h2, .contact-landing-explore-head h2 { margin: 28px 0 20px; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.1; }
+.contact-landing-band-copy { max-width: 540px; margin-bottom: 28px; color: var(--muted); line-height: 1.85; }
+.contact-landing-channels { display: grid; gap: 12px; }
+.contact-landing-channel { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; padding: 16px 20px; border: 1px solid var(--line); background: rgba(255,255,255,.35); transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+.contact-landing-channel:hover { border-color: var(--clay-dark); background: rgba(255,255,255,.65); transform: translateY(-1px); }
+.contact-landing-channel-primary { background: var(--hero); border-color: var(--hero); color: var(--paper); }
+.contact-landing-channel-primary:hover { background: var(--ink); border-color: var(--ink); }
+.contact-landing-channel-tag { display: block; margin-bottom: 4px; color: var(--clay-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.contact-landing-channel-primary .contact-landing-channel-tag { color: #c8998e; }
+.contact-landing-channel strong { display: block; font-size: 16px; font-weight: 700; }
+.contact-landing-channel small { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
+.contact-landing-channel-primary small { color: rgba(245,240,233,.74); }
+.contact-landing-channel-arrow { font-size: 18px; color: var(--clay-dark); }
+.contact-landing-channel-primary .contact-landing-channel-arrow { color: var(--paper); }
+.contact-landing-qr-wrap { padding-top: 12px; }
+.contact-landing-qr-caption { display: block; margin-bottom: 18px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.contact-landing-qr-wrap .contact-qr-grid { margin-top: 0; }
+.contact-landing-explore { padding: 96px 0; border-bottom: 1px solid var(--line); }
+.contact-landing-explore-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+.contact-landing-explore-group h3 { margin-bottom: 18px; font-family: var(--serif); font-size: 24px; font-weight: 400; }
+.contact-landing-link-cards { display: grid; gap: 12px; }
+.contact-landing-link-card { display: grid; gap: 4px; padding: 18px 20px; border: 1px solid var(--line); transition: border-color .25s ease, background .25s ease; }
+.contact-landing-link-card:hover { border-color: var(--clay-dark); background: var(--paper-deep); }
+.contact-landing-link-card span { color: var(--clay-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.contact-landing-link-card strong { font-size: 16px; font-weight: 700; line-height: 1.45; }
+.contact-landing-link-card em { color: var(--muted); font-size: 12px; font-style: normal; }
+.contact-landing-more-link { margin-top: 18px; }
+.contact-landing-boundary { padding-top: 64px; }
+.contact-landing-boundary-box { padding: 32px 36px; background: var(--paper-deep); border: 1px solid var(--line); }
+.contact-landing-boundary-box h2 { margin-bottom: 16px; font-size: 26px; }
+.contact-landing-boundary-box ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+.contact-landing-boundary-box a { border-bottom: 1px solid var(--clay); }
+@media (max-width: 760px) {
+  .contact-landing { padding: 20px 0 96px; }
+  .contact-landing-hero { display: flex; flex-direction: column; }
+  .contact-landing-hero-copy { padding: 44px 22px 36px; }
+  .contact-landing-hero-copy h1 { font-size: clamp(34px, 9.5vw, 46px); }
+  .contact-landing-hero-lede { font-size: 15px; line-height: 1.85; margin-bottom: 26px; }
+  .contact-landing-hero-actions { gap: 14px; }
+  .contact-landing-hero-actions .button { width: 100%; }
+  .contact-landing-facts { margin: 0 16px 20px; padding: 22px; }
+  .contact-landing-band { display: block; padding: 64px 0; }
+  .contact-landing-qr-wrap { display: none; }
+  .contact-landing-explore { padding: 64px 0; }
+  .contact-landing-explore-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-landing-boundary { padding-top: 48px; }
+  .contact-landing-boundary-box { padding: 24px 20px; }
 }
 
 /* 320px 時 .hero-title-line 的 nowrap 會讓主標超出欄位 9px。 */
