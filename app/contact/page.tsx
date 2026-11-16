@@ -95,7 +95,7 @@ const structuredData = {
     },
     sharedOrganizationEntity,
     {
-      "@type": "ContactPage",
+      "@type": ["ContactPage", "WebPage"],
       "@id": `${pageUrl}#contactpage`,
       url: pageUrl,
       name: `${pageTitle}｜${siteName}`,
