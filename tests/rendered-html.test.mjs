@@ -596,6 +596,39 @@ test("renders the knowledge hub index page", async () => {
   assert.equal((html.match(/id="knowledge-contact-title"/g) ?? []).length, 1);
 });
 
+test("renders the shared contact entry landing page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("contact-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/contact", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  const html = await response.text();
+  assert.match(html, /<title>聯絡與預約諮詢｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/contact"\/>/i);
+  assert.match(html, /歡迎聯繫我們/);
+  assert.match(html, /https:\/\/line\.me\/ti\/p\/f_92dWjx8l/);
+  assert.match(html, /https:\/\/www\.instagram\.com\/millie_711102/);
+  assert.match(html, /tel:\+886981756111/);
+  assert.match(html, /私訊前可先整理 3 件事/);
+  assert.match(html, /非醫療美容外觀美化與一般肌膚美學討論/);
+  assert.match(html, /href="\/knowledge\/striae-comparison"/i);
+  assert.match(html, /href="\/services\/skin-camouflage"/i);
+
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "contact page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  assert.ok(graph.some((entity) => entity["@type"] === "ContactPage"));
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present on contact page");
+  assert.equal(breadcrumb.itemListElement.length, 2);
+});
+
 test("redirects every HTTP hostname to HTTPS", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("http-redirect-test", `${process.pid}-${Date.now()}`);
@@ -758,8 +791,9 @@ test("ships crawler and answer-engine support files", async () => {
   assert.equal(indexNowKeyFile.trim(), indexNowKey);
   const { extractSitemapUrls, decodeXmlEntities, chunkArray } = await import("../scripts/submit-indexnow.mjs");
   const extractedUrls = extractSitemapUrls(sitemap);
-  assert.equal(extractedUrls.length, 11);
+  assert.equal(extractedUrls.length, 12);
   assert.ok(extractedUrls.includes("https://ycaura.com"));
+  assert.ok(extractedUrls.includes("https://ycaura.com/contact"));
   assert.ok(extractedUrls.includes("https://ycaura.com/services/herbal-stretch-care"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/striae-comparison"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/scars-camouflage"));
