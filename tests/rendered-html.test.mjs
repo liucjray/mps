@@ -638,7 +638,8 @@ test("renders the shared contact entry landing page", async () => {
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "contact page JSON-LD block should be rendered");
   const graph = JSON.parse(jsonLdMatch[1])["@graph"];
-  assert.ok(graph.some((entity) => entity["@type"] === "ContactPage"));
+  assert.ok(graph.some((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("ContactPage") : entity["@type"] === "ContactPage"));
+  assert.ok(graph.some((entity) => Array.isArray(entity["@type"]) ? entity["@type"].includes("WebPage") : entity["@type"] === "WebPage"));
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present on contact page");
   assert.equal(breadcrumb.itemListElement.length, 2);
