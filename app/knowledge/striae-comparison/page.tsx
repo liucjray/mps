@@ -8,9 +8,10 @@ import { SiteNavigation } from "../../site-navigation";
 export const dynamic = "force-static";
 
 const pageUrl = striaeKnowledgeUrl;
-const pageTitle = "肥胖紋、成長紋與妊娠紋怎麼分？成因差異與外觀評估";
-const pageDescription = "整理妊娠紋、肥胖紋與生長紋（萎縮紋）成因、好發部位、紅紋與白紋演變差異，並了解非醫療外觀修飾與雙和店諮詢評估方向。";
-const updatedAt = "2026-09-19";
+const pageTitle = "生長紋、肥胖紋與妊娠紋差別｜成因與外觀評估";
+const pageDescription = "整理生長紋（成長紋）、肥胖紋與妊娠紋的成因、好發部位與紅白紋差異，並介紹非醫療外觀修飾與雙和店諮詢評估方向。";
+const publishedAt = "2026-09-19";
+const updatedAt = "2026-11-04";
 
 const faqs = [
   {
@@ -106,7 +107,7 @@ const structuredData = {
       headline: pageTitle,
       description: pageDescription,
       image: `${siteUrl}${knowledgeImageUrl}`,
-      datePublished: updatedAt,
+      datePublished: publishedAt,
       dateModified: updatedAt,
       inLanguage: "zh-Hant-TW",
       author: { "@id": organizationId },

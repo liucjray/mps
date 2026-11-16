@@ -24,7 +24,7 @@ const isPublicAsset = (pathname: string) => /\.(?:avif|css|gif|ico|jpe?g|js|png|
 const isAssetRequest = (request: Request, pathname: string) =>
   (request.method === "GET" || request.method === "HEAD") && (isHashedAsset(pathname) || isPublicAsset(pathname));
 const htmlCacheControl = "public, max-age=300, stale-while-revalidate=86400";
-const redirectHosts = new Set(["mps.rabby.cc", "www.ycaura.com"]);
+const redirectHosts = new Set(["www.ycaura.com"]);
 const canonicalHost = "ycaura.com";
 const localHosts = new Set(["localhost", "127.0.0.1", "[::1]", "terminal.local"]);
 

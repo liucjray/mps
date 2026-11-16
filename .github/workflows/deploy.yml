@@ -81,7 +81,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: .
-          command: deploy --config dist/server/wrangler.json --domains ycaura.com --domains www.ycaura.com --domains mps.rabby.cc --message "GitHub Actions ${{ github.sha }}"
+          command: deploy --config dist/server/wrangler.json --domains ycaura.com --domains www.ycaura.com --message "GitHub Actions ${{ github.sha }}"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
