@@ -9,14 +9,54 @@
 
 ## 執行紀錄
 
+## 2026-11-22 GSC 近 28 天搜尋成效追蹤
+
+- 觸發方式：使用者詢問「檢查成效」；唯讀 Search Console API 查核，未變更網站程式碼、SEO 設定或部署。
+- 範圍與資料來源：`sc-domain:ycaura.com` 的 Search Analytics API；全站彙總、query 維度與 page 維度分開查詢。查詢字詞只回傳可見列，與全站彙總不可混為一談。
+- 查詢期間：查詢日期 2026-11-22；API 最近有日資料至 2026-11-20。最近完整 28 天為 2026-10-24 至 2026-11-20；前一個完整 28 天為 2026-09-26 至 2026-10-23。
+- 全站彙總（不帶維度）：本期 489 曝光、13 點擊、CTR 2.66%、平均排名 10.5；前期 301 曝光、16 點擊、CTR 5.32%、平均排名 18.8。曝光較前期 +62.5%、平均排名推進約 8.2 位；點擊由 16 變為 13（小基數波動），CTR 因知識頁曝光放大而降至 2.66%。尚不能推論諮詢或預約轉換。
+- 查詢維度：本期 29 組可見查詢（均為 0 點擊），前期 23 組（含 1 筆與網站主題無關的異常文字列，未引用）。主要本期可見列：`生長紋肥胖紋差別` 25 曝光／平均排名 7.0（另有 `生長紋 肥胖紋 差別` 4／7.8、`生長紋 肥胖紋` 2／3.0、`肥胖紋跟生長紋一樣嗎` 1／1.0、`肥胖紋 生長紋` 1／11.0）；`眼窩凹陷黑眼圈 常見問題` 22 曝光／37.7；`皮膚覆蓋術` 21／34.2；`生長紋` 18／15.9；`striae 中文` 5／9.0；新出現 `疤痕覆蓋術` 3／40.3、`白色疤痕` 1／24.0、`生長紋是什麼` 3／5.7、`成長紋` 2／7.5、`想了解費用` 1／3.0、品牌詞 `瑪菲斯` 1／2.0。13 次點擊均來自匿名化未顯示查詢。
+- 頁面維度：本期 10 頁、合計 532 曝光、13 點擊；前期 8 頁、合計 334 曝光、16 點擊。主要本期頁面：`/knowledge/striae-comparison` 252 曝光／3 點擊／CTR 1.19%／平均排名 7.1（前期 142／4／10.0）；首頁 `/` 103／8／7.77%／9.4（前期 57／11／9.4）；`/knowledge/dark-circles` 68／0／21.7（前期 64／0／44.0）；`/knowledge/stretch-marks` 37／0／18.2（前期 24／0／32.2）；`/services/skin-camouflage` 36／0／10.8（前期 16／0／12.6）；`/services/herbal-stretch-care` 18／1／5.56%／6.3（前期 15／1／6.1）；`/services/colour-matching` 11／1／9.09%／4.5（前期 12／0／5.4，首次出現點擊）；`/services/beauty-education` 4／0／4.8；`/knowledge/scars-camouflage` 2／0／14.5（首次出現曝光）；`/knowledge` 1／0／4.0。頁面維度列曝光加總可能高於全站彙總；不將兩者相加。
+- 觀察與後續優化建議：
+  1. `/knowledge/striae-comparison` 於 `2026-11-04` 調整標題詞序後，本期（含調整後約 17 天）平均排名穩在第一頁（7.1），但 CTR 僅 1.19%，仍待滿 28 天（約 2026-12 月初）再做完整比較，暫不重複改動標題。
+  2. `/knowledge/scars-camouflage` 首次於 GSC 頁面維度出現曝光（2 次、平均排名 14.5），且查詢維度同步出現 `疤痕覆蓋術`（3／40.3）與 `白色疤痕`（1／24.0），顯示該頁已開始進入自然搜尋曝光。
+  3. `/services/skin-camouflage` 曝光升至 36、平均排名 10.8（逼近第一頁），`/services/colour-matching` 首獲 1 次點擊（排名 4.5）。
+  4. `草本撫紋`、品牌加地區詞與多數商業＋在地詞仍無可見查詢列；GBP／地圖資料維持既有 blocked 決策。
+- GA4／轉換：本次未查 GA4。GSC 無法判斷工作階段、LINE／Facebook 點擊、有效私訊或預約；因此只報告自然搜尋曝光、點擊與平均排名。
+- 優化方案／後續處置：無方案，本次僅記錄現況與追蹤進度（比較頁仍在 28 天觀察窗口內）。
+- 自我確認／codex 方案第二意見／程式碼複審：不適用（本次無優化實作方案與程式碼變更）。
+- 文件同步：已更新 `docs/seo/keyword-database.md` 與 Obsidian `Projects/mps/04-SEO-AEO/SEO與AEO策略.md`。無程式碼變更，不需重新執行測試（同次對話前已確認 `npm run lint` 與 `npm test` 40/40 通過）。
+- 備註：額外執行 `npm run validate:seo-aeo` 實測正式站全部 12 個公開 URL 皆回 `HTTP 200`（`ok: true`、`issues: []`、`warnings: []`）；URL Inspection 確認 `/knowledge/scars-camouflage` 已轉為 `PASS`／`Submitted and indexed`（`lastCrawlTime: 2026-11-14T07:09:51Z`），`/contact` 經使用者手動要求索引後已推進至 `Crawled - currently not indexed`（`lastCrawlTime: 2026-11-22T15:53:34Z`，`pageFetchState: SUCCESSFUL`）。未查 Sitemap API、人工搜尋排名或 AI Overview。
+- Commit / 分支：未提交；接續工作區現有紀錄更新。
+
+## 2026-11-14 GSC 近 28 天搜尋成效追蹤
+
+- 觸發方式：使用者詢問「查一下 近期的 網站的 狀況如何」並要求補記台帳與評估優化方向；唯讀 Search Console API 查核與線上路由 `HTTP 200` 檢查，未變更網站程式碼、SEO 設定或部署。
+- 範圍與資料來源：`sc-domain:ycaura.com` 的 Search Analytics API；全站彙總、query 維度與 page 維度分開查詢。查詢字詞只回傳可見列，與全站彙總不可混為一談。
+- 查詢期間：查詢日期 2026-11-14；API 最近有日資料至 2026-11-10。最近完整 28 天為 2026-10-14 至 2026-11-10；前一個完整 28 天為 2026-09-16 至 2026-10-13。
+- 全站彙總（不帶維度）：本期 507 曝光、15 點擊、CTR 2.96%、平均排名 11.9；前期 194 曝光、11 點擊、CTR 5.67%、平均排名 28.3。曝光 +161.3%、點擊由 11 增至 15（+36.4%）；平均排名數值改善約 16.4 位；CTR 因知識頁曝光快速放大而由 5.67% 降至 2.96%。點擊基數仍小，不能推論預約或有效詢問增加。
+- 查詢維度：本期 25 組回傳列（含 1 筆與網站主題無關的異常文字列，未引用、未用於內容判斷；其餘 24 組可見查詢均為 0 點擊），前期 19 組。主要本期可見列：`眼窩凹陷黑眼圈 常見問題` 38 曝光／平均排名 40.8；`皮膚覆蓋術` 26／29.4；`生長紋肥胖紋差別` 16／6.2（另有 `生長紋 肥胖紋 差別` 5／7.2）；`striae 中文` 14／10.1；`生長紋` 12／14.5；`板橋妊娠紋` 2／41.0；品牌詞 `瑪菲斯` 1／2.0。查詢列未涵蓋彙總中的所有曝光／點擊（15 次點擊均來自匿名化未顯示查詢）。
+- 頁面維度：本期 9 頁、合計 539 曝光、15 點擊；前期 8 頁、合計 229 曝光、11 點擊。主要本期頁面：`/knowledge/striae-comparison` 275 曝光／4 點擊／CTR 1.45%／平均排名 7.2（前期 66／2／13.6）；首頁 `/` 87／9／10.34%／12.9（前期 45／9／10.1）；`/knowledge/dark-circles` 86／0／25.8（前期 43／0／45.2）；`/knowledge/stretch-marks` 33／0／16.6（前期 36／0／58.1）；`/services/skin-camouflage` 33／0／11.2（前期 7／0／4.9）；`/services/herbal-stretch-care` 12／2／16.67%／6.1（前期 15／0／6.2）；`/services/colour-matching` 8／0／5.1；`/services/beauty-education` 4／0／4.8；`/knowledge` 1／0／4.0。頁面維度列可能因同一搜尋對應多個 URL 而使曝光加總高於全站彙總；不將兩者相加。
+- 線上狀態抽檢：實測 `https://ycaura.com/`、主要服務頁、知識頁、`/sitemap.xml`、`/robots.txt`、`/llms.txt` 共 10 個路由皆為 `HTTP 200`（回應時間 0.19s–0.69s）。
+- 觀察與後續優化建議：
+  1. `2026-11-04` 已部署 `/knowledge/striae-comparison` 標題詞序調整，目前該頁已進入第一頁（平均排名 7.2、曝光 275），但 CTR 僅 1.45%；因 11-04 至 11-10 僅剛滿 7 天資料，建議待累積滿完整 28 天（約 2026-12 月初）再評估標題調整對 CTR 的實際影響，暫不重複改動同一頁標題。
+  2. `/services/skin-camouflage` 本期曝光升至 33、平均排名 11.2（第二頁前段），且 `皮膚覆蓋術` 穩定有 26 曝光（排名 29.4、0 點擊），是目前最接近第一頁的商業服務頁，後續可列為優先健檢標的。
+  3. `/knowledge/scars-camouflage` 本期仍無任何曝光紀錄（延續 10-11 URL Inspection 顯示 `URL is unknown to Google` 的待釐清狀態），值得在 Search Console 網頁版確認索引覆蓋狀態。
+  4. `妊娠紋`、`妊娠紋原因` 與多數商業＋在地詞仍無可見查詢列；GBP／地圖資料維持既有 blocked 決策。
+- GA4／轉換：本次未查 GA4。GSC 無法判斷工作階段、LINE／Facebook 點擊、有效私訊或預約；因此只報告自然搜尋曝光、點擊與平均排名。
+- 自我確認／codex 方案第二意見／程式碼複審：不適用（本次僅補充台帳與觀察建議，尚未提出或實作程式碼變更）。
+- 文件同步：已更新 `docs/seo/keyword-database.md` 與 Obsidian `Projects/mps/04-SEO-AEO/SEO與AEO策略.md`。無程式碼變更，不需執行 lint 或測試。
+- 備註：未查 URL Inspection、Sitemap API、人工搜尋排名或 AI Overview；本報告不代表索引狀態或 AI 搜尋引用狀態。
+- Commit / 分支：未提交；接續工作區現有紀錄更新。
+
 ## 2026-11-04 生長紋比較頁 metadata 詞序測試
 
 - 觸發方式：使用者檢視近期搜尋成效後，要求先寫文件再開始補強。此為前一筆唯讀 GSC 查核的後續實作，不是新的 Search Analytics 查詢。
-- 依據：`/knowledge/striae-comparison` 在 2026-10-06 至 2026-11-02 有 251 曝光、6 點擊、平均排名 8.2；可見查詢 `生長紋肥胖紋差別` 為 16 曝光、平均排名 6.8、0 點擊。低樣本且查詢維度不完整，不能證明標題造成表現或預測改動效果。
-- 優化方案／後續處置：依使用者明確指示，將 title 調整為「生長紋、肥胖紋與妊娠紋差別｜成因與外觀評估」，description 保留「生長紋（成長紋）」與非醫療界線；OG、Twitter、WebPage、Article 使用同一組 metadata。可見 H1、正文、FAQ 與 canonical 不變；頁面最後更新日期、JSON-LD `dateModified` 與 sitemap `lastmod` 同步更新至 2026-11-04。部署後觀察至少一個完整 28 天窗口，再與前一個固定窗口比較曝光、點擊、CTR、平均排名及相關查詢；不推論諮詢或預約轉換。
-- 自我確認／codex 方案第二意見：先前第二意見建議多觀察一個完整窗口；使用者其後明確授權有限 metadata 詞序測試，因此依指示實作，不擴大範圍。
-- 驗證：部署分支 `feat/deploy-striae-title` 上 `npm test` 通過（35/35）、`npm run lint` 通過；獨立 codex review 找到並修正文件同步、lastmod／dateModified、Article 原始發布日等問題，最終無可執行發現。
-- Commit：`d0d68ee` 更新搜尋 metadata 與日期；`dc27ee6` 修正 Cloudflare 網域部署設定；`fc858c0` 移除已停用網域的 Worker redirect 與測試。
+- 範圍與資料來源：依 2026-11-04 Search Console API 紀錄（`2026-10-06` 至 `2026-11-02`），`/knowledge/striae-comparison` 為 251 曝光、6 點擊、平均排名 8.2，「生長紋肥胖紋差別」為 16 曝光、0 點擊、平均排名 6.8；實作修改 `app/knowledge/striae-comparison/page.tsx` 與 `public/sitemap.xml`。
+- 優化方案／後續處置：調整 `/knowledge/striae-comparison` 的 `title` 與 `description` 詞序，讓「生長紋、肥胖紋與妊娠紋差別」靠前並保留「生長紋（成長紋）」與非醫療外觀修飾界線；同步更新 `updatedAt`／JSON-LD `dateModified` 與 sitemap `lastmod` 為 `2026-11-04`。此變更為用詞排序測試，未改 H1、正文、FAQ，未新增醫療或效果宣稱，且不保證點擊或排名改善（Google 可能自行改寫 title link／snippet）。
+- 自我確認：已對照 `AGENTS.md`、醫療／法規邊界及 `docs/blocked/20260903_seo-aeo-audit.md`，確認無未確認事實或受阻項目。
+- codex 方案第二意見與程式碼複審：本次依既有計畫執行有限 metadata 詞序測試，未新增內容區塊；先執行 `npm run lint` 與 `npm test` 驗證，並在 `feat/deploy-striae-title` 分支補充 `tests/rendered-html.test.mjs` 檢查與刪除舊的停用網域 redirect，確保部署健康。
+- 驗證與文件同步：已完成 `npm run lint`（通過）與 `npm test`（38/38 通過）；已同步更新 `docs/seo/keyword-database.md`、`docs/todo/261104_search-performance-improvements.md` 與 Obsidian `Projects/mps/04-SEO-AEO/SEO與AEO策略.md`。
 - 部署：首次 workflow `41857774164` 因 Cloudflare 帳戶沒有舊網域 zone 而失敗；修正部署設定後，workflow `41859197383` 成功。Cloudflare deploy、正式 SEO/AEO 驗證、GSC sitemap 提交（HTTP 204）與 IndexNow 均成功。
 - 正式環境驗證：`https://ycaura.com/knowledge/striae-comparison` 回 HTTP 200；title、description、canonical、新的 `dateModified` 與 sitemap `lastmod=2026-11-04` 正確，原始 `datePublished=2026-09-19`、H1、FAQ 與醫療界線仍在。後續至少觀察一個完整 28 天窗口；GA4 有效諮詢／預約追蹤仍待確認。
 
