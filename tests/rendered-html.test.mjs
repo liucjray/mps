@@ -635,6 +635,9 @@ test("renders the shared contact entry landing page", async () => {
   assert.match(html, /href="\/knowledge\/striae-comparison"/i);
   assert.match(html, /href="\/services\/skin-camouflage"/i);
   assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/contact"[^>]*>聯絡與預約<\/a>/i);
+  assert.match(html, /LINE 預約諮詢/);
+  assert.doesNotMatch(html, /LINE 聯絡我們|LINE 官方預約諮詢/);
+  assert.doesNotMatch(html, /HOW TO CONNECT|BEFORE YOU MESSAGE|SCAN TO CONNECT|FOLLOW &amp; MESSAGE/);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "contact page JSON-LD block should be rendered");

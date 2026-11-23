@@ -146,7 +146,7 @@ export default function ContactPage() {
                 data-ga-contact-method="line"
                 data-ga-cta-location="contact_hero"
               >
-                LINE 聯絡我們 <span aria-hidden="true">↗</span>
+                LINE 預約諮詢 <span aria-hidden="true">↗</span>
               </a>
               <a
                 className="text-link"
@@ -206,7 +206,6 @@ export default function ContactPage() {
 
         <section className="contact-landing-band section-shell" aria-labelledby="contact-channels-title">
           <div className="contact-landing-main">
-            <div className="section-label">HOW TO CONNECT / 聯絡管道</div>
             <h2 id="contact-channels-title">選擇你習慣的管道開始討論</h2>
             <p className="contact-landing-band-copy">
               無論你是想了解產後妊娠紋、成長紋／肥胖紋、白色疤痕，還是眼周與局部色澤評估，都可以先從線上私訊開始，不必急著決定。
@@ -224,7 +223,7 @@ export default function ContactPage() {
               >
                 <div>
                   <span className="contact-landing-channel-tag">推薦・可傳照片討論</span>
-                  <strong>LINE 官方預約諮詢</strong>
+                  <strong>LINE 預約諮詢</strong>
                   <small>適合傳文字描述或自然光近照初步溝通</small>
                 </div>
                 <span className="contact-landing-channel-arrow" aria-hidden="true">↗</span>
@@ -240,7 +239,6 @@ export default function ContactPage() {
                 data-ga-cta-location="contact_channels"
               >
                 <div>
-                  <span className="contact-landing-channel-tag">FACEBOOK</span>
                   <strong>新北雙和店粉專私訊</strong>
                   <small>查看粉專分享並直接私訊詢問</small>
                 </div>
@@ -257,7 +255,6 @@ export default function ContactPage() {
                 data-ga-cta-location="contact_channels"
               >
                 <div>
-                  <span className="contact-landing-channel-tag">INSTAGRAM</span>
                   <strong>Instagram @millie_711102</strong>
                   <small>從 IG／Threads 順手私訊聯絡</small>
                 </div>
@@ -272,7 +269,6 @@ export default function ContactPage() {
                 data-ga-cta-location="contact_channels"
               >
                 <div>
-                  <span className="contact-landing-channel-tag">PHONE / 11:00–19:00</span>
                   <strong>電話聯繫 0981-756-111</strong>
                   <small>適合直接確認預約時間或交通方向</small>
                 </div>
@@ -286,16 +282,15 @@ export default function ContactPage() {
           <div className="contact-landing-qr-wrap">
             <span className="contact-landing-qr-caption">用電腦瀏覽？手機掃描直接加入</span>
             <div className="contact-qr-grid" aria-label="掃描加入雙和店聯絡方式">
-              <ContactQr href={lineUrl} image="/qr-line.svg" eyebrow="SCAN TO CONNECT" title="LINE 預約" description="掃描加入好友" kind="line" />
-              <ContactQr href={facebookUrl} image="/qr-facebook.svg" eyebrow="FOLLOW & MESSAGE" title="Facebook" description="查看最新分享" kind="facebook" />
-              <ContactQr href={instagramUrl} image="/qr-instagram.svg" eyebrow="FOLLOW & MESSAGE" title="Instagram" description="查看日常分享" kind="instagram" />
+              <ContactQr href={lineUrl} image="/qr-line.svg" title="LINE 預約諮詢" description="掃描加入好友" kind="line" />
+              <ContactQr href={facebookUrl} image="/qr-facebook.svg" title="Facebook" description="查看最新分享" kind="facebook" />
+              <ContactQr href={instagramUrl} image="/qr-instagram.svg" title="Instagram" description="查看日常分享" kind="instagram" />
             </div>
           </div>
         </section>
 
         <section className="contact-landing-explore section-shell" aria-labelledby="contact-explore-title">
           <div className="contact-landing-explore-head">
-            <div className="section-label">BEFORE YOU MESSAGE / 先看懂再詢問</div>
             <h2 id="contact-explore-title">如果你是為了特定困擾點進來的</h2>
           </div>
 

@@ -2,7 +2,7 @@
 type ContactQrProps = {
   href: string;
   image: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description: string;
   kind: "line" | "facebook" | "instagram";
@@ -44,7 +44,7 @@ export function ContactQr({ href, image, eyebrow, title, description, kind }: Co
       <span className="contact-qr-spark contact-qr-spark-one" aria-hidden="true">✦</span>
       <span className="contact-qr-spark contact-qr-spark-two" aria-hidden="true">·</span>
       <span className="contact-qr-image"><img src={image} alt="" width="160" height="160" loading="lazy" decoding="async" /></span>
-      <span className="contact-qr-copy"><span className={`contact-qr-brand contact-qr-brand-${kind}`} aria-hidden="true"><BrandIcon kind={kind} /></span><span className="contact-qr-eyebrow">{eyebrow}</span><strong>{title}</strong><small>{description}</small><span className="contact-qr-arrow" aria-hidden="true">↗</span></span>
+      <span className="contact-qr-copy"><span className={`contact-qr-brand contact-qr-brand-${kind}`} aria-hidden="true"><BrandIcon kind={kind} /></span>{eyebrow ? <span className="contact-qr-eyebrow">{eyebrow}</span> : null}<strong>{title}</strong><small>{description}</small><span className="contact-qr-arrow" aria-hidden="true">↗</span></span>
     </a>
   );
 }

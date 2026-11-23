@@ -163,12 +163,12 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-map-link span { min-width: 0 !important; margin-left: 2px; }
 .contact-map-link::before { content: ""; position: absolute; inset: -10px -8px; }
 .contact-guide { margin-top: 28px; padding: 20px 22px; background: rgba(233, 222, 211, .55); border: 1px solid rgba(53, 43, 41, .12); border-radius: 4px; }
-.contact-guide-badge { display: inline-block; color: var(--clay-dark); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.contact-guide-badge { display: inline-block; color: var(--clay-deep); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
 .contact-guide-steps { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .contact-guide-steps li { display: flex; align-items: baseline; gap: 12px; font-size: 13px; line-height: 1.6; }
 .contact-guide-steps strong { flex-shrink: 0; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
 .contact-guide-steps span { color: var(--muted); font-size: 13px; }
-.contact-guide-hint { margin-top: 12px !important; margin-bottom: 0 !important; max-width: 100% !important; color: var(--clay-dark) !important; font-size: 12px !important; line-height: 1.6 !important; }
+.contact-guide-hint { margin-top: 12px !important; margin-bottom: 0 !important; max-width: 100% !important; color: var(--clay-deep) !important; font-size: 12px !important; line-height: 1.6 !important; }
 .contact-actions { display: flex; flex-direction: column; gap: 22px; }
 .contact-button { min-height: 220px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--paper-deep); color: var(--ink); border: 1px solid var(--clay); font-family: var(--serif); font-size: 26px; letter-spacing: -.05em; transition: background .25s ease, border-color .25s ease, transform .25s ease; }
 .contact-button:hover { background: #e2d3c5; border-color: var(--clay-dark); }
@@ -496,7 +496,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-landing { padding: 32px 0 96px; }
 .contact-landing-hero { display: grid; grid-template-columns: 1.15fr .85fr; background: var(--paper-deep); color: var(--ink); border: 1px solid var(--line); }
 .contact-landing-hero-copy { padding: 72px 64px; }
-.contact-landing-hero-copy .eyebrow { color: var(--clay-dark); margin-bottom: 24px; }
+.contact-landing-hero-copy .eyebrow { color: var(--clay-deep); margin-bottom: 24px; }
 .contact-landing-hero-copy h1 { max-width: none; margin-bottom: 24px; font-size: clamp(42px, 4.8vw, 68px); line-height: 1.06; }
 .contact-landing-hero-lede { max-width: 540px; margin-bottom: 34px; color: var(--muted-deep); font-size: 16px; line-height: 1.9; }
 .contact-landing-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
@@ -519,7 +519,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-landing-channel-primary { background: var(--paper-deep); border-color: var(--clay); color: var(--ink); }
 .contact-landing-channel-primary:hover { background: #e2d3c5; border-color: var(--clay-dark); }
 .contact-landing-channel-tag { display: block; margin-bottom: 4px; color: var(--clay-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.contact-landing-channel-primary .contact-landing-channel-tag { color: var(--clay-dark); }
+.contact-landing-channel-primary .contact-landing-channel-tag { color: var(--clay-deep); }
 .contact-landing-channel strong { display: block; font-size: 16px; font-weight: 700; }
 .contact-landing-channel small { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
 .contact-landing-channel-primary small { color: var(--muted-deep); }
