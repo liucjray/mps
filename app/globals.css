@@ -641,3 +641,12 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .flow-gate-grid, .flow-branch-grid, .flow-prep-grid { grid-template-columns: 1fr; }
   .flow-node { padding: 22px 20px; }
 }
+
+/* /flow route cards: align title, target box, and link rows across columns */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 901px) {
+    .flow-branch-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+    .flow-branch-card > .flow-step-tag { justify-self: start; align-self: start; }
+    .flow-card-links { margin-top: 0; align-self: start; }
+  }
+}
