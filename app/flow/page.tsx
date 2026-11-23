@@ -2,11 +2,14 @@
 import type { Metadata } from "next";
 import { SiteNavigation } from "../site-navigation";
 import {
-  contactPath,
   darkCirclesKnowledgePath,
+  facebookUrl,
+  instagramUrl,
+  lineUrl,
+  phoneNumber,
   scarsCamouflageKnowledgePath,
+  siteBusinessHours,
   siteName,
-  siteServiceArea,
   stretchMarksKnowledgePath,
   striaeKnowledgePath,
 } from "../site";
@@ -15,7 +18,7 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "客戶諮詢決策流程（預覽）",
-  description: "新北雙和店瑪菲斯皮膚覆蓋專家客戶決策流程視覺預覽：從安全前提確認、困擾部位分流、私訊準備到評估預約。",
+  description: "新北雙和店瑪菲斯皮膚覆蓋專家客戶決策流程視覺預覽：從安全前提確認、困擾部位分流、私訊準備到預約到店。",
   robots: { index: false, follow: false },
 };
 
@@ -34,7 +37,7 @@ export default function DecisionFlowPreviewPage() {
             <em>一步步看懂怎麼選。</em>
           </h1>
           <p className="flow-lede">
-            這份流程圖依網站現有內容整理，讓訪客一眼看懂「自己適不適合」、「該選哪個方向」以及「聯繫前要準備什麼」；標示虛線框的區塊為目前尚待店家確認的內容。
+            依網站現有內容整理：先確認安全前提，再依困擾部位了解方向，最後準備私訊與預約。
           </p>
         </header>
 
@@ -166,7 +169,7 @@ export default function DecisionFlowPreviewPage() {
             <span className="flow-step-tag">STEP 04 · 一對一初步了解與預約決定</span>
             <h2>說明可行方向與限制，再由客戶決定是否預約</h2>
             <p>
-              {siteServiceArea}。雙和店為純預約制（有預約才到工作室），會依個別肌膚狀態說明可能方向與注意事項，不先保證固定效果；確認清楚後再預約到店時段。
+              雙和店會依個別肌膚狀態說明可能方向與注意事項，不先保證固定效果；確認清楚後，再安排預約時段。
             </p>
           </div>
 
@@ -175,23 +178,19 @@ export default function DecisionFlowPreviewPage() {
             <div className="flow-stem-arrow">▼</div>
           </div>
 
-          {/* Step 5: Post-care (Draft / Pending confirmation) */}
-          <div className="flow-node flow-node-pending">
-            <span className="flow-step-tag">STEP 05 · 到店服務與【術後保養】（待店家確認補齊）</span>
-            <h2>這段需要您提供實際做法後才能正式放上網站</h2>
-            <ul className="flow-pending-list">
-              <li><strong>方案選擇標準</strong>：什麼情況建議「草本撫紋」、什麼情況建議「皮膚覆蓋術」？</li>
-              <li><strong>術後保養重點</strong>：做完後幾天內不能碰水、防曬、擦拭或穿著需注意什麼？</li>
-              <li><strong>照片與預約規則</strong>：傳照片後多久回覆、照片保存原則、諮詢是否收費與改期規定？</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="section-shell flow-footer-cta">
-          <p>確認好想了解的方向了嗎？</p>
-          <div className="flow-footer-actions">
-            <a className="button button-primary" href={contactPath}>前往聯絡與預約入口 <span>→</span></a>
-            <a className="text-link" href="/">回到首頁 <span>→</span></a>
+          {/* Step 5: Booking */}
+          <div className="flow-node flow-node-primary">
+            <span className="flow-step-tag">STEP 05 · 預約到店</span>
+            <h2>確認方向後，預約到工作室</h2>
+            <p>
+              雙和店為純預約制，有預約才到工作室，平常以網路聯繫；可聯繫與安排預約的時段為 {siteBusinessHours}。服務費用、改期規則與到店後的注意事項，請於預約聯繫時直接向雙和店詢問。
+            </p>
+            <div className="flow-booking-actions">
+              <a className="button button-primary" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="flow_booking">LINE 預約 <span>↗</span></a>
+              <a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="flow_booking">Facebook 私訊 <span>↗</span></a>
+              <a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="flow_booking">Instagram 私訊 <span>↗</span></a>
+              <a className="text-link" href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="flow_booking">電話預約 <span>→</span></a>
+            </div>
           </div>
         </section>
       </main>

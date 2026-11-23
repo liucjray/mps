@@ -662,7 +662,11 @@ test("renders the noindex decision flow preview page", async () => {
   assert.match(html, /<meta name="robots" content="noindex, ?nofollow"\/?>/i);
   assert.match(html, /先諮詢合格專科醫師/);
   assert.match(html, /私訊前先整理 3 件事/);
-  assert.match(html, /待店家確認補齊/);
+  assert.match(html, /STEP 05 · 預約到店/);
+  assert.match(html, /純預約制，有預約才到工作室/);
+  assert.match(html, /data-ga-cta-location="flow_booking"/);
+  assert.match(html, /href="tel:\+886981756111"/);
+  assert.doesNotMatch(html, /待店家確認|術後保養/);
   for (const href of ["/services/herbal-stretch-care", "/services/skin-camouflage", "/services/colour-matching", "/services/beauty-education", "/contact"]) {
     assert.ok(html.includes(`href="${href}"`), `flow page should link to ${href}`);
   }
