@@ -634,6 +634,7 @@ test("renders the shared contact entry landing page", async () => {
   assert.match(html, /非醫療美容外觀美化與一般肌膚美學討論/);
   assert.match(html, /href="\/knowledge\/striae-comparison"/i);
   assert.match(html, /href="\/services\/skin-camouflage"/i);
+  assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/contact"[^>]*>聯絡與預約<\/a>/i);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "contact page JSON-LD block should be rendered");
