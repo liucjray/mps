@@ -634,6 +634,7 @@ test("renders the shared contact entry landing page", async () => {
   assert.match(html, /非醫療美容外觀美化與一般肌膚美學討論/);
   assert.match(html, /href="\/knowledge\/striae-comparison"/i);
   assert.match(html, /href="\/services\/skin-camouflage"/i);
+  assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/contact"[^>]*>聯絡與預約<\/a>/i);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "contact page JSON-LD block should be rendered");
@@ -643,6 +644,32 @@ test("renders the shared contact entry landing page", async () => {
   const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
   assert.ok(breadcrumb, "BreadcrumbList should be present on contact page");
   assert.equal(breadcrumb.itemListElement.length, 2);
+});
+
+test("renders the noindex decision flow preview page", async () => {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("flow-test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/flow", { headers: { accept: "text/html" } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /<title>客戶諮詢決策流程（預覽）/i);
+  assert.match(html, /<meta name="robots" content="noindex, ?nofollow"\/?>/i);
+  assert.match(html, /先諮詢合格專科醫師/);
+  assert.match(html, /私訊前先整理 3 件事/);
+  assert.match(html, /待店家確認補齊/);
+  for (const href of ["/services/herbal-stretch-care", "/services/skin-camouflage", "/services/colour-matching", "/services/beauty-education", "/contact"]) {
+    assert.ok(html.includes(`href="${href}"`), `flow page should link to ${href}`);
+  }
+  assert.doesNotMatch(html, /type="application\/ld\+json"/i);
+
+  const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
+  assert.doesNotMatch(sitemap, /\/flow</);
 });
 
 test("redirects every HTTP hostname to HTTPS", async () => {
