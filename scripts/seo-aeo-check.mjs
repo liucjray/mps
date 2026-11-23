@@ -30,7 +30,11 @@ export function discoverPublicRoutes() {
       if (entry.name.startsWith("[") || entry.name.startsWith(".")) continue;
       const entryPath = resolve(directory, entry.name);
       if (entry.isDirectory()) walk(entryPath, [...segments, entry.name]);
-      else if (entry.name === "page.tsx") routes.add(`/${segments.join("/")}`.replace(/\/$/, "") || "/");
+      else if (entry.name === "page.tsx") {
+        // noindex preview pages are intentionally kept out of the sitemap.
+        if (/robots:\s*\{[^}]*index:\s*false/.test(readFileSync(entryPath, "utf8"))) continue;
+        routes.add(`/${segments.join("/")}`.replace(/\/$/, "") || "/");
+      }
     }
   }
   walk(appRoot);
