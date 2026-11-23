@@ -4,7 +4,12 @@ import { SiteNavigation } from "../site-navigation";
 import {
   contactPath,
   darkCirclesKnowledgePath,
+  facebookUrl,
+  instagramUrl,
+  lineUrl,
+  phoneNumber,
   scarsCamouflageKnowledgePath,
+  siteBusinessHours,
   siteName,
   siteServiceArea,
   stretchMarksKnowledgePath,
@@ -15,7 +20,7 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "客戶諮詢決策流程（預覽）",
-  description: "新北雙和店瑪菲斯皮膚覆蓋專家客戶決策流程視覺預覽：從安全前提確認、困擾部位分流、私訊準備到評估預約。",
+  description: "新北雙和店瑪菲斯皮膚覆蓋專家客戶決策流程視覺預覽：從安全前提確認、困擾部位分流、私訊準備到預約到店。",
   robots: { index: false, follow: false },
 };
 
@@ -34,7 +39,7 @@ export default function DecisionFlowPreviewPage() {
             <em>一步步看懂怎麼選。</em>
           </h1>
           <p className="flow-lede">
-            這份流程圖依網站現有內容整理，讓訪客一眼看懂「自己適不適合」、「該選哪個方向」以及「聯繫前要準備什麼」；標示虛線框的區塊為目前尚待店家確認的內容。
+            這份流程圖依網站現有內容整理，讓訪客一眼看懂「自己適不適合」、「該選哪個方向」以及「聯繫前要準備什麼」。
           </p>
         </header>
 
@@ -175,15 +180,19 @@ export default function DecisionFlowPreviewPage() {
             <div className="flow-stem-arrow">▼</div>
           </div>
 
-          {/* Step 5: Post-care (Draft / Pending confirmation) */}
-          <div className="flow-node flow-node-pending">
-            <span className="flow-step-tag">STEP 05 · 到店服務與【術後保養】（待店家確認補齊）</span>
-            <h2>這段需要您提供實際做法後才能正式放上網站</h2>
-            <ul className="flow-pending-list">
-              <li><strong>方案選擇標準</strong>：什麼情況建議「草本撫紋」、什麼情況建議「皮膚覆蓋術」？</li>
-              <li><strong>術後保養重點</strong>：做完後幾天內不能碰水、防曬、擦拭或穿著需注意什麼？</li>
-              <li><strong>照片與預約規則</strong>：傳照片後多久回覆、照片保存原則、諮詢是否收費與改期規定？</li>
-            </ul>
+          {/* Step 5: Booking */}
+          <div className="flow-node flow-node-primary">
+            <span className="flow-step-tag">STEP 05 · 預約到店</span>
+            <h2>確認方向後，預約到工作室</h2>
+            <p>
+              雙和店為純預約制，有預約才到工作室，平常以網路聯繫；可聯繫與安排預約的時段為 {siteBusinessHours}。服務費用、改期規則與到店後的注意事項，請於預約聯繫時直接向雙和店詢問。
+            </p>
+            <div className="flow-booking-actions">
+              <a className="button button-primary" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="flow_booking">LINE 預約 <span>↗</span></a>
+              <a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="flow_booking">Facebook 私訊 <span>↗</span></a>
+              <a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="flow_booking">Instagram 私訊 <span>↗</span></a>
+              <a className="text-link" href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="flow_booking">電話預約 <span>→</span></a>
+            </div>
           </div>
         </section>
 
