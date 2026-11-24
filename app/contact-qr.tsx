@@ -2,7 +2,6 @@
 type ContactQrProps = {
   href: string;
   image: string;
-  eyebrow?: string;
   title: string;
   description: string;
   kind: "line" | "facebook" | "instagram";
@@ -37,14 +36,12 @@ function BrandIcon({ kind }: { kind: ContactQrProps["kind"] }) {
   );
 }
 
-export function ContactQr({ href, image, eyebrow, title, description, kind }: ContactQrProps) {
+export function ContactQr({ href, image, title, description, kind }: ContactQrProps) {
   return (
     <a className="contact-qr-card" href={href} target="_blank" rel="noreferrer" aria-label={`${title} QR Code，點擊開啟連結`} data-ga-event="contact_click" data-ga-contact-method={kind} data-ga-cta-location="contact_qr">
       <span className="contact-qr-glow" aria-hidden="true" />
-      <span className="contact-qr-spark contact-qr-spark-one" aria-hidden="true">✦</span>
-      <span className="contact-qr-spark contact-qr-spark-two" aria-hidden="true">·</span>
       <span className="contact-qr-image"><img src={image} alt="" width="160" height="160" loading="lazy" decoding="async" /></span>
-      <span className="contact-qr-copy"><span className={`contact-qr-brand contact-qr-brand-${kind}`} aria-hidden="true"><BrandIcon kind={kind} /></span>{eyebrow ? <span className="contact-qr-eyebrow">{eyebrow}</span> : null}<strong>{title}</strong><small>{description}</small><span className="contact-qr-arrow" aria-hidden="true">↗</span></span>
+      <span className="contact-qr-copy"><span className={`contact-qr-brand contact-qr-brand-${kind}`} aria-hidden="true"><BrandIcon kind={kind} /></span><strong>{title}</strong><small>{description}</small><span className="contact-qr-arrow" aria-hidden="true">↗</span></span>
     </a>
   );
 }

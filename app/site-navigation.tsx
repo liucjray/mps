@@ -1,4 +1,5 @@
-import { contactPath, facebookUrl, flowPath, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
+import { NavMenuAutoClose } from "./nav-menu-autoclose";
+import { contactPath, facebookUrl, flowPath, lineUrl, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { servicePath, services } from "./services";
 
 type SiteNavigationProps = {
@@ -19,18 +20,19 @@ export function SiteNavigation({ isHome = false, faqHref }: SiteNavigationProps)
       <details className="nav-menu">
         <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
         <div className="nav-menu-panel">
+          <a className="nav-menu-cta" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="nav_menu">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
           <a href={anchor("#about")}>品牌理念</a><a href={anchor("#services")}>服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href={faqPath}>常見問題</a>
           <a href={contactPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">聯絡與預約</a>
           <a href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">預約前怎麼選</a>
-          <span className="nav-menu-divider">知識專題</span>
-          <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
+          <span className="nav-menu-divider" role="presentation">知識專題</span>
           <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
           <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
           <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
           <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          <span className="nav-menu-divider">服務內容</span>
+          <span className="nav-menu-divider" role="presentation">服務內容</span>
           {services.map((service) => <a href={servicePath(service.slug)} key={service.slug} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">{service.title}</a>)}
         </div>
+        <NavMenuAutoClose />
       </details>
     </nav>
   );

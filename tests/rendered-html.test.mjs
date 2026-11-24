@@ -112,7 +112,7 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /"@type":"ContactPoint"/i);
   assert.match(html, /https:\/\/line\.me\/ti\/p\/f_92dWjx8l/i);
   assert.match(html, /https:\/\/www\.instagram\.com\/millie_711102/i);
-  assert.match(html, /aria-label="LINE 預約 QR Code/i);
+  assert.match(html, /aria-label="LINE 預約諮詢 QR Code/i);
   assert.match(html, /src="\/qr-line\.svg"/i);
   assert.match(html, /src="\/qr-facebook\.svg"/i);
   assert.match(html, /src="\/qr-instagram\.svg"/i);
@@ -676,6 +676,8 @@ test("renders the public decision flow page", async () => {
     assert.ok(html.includes(`href="${href}"`), `flow page should link to ${href}`);
   }
   assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/flow"[^>]*>預約前怎麼選<\/a>/i);
+  assert.match(html, /<a class="nav-menu-cta" href="https:\/\/line\.me\/ti\/p\/f_92dWjx8l"[^>]*data-ga-cta-location="nav_menu"[^>]*>LINE 預約諮詢/i);
+  assert.doesNotMatch(html, /知識中心首頁/);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, "flow page JSON-LD block should be rendered");

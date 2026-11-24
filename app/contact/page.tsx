@@ -134,7 +134,7 @@ export default function ContactPage() {
               <em>先聊聊也可以。</em>
             </h1>
             <p className="contact-landing-hero-lede">
-              我們是「瑪菲斯皮膚覆蓋專家｜新北雙和店」，{siteServiceArea}。無論是想先了解服務、單純問問狀況，或確認預約時段，都可以從這裡找到我們。
+              想先了解服務、單純問問狀況，或確認預約時段，都可以從這裡找到雙和店。
             </p>
             <div className="contact-landing-hero-actions">
               <a
@@ -147,17 +147,6 @@ export default function ContactPage() {
                 data-ga-cta-location="contact_hero"
               >
                 LINE 預約諮詢 <span aria-hidden="true">↗</span>
-              </a>
-              <a
-                className="text-link"
-                href={facebookUrl}
-                target="_blank"
-                rel="noreferrer"
-                data-ga-event="contact_click"
-                data-ga-contact-method="facebook"
-                data-ga-cta-location="contact_hero"
-              >
-                Facebook 粉專私訊 <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -180,16 +169,9 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div>
-                <dt>電話聯繫</dt>
+                <dt>電子信箱</dt>
                 <dd>
-                  <a
-                    href={`tel:${phoneNumber}`}
-                    data-ga-event="contact_click"
-                    data-ga-contact-method="phone"
-                    data-ga-cta-location="contact_facts"
-                  >
-                    0981-756-111
-                  </a>
+                  <a href={`mailto:${siteEmail}`}>{siteEmail}</a>
                 </dd>
               </div>
               <div>
@@ -256,7 +238,7 @@ export default function ContactPage() {
               >
                 <div>
                   <strong>Instagram @millie_711102</strong>
-                  <small>從 IG／Threads 順手私訊聯絡</small>
+                  <small>從 Instagram 私訊聯絡</small>
                 </div>
                 <span className="contact-landing-channel-arrow" aria-hidden="true">↗</span>
               </a>
@@ -350,7 +332,6 @@ export default function ContactPage() {
               <li>本站與雙和店提供之草本撫紋、皮膚覆蓋術、科技測色與局部美學諮詢，皆屬於<strong>非醫療美容外觀美化與一般肌膚美學討論</strong>，不具醫療效能，亦不取代合格醫師之診斷與治療。</li>
               <li>每個人的膚質、紋路或疤痕形成時間與色階狀態不同，無法保證固定效果；實際評估方式與可討論方向需於一對一溝通後確認。</li>
               <li>若皮膚正處於紅腫、疼痛、發炎、破皮傷口、感染或伴隨其他健康疑慮，請優先尋求皮膚科或專科醫師協助。</li>
-              <li>信箱聯絡：<a href={`mailto:${siteEmail}`}>{siteEmail}</a></li>
             </ul>
           </div>
         </section>
