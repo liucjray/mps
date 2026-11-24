@@ -1,5 +1,5 @@
 import { NavMenuAutoClose } from "./nav-menu-autoclose";
-import { contactPath, facebookUrl, flowPath, lineUrl, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
+import { contactPath, facebookUrl, flowPath, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { servicePath, services } from "./services";
 
 type SiteNavigationProps = {
@@ -20,7 +20,6 @@ export function SiteNavigation({ isHome = false, faqHref }: SiteNavigationProps)
       <details className="nav-menu">
         <summary><span className="nav-menu-label-open">選單</span><span className="nav-menu-label-close">關閉</span></summary>
         <div className="nav-menu-panel">
-          <a className="nav-menu-cta" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="nav_menu">LINE 預約諮詢 <span aria-hidden="true">↗</span></a>
           <a href={anchor("#about")}>品牌理念</a><a href={anchor("#services")}>服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href={faqPath}>常見問題</a>
           <a href={contactPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">聯絡與預約</a>
           <a href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">預約前怎麼選</a>

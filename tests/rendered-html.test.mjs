@@ -676,7 +676,7 @@ test("renders the public decision flow page", async () => {
     assert.ok(html.includes(`href="${href}"`), `flow page should link to ${href}`);
   }
   assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/flow"[^>]*>預約前怎麼選<\/a>/i);
-  assert.match(html, /<a class="nav-menu-cta" href="https:\/\/line\.me\/ti\/p\/f_92dWjx8l"[^>]*data-ga-cta-location="nav_menu"[^>]*>LINE 預約諮詢/i);
+  assert.doesNotMatch(html, /nav-menu-cta/);
   assert.doesNotMatch(html, /知識中心首頁/);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
