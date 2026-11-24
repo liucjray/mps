@@ -1,4 +1,4 @@
-import { contactPath, facebookUrl, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
+import { contactPath, facebookUrl, flowPath, darkCirclesKnowledgePath, knowledgeIndexPath, scarsCamouflageKnowledgePath, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { servicePath, services } from "./services";
 
 type SiteNavigationProps = {
@@ -21,6 +21,7 @@ export function SiteNavigation({ isHome = false, faqHref }: SiteNavigationProps)
         <div className="nav-menu-panel">
           <a href={anchor("#about")}>品牌理念</a><a href={anchor("#services")}>服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href={faqPath}>常見問題</a>
           <a href={contactPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">聯絡與預約</a>
+          <a href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">預約前怎麼選</a>
           <span className="nav-menu-divider">知識專題</span>
           <a href={knowledgeIndexPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">知識中心首頁</a>
           <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>

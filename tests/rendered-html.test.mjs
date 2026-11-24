@@ -649,7 +649,7 @@ test("renders the shared contact entry landing page", async () => {
   assert.equal(breadcrumb.itemListElement.length, 2);
 });
 
-test("renders the noindex decision flow preview page", async () => {
+test("renders the public decision flow page", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("flow-test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -661,8 +661,10 @@ test("renders the noindex decision flow preview page", async () => {
 
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /<title>客戶諮詢決策流程（預覽）/i);
-  assert.match(html, /<meta name="robots" content="noindex, ?nofollow"\/?>/i);
+  assert.match(html, /<title>預約前怎麼選？客戶諮詢流程｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/ycaura\.com\/flow"\/>/i);
+  assert.doesNotMatch(html, /<meta name="robots"[^>]*noindex/i);
+  assert.doesNotMatch(html, /預覽/);
   assert.match(html, /先諮詢合格專科醫師/);
   assert.match(html, /私訊前先整理 3 件事/);
   assert.match(html, /STEP 05 · 預約到店/);
@@ -673,10 +675,22 @@ test("renders the noindex decision flow preview page", async () => {
   for (const href of ["/services/herbal-stretch-care", "/services/skin-camouflage", "/services/colour-matching", "/services/beauty-education", "/contact"]) {
     assert.ok(html.includes(`href="${href}"`), `flow page should link to ${href}`);
   }
-  assert.doesNotMatch(html, /type="application\/ld\+json"/i);
+  assert.match(html, /<div class="nav-menu-panel">[\s\S]*?<a href="\/flow"[^>]*>預約前怎麼選<\/a>/i);
 
-  const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
-  assert.doesNotMatch(sitemap, /\/flow</);
+  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLdMatch, "flow page JSON-LD block should be rendered");
+  const graph = JSON.parse(jsonLdMatch[1])["@graph"];
+  assert.ok(graph.some((entity) => entity["@type"] === "WebPage" && entity.url === "https://ycaura.com/flow"));
+  const breadcrumb = graph.find((entity) => entity["@type"] === "BreadcrumbList");
+  assert.ok(breadcrumb, "BreadcrumbList should be present on flow page");
+  assert.equal(breadcrumb.itemListElement.length, 2);
+
+  const [sitemap, llms] = await Promise.all([
+    readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8"),
+    readFile(new URL("../public/llms.txt", import.meta.url), "utf8"),
+  ]);
+  assert.match(sitemap, /<loc>https:\/\/ycaura\.com\/flow<\/loc>/);
+  assert.match(llms, /https:\/\/ycaura\.com\/flow/);
 });
 
 test("redirects every HTTP hostname to HTTPS", async () => {
@@ -842,9 +856,10 @@ test("ships crawler and answer-engine support files", async () => {
   assert.equal(indexNowKeyFile.trim(), indexNowKey);
   const { extractSitemapUrls, decodeXmlEntities, chunkArray } = await import("../scripts/submit-indexnow.mjs");
   const extractedUrls = extractSitemapUrls(sitemap);
-  assert.equal(extractedUrls.length, 12);
+  assert.equal(extractedUrls.length, 13);
   assert.ok(extractedUrls.includes("https://ycaura.com"));
   assert.ok(extractedUrls.includes("https://ycaura.com/contact"));
+  assert.ok(extractedUrls.includes("https://ycaura.com/flow"));
   assert.ok(extractedUrls.includes("https://ycaura.com/services/herbal-stretch-care"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/striae-comparison"));
   assert.ok(extractedUrls.includes("https://ycaura.com/knowledge/scars-camouflage"));
