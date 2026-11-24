@@ -248,7 +248,7 @@ export default function DecisionFlowPage() {
               雙和店為純預約制，有預約才到工作室，平常以網路聯繫；可聯繫與安排預約的時段為 {siteBusinessHours}。服務費用、改期規則與到店後的注意事項，請於預約聯繫時直接向雙和店詢問。
             </p>
             <div className="flow-booking-actions">
-              <a className="button button-primary" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="flow_booking">LINE 預約 <span>↗</span></a>
+              <a className="button button-primary" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="flow_booking">LINE 預約諮詢 <span>↗</span></a>
               <a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="flow_booking">Facebook 私訊 <span>↗</span></a>
               <a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="flow_booking">Instagram 私訊 <span>↗</span></a>
               <a className="text-link" href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="flow_booking">電話預約 <span>→</span></a>
