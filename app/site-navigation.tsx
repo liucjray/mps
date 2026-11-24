@@ -23,13 +23,17 @@ export function SiteNavigation({ isHome = false, faqHref }: SiteNavigationProps)
           <a href={anchor("#about")}>品牌理念</a><a href={anchor("#services")}>服務內容</a><a href={knowledgeIndexPath}>肌膚知識</a><a href={faqPath}>常見問題</a>
           <a href={contactPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">聯絡與預約</a>
           <a href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">預約前怎麼選</a>
-          <span className="nav-menu-divider" role="presentation">知識專題</span>
-          <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
-          <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
-          <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
-          <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
-          <span className="nav-menu-divider" role="presentation">服務內容</span>
-          {services.map((service) => <a href={servicePath(service.slug)} key={service.slug} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">{service.title}</a>)}
+          <div className="nav-menu-group" role="group" aria-labelledby="nav-group-knowledge">
+            <span className="nav-menu-group-label" id="nav-group-knowledge">知識專題</span>
+            <a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">妊娠紋知識</a>
+            <a href={darkCirclesKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">黑眼圈知識</a>
+            <a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">肥胖紋與生長紋</a>
+            <a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">疤痕外觀修飾</a>
+          </div>
+          <div className="nav-menu-group" role="group" aria-labelledby="nav-group-services">
+            <span className="nav-menu-group-label" id="nav-group-services">服務項目</span>
+            {services.map((service) => <a href={servicePath(service.slug)} key={service.slug} data-ga-event="content_navigation" data-ga-cta-location="nav_menu">{service.title}</a>)}
+          </div>
         </div>
         <NavMenuAutoClose />
       </details>
