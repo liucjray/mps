@@ -144,7 +144,7 @@ test("rejects sitemap URLs outside the canonical origin", () => {
 test("detects public routes omitted from the sitemap", () => {
   assert.deepEqual(findMissingRoutes(["https://ycaura.com"], ["/", "/knowledge/new-page"], "https://ycaura.com"), ["https://ycaura.com/knowledge/new-page"]);
   assert.equal(discoverPublicRoutes().includes("/services/herbal-stretch-care"), true);
-  assert.equal(discoverPublicRoutes().includes("/flow"), false, "noindex preview routes are not expected in the sitemap");
+  assert.equal(discoverPublicRoutes().includes("/flow"), true);
   assert.equal(discoverPublicRoutes().includes("/contact"), true);
 });
 

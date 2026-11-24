@@ -39,6 +39,8 @@ export const scarsCamouflageKnowledgeUrl = `${siteUrl}/knowledge/scars-camouflag
 export const scarsCamouflageKnowledgePath = "/knowledge/scars-camouflage";
 export const contactPath = "/contact";
 export const contactUrl = `${siteUrl}/contact`;
+export const flowPath = "/flow";
+export const flowUrl = `${siteUrl}/flow`;
 // 首頁與服務頁的內容最後更新日；知識頁各自維護自己的 updatedAt。
 export const siteLastModified = "2026-09-19";
 

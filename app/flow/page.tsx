@@ -4,25 +4,87 @@ import { SiteNavigation } from "../site-navigation";
 import {
   darkCirclesKnowledgePath,
   facebookUrl,
+  flowUrl,
   instagramUrl,
   lineUrl,
+  organizationId,
   phoneNumber,
   scarsCamouflageKnowledgePath,
+  sharedOrganizationEntity,
   siteBusinessHours,
+  siteCanonicalUrl,
   siteName,
+  siteUrl,
+  socialImageUrl,
   stretchMarksKnowledgePath,
   striaeKnowledgePath,
 } from "../site";
 
 export const dynamic = "force-static";
 
+const pageUrl = flowUrl;
+const pageTitle = "預約前怎麼選？客戶諮詢流程";
+const pageDescription = "新北雙和店瑪菲斯皮膚覆蓋專家的客戶諮詢流程：先確認安全前提，再依妊娠紋、疤痕色差或眼周困擾了解方向，準備私訊資料後，一對一說明並預約到店。";
+const updatedAt = "2026-11-24";
+
 export const metadata: Metadata = {
-  title: "客戶諮詢決策流程（預覽）",
-  description: "新北雙和店瑪菲斯皮膚覆蓋專家客戶決策流程視覺預覽：從安全前提確認、困擾部位分流、私訊準備到預約到店。",
-  robots: { index: false, follow: false },
+  title: pageTitle,
+  description: pageDescription,
+  alternates: { canonical: pageUrl },
+  openGraph: {
+    title: `${pageTitle}｜${siteName}`,
+    description: pageDescription,
+    type: "website",
+    locale: "zh_TW",
+    url: pageUrl,
+    siteName,
+    images: [{ url: socialImageUrl, type: "image/jpeg", width: 1200, height: 630, alt: "新北雙和店瑪菲斯皮膚覆蓋專家客戶諮詢流程" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${pageTitle}｜${siteName}`,
+    description: pageDescription,
+    images: [{ url: socialImageUrl, alt: "新北雙和店瑪菲斯皮膚覆蓋專家客戶諮詢流程" }],
+  },
 };
 
-export default function DecisionFlowPreviewPage() {
+const websiteId = `${siteCanonicalUrl}#website`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: siteCanonicalUrl,
+      name: siteName,
+      inLanguage: "zh-Hant-TW",
+      publisher: { "@id": organizationId },
+    },
+    sharedOrganizationEntity,
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: `${pageTitle}｜${siteName}`,
+      description: pageDescription,
+      inLanguage: "zh-Hant-TW",
+      dateModified: updatedAt,
+      isPartOf: { "@id": websiteId },
+      about: { "@id": organizationId },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "首頁", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: pageTitle, item: pageUrl },
+      ],
+    },
+  ],
+};
+
+export default function DecisionFlowPage() {
   return (
     <>
       <a className="skip-link" href="#main-content">跳至主要內容</a>
@@ -30,7 +92,7 @@ export default function DecisionFlowPreviewPage() {
 
       <main id="main-content" className="flow-page">
         <header className="section-shell flow-hero">
-          <div className="section-label">DECISION FLOW / 客戶決策流程預覽</div>
+          <div className="section-label">DECISION FLOW / 客戶諮詢流程</div>
           <h1>
             從困擾到預約，
             <br />
@@ -203,6 +265,8 @@ export default function DecisionFlowPreviewPage() {
         <span>紋路美化・科技測色・肌膚知識</span>
         <span>© 2026</span>
       </footer>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </>
   );
 }
