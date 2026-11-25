@@ -11,7 +11,7 @@ const pageUrl = striaeKnowledgeUrl;
 const pageTitle = "生長紋、肥胖紋與妊娠紋差別｜成因與外觀評估";
 const pageDescription = "整理生長紋（成長紋）、肥胖紋與妊娠紋的成因、好發部位與紅白紋差異，並介紹非醫療外觀修飾與雙和店諮詢評估方向。";
 const publishedAt = "2026-09-19";
-const updatedAt = "2026-11-04";
+const updatedAt = "2026-11-26";
 
 const faqs = [
   {
@@ -155,17 +155,28 @@ export default function StriaeComparisonKnowledgePage() {
             <div className="knowledge-article-copy">
               <div className="section-label">雙和店 / 紋路比較知識</div>
               <h1>肥胖紋、成長紋與妊娠紋，<br /><em>究竟有何不同？</em></h1>
-              <p>無論是因為青春期發育、體重起伏或懷孕，身體各處出現的條狀細紋常讓人感到困擾。本篇整理醫學上的皮膚擴張紋成因、好發部位與紅白演變差異，讓你在尋求外觀修飾前清楚理解。</p>
+              <p>生長紋、肥胖紋與妊娠紋都屬於皮膚擴張紋，主要差在出現時的情境。生長紋常見於青春期快速成長，肥胖紋常見於短時間內體重增加，妊娠紋則在懷孕期間出現。</p>
               <div className="knowledge-article-meta"><span>內容整理：{siteName}</span><span>最後更新：{updatedAt}</span></div>
             </div>
-            <div className="knowledge-article-facts" aria-label="紋路重點摘要">
-              <span className="knowledge-card-label">先知道三件事</span>
-              <ol>
-                <li><strong>同源機轉</strong><span>三者在醫學上同屬擴張紋，主因為真皮彈性纖維受外力或荷爾蒙拉扯。</span></li>
-                <li><strong>紅白差異</strong><span>紅紋屬早期充血反應；白紋為成熟期微血管消退後的萎縮痕跡。</span></li>
-                <li><strong>修飾邊界</strong><span>外觀美化注重視覺色差修飾，非醫療治療，不保證深層纖維完全復原。</span></li>
-              </ol>
-            </div>
+            <section className="knowledge-article-facts striae-quick-comparison" aria-labelledby="striae-quick-comparison-title">
+              <h2 className="knowledge-card-label" id="striae-quick-comparison-title">三種紋路怎麼分？</h2>
+              <div className="knowledge-table-wrap">
+                <table className="knowledge-table" aria-labelledby="striae-quick-comparison-title">
+                  <thead>
+                    <tr>
+                      <th scope="col">紋路</th>
+                      <th scope="col">常見出現情境</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">生長紋（成長紋）</th><td>青春期快速成長時</td></tr>
+                    <tr><th scope="row">肥胖紋</th><td>短時間內體重增加時</td></tr>
+                    <tr><th scope="row">妊娠紋</th><td>懷孕期間</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>三者的外觀和部位可能重疊，可以先回想紋路出現時的身體變化。</p>
+            </section>
           </header>
 
           <div className="knowledge-article-notice">本站提供一般肌膚美學與外觀照護科普資訊，不取代合格醫療專業人員之診斷或治療建議；若有健康疑慮，請先諮詢醫療專業人員。</div>
