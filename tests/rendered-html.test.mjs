@@ -65,6 +65,10 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.equal("hasMap" in organization, false);
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
+  const skinCamouflage = services.find((service) => service["@id"] === "https://ycaura.com#service-skin-camouflage");
+  const skinCamouflageSummary = "針對紋路、疤痕與局部色差，依個別色澤與紋理評估外觀修飾方向。";
+  assert.equal(skinCamouflage?.description, skinCamouflageSummary);
+  assert.ok(html.includes(`<p>${skinCamouflageSummary}</p>`));
   assert.ok(services.every((service) => service.provider["@id"] === "https://ycaura.com#organization"));
   assert.ok(services.every((service) => service.areaServed.some((area) => area.name === "中和區")));
   assert.ok(organization.hasOfferCatalog.itemListElement.every((offer) => offer.itemOffered["@id"].includes("#service-")));
@@ -322,7 +326,27 @@ test("renders independently indexable service pages", async () => {
       assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
     }
     if (slug === "skin-camouflage") {
-      assert.match(html, /位於新北中和、南勢角站附近的雙和店皮膚覆蓋術/);
+      const title = "中和皮膚覆蓋術｜紋路與疤痕外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家";
+      const description = "瑪菲斯雙和店位於新北中和、南勢角站附近，提供皮膚覆蓋術諮詢。了解紋路、疤痕與局部色差的外觀修飾方向、評估重點與預約方式。";
+      const page = graph.find((entity) => entity["@type"] === "WebPage");
+      const service = graph.find((entity) => entity["@type"] === "Service");
+      assert.match(html, /<h1>皮膚覆蓋術<\/h1>/);
+      assert.ok(html.includes(`<title>${title}</title>`));
+      for (const tag of ['property="og:title"', 'name="twitter:title"']) {
+        assert.ok(html.includes(`<meta ${tag} content="${title}"`), tag);
+      }
+      for (const tag of ['name="description"', 'property="og:description"', 'name="twitter:description"']) {
+        assert.ok(html.includes(`<meta ${tag} content="${description}"`), tag);
+      }
+      assert.ok(html.includes(`<p class="service-detail-lede">${description}</p>`));
+      assert.equal(page?.name, title);
+      assert.equal(page?.description, description);
+      assert.equal(service?.name, "皮膚覆蓋術");
+      assert.equal(service?.description, description);
+      assert.equal(page?.dateModified, "2026-11-25");
+      assert.match(html, /最後更新：(<!-- -->)?2026-11-25<\/p>/);
+      const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
+      assert.ok(isSitemapLastmodInSync(sitemap, page.url, page.dateModified));
       assert.match(html, /皮膚覆蓋術的評估重點是什麼/);
       assert.match(html, /夏天曬黑或膚色改變後/);
     }
@@ -837,8 +861,11 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge\/scars-camouflage/);
   assert.match(llmsFull, /肥胖紋與生長紋/);
   assert.match(llmsFull, /0981-756-111/);
-  assert.match(llmsFull, /最後更新：2026-09-20/);
-  assert.match(llms, /最後更新：2026-09-20/);
+  assert.match(llmsFull, /最後更新：2026-11-25/);
+  assert.match(llmsFull, /提供紋路、疤痕與局部色差的外觀修飾諮詢/);
+  assert.match(llmsFull, /https:\/\/ycaura\.com\/services\/skin-camouflage/);
+  assert.match(llms, /最後更新：2026-11-25/);
+  assert.match(llms, /\[皮膚覆蓋術專頁\]\(https:\/\/ycaura\.com\/services\/skin-camouflage\): 新北中和、南勢角站附近的紋路、疤痕與局部色差外觀修飾諮詢/);
   assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
   assert.match(llmsFull, /紋路處理方式客觀比對/);
   assert.match(llmsFull, /墨菲斯微針電波（Morpheus8）/);
