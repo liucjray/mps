@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ContactQr } from "../../contact-qr";
 import { ContactConsultationGuide } from "../../contact-guide";
 import { SiteNavigation } from "../../site-navigation";
-import { facebookUrl, googleMapsSearchUrl, instagramUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, socialImageUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "../../site";
+import { facebookUrl, flowPath, googleMapsSearchUrl, instagramUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, socialImageUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "../../site";
 import { darkCirclesPath, servicePath, serviceUrl, services, type Service } from "../../services";
 
 export const dynamic = "force-static";
@@ -147,7 +147,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="service-detail-body">
             <div className="service-detail-main">
               <section aria-labelledby="service-overview-title"><div className="section-label">服務說明</div><h2 id="service-overview-title">先理解狀態，<br /><em>再討論適合的方向。</em></h2><p className="service-detail-overview">{service.overview}</p><p className="service-detail-note">本站提供一般肌膚美學與外觀照護資訊，不取代醫療診斷或治療建議。若有皮膚疾病、傷口、發炎、疼痛或其他疑慮，請先諮詢合格醫療專業人員。</p>{service.slug === "beauty-education" && <p className="service-detail-note service-topic-note">你可以依照在意的部位，從眼周、膚色、疤痕、紋路或輪廓等主題開始閱讀。</p>}</section>
-              <section className="service-detail-points" aria-labelledby="service-points-title"><div className="section-label">如何了解</div><h2 id="service-points-title">把每一步說清楚。</h2><div className="service-detail-point-list">{service.sections.map((section, index) => <article key={section.title}><span>0{index + 1}</span><h3>{section.title}</h3><p>{section.text}</p></article>)}</div></section>
+              <section className="service-detail-points" aria-labelledby="service-points-title">
+                <div className="section-label">如何了解</div>
+                <h2 id="service-points-title">把每一步說清楚。</h2>
+                <div className="service-detail-point-list">{service.sections.map((section, index) => <article key={section.title}><span>0{index + 1}</span><h3>{section.title}</h3><p>{section.text}</p></article>)}</div>
+                <a className="text-link" href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="service_process">第一次諮詢？先看流程</a>
+              </section>
               <section className="service-detail-faq" aria-labelledby="service-faq-title"><div className="section-label">常見問題</div><h2 id="service-faq-title">關於{service.title}，<br /><em>先問清楚。</em></h2><div className="faq-list">{service.faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>＋</span></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div></section>
             </div>
             <aside className="service-detail-aside" aria-label="其他服務與聯絡方式">

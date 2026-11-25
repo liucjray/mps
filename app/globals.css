@@ -68,7 +68,7 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .trust-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .trust-inner { min-height: 76px; display: flex; align-items: center; gap: clamp(22px, 6vw, 88px); }
 .trust-label { color: var(--muted); }
-.trust-inner > span:not(.trust-label), .trust-inner > a { display: flex; align-items: center; min-height: 44px; gap: 11px; font-size: 13px; }
+.trust-inner > a { display: flex; align-items: center; min-height: 44px; gap: 11px; font-size: 13px; }
 .trust-inner b { color: var(--clay-dark); font-size: 12px; font-weight: 400; }
 .trust-inner > a { transition: color .25s ease; }
 .trust-inner > a:hover { color: var(--clay-dark); }
@@ -113,6 +113,7 @@ h2 { font-size: clamp(44px, 5.8vw, 78px); line-height: 1.04; letter-spacing: -.0
 .service-title-wrap span { color: var(--muted); }
 .service-row p { color: var(--muted); line-height: 1.8; max-width: 350px; margin: 0; font-size: 14px; }
 .process { padding: 0 0 145px; }
+.process > .text-link, .service-detail-points > .text-link { margin-top: 18px; }
 .process-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .process-step { min-height: 220px; padding: 26px 0 22px; border-bottom: 1px solid var(--line); }
 .process-number { display: block; margin-bottom: 28px; color: var(--clay-dark); font-family: var(--serif); font-size: 24px; }
@@ -362,11 +363,9 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .hero-visual::before { inset: 18px 0 0 0; }
   .hero-image { height: 368px; min-height: 368px; }
   .image-caption { left: 16px; bottom: 22px; gap: 8px; padding: 28px 12px 10px; font-size: 12px; letter-spacing: .06em; }
-  /* 320px 時內容寬 329px > 欄寬 280px；改為可捲動，避免「黑眼圈」被切掉且無法取用。 */
-  .trust-inner { min-height: 68px; gap: 22px; overflow-x: auto; overflow-y: hidden; white-space: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .trust-inner::-webkit-scrollbar { display: none; }
+  .trust-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; padding-block: 8px; }
   .trust-label { display: none; }
-  .trust-inner > span:not(.trust-label), .trust-inner > a { font-size: 12px; }
+  .trust-inner > a { font-size: 12px; }
   .intro { padding: 105px 0 115px; }
   .intro-content { display: block; margin-top: var(--section-gap); }
   .intro-copy { padding-top: 52px; }
