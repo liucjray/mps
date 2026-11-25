@@ -252,6 +252,11 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .knowledge-article-facts strong { color: var(--clay-dark); font-family: var(--serif); font-size: 25px; font-weight: 400; letter-spacing: -.05em; white-space: nowrap; }
 .knowledge-services .service-row { grid-template-columns: 8% 42% 1fr; }
 .knowledge-article-facts li span { color: var(--muted); font-size: 13px; line-height: 1.75; }
+.striae-quick-comparison { display: flex; flex-direction: column; justify-content: center; }
+.striae-quick-comparison .knowledge-card-label { margin: 0; padding-bottom: 0; border-bottom: 0; font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.striae-quick-comparison .knowledge-table-wrap { margin-top: 14px; box-shadow: none; }
+.striae-quick-comparison .knowledge-table th { white-space: normal; }
+.striae-quick-comparison > p { margin: 14px 0 0; color: var(--muted-deep); font-size: 13px; line-height: 1.75; }
 .knowledge-article-body { display: grid; grid-template-columns: 1.35fr .65fr; gap: 8vw; padding-top: 125px; }
 .knowledge-article-section + .knowledge-article-section { margin-top: 145px; }
 .knowledge-article-section h2, .knowledge-article-sources h2 { max-width: 700px; margin: 30px 0 28px; font-size: clamp(42px, 5vw, 68px); }
