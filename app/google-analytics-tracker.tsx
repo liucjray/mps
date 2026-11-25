@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { getAnalyticsLinkDetails } from "./google-analytics-link";
 
 type Gtag = (...args: unknown[]) => void;
 
@@ -24,8 +25,7 @@ export function GoogleAnalyticsTracker() {
 
       window.gtag("event", eventName, {
         page_path: window.location.pathname,
-        link_url: link instanceof HTMLAnchorElement ? link.href : undefined,
-        link_text: link.textContent?.trim().slice(0, 100),
+        ...getAnalyticsLinkDetails(link instanceof HTMLAnchorElement ? link.href : undefined, link.textContent),
         contact_method: link.dataset.gaContactMethod,
         cta_location: link.dataset.gaCtaLocation,
       });

@@ -96,6 +96,9 @@ local development, export the variable before `npm run dev`. For production,
 add it as a GitHub Actions Repository Variable with the same name so the deploy
 build can include GA4. The ID is public configuration, not a secret.
 
+Phone and email clicks retain the contact method and CTA location. Their
+destination and link label are omitted from the GA4 event.
+
 ## Automatic Cloudflare Deployment
 
 `.github/workflows/deploy.yml` builds and validates the site, then deploys it to
