@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { stripTypeScriptTypes } from "node:module";
 import { isSitemapLastmodInSync } from "../scripts/sitemap-lastmod.mjs";
 import { updatedAt as stretchMarksUpdatedAt } from "../app/knowledge/stretch-marks/updated-at.mjs";
 import test from "node:test";
@@ -8,6 +9,22 @@ import test from "node:test";
 const stretchMarksVaultNotePath = "/mnt/c/Users/user/obs-notes/Projects/mps/03-知識/妊娠紋知識.md";
 const developmentPreviewMeta =
   /<meta[^>]*\bname=["']codex-preview["'][^>]*>/i;
+
+test("omits contact addresses and labels from GA4 link details", async () => {
+  const source = await readFile(new URL("../app/google-analytics-link.ts", import.meta.url), "utf8");
+  const { getAnalyticsLinkDetails } = await import(`data:text/javascript,${encodeURIComponent(stripTypeScriptTypes(source))}`);
+
+  assert.deepEqual(getAnalyticsLinkDetails("tel:+12025550123", "電話 +12025550123"), {});
+  assert.deepEqual(getAnalyticsLinkDetails("mailto:hello@example.invalid?subject=Question", "hello@example.invalid"), {});
+  assert.deepEqual(getAnalyticsLinkDetails("https://ycaura.com/flow", "  看諮詢流程  "), {
+    link_url: "https://ycaura.com/flow",
+    link_text: "看諮詢流程",
+  });
+  assert.deepEqual(getAnalyticsLinkDetails("https://line.me/example", "LINE 預約諮詢"), {
+    link_url: "https://line.me/example",
+    link_text: "LINE 預約諮詢",
+  });
+});
 
 test("renders SEO/AEO signals without development-only metadata", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
