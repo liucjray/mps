@@ -140,6 +140,8 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /href="\/knowledge\/dark-circles"/i);
   assert.match(html, /href="\/knowledge\/scars-camouflage"/i);
   assert.match(html, /<section class="trust-strip"[^>]*>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>02<\/b> 肥胖紋<\/a>/);
+  assert.match(html, /<a href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>03<\/b> 疤痕外觀修飾<\/a>/);
+  assert.match(html, /<a class="text-link" href="\/flow" data-ga-event="content_navigation" data-ga-cta-location="home_process">看完整諮詢流程<\/a>/);
   assert.match(html, /<div class="knowledge-links">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀肥胖紋與生長紋比對 <span aria-hidden="true">↗<\/span><\/a>/);
   assert.match(html, /<div class="knowledge-links">[\s\S]*?<a class="text-link" href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_section">閱讀疤痕外觀修飾指南 <span aria-hidden="true">↗<\/span><\/a>/);
   assert.match(html, /<div class="topic-list">[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">肥胖紋<\/a>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">成長紋<\/a>[\s\S]*?<a href="\/knowledge\/scars-camouflage" data-ga-event="content_navigation" data-ga-cta-location="knowledge_topics">各類疤痕<\/a>/);
@@ -306,6 +308,7 @@ test("renders independently indexable service pages", async () => {
     assert.match(html, /href="\/services\//i);
     assert.match(html, /href="\/knowledge"/i);
     assert.match(html, /<div class="service-aside-card">[\s\S]*?<a class="text-link" href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="service_aside">肥胖紋與生長紋比對 <span aria-hidden="true">↗<\/span><\/a>/);
+    assert.match(html, /<a class="text-link" href="\/flow" data-ga-event="content_navigation" data-ga-cta-location="service_process">第一次諮詢？先看流程<\/a>/, slug);
     if (slug === "beauty-education") {
       assert.match(html, /<div class="service-aside-links"><span class="knowledge-card-label">EXPLORE TOPICS<\/span>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="service_topics">肥胖紋與生長紋比對<span aria-hidden="true">↗<\/span><\/a>/);
     }
@@ -670,6 +673,7 @@ test("renders the public decision flow page", async () => {
   assert.match(html, /STEP 05 · 預約到店/);
   assert.match(html, /純預約制，有預約才到工作室/);
   assert.match(html, /data-ga-cta-location="flow_booking"/);
+  assert.match(html, /<a class="text-link" href="\/contact" data-ga-event="content_navigation" data-ga-cta-location="flow_booking">查看聯絡方式與交通資訊<\/a>/);
   assert.match(html, /href="tel:\+886981756111"/);
   assert.doesNotMatch(html, /待店家確認|術後保養/);
   for (const href of ["/services/herbal-stretch-care", "/services/skin-camouflage", "/services/colour-matching", "/services/beauty-education", "/contact"]) {

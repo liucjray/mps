@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { SiteNavigation } from "../site-navigation";
 import {
+  contactPath,
   darkCirclesKnowledgePath,
   facebookUrl,
   flowUrl,
@@ -252,6 +253,7 @@ export default function DecisionFlowPage() {
               <a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="flow_booking">Facebook 私訊 <span>↗</span></a>
               <a className="text-link" href={instagramUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="instagram" data-ga-cta-location="flow_booking">Instagram 私訊 <span>↗</span></a>
               <a className="text-link" href={`tel:${phoneNumber}`} data-ga-event="contact_click" data-ga-contact-method="phone" data-ga-cta-location="flow_booking">電話預約 <span>→</span></a>
+              <a className="text-link" href={contactPath} data-ga-event="content_navigation" data-ga-cta-location="flow_booking">查看聯絡方式與交通資訊</a>
             </div>
           </div>
         </section>

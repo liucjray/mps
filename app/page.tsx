@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, googleMapsSearchUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
+import { facebookUrl, flowPath, googleMapsSearchUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
 import { ContactConsultationGuide } from "./contact-guide";
 import { SiteNavigation } from "./site-navigation";
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="trust-strip" aria-label="服務關鍵字"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>01</b> 妊娠紋</a><a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>02</b> 肥胖紋</a><span><b>03</b> 疤痕與色澤</span><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>04</b> 黑眼圈</a></div></section>
+      <section className="trust-strip" aria-label="肌膚困擾與知識"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>01</b> 妊娠紋</a><a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>02</b> 肥胖紋</a><a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>03</b> 疤痕外觀修飾</a><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>04</b> 黑眼圈</a></div></section>
 
       <section className="intro section-shell" aria-labelledby="about-title">
         <div className="section-label nav-target" id="about">品牌理念</div>
@@ -128,6 +128,7 @@ export default function Home() {
       <section className="process section-shell" id="process" aria-labelledby="process-title">
         <div className="section-heading"><div><div className="section-label">了解流程</div><h2 id="process-title">先理解，再決定。</h2></div><p>每個人的肌膚狀態不同，<br />先從清楚溝通開始。</p></div>
         <ol className="process-list">{processSteps.map((step) => <li className="process-step" key={step.number}><span className="process-number">{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
+        <a className="text-link" href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="home_process">看完整諮詢流程</a>
       </section>
 
       <section className="knowledge section-shell">
