@@ -20,17 +20,25 @@ function findService(slug: string): Service {
   return service;
 }
 
+function getServicePageMetadata(service: Service) {
+  return "pageMetadata" in service
+    ? service.pageMetadata
+    : { title: service.title, updatedAt: siteLastModified };
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const service = findService(slug);
   const url = serviceUrl(service.slug);
+  const { title } = getServicePageMetadata(service);
+  const brandedTitle = `${title}｜${siteName}`;
 
   return {
-    title: service.title,
+    title,
     description: service.description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${service.title}｜${siteName}`,
+      title: brandedTitle,
       description: service.description,
       type: "website",
       locale: "zh_TW",
@@ -40,14 +48,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: "summary_large_image",
-      title: `${service.title}｜${siteName}`,
+      title: brandedTitle,
       description: service.description,
       images: [{ url: socialImageUrl, alt: service.imageAlt }],
     },
   };
 }
 
-function getStructuredData(service: Service) {
+function getStructuredData(service: Service, pageMetadata: { title: string; updatedAt: string }) {
   const url = serviceUrl(service.slug);
   const serviceId = `${siteCanonicalUrl}#service-${service.slug}`;
   const websiteId = `${siteCanonicalUrl}#website`;
@@ -82,10 +90,10 @@ function getStructuredData(service: Service) {
         "@type": "WebPage",
         "@id": pageId,
         url,
-        name: `${service.title}｜${siteName}`,
+        name: `${pageMetadata.title}｜${siteName}`,
         description: service.description,
         inLanguage: "zh-Hant-TW",
-        dateModified: siteLastModified,
+        dateModified: pageMetadata.updatedAt,
         isPartOf: { "@id": websiteId },
         author: { "@id": organizationId },
         publisher: { "@id": organizationId },
@@ -120,7 +128,8 @@ function getStructuredData(service: Service) {
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = findService(slug);
-  const structuredData = getStructuredData(service);
+  const pageMetadata = getServicePageMetadata(service);
+  const structuredData = getStructuredData(service, pageMetadata);
 
   return (
     <>
@@ -138,7 +147,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="service-detail-copy">
               <div className="section-label">{service.tag}</div>
               <h1>{service.title}</h1>
-              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">{siteServiceArea}。<br />內容整理：{siteName}<br />最後更新：{siteLastModified}</p>
+              <p className="service-detail-lede">{service.description}</p><p className="service-detail-location">{siteServiceArea}。<br />內容整理：{siteName}<br />最後更新：{pageMetadata.updatedAt}</p>
               <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="service_hero">向雙和店詢問</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="service_hero">LINE 預約諮詢</a></div>
             </div>
             <div className="service-detail-image"><img src={service.image} alt={service.imageAlt} width={service.imageWidth} height={service.imageHeight} loading="eager" fetchPriority="high" decoding="async" /></div>
