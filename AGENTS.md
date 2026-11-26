@@ -23,9 +23,11 @@ Use Node.js `>=22.13.0`. Keep the `main` preview port at `1102`; worktrees must 
 
 Every development and test task must use a dedicated Git worktree; do not develop directly on the shared `main` worktree. The `main` worktree reserves preview port `1102`. A worktree must use a different available preview port, set through `PORT` (for example `PORT=1104 npm run dev`).
 
-Branch names are `feat/<slug>`; the preview port is **not** part of the branch name. For tickets run through the Linear workflow, the slug is derived from the ticket (`<ticket id>-<short title>`), the worktree is `.worktrees/wt<N>-<slug>`, and its preview port is recorded on the Linear ticket (claim comment) and follows `port_range` in the device registry (first port + N − 1). Outside that workflow, pick any free port other than `1102`. Keep the worktree path, branch name, and ticket aligned so another agent can identify the task quickly.
+Branch names are `feat/<slug>`; the preview port is **not** part of the branch name. For tickets run through the Linear workflow, the slug is derived from the ticket (`<ticket id>-<short title>`), the worktree is `.worktrees/wt<N>-<slug>`, and its preview port is recorded on the Linear ticket (claim comment) and follows `port_range` in the device registry (first port + N − 1). Outside that workflow, prefer an available preview port in `1103–1105`. Reuse ports freed by completed previews before choosing a higher port. Keep the worktree path, branch name, and ticket aligned so another agent can identify the task quickly.
 
 The Linear workflow is configured in `project.toml` (see go-rabby-me `docs/done/261003_multi-project-ticket-workflow-analysis.md`). Do not put secrets or device-specific paths in that file.
+
+After a feature branch is merged into `main`, stop its preview and remove its worktree once you have verified that the changes are merged, the worktree is clean, and requested screenshots are saved outside it.
 
 ## Coding Style & Naming Conventions
 

@@ -24,7 +24,6 @@ import {
   siteServiceArea,
   siteTransitInfo,
   siteUrl,
-  socialImageUrl,
   stretchMarksKnowledgePath,
   striaeKnowledgePath,
 } from "../site";
@@ -70,13 +69,13 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     url: pageUrl,
     siteName,
-    images: [{ url: socialImageUrl, type: "image/jpeg", width: 1200, height: 630, alt: "新北雙和店瑪菲斯皮膚覆蓋專家聯絡與預約資訊" }],
+    images: [],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: `${pageTitle}｜${siteName}`,
     description: pageDescription,
-    images: [{ url: socialImageUrl, alt: "新北雙和店瑪菲斯皮膚覆蓋專家聯絡與預約資訊" }],
+    images: [],
   },
 };
 
@@ -152,7 +151,14 @@ export default function ContactPage() {
           </div>
 
           <aside className="contact-landing-facts" aria-label="雙和店據點與預約資訊">
-            <span className="contact-landing-facts-label">SHUANGHE STUDIO / 雙和店資訊</span>
+            <div className="contact-landing-portrait">
+              {/* eslint-disable-next-line @next/next/no-img-element -- Cloudflare serves this small static asset. */}
+              <img src="/contact-millie.jpg" alt="" width={64} height={64} decoding="async" />
+              <div>
+                <strong>Millie (小米)</strong>
+                <span>瑪菲斯雙和店</span>
+              </div>
+            </div>
             <dl className="contact-landing-facts-list">
               <div>
                 <dt>服務據點</dt>
