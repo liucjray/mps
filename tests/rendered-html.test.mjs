@@ -82,6 +82,10 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.equal("hasMap" in organization, false);
   const services = graph.filter((entity) => entity["@type"] === "Service");
   assert.equal(services.length, 4);
+  const herbalStretch = services.find((service) => service["@id"] === "https://ycaura.com#service-herbal-stretch-care");
+  const herbalStretchSummary = "妊娠紋、肥胖紋與成長紋的外觀修飾諮詢，先了解紋路的部位、出現時間和外觀變化。";
+  assert.equal(herbalStretch?.description, herbalStretchSummary);
+  assert.ok(html.includes(`<p>${herbalStretchSummary}</p>`));
   const skinCamouflage = services.find((service) => service["@id"] === "https://ycaura.com#service-skin-camouflage");
   const skinCamouflageSummary = "針對紋路、疤痕與局部色差，依個別色澤與紋理評估外觀修飾方向。";
   assert.equal(skinCamouflage?.description, skinCamouflageSummary);
@@ -278,6 +282,21 @@ test("renders independently indexable service pages", async () => {
   workerUrl.searchParams.set("services-test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
   const serviceSlugs = ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"];
+  const pageMetadata = {
+    "herbal-stretch-care": {
+      title: "中和妊娠紋外觀修飾諮詢｜草本撫紋｜新北雙和店｜瑪菲斯皮膚覆蓋專家",
+      description: "瑪菲斯雙和店在新北中和、南勢角站附近，提供妊娠紋外觀修飾諮詢。第一次聯絡可先用文字說明在意的部位、紋路出現多久和目前顏色，再討論可行方向與限制。",
+      serviceName: "草本撫紋｜妊娠紋外觀修飾",
+      updatedAt: "2026-11-26",
+    },
+    "skin-camouflage": {
+      title: "中和皮膚覆蓋術｜紋路與疤痕外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家",
+      description: "瑪菲斯雙和店位於新北中和、南勢角站附近，提供皮膚覆蓋術諮詢。了解紋路、疤痕與局部色差的外觀修飾方向、評估重點與預約方式。",
+      serviceName: "皮膚覆蓋術",
+      updatedAt: "2026-11-25",
+    },
+  };
+  const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
 
   for (const slug of serviceSlugs) {
     const response = await worker.fetch(
@@ -333,21 +352,12 @@ test("renders independently indexable service pages", async () => {
     if (slug === "beauty-education") {
       assert.match(html, /<div class="service-aside-links"><span class="knowledge-card-label">EXPLORE TOPICS<\/span>[\s\S]*?<a href="\/knowledge\/striae-comparison" data-ga-event="content_navigation" data-ga-cta-location="service_topics">肥胖紋與生長紋比對<span aria-hidden="true">↗<\/span><\/a>/);
     }
-    if (slug === "herbal-stretch-care") {
-      assert.match(html, /<h1>草本撫紋｜妊娠紋外觀修飾<\/h1>/i);
-      assert.match(html, /<title>草本撫紋｜妊娠紋外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家<\/title>/i);
-      assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
-      assert.match(html, /最後更新：[\s\S]*2026-09-19/);
-      assert.match(html, /了解瑪菲斯雙和店的草本撫紋服務，從妊娠紋、肥胖紋與成長紋的顏色、紋理、部位與形成時間開始評估/);
-      assert.match(html, /草本撫紋與其他方式有什麼不同/);
-      assert.doesNotMatch(html, /<h1>雙和店草本撫紋<\/h1>/i);
-    }
-    if (slug === "skin-camouflage") {
-      const title = "中和皮膚覆蓋術｜紋路與疤痕外觀修飾｜新北雙和店｜瑪菲斯皮膚覆蓋專家";
-      const description = "瑪菲斯雙和店位於新北中和、南勢角站附近，提供皮膚覆蓋術諮詢。了解紋路、疤痕與局部色差的外觀修飾方向、評估重點與預約方式。";
+    const expected = pageMetadata[slug];
+    if (expected) {
+      const { title, description, serviceName, updatedAt } = expected;
       const page = graph.find((entity) => entity["@type"] === "WebPage");
       const service = graph.find((entity) => entity["@type"] === "Service");
-      assert.match(html, /<h1>皮膚覆蓋術<\/h1>/);
+      assert.ok(html.includes(`<h1>${serviceName}</h1>`));
       assert.ok(html.includes(`<title>${title}</title>`));
       for (const tag of ['property="og:title"', 'name="twitter:title"']) {
         assert.ok(html.includes(`<meta ${tag} content="${title}"`), tag);
@@ -358,12 +368,20 @@ test("renders independently indexable service pages", async () => {
       assert.ok(html.includes(`<p class="service-detail-lede">${description}</p>`));
       assert.equal(page?.name, title);
       assert.equal(page?.description, description);
-      assert.equal(service?.name, "皮膚覆蓋術");
+      assert.equal(service?.name, serviceName);
       assert.equal(service?.description, description);
-      assert.equal(page?.dateModified, "2026-11-25");
-      assert.match(html, /最後更新：(<!-- -->)?2026-11-25<\/p>/);
-      const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
-      assert.ok(isSitemapLastmodInSync(sitemap, page.url, page.dateModified));
+      assert.equal(page?.dateModified, updatedAt);
+      assert.equal(html.match(/最後更新：(<!-- -->)?([\d-]+)<\/p>/)?.[2], updatedAt);
+      assert.ok(isSitemapLastmodInSync(sitemap, page.url, updatedAt));
+    }
+    if (slug === "herbal-stretch-care") {
+      assert.match(html, /內容整理：[\s\S]*新北雙和店｜瑪菲斯皮膚覆蓋專家/);
+      assert.match(html, /草本撫紋與其他方式有什麼不同/);
+      assert.match(html, /第一次聯絡可先整理在意的部位、紋路出現多久和目前顏色/);
+      assert.equal(graph.find((entity) => entity["@type"] === "Service")?.serviceType, "草本撫紋");
+      assert.match(faqEntity.mainEntity.find((faq) => faq.name === "需要先準備什麼？")?.acceptedAnswer.text ?? "", /再說明最想了解的問題/);
+    }
+    if (slug === "skin-camouflage") {
       assert.match(html, /皮膚覆蓋術的評估重點是什麼/);
       assert.match(html, /夏天曬黑或膚色改變後/);
     }
@@ -893,9 +911,12 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llmsFull, /https:\/\/ycaura\.com\/knowledge\/striae-comparison/);
   assert.match(llmsFull, /生長紋常見於青春期快速成長，肥胖紋常見於短時間內體重增加，妊娠紋則在懷孕期間出現/);
   assert.match(llmsFull, /提供紋路、疤痕與局部色差的外觀修飾諮詢/);
+  assert.match(llmsFull, /https:\/\/ycaura\.com\/services\/herbal-stretch-care/);
+  assert.match(llmsFull, /第一次聯絡可先用文字說明在意的部位/);
   assert.match(llmsFull, /https:\/\/ycaura\.com\/services\/skin-camouflage/);
   assert.match(llms, /最後更新：2026-11-26/);
   assert.match(llms, /依青春期成長、短時間內體重增加與孕期比較生長紋、肥胖紋和妊娠紋/);
+  assert.match(llms, /第一次可先用文字說明紋路的部位、出現時間與顏色/);
   assert.match(llms, /\[皮膚覆蓋術專頁\]\(https:\/\/ycaura\.com\/services\/skin-camouflage\): 新北中和、南勢角站附近的紋路、疤痕與局部色差外觀修飾諮詢/);
   assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
   assert.match(llmsFull, /紋路處理方式客觀比對/);
