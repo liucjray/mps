@@ -99,7 +99,7 @@ export default function Home() {
       <a className="skip-link" href="#main-content">跳至主要內容</a>
       <SiteNavigation isHome />
 
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" className="home-page" tabIndex={-1}>
       <section className="hero section-shell" id="top">
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" />雙和店 / 新北中和・南勢角站</div>
@@ -123,14 +123,26 @@ export default function Home() {
 
       <section className="trust-strip" aria-label="肌膚困擾與知識"><div className="section-shell trust-inner"><span className="trust-label">WHAT WE HELP YOU UNDERSTAND</span><a href={stretchMarksKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>01</b> 妊娠紋</a><a href={striaeKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>02</b> 肥胖紋</a><a href={scarsCamouflageKnowledgePath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>03</b> 疤痕外觀修飾</a><a href={darkCirclesPath} data-ga-event="content_navigation" data-ga-cta-location="trust_strip"><b>04</b> 黑眼圈</a></div></section>
 
+      <section className="services section-shell" aria-labelledby="services-title">
+        <div className="section-heading"><div><div className="section-label nav-target" id="services">服務內容</div><h2 id="services-title">從紋路，到肌膚美學。</h2></div><p>雙和店提供草本撫紋、皮膚覆蓋術、科技測色與局部美學教育；<br />每一種狀態不同，先評估，再找到方向。</p></div>
+        <div className="service-list">
+          {services.map((service) => (
+            <a className="service-row home-service-row" key={service.slug} href={servicePath(service.slug)} aria-labelledby={`home-service-${service.slug}`}>
+              <span className="service-number" aria-hidden="true">{service.number}</span>
+              <div className="service-title-wrap">
+                <h3 id={`home-service-${service.slug}`}>{service.title}</h3>
+                <span>{service.tag}</span>
+              </div>
+              <p>{service.text}</p>
+              <span className="home-service-arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section className="intro section-shell" aria-labelledby="about-title">
         <div className="section-label nav-target" id="about">品牌理念</div>
         <div className="intro-content"><h2 id="about-title">不只是遮住，<br /><span>先把紋路看懂。</span></h2><div className="intro-copy"><p className="large-copy">先理解肌膚，再選擇適合自己的美化方式。</p><p>雙和店把紋路分類、膚色判斷與案例經驗整理成容易理解的內容，讓你在做選擇以前，先知道自己正在面對什麼。</p><p className="content-note">{siteServiceArea}。</p><a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="intro">閱讀雙和店 Facebook 分享</a></div><div className="intro-media"><div className="intro-photo"><img src={introImage} alt="自然光下的肌膚諮詢桌面，包含筆記本、陶瓷器皿與放大鏡" width={1024} height={1536} loading="lazy" decoding="async" /></div></div></div>
-      </section>
-
-      <section className="services section-shell" aria-labelledby="services-title">
-        <div className="section-heading"><div><div className="section-label nav-target" id="services">服務內容</div><h2 id="services-title">從紋路，到肌膚美學。</h2></div><p>雙和店提供草本撫紋、皮膚覆蓋術、科技測色與局部美學教育；<br />每一種狀態不同，先評估，再找到方向。</p></div>
-        <div className="service-list">{services.map((service) => <article className="service-row" key={service.number}><span className="service-number">{service.number}</span><div className="service-title-wrap"><h3><a href={servicePath(service.slug)}>{service.title}</a></h3><span>{service.tag}</span></div><p>{service.text}</p></article>)}</div>
       </section>
 
       <section className="process section-shell" id="process" aria-labelledby="process-title">
@@ -152,7 +164,7 @@ export default function Home() {
       </main>
 
       <footer className="site-footer section-shell"><a className="wordmark" href="#top" aria-label="新北雙和店｜瑪菲斯皮膚覆蓋專家首頁"><span className="wordmark-mark">M</span><span>新北雙和店｜瑪菲斯皮膚覆蓋專家</span></a><span>紋路美化・科技測色・肌膚知識</span><span>© 2026</span></footer>
-      <a className="mobile-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="mobile_sticky">Facebook 私訊預約</a>
+      <a className="mobile-sticky-cta home-sticky-cta" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="mobile_sticky">Facebook 私訊預約</a>
     </>
   );
 }
