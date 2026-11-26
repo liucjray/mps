@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element -- Cloudflare serves these public assets directly. */
-import { facebookUrl, flowPath, googleMapsSearchUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteLastModified, siteName, siteServiceArea, siteTransitInfo, siteUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
+import { facebookUrl, flowPath, googleMapsSearchUrl, heroImageUrl, instagramUrl, introImageUrl, knowledgeImageUrl, knowledgeIndexPath, lineUrl, organizationId, phoneNumber, scarsCamouflageKnowledgePath, sharedOrganizationEntity, sharedServedAreas, siteAddressLine, siteBusinessHours, siteCanonicalUrl, siteDescription, siteEmail, siteName, siteServiceArea, siteTransitInfo, siteUrl, stretchMarksKnowledgePath, striaeKnowledgePath } from "./site";
 import { ContactQr } from "./contact-qr";
 import { ContactConsultationGuide } from "./contact-guide";
 import { SiteNavigation } from "./site-navigation";
 import { darkCirclesPath, servicePath, serviceUrl, services } from "./services";
 
 export const dynamic = "force-static";
+
+const homeUpdatedAt = "2026-11-26";
 
 const phoneUrl = `tel:${phoneNumber}`;
 
@@ -69,7 +71,7 @@ const structuredData = {
       name: siteName,
       description: siteDescription,
       inLanguage: "zh-Hant-TW",
-      dateModified: siteLastModified,
+      dateModified: homeUpdatedAt,
       isPartOf: { "@id": `${siteCanonicalUrl}#website` },
       author: { "@id": organizationId },
       publisher: { "@id": organizationId },
@@ -102,8 +104,14 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" />雙和店 / 新北中和・南勢角站</div>
           <h1><span className="hero-title-line">讓肌膚的故事，</span><span className="hero-title-line hero-title-accent">被溫柔理解。</span></h1>
-          <p className="hero-lede">{siteServiceArea}。從妊娠紋、肥胖紋、成長紋，到疤痕與局部色澤困擾，雙和店以專業評估、科技測色與清楚說明，陪你找到適合自己的美化方向。</p>
-          <div className="hero-actions"><a className="button button-primary" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="hero">雙和店 Facebook 私訊</a><a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="hero">LINE 預約諮詢</a></div>
+          <p className="hero-lede">如果你在意妊娠紋、疤痕或局部色差，可以先和我們聊聊。從你最在意的地方開始，一起看看有哪些外觀修飾方式。瑪菲斯雙和店採預約制。</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href={flowPath} data-ga-event="content_navigation" data-ga-cta-location="home_hero">先看諮詢流程 <span aria-hidden="true">→</span></a>
+            <div className="hero-contact-links">
+              <a className="text-link" href={lineUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="line" data-ga-cta-location="hero">LINE 預約諮詢</a>
+              <a className="text-link" href={facebookUrl} target="_blank" rel="noreferrer" data-ga-event="contact_click" data-ga-contact-method="facebook" data-ga-cta-location="hero">Facebook 私訊</a>
+            </div>
+          </div>
         </div>
         <div className="hero-visual">
           <div className="hero-image">
