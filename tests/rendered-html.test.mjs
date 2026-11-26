@@ -116,6 +116,14 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(hero, /<a class="button button-primary" href="\/flow" data-ga-event="content_navigation" data-ga-cta-location="home_hero">先看諮詢流程 /);
   assert.match(hero, /data-ga-contact-method="line" data-ga-cta-location="hero">LINE 預約諮詢<\/a>/);
   assert.match(hero, /data-ga-contact-method="facebook" data-ga-cta-location="hero">Facebook 私訊<\/a>/);
+  const serviceSection = html.match(/<section class="services section-shell" aria-labelledby="services-title">([\s\S]*?)<\/section>/);
+  assert.ok(serviceSection, "the home services section should render");
+  assert.ok(serviceSection.index < html.indexOf('aria-labelledby="about-title"'));
+  for (const slug of ["herbal-stretch-care", "skin-camouflage", "colour-matching", "beauty-education"]) {
+    assert.ok(serviceSection[1].includes(`href="/services/${slug}" aria-labelledby="home-service-${slug}"`));
+    assert.ok(serviceSection[1].includes(`<h3 id="home-service-${slug}">`));
+  }
+  assert.match(html, /class="mobile-sticky-cta home-sticky-cta"[^>]+data-ga-cta-location="mobile_sticky"/);
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家/);
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
   assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);

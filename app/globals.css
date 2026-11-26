@@ -649,3 +649,44 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
     .flow-card-links { margin-top: 0; align-self: start; }
   }
 }
+
+/* Homepage type scale and spacing. */
+.home-page { --home-section-space: clamp(80px, 8vw, 120px); }
+.home-page .hero h1 { font-size: clamp(28px, 14cqi, 72px); }
+.home-page > section h2 { font-size: clamp(28px, 4.1vw, 56px); line-height: 1.12; }
+.home-page .intro h2 span, .home-page .faq h2 span, .home-page .knowledge h2 em, .home-page .contact h2 em { color: var(--clay-dark); }
+.home-page .hero .button-primary { background: var(--clay-deep); color: var(--paper); border-color: var(--clay-deep); box-shadow: none; font-size: 15px; }
+.home-page .hero .button-primary:hover { background: var(--ink); border-color: var(--ink); }
+.home-page .hero .text-link { font-size: 14px; }
+.home-page .services { padding: var(--home-section-space) 0; }
+.home-page .intro, .home-page .process, .home-page .knowledge, .home-page .faq { padding: 0 0 var(--home-section-space); }
+.home-page .contact { padding: var(--home-section-space) 0; }
+.home-page .section-heading { margin-bottom: 32px; }
+.home-page .section-heading h2 { margin-top: 22px; }
+.home-page .section-heading > p, .home-page .service-row p, .home-page .process-step p, .home-page .faq-answer p { font-size: 16px; }
+.home-page .home-service-row { min-height: 124px; grid-template-columns: 48px minmax(0, .95fr) minmax(0, 1fr) 24px; padding: 18px 12px; }
+.home-page .home-service-row:focus-visible { outline-offset: -3px; }
+.home-service-arrow { color: var(--clay-dark); font-size: 21px; }
+
+@media (max-width: 760px) {
+  .home-page { --home-section-space: 64px; }
+  .home-page .hero h1 { font-size: clamp(28px, 14cqi, 56px); }
+  .home-page > section h2 { font-size: clamp(26px, 8.5vw, 36px); }
+  .home-page .hero-visual { min-height: 0; }
+  .home-page .hero-image { height: clamp(210px, 60vw, 320px); min-height: 0; }
+  .home-page .services { padding-top: 52px; }
+  .home-page .section-heading { margin-bottom: 24px; }
+  .home-page .section-heading > p { margin-top: 16px; }
+  .home-page .section-heading > p br { display: none; }
+  .home-page .home-service-row { grid-template-columns: 28px minmax(0, 1fr) 20px; min-height: 0; padding: 16px 0; }
+  .home-page .service-title-wrap { gap: 5px; }
+  .home-page .service-title-wrap h3 { font-size: 23px; }
+  .home-service-arrow { grid-column: 3; grid-row: 1; }
+  .home-page .intro-content, .home-page .faq-layout { margin-top: 24px; }
+  .home-page .intro-copy { padding-top: 24px; }
+  .home-page .intro-media, .home-page .faq-list, .home-page .contact-actions { margin-top: 28px; }
+  .home-page .manifesto { padding: 56px 0; }
+  .home-page .manifesto-mark, .home-page .manifesto h2 { margin: 0 0 24px; }
+  .home-sticky-cta { left: auto; right: 15px; bottom: max(15px, env(safe-area-inset-bottom)); min-height: 46px; padding: 0 14px; border: 1px solid var(--clay-dark); background: var(--paper); color: var(--ink); box-shadow: 0 4px 16px rgba(41,35,34,.13); }
+  .home-sticky-cta:focus-visible { outline-color: var(--ink); }
+}
