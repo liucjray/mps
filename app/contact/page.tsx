@@ -33,8 +33,8 @@ export const dynamic = "force-static";
 
 const pageUrl = contactUrl;
 const pageTitle = "聯絡與預約諮詢";
-const pageDescription = `瑪菲斯皮膚覆蓋專家（新北雙和店）預約與聯絡入口，整理 LINE、Facebook、Instagram 與電話聯繫方式，以及私訊前可先準備的 3 件事；${siteServiceArea}。`;
-const updatedAt = "2026-11-16";
+const pageDescription = `瑪菲斯新北雙和店提供妊娠紋、肥胖紋、成長紋、疤痕與局部色差的外觀修飾諮詢。可透過 LINE、Facebook、Instagram 或電話聯絡。${siteServiceArea}。`;
+const updatedAt = "2026-11-27";
 
 const knowledgeTopics = [
   {
@@ -127,14 +127,14 @@ export default function ContactPage() {
           <div className="contact-landing-hero-copy">
             <div className="eyebrow">
               <span className="eyebrow-line" aria-hidden="true" />
-              CONTACT / 新北雙和店・聯絡我們
+              聯絡與預約 / 新北中和・南勢角站
             </div>
             <h1>
-              歡迎聯繫我們，<br />
-              <em>先聊聊也可以。</em>
+              紋路與疤痕，<br />
+              <em>可以先聊聊。</em>
             </h1>
             <p className="contact-landing-hero-lede">
-              想先了解服務、單純問問狀況，或確認預約時段，都可以從這裡找到雙和店。
+              瑪菲斯雙和店提供妊娠紋、肥胖紋、成長紋、疤痕與局部色差的外觀修飾諮詢。你可以先用 LINE 說說最在意的部位，再決定是否預約。
             </p>
             <div className="contact-landing-hero-actions">
               <a
@@ -190,7 +190,7 @@ export default function ContactPage() {
           <div className="contact-landing-main">
             <h2 id="contact-channels-title">選擇你習慣的管道開始討論</h2>
             <p className="contact-landing-band-copy">
-              無論你是想了解產後妊娠紋、成長紋／肥胖紋、白色疤痕，還是眼周與局部色澤評估，都可以先從線上私訊開始，不必急著決定。
+              可以用你方便的方式聯絡雙和店。第一次詢問時，先說說你在意哪個部位、想了解什麼，就能開始聊。
             </p>
 
             <div className="contact-landing-channels" aria-label="即時線上聯絡按鈕">
