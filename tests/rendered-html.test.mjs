@@ -108,7 +108,14 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /MAVIS PURE SKIN/);
   assert.match(html, /<a class="skip-link" href="#main-content">跳至主要內容<\/a>/);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/>/i);
-  assert.match(html, /雙和店 \/ 新北中和・南勢角站/);
+  const hero = html.match(/<section class="hero section-shell" id="top">([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(hero, "the homepage should render a hero");
+  assert.match(hero, /雙和店 \/ 新北中和・南勢角站/);
+  assert.match(hero, /<h1><span class="hero-title-line">讓肌膚的故事，<\/span><span class="hero-title-line hero-title-accent">被溫柔理解。<\/span><\/h1>/);
+  assert.match(hero, /<p class="hero-lede">如果你在意妊娠紋、疤痕或局部色差，可以先和我們聊聊。從你最在意的地方開始，一起看看有哪些外觀修飾方式。瑪菲斯雙和店採預約制。/);
+  assert.match(hero, /<a class="button button-primary" href="\/flow" data-ga-event="content_navigation" data-ga-cta-location="home_hero">先看諮詢流程 /);
+  assert.match(hero, /data-ga-contact-method="line" data-ga-cta-location="hero">LINE 預約諮詢<\/a>/);
+  assert.match(hero, /data-ga-contact-method="facebook" data-ga-cta-location="hero">Facebook 私訊<\/a>/);
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家/);
   assert.match(html, /新北雙和店｜瑪菲斯皮膚覆蓋專家｜中和・南勢角站｜雙北預約/);
   assert.match(html, /"@type":\["Organization","LocalBusiness"\]/i);
@@ -117,7 +124,10 @@ test("renders SEO/AEO signals without development-only metadata", async () => {
   assert.match(html, /"@type":"ImageObject"/i);
   assert.match(html, /https:\/\/ycaura\.com\/logo\.png/i);
   assert.match(html, /property="og:image" content="https:\/\/ycaura\.com\/social-skin-atelier\.jpg"/i);
-  assert.match(html, /"dateModified":"2026-09-19"/i);
+  const homePage = graph.find((entity) => entity["@type"] === "WebPage");
+  assert.equal(homePage?.dateModified, "2026-11-26");
+  const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
+  assert.ok(isSitemapLastmodInSync(sitemap, homePage.url, homePage.dateModified));
   assert.match(html, /"alternateName":\["Mavis pure skin","MAVIS PURE SKIN"\]/i);
   assert.match(html, /"@type":"Brand"/i);
   assert.match(html, /新北市中和區/);
@@ -835,7 +845,7 @@ test("returns 404 without home page content for unknown route", async () => {
   const html = await response.text();
   assert.match(html, /404/);
   assert.match(html, /This page could not be found/i);
-  assert.doesNotMatch(html, /讓肌膚的故事/);
+  assert.doesNotMatch(html, /<h1><span class="hero-title-line">讓肌膚的故事，/);
   assert.doesNotMatch(html, /<main id="main-content"/);
   assert.doesNotMatch(html, /雙和店肌膚美學服務/);
 });
@@ -919,6 +929,8 @@ test("ships crawler and answer-engine support files", async () => {
   assert.match(llms, /第一次可先用文字說明紋路的部位、出現時間與顏色/);
   assert.match(llms, /\[皮膚覆蓋術專頁\]\(https:\/\/ycaura\.com\/services\/skin-camouflage\): 新北中和、南勢角站附近的紋路、疤痕與局部色差外觀修飾諮詢/);
   assert.match(llms, /草本撫紋與醫美微針電波（如墨菲斯）或雷射有什麼差別？/);
+  assert.match(llmsFull, /首頁可直接查看 \[諮詢流程\]\(https:\/\/ycaura\.com\/flow\)/);
+  assert.match(llms, /紋路與疤痕外觀修飾諮詢，首頁提供諮詢流程與聯絡入口/);
   assert.match(llmsFull, /紋路處理方式客觀比對/);
   assert.match(llmsFull, /墨菲斯微針電波（Morpheus8）/);
   assert.match(llms, /Email: millie0806@gmail\.com/);

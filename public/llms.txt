@@ -6,7 +6,7 @@
 
 ## 官方來源
 
-- [官方網站](https://ycaura.com): 新北雙和店官方網站，提供瑪菲斯皮膚覆蓋專家相關服務資訊
+- [官方網站](https://ycaura.com): 新北中和南勢角附近的紋路與疤痕外觀修飾諮詢，首頁提供諮詢流程與聯絡入口
 - [服務內容](https://ycaura.com#services): 查看主要服務項目
 - [肌膚知識中心](https://ycaura.com/knowledge): 雙和店肌膚知識中心，彙整紋路、疤痕色澤與眼周困擾科普文章與評估指南
 - [網站自動同步驗證頁](https://ycaura.com/knowledge/gsc-automation-check): 驗證部署後 sitemap、GSC、SEO 與 AEO 自動同步流程；不代表服務或索引保證

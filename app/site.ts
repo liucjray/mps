@@ -41,7 +41,7 @@ export const contactPath = "/contact";
 export const contactUrl = `${siteUrl}/contact`;
 export const flowPath = "/flow";
 export const flowUrl = `${siteUrl}/flow`;
-// 首頁與未指定更新日期的服務頁共用預設日期。
+// 未另定更新日期的服務頁共用此日期。
 export const siteLastModified = "2026-09-19";
 
 export const organizationId = `${siteCanonicalUrl}#organization`;
