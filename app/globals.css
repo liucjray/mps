@@ -510,7 +510,10 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
 .contact-landing-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
 .contact-landing-hero .text-link { color: var(--ink); border-color: var(--clay-dark); }
 .contact-landing-facts { display: flex; flex-direction: column; justify-content: center; margin: 28px 28px 28px 0; padding: 32px; background: #fbf8f3; border: 1px solid var(--line); }
-.contact-landing-facts-label { display: block; margin-bottom: 20px; color: var(--clay-dark); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.contact-landing-portrait { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.contact-landing-portrait img { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: center 26%; }
+.contact-landing-portrait strong { display: block; font: 400 23px/1.15 var(--serif); }
+.contact-landing-portrait span { color: var(--muted-deep); font-size: 13px; }
 .contact-landing-facts-list { display: grid; gap: 18px; margin: 0; }
 .contact-landing-facts-list > div { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .contact-landing-facts-list > div:last-child { padding-bottom: 0; border-bottom: 0; }
@@ -560,6 +563,7 @@ details[open] .faq-answer p { padding-bottom: 24px; transform: translateY(0); }
   .contact-landing-hero-actions { gap: 14px; }
   .contact-landing-hero-actions .button { width: 100%; }
   .contact-landing-facts { margin: 0 16px 20px; padding: 22px; }
+  .contact-landing-portrait img { width: 54px; height: 54px; }
   .contact-landing-band { display: block; padding: 64px 0; }
   .contact-landing-qr-wrap { display: none; }
   .contact-landing-explore { padding: 64px 0; }

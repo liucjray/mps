@@ -723,6 +723,11 @@ test("renders the shared contact entry landing page", async () => {
   assert.match(hero, /<h1>紋路與疤痕，<br\/><em>可以先聊聊。<\/em><\/h1>/);
   assert.match(hero, /妊娠紋、肥胖紋、成長紋、疤痕與局部色差的外觀修飾諮詢/);
   assert.match(hero, /data-ga-contact-method="line" data-ga-cta-location="contact_hero">LINE 預約諮詢 /);
+  assert.match(hero, /<div class="contact-landing-portrait">[\s\S]*?src="\/contact-millie\.jpg"[\s\S]*?<strong>Millie \(小米\)<\/strong>/);
+  assert.doesNotMatch(html, /<meta (?:property="og:image|name="twitter:image)/i);
+  assert.match(html, /<meta name="twitter:card" content="summary"\/>/i);
+  const portrait = await readFile(new URL("../public/contact-millie.jpg", import.meta.url));
+  assert.equal(portrait.readUInt16BE(0), 0xffd8);
   assert.match(html, /https:\/\/line\.me\/ti\/p\/f_92dWjx8l/);
   assert.match(html, /https:\/\/www\.instagram\.com\/millie_711102/);
   assert.match(html, /tel:\+886981756111/);
